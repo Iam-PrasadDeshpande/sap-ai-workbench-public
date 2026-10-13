@@ -1,0 +1,606 @@
+{
+ "schema": "sap-public.capability-catalog/1",
+ "contract": "sap-ai-workbench.capability/1",
+ "mission": "Identify SAP AI and AI-enabling developer capabilities from official SAP sources, evaluate their accessibility and engineering relevance, validate practical usefulness through controlled hands-on experiments, and share evidence-backed findings to guide informed SAP engineering adoption.",
+ "principles": [
+  "Official documentation is the starting point, not proof.",
+  "Connectivity is not execution validation.",
+  "An executed tool is not automatically useful.",
+  "A validated local prototype does not establish SAP tenant behaviour.",
+  "Maturity and usefulness require explicit evaluation criteria.",
+  "Unproven capabilities remain unproven.",
+  "Every published assessment discloses its supporting evidence and limitations."
+ ],
+ "source_foundation": "https://developers.sap.com",
+ "categories": {
+  "AI_NATIVE": "SAP AI-native capability",
+  "AI_ENABLING_FRAMEWORK": "SAP AI-enabling development framework",
+  "AI_INTEGRATION": "SAP AI integration service or tooling",
+  "DISCOVERY": "Public SAP developer discovery and documentation service"
+ },
+ "levels": {
+  "NOT_ASSESSED": "Not assessed",
+  "INSUFFICIENT_EVIDENCE": "Insufficient evidence",
+  "DOCUMENTATION_ONLY": "Documentation only",
+  "LOCAL_VALIDATION_ONLY": "Local validation only",
+  "SYSTEM_VALIDATION_AVAILABLE": "SAP system validation available"
+ },
+ "dimensions": [
+  [
+   "official_availability",
+   "Official availability and documentation"
+  ],
+  [
+   "accessibility",
+   "Accessibility and dependencies"
+  ],
+  [
+   "integration_feasibility",
+   "Technical integration feasibility"
+  ],
+  [
+   "hands_on_coverage",
+   "Hands-on execution coverage"
+  ],
+  [
+   "functional_behavior",
+   "Functional behaviour and reliability"
+  ],
+  [
+   "engineering_usefulness",
+   "Engineering usefulness"
+  ],
+  [
+   "operational_limitations",
+   "Operational limitations"
+  ],
+  [
+   "adoption_readiness",
+   "Adoption readiness"
+  ]
+ ],
+ "assessment_method": "R8 rule set: each dimension takes the highest level supported by a verified receipt of the matching evidence class (system readback > local execution > public documentation retrieval); official references support at most DOCUMENTATION_ONLY; no evidence gives NOT_ASSESSED; usefulness and adoption need a recorded owner judgment.",
+ "capabilities": [
+  {
+   "capability_id": "SAP-01",
+   "name": "SAP Developer Center GraphQL",
+   "category": "DISCOVERY",
+   "components": [],
+   "sap_source_reference": "https://developers.sap.com/api-docs/graphql/",
+   "official_description": "Public GraphQL API over the SAP Developer Center catalogue.",
+   "engineering_purpose": "Machine-readable discovery of what SAP publishes for developers, with source URLs and snapshot dates.",
+   "supported_scenarios": [
+    "Discovery snapshots of AI concepts",
+    "Change tracking of published developer content"
+   ],
+   "access_requirements": "Public, no API key",
+   "licensing_or_entitlement_status": "No licence needed",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Record a sealed discovery snapshot and compare two snapshots for changes.",
+   "improvement_opportunities": [
+    "Tie each catalog entry to a dated snapshot of its source"
+   ],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-02",
+   "name": "SAP Developers public MCP (Search and Knowledge Graph)",
+   "category": "DISCOVERY",
+   "components": [
+    "search-mcp",
+    "graph-mcp"
+   ],
+   "sap_source_reference": "https://developers.sap.com/mcp/search",
+   "official_description": "Hosted, anonymous MCP servers for tutorials, missions and a concept graph.",
+   "engineering_purpose": "Ground AI-assisted design questions in SAP-published material instead of model memory.",
+   "supported_scenarios": [
+    "Source-cited answers to SAP developer questions",
+    "Finding tutorials and concepts for a design task"
+   ],
+   "access_requirements": "Anonymous read tier",
+   "licensing_or_entitlement_status": "No licence needed",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Repeat the investigation with the same question to obtain a comparable second run.",
+   "improvement_opportunities": [
+    "Filter low-signal event pages from results",
+    "Compare answers across two dates"
+   ],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-03",
+   "name": "SAP Developer CLI (sap-devs) and local MCP",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "devs-cli"
+   ],
+   "sap_source_reference": "https://github.com/SAP-samples/sap-devs-cli",
+   "official_description": "Open-source command-line access to SAP developer content with a local MCP mode.",
+   "engineering_purpose": "Bring SAP developer content into AI coding assistants on the developer machine.",
+   "supported_scenarios": [
+    "Local MCP content lookup for coding assistants"
+   ],
+   "access_requirements": "Open-source local tool installed from source",
+   "licensing_or_entitlement_status": "Open source",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Review the CLI in an isolated profile; its init/inject commands change global configuration.",
+   "improvement_opportunities": [
+    "Define a read-only invocation that cannot modify global configuration"
+   ],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-04",
+   "name": "Joule for Developers (ABAP)",
+   "category": "AI_NATIVE",
+   "components": [],
+   "sap_source_reference": "https://help.sap.com/docs/abap-ai/generative-ai-in-abap-cloud/d515aa8b9a6d4f6dab9d481b94ff6e08.html",
+   "official_description": "Generative AI assistance inside ABAP development (explain, test suggestions).",
+   "engineering_purpose": "Faster ABAP understanding and test creation inside the SAP development tools.",
+   "supported_scenarios": [
+    "Explain ABAP code",
+    "Suggest unit tests"
+   ],
+   "access_requirements": "Commercial entitlement and SAP system access",
+   "licensing_or_entitlement_status": "Commercial entitlement",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "Evaluate only after an entitlement and an authorized system exist.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_NOT_CHECKABLE",
+    "last_checked": null
+   }
+  },
+  {
+   "capability_id": "SAP-05",
+   "name": "ABAP Development Tools MCP server",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "adt"
+   ],
+   "sap_source_reference": "https://help.sap.com/docs/ABAP_Cloud/bbcee501b99848bdadecd4e290db3ae4/cbe6ee73bce04073a5271ad0de401208.html",
+   "official_description": "MCP access to ABAP Development Tools workflows for AI agents.",
+   "engineering_purpose": "Let an agent inspect ABAP/RAP artefacts through the developer tools instead of screen scraping.",
+   "supported_scenarios": [
+    "Read-only ABAP/RAP inventory for design review"
+   ],
+   "access_requirements": "ADT plus an authorized SAP system (for example a trial) and owner attestation",
+   "licensing_or_entitlement_status": "SAP system access required",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "Obtain SAP object readback on the authorized trial and confirm it independently in Eclipse ADT.",
+   "improvement_opportunities": [
+    "A repository-browsing tool would allow object readback"
+   ],
+   "source_check": {
+    "state": "REFERENCE_NOT_CHECKABLE",
+    "last_checked": null
+   }
+  },
+  {
+   "capability_id": "SAP-06",
+   "name": "SAP Build Code AI assistance",
+   "category": "AI_NATIVE",
+   "components": [],
+   "sap_source_reference": "https://community.sap.com/t5/technology-blog-posts-by-sap/sap-joule-for-developers-end-of-the-promotional-period-and-the-path-forward/ba-p/14490003",
+   "official_description": "Joule-based assistance in SAP Build Code for CAP and Fiori development.",
+   "engineering_purpose": "AI-assisted generation and explanation of CAP and Fiori artefacts.",
+   "supported_scenarios": [
+    "Explain a CAP model",
+    "Generate a Fiori view"
+   ],
+   "access_requirements": "SAP Build / Business Application Studio entitlement",
+   "licensing_or_entitlement_status": "Entitlement dependent",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "Compare a bounded CAP explanation task against the local CAP evidence once an entitlement exists.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_NOT_CHECKABLE",
+    "last_checked": null
+   }
+  },
+  {
+   "capability_id": "SAP-07",
+   "name": "Joule Studio (agent authoring)",
+   "category": "AI_NATIVE",
+   "components": [
+    "joule"
+   ],
+   "sap_source_reference": "https://help.sap.com/docs/joule-studio-classic/joule-studio-classic-edition/initial-setup-and-prerequisites",
+   "official_description": "Authoring Joule skills and agents in SAP Build.",
+   "engineering_purpose": "Build business assistants on SAP-managed AI.",
+   "supported_scenarios": [
+    "Synthetic read-only assistant skill"
+   ],
+   "access_requirements": "SAP Build / Joule licence; UI-driven",
+   "licensing_or_entitlement_status": "Commercial licence",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "None possible without a licence: no public programmatic interface was found.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_NOT_CHECKABLE",
+    "last_checked": null
+   }
+  },
+  {
+   "capability_id": "SAP-08",
+   "name": "SAP AI Core / Generative AI Hub",
+   "category": "AI_NATIVE",
+   "components": [
+    "ai-core"
+   ],
+   "sap_source_reference": "https://developers.sap.com/tutorials/teched2025-genaihub-basic-trial",
+   "official_description": "Managed AI runtime and model access with orchestration, grounding and prompt management.",
+   "engineering_purpose": "Use governed LLM access from SAP applications.",
+   "supported_scenarios": [
+    "Orchestration with synthetic documents",
+    "Prompt and grounding evaluation"
+   ],
+   "access_requirements": "Trial or paid SAP BTP entitlement and a service key",
+   "licensing_or_entitlement_status": "Entitlement-gated; chargeable",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "List deployments read-only once an entitlement and service key are available.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-09",
+   "name": "SAP Cloud SDK for AI",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "ai-sdk"
+   ],
+   "sap_source_reference": "https://developers.sap.com/concepts/sap-aicore-sdk/",
+   "official_description": "Client SDKs for SAP AI Core and the Generative AI Hub.",
+   "engineering_purpose": "Call SAP-managed models from application code with SAP conventions.",
+   "supported_scenarios": [
+    "Model API wrapper patterns"
+   ],
+   "access_requirements": "SDK is public; the service needs AI Core access",
+   "licensing_or_entitlement_status": "SDK open source; service entitlement-gated",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "Run a read-only orchestration call once AI Core access exists.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-10",
+   "name": "ABAP AI SDK (ISLM)",
+   "category": "AI_INTEGRATION",
+   "components": [],
+   "sap_source_reference": "https://developers.sap.com/concepts/abap-ai-sdk/",
+   "official_description": "ABAP SDK for generative AI through Intelligent Scenario Lifecycle Management.",
+   "engineering_purpose": "Add AI calls to ABAP applications under SAP governance.",
+   "supported_scenarios": [
+    "AI-enabled ABAP application pattern review"
+   ],
+   "access_requirements": "Compatible ABAP release, ISLM and model entitlements",
+   "licensing_or_entitlement_status": "Entitlement-gated",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "Review the integration pattern; execute only with an authorized ABAP environment.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-11",
+   "name": "SAP HANA Cloud vector engine",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "hana"
+   ],
+   "sap_source_reference": "https://developers.sap.com/concepts/hana-cloud-vector-engine/",
+   "official_description": "Vector storage and similarity search inside SAP HANA Cloud.",
+   "engineering_purpose": "Retrieval-augmented generation on SAP-managed data.",
+   "supported_scenarios": [
+    "Synthetic retrieval precision with grounded citations"
+   ],
+   "access_requirements": "SAP HANA Cloud instance",
+   "licensing_or_entitlement_status": "Entitlement-gated",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "Measure retrieval on synthetic documents once an instance is provisioned.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-12",
+   "name": "SAP RPT-1 playground",
+   "category": "AI_NATIVE",
+   "components": [],
+   "sap_source_reference": "https://developers.sap.com/ai/",
+   "official_description": "SAP relational/tabular foundation model, offered through a public playground.",
+   "engineering_purpose": "Predictions on structured business data.",
+   "supported_scenarios": [
+    "Synthetic tabular classification against a deterministic baseline"
+   ],
+   "access_requirements": "Public portal; runtime eligibility not checked",
+   "licensing_or_entitlement_status": "Not determined",
+   "sap_entitlement": "NOT_DETERMINED",
+   "next_hands_on_action": "Check playground eligibility; compare with a deterministic baseline on synthetic data.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-13",
+   "name": "SAP Integration Suite MCP gateway",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "integration"
+   ],
+   "sap_source_reference": "https://developers.sap.com/concepts/mcp-gateway-integration-suite/",
+   "official_description": "Expose and govern APIs as MCP tools through SAP Integration Suite.",
+   "engineering_purpose": "Govern agent access to enterprise APIs.",
+   "supported_scenarios": [
+    "Agent-tool exposure with mock resources"
+   ],
+   "access_requirements": "Integration Suite tenant",
+   "licensing_or_entitlement_status": "Entitlement-gated",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "Review tool exposure and policy with mock resources once a tenant exists.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-14",
+   "name": "SAP Build Process Automation AI",
+   "category": "AI_NATIVE",
+   "components": [],
+   "sap_source_reference": "https://developers.sap.com/tutorials/joule-studio-codejam-1-build-lobby",
+   "official_description": "AI-assisted document processing and decisions in process automation.",
+   "engineering_purpose": "Automate document-centric business workflows.",
+   "supported_scenarios": [
+    "Synthetic document processing workflow"
+   ],
+   "access_requirements": "SAP Build licence",
+   "licensing_or_entitlement_status": "Commercial licence",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "Assess a synthetic workflow once a licence exists.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-15",
+   "name": "SAP CAP Node.js (CDS service framework, OData V4)",
+   "category": "AI_ENABLING_FRAMEWORK",
+   "components": [
+    "cap-runtime"
+   ],
+   "sap_source_reference": "https://cap.cloud.sap/docs/",
+   "official_description": "SAP Cloud Application Programming Model: CDS models served as OData V4 services.",
+   "engineering_purpose": "The service layer that AI agents and UIs consume; not an AI product itself.",
+   "supported_scenarios": [
+    "Read-only OData V4 service on synthetic data",
+    "Service for agent tools and Fiori UIs"
+   ],
+   "access_requirements": "Node.js and project-local packages (owner-authorized)",
+   "licensing_or_entitlement_status": "Open source; @sap/cds under SAP licence terms",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Run the CAP experiment in the owner workbench to obtain owner-workbench execution evidence.",
+   "improvement_opportunities": [
+    "Add a second comparable run to observe repeatability"
+   ],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-16",
+   "name": "CAP MCP adapter (@cap-js/mcp)",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "cap-mcp"
+   ],
+   "sap_source_reference": "https://github.com/cap-js/mcp",
+   "official_description": "CAP plugin that exposes CAP services to agents over MCP (describe, query).",
+   "engineering_purpose": "Give AI agents governed, read-only access to CAP data.",
+   "supported_scenarios": [
+    "Agent query over a CAP service"
+   ],
+   "access_requirements": "Node.js and project-local packages (owner-authorized); marked Beta upstream",
+   "licensing_or_entitlement_status": "Open source",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Run the CAP experiment in the owner workbench database; compare MCP answers with the OData readback.",
+   "improvement_opportunities": [
+    "Evaluate behaviour with a larger synthetic dataset"
+   ],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-17",
+   "name": "CAP agents (@cap-js/agents)",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "cap-agents"
+   ],
+   "sap_source_reference": "https://github.com/cap-js/agents",
+   "official_description": "CAP plugin to build agents on top of CAP services.",
+   "engineering_purpose": "Build AI agents with CAP conventions.",
+   "supported_scenarios": [
+    "Agent over a CAP service"
+   ],
+   "access_requirements": "Needs a configured model provider",
+   "licensing_or_entitlement_status": "Open source; model provider separate",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Evaluate once a local or approved model provider is configured.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-18",
+   "name": "SAPUI5 / SAP Fiori front end",
+   "category": "AI_ENABLING_FRAMEWORK",
+   "components": [
+    "fiori-app",
+    "fiori-gen"
+   ],
+   "sap_source_reference": "https://ui5.sap.com/",
+   "official_description": "SAPUI5 framework and Fiori design for SAP user interfaces.",
+   "engineering_purpose": "The user interface over CAP or RAP services; not an AI product itself.",
+   "supported_scenarios": [
+    "Fiori/UI5 app on a local OData V4 service"
+   ],
+   "access_requirements": "Node.js tooling; served by the local CAP service",
+   "licensing_or_entitlement_status": "Open source (OpenUI5) / SAP terms (SAPUI5)",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Run the Fiori experiment and the separate browser proof in the owner workbench database.",
+   "improvement_opportunities": [
+    "Keep the real-browser proof separate from the tool-execution record"
+   ],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-19",
+   "name": "UI5 MCP server (@ui5/mcp-server)",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "ui5-mcp"
+   ],
+   "sap_source_reference": "https://github.com/UI5/mcp-server",
+   "official_description": "MCP server with UI5 guidelines, API reference and manifest validation for agents.",
+   "engineering_purpose": "Let coding agents check UI5 code against official rules.",
+   "supported_scenarios": [
+    "Manifest validation of a UI5 app"
+   ],
+   "access_requirements": "Node.js tooling (project-local, owner-authorized)",
+   "licensing_or_entitlement_status": "Open source",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Run the Fiori experiment in the owner workbench database to record its operations.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-20",
+   "name": "SAP Fiori MCP server (@sap-ux/fiori-mcp-server)",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "fiori-mcp"
+   ],
+   "sap_source_reference": "https://github.com/SAP/open-ux-tools",
+   "official_description": "MCP server for Fiori app generation and modification by agents.",
+   "engineering_purpose": "Agent-driven Fiori app creation and change.",
+   "supported_scenarios": [
+    "Read-only listing of Fiori apps and functionality"
+   ],
+   "access_requirements": "Node.js tooling (project-local, owner-authorized); includes write tools that stay refused",
+   "licensing_or_entitlement_status": "Open source",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Validate one read-only listing operation; keep write tools refused.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-21",
+   "name": "SAP Business Accelerator Hub APIs",
+   "category": "DISCOVERY",
+   "components": [
+    "hub"
+   ],
+   "sap_source_reference": "https://api.sap.com",
+   "official_description": "Catalogue of SAP API contracts with a sandbox.",
+   "engineering_purpose": "Find and try SAP APIs before integration work.",
+   "supported_scenarios": [
+    "API contract discovery",
+    "Sandbox call with mock data"
+   ],
+   "access_requirements": "Registration and an API key held by you",
+   "licensing_or_entitlement_status": "Free registration",
+   "sap_entitlement": "NOT_REQUIRED",
+   "next_hands_on_action": "Call one sandbox API read-only once an API key is configured (mock data only).",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  },
+  {
+   "capability_id": "SAP-22",
+   "name": "SAP AI skills library",
+   "category": "AI_INTEGRATION",
+   "components": [
+    "skills"
+   ],
+   "sap_source_reference": "https://developers.sap.com",
+   "official_description": "Reusable skills for AI coding assistants (as described by SAP).",
+   "engineering_purpose": "Share SAP-specific guidance with coding assistants.",
+   "supported_scenarios": [
+    "Assistant skills for SAP development"
+   ],
+   "access_requirements": "Not determined: no locatable artifact was verified",
+   "licensing_or_entitlement_status": "Not determined",
+   "sap_entitlement": "NOT_DETERMINED",
+   "next_hands_on_action": "Locate an official artifact before any evaluation.",
+   "improvement_opportunities": [],
+   "source_check": {
+    "state": "REFERENCE_NOT_CHECKABLE",
+    "last_checked": null
+   }
+  },
+  {
+   "capability_id": "SAP-23",
+   "name": "ABAP RESTful Application Programming Model (RAP)",
+   "category": "AI_ENABLING_FRAMEWORK",
+   "components": [],
+   "sap_source_reference": "https://developers.sap.com/concepts/abap-restful-application-programming-model/",
+   "official_description": "SAP's ABAP programming model for building services and apps on the ABAP platform (SAP Developer Center concept page with hands-on tutorials).",
+   "engineering_purpose": "The ABAP-side service and data model that AI tooling such as the ABAP Development Tools MCP server (SAP-05) and Fiori front ends (SAP-18) work on; not an AI product itself.",
+   "supported_scenarios": [
+    "ABAP RAP business objects and services as targets for AI-assisted design and review"
+   ],
+   "access_requirements": "An ABAP system you control (for example a trial or BTP ABAP environment); no access is configured here",
+   "licensing_or_entitlement_status": "Part of the ABAP platform; licence and entitlement depend on the ABAP system",
+   "sap_entitlement": "REQUIRED",
+   "next_hands_on_action": "No Workbench execution exists. Evaluate through the ABAP Development Tools MCP server (SAP-05) once an ABAP trial system and the owner attestation are available.",
+   "improvement_opportunities": [
+    "Define a read-only RAP inspection experiment before any claim is made"
+   ],
+   "source_check": {
+    "state": "REFERENCE_REACHABLE",
+    "last_checked": "2026-10-13"
+   }
+  }
+ ]
+}

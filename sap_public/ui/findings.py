@@ -1,4 +1,5 @@
-"""FINDINGS: browse, filter, read and compare the published findings. Nothing here executes anything."""
+"""HANDS-ON EVALUATIONS: published execution findings read through the six stages (identify, evaluate, align with
+hands-on, prove, compare, scope for improvement). Browse, filter and compare. Nothing here executes anything."""
 from __future__ import annotations
 
 import streamlit as st
@@ -38,27 +39,41 @@ def detail(f: dict, rel: dict) -> None:
     if F.is_stale(f):
         st.warning(f"This was executed more than {F.STALE_AFTER_DAYS} days ago. Tools and services change; treat it as "
                    'a dated observation.')
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown('#### Engineering question')
-        st.write(md_escape(f.get('question', ''), 600))
-        st.markdown('#### Objective and setup')
-        st.write(md_escape(f.get('objective', ''), 600))
-        st.caption(md_escape(f.get('setup', ''), 600))
-        st.markdown('#### Where and how it was executed')
-        st.write(md_escape(f.get('target', ''), 400) + ' Scope: ' + md_escape(f.get('scope', ''), 120))
-    with c2:
-        st.markdown('#### What it proves, and what it does not')
-        st.write(md_escape(f.get('what_it_proves', ''), 600))
-        st.markdown('#### Technology evaluated')
-        st.write(md_escape(f.get('technology', ''), 200))
-        st.markdown('#### Receipt')
-        st.caption('Execution receipt ' + md_escape(str(f.get('receipt_sha256', ''))[:16]) +
-                   '… A receipt proves the record is intact, not that SAP behaves as described.')
+    common.lifecycle_strip(tuple(common.LIFECYCLE))
+    common.section('IDENTIFY', 'the engineering scenario')
+    st.markdown('#### Engineering question')
+    st.write(md_escape(f.get('question', ''), 600))
+    st.markdown('#### Technology evaluated')
+    st.write(md_escape(f.get('technology', ''), 200))
+    common.section('EVALUATE', 'objective, setup and access')
+    st.markdown('#### Objective and setup')
+    st.write(md_escape(f.get('objective', ''), 600))
+    st.caption(md_escape(f.get('setup', ''), 600))
+    common.section('ALIGN WITH HANDS-ON', 'actual execution target')
+    st.markdown('#### Where and how it was executed')
+    st.write(md_escape(f.get('target', ''), 400) + ' Scope: ' + md_escape(f.get('scope', ''), 120))
+    if F.finding_tier(f) == 'DOCUMENTATION_RETRIEVED':
+        st.info("This is retrieval from SAP's public developer service. It is not an execution in an SAP system.")
+    common.section('PROVE', 'what was executed and checked')
+    st.markdown('#### What it proves, and what it does not')
+    st.write(md_escape(f.get('what_it_proves', ''), 600))
+    st.caption('What it supports: ' + md_escape(F.TIER_TEXT.get(F.finding_tier(f), 'not established'), 200))
     st.markdown('#### Verified observations')
     _bullets(f.get('verified_observations'))
     st.markdown('#### Technical findings')
     _bullets(f.get('technical_findings'))
+    st.markdown('#### Evidence')
+    st.caption('Validation: ' + md_escape(f.get('validation_text', ''), 120) + ' · Execution receipt '
+               + md_escape(str(f.get('receipt_sha256', ''))[:16]) +
+               '… A receipt proves the record is intact, not that SAP behaves as described.')
+    st.markdown('#### Practical usefulness')
+    st.write('Observed within the stated scope only. Whether it is worth adopting is an engineering judgment that '
+             'needs more than one result; it is not inferred from this evaluation.')
+    common.section('COMPARE', 'against comparable runs')
+    comp = f.get('comparison') or {}
+    st.markdown('#### Comparison')
+    st.write(md_escape(comp.get('text', 'No comparable data.'), 500))
+    common.section('SCOPE FOR IMPROVEMENT', 'limits and next steps')
     st.markdown('#### Limitations')
     _bullets(f.get('limitations'), 'No limitations recorded (that does not mean there are none).')
     if f.get('failures'):
@@ -66,9 +81,6 @@ def detail(f: dict, rel: dict) -> None:
         _bullets(f.get('failures'))
     st.markdown('#### Improvement opportunities')
     _bullets(f.get('improvements'))
-    comp = f.get('comparison') or {}
-    st.markdown('#### Comparison')
-    st.write(md_escape(comp.get('text', 'No comparable data.'), 500))
     if f.get('sources'):
         st.markdown('#### Sources')
         for s in f['sources']:
@@ -83,8 +95,10 @@ def detail(f: dict, rel: dict) -> None:
 def render() -> None:
     c = common.content()
     rel = c['release']
-    st.title('Findings')
-    st.caption('Published results of hands-on experiments, with their evidence and limits. Read-only.')
+    st.title('Hands-on Evaluations')
+    st.caption('Published results of hands-on experiments run in the private engineering workbench, each with its '
+               'execution target, checks, evidence and limits. A public documentation retrieval is labelled as such and '
+               'is never presented as SAP system execution. Read-only.')
     common.content_banner(c)
     items = F.visible(rel)
     tomb = F.retracted(rel)
@@ -95,7 +109,7 @@ def render() -> None:
     sel = st.session_state.get('finding_selected') or st.query_params.get('finding')
     chosen = F.by_id(rel, sel) if sel else None
     if chosen:
-        if st.button('← All findings', key='fnd_back'):
+        if st.button('← All evaluations', key='fnd_back'):
             st.session_state.pop('finding_selected', None)
             st.query_params.pop('finding', None)
             st.rerun()

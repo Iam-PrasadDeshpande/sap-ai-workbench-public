@@ -1,28 +1,35 @@
-"""Public catalogue of SAP developer tools and public release information (static, versioned, read-only data)."""
+"""Public capability catalog and release information (static, versioned, read-only data).
+
+`data/capabilities.json` is GENERATED from the private workbench's canonical capability contract
+(scripts/gen_public_capabilities.py) so both editions share one set of capability identities. It holds identity and
+official-reference facts only: execution evidence reaches this site solely through owner-approved content releases.
+"""
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 DATA = Path(__file__).resolve().parents[1] / 'data'
-STATE_TEXT = {
-    'PUBLICLY_AVAILABLE': ('Publicly available', 'green', 'Usable by anyone; some of it runs inside this application.'),
-    'DOCUMENTED': ('Documented', 'blue', 'Published by SAP; not run by this edition.'),
-    'REQUIRES_SETUP': ('Requires setup', 'orange', 'Needs software installed on your own machine.'),
-    'REQUIRES_TRIAL': ('Requires an SAP trial', 'orange', 'Needs an SAP trial or sandbox system you control.'),
-    'REQUIRES_COMMERCIAL_LICENSE': ('Requires an entitlement', 'orange', 'Needs a commercial SAP entitlement.'),
-    'NOT_VERIFIED': ('Not verified', 'gray', 'The project could not verify availability or behaviour.'),
-    'NOT_IMPLEMENTED': ('Not available here', 'gray', 'Nothing is implemented or simulated for it.'),
-}
+CATALOG_SCHEMA = 'sap-public.capability-catalog/1'
+CATEGORIES = ('AI_NATIVE', 'AI_ENABLING_FRAMEWORK', 'AI_INTEGRATION', 'DISCOVERY')
+_ID = re.compile(r'SAP-\d{2}')
+_REF = re.compile(r'https://[a-z0-9.-]+/[^\s<>"]*|https://[a-z0-9.-]+')
 
 
-def tools() -> dict:
-    data = json.loads((DATA / 'tools.json').read_text(encoding='utf-8'))
-    for t in data['tools']:
-        if t['state'] not in STATE_TEXT:
-            raise ValueError(f"unknown state {t['state']}")
-        if t.get('runs_here') and t['state'] != 'PUBLICLY_AVAILABLE':
-            raise ValueError('only publicly available tools may run here')
+def capabilities() -> dict:
+    data = json.loads((DATA / 'capabilities.json').read_text(encoding='utf-8'))
+    if data.get('schema') != CATALOG_SCHEMA:
+        raise ValueError('unexpected capability catalog schema')
+    seen = set()
+    for c in data['capabilities']:
+        if not _ID.fullmatch(str(c.get('capability_id', ''))) or c['capability_id'] in seen:
+            raise ValueError('malformed or duplicate capability id')
+        seen.add(c['capability_id'])
+        if c.get('category') not in CATEGORIES:
+            raise ValueError(f"unknown category {c.get('category')}")
+        if c.get('sap_source_reference') and not _REF.fullmatch(c['sap_source_reference']):
+            raise ValueError('official reference is not an https URL')
     return data
 
 

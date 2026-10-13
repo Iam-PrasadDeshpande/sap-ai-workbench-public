@@ -36,7 +36,16 @@ INTENTS = {
     'UNPROVEN': frozenset({'unproven', 'unverified', 'untested', 'unvalidated', 'gap', 'gaps', 'missing', 'outstanding',
                            'pending', 'open'}),
     'LIMITATIONS': frozenset({'limitation', 'limitations', 'limit', 'limits', 'limited', 'risk', 'risks', 'caveat', 'caveats', 'weakness'}),
+    # R8 evaluation questions. Catalog answers are documentation context (official references), never evidence.
+    'EXPOSED': frozenset({'exposed', 'expose', 'exposes', 'offer', 'offers', 'offered', 'provide', 'provides',
+                          'provided', 'available', 'exist', 'exists'}),
+    'ASSESSED': frozenset({'assessed', 'assess', 'assessment', 'assessments', 'evaluated', 'evaluate', 'evaluating',
+                           'evaluation', 'evaluations', 'maturity', 'mature'}),
+    'LOCAL': frozenset({'local', 'locally'}),
+    'NEXT': frozenset({'next', 'worth', 'priority', 'priorities', 'prioritise', 'prioritize'}),
+    'REQUIRES': frozenset({'require', 'requires', 'required', 'requirement', 'requirements'}),
 }
+CATALOG_STATUS = 'CATALOG_CONTEXT'
 COVERED = 0.6        # share of the topic terms one finding must cover for the answer to count as ANSWERED
 W = {'title': 3.0, 'technology': 2.0, 'question': 2.0, 'objective': 1.0, 'observations': 1.0, 'findings': 1.0,
      'limitations': 1.0, 'improvements': 0.5}
@@ -138,17 +147,114 @@ def _tier_counts(findings: list) -> str:
     return '; '.join(f'{k} finding(s): {F.TIER_TEXT[t]}' for t, k in sorted(n.items())) or 'no current findings'
 
 
-def answer(question: str, release: dict, *, status_of_content: str = 'OK') -> dict:
+_ENTITLEMENT_RANK = {'NOT_REQUIRED': 0, 'NOT_DETERMINED': 1, 'REQUIRED': 2}
+_EVIDENCED = ('LOCAL_VALIDATION_ONLY', 'SYSTEM_VALIDATION_AVAILABLE')
+
+
+def _catalog_view(c: dict, levels: dict) -> dict:
+    return {'capability_id': c.get('capability_id', ''), 'name': c.get('name', ''), 'category': c.get('category', ''),
+            'description': c.get('official_description', ''), 'access': c.get('access_requirements', ''),
+            'licensing': c.get('licensing_or_entitlement_status', ''), 'source': c.get('sap_source_reference', ''),
+            'next_action': c.get('next_hands_on_action', ''), 'entitlement': c.get('sap_entitlement', 'NOT_DETERMINED'),
+            'executable': bool(c.get('components')),
+            'evidence_level': levels.get(c.get('capability_id'), 'DOCUMENTATION_ONLY')}
+
+
+def _catalog_matches(topic: list[str], catalog: list[dict]) -> list[tuple[float, dict]]:
+    out = []
+    for c in catalog:
+        s, hit = _score(topic, {'title': c.get('name', ''), 'technology': ' '.join(c.get('components') or []),
+                                'question': c.get('engineering_purpose', ''), 'objective': c.get('official_description', ''),
+                                'observations': ' '.join(c.get('supported_scenarios') or []), 'findings': '',
+                                'limitations': c.get('access_requirements', ''), 'improvements': ''})
+        if topic and s > 0 and len(hit) / len(topic) >= MIN_COVERAGE:
+            out.append((s, c))
+    return sorted(out, key=lambda x: -x[0])
+
+
+def _catalog_answer(intents: set, topic: list[str], catalog: list[dict], levels: dict, res: dict) -> bool:
+    """Evaluation questions answered from the capability catalog (official references) and the published evaluation
+    levels. Labelled CATALOG_CONTEXT: documentation context, never execution evidence. Returns True when handled."""
+    if not catalog:
+        return False
+    views = [_catalog_view(c, levels) for c in catalog]
+    evidenced = [v for v in views if v['evidence_level'] in _EVIDENCED]
+    if 'NEXT' in intents:
+        todo = [v for v in views if v['evidence_level'] not in _EVIDENCED and v['next_action'] and v['executable']]
+        # local, owner-authorizable experiments first: they need no SAP entitlement
+        todo.sort(key=lambda v: (_ENTITLEMENT_RANK.get(v['entitlement'], 1), v['capability_id']))
+        res['catalog'] = todo[:6]
+        res['summary'] = ('These are the owner\'s planned next hands-on actions for capabilities without published '
+                          'hands-on evidence, listed with no SAP entitlement needed first. They are plans, not results.')
+    elif 'EXPOSED' in intents:
+        res['catalog'] = views
+        by_cat = {}
+        for v in views:
+            by_cat[v['category']] = by_cat.get(v['category'], 0) + 1
+        res['summary'] = (f'The evaluation catalog lists {len(views)} SAP capabilities from official SAP sources: '
+                          + ', '.join(f'{n} {CATEGORY_TEXT.get(k, k).lower()}' for k, n in by_cat.items())
+                          + '. Being listed shows what SAP publishes; it does not show that anything was executed. '
+                          f'{len(evidenced)} of them have published hands-on evidence.')
+    elif 'ASSESSED' in intents:
+        res['catalog'] = sorted(views, key=lambda v: (v['evidence_level'] not in _EVIDENCED, v['capability_id']))
+        docs = sum(1 for v in views if v['evidence_level'] == 'DOCUMENTATION_ONLY')
+        res['summary'] = (f'{len(evidenced)} of {len(views)} catalog capabilities have published hands-on evidence. '
+                          f'{docs} are assessed at documentation level only (official references, or public '
+                          'documentation retrieval); the rest are not assessed. Maturity is reported as an evidence '
+                          'level, never as a score.')
+    elif ({'BLOCKED', 'REQUIRES'} & intents) and not res['capabilities']:
+        gated = [v for v in views if v['entitlement'] == 'REQUIRED']
+        res['catalog'] = gated
+        res['summary'] = (f'{len(gated)} catalog capabilities need an SAP entitlement, licence, tenant or SAP system '
+                          'access according to their official references. This is what SAP documents, not a test of '
+                          'your access.')
+    else:
+        return False
+    res['status'] = CATALOG_STATUS
+    return True
+
+
+CATEGORY_TEXT = {'AI_NATIVE': 'SAP AI-native capabilities', 'AI_ENABLING_FRAMEWORK': 'AI-enabling development frameworks',
+                 'AI_INTEGRATION': 'AI integration services or tooling',
+                 'DISCOVERY': 'public developer discovery and documentation services'}
+
+
+def answer(question: str, release: dict, *, status_of_content: str = 'OK', catalog: list | None = None) -> dict:
     q = ' '.join(str(question or '').split())[:MAX_QUESTION]
     intents, topic = classify(q)
     findings = F.visible(release)
     caps = release.get('capabilities') or []
+    catalog = list(catalog or [])
+    levels = {e.get('capability_id'): e.get('evidence_level') for e in release.get('evaluations') or []
+              if isinstance(e, dict)}
     res = {'question': q, 'intents': sorted(intents), 'topic_terms': topic, 'release_version': release.get('version'),
            'release_published_at': release.get('published_at'), 'content_status': status_of_content,
            'status': 'NOT_ESTABLISHED', 'summary': '', 'findings': [], 'capabilities': [], 'limitations': [],
-           'not_established': [], 'changes': []}
+           'not_established': [], 'changes': [], 'catalog': []}
     if not q:
         res['summary'] = 'Ask about a technology or a capability, for example "What have you validated with CAP and MCP?".'
+        return res
+    if ({'NEXT', 'EXPOSED', 'ASSESSED'} & intents or ({'BLOCKED', 'REQUIRES'} & intents and not caps)) \
+            and _catalog_answer(intents, topic, catalog, levels, res):
+        return res
+    res['catalog'] = [_catalog_view(c, levels) for _s, c in _catalog_matches(topic, catalog)[:3]]
+    if 'LOCAL' in intents:
+        local = [f for f in findings if F.finding_tier(f) == 'LOCAL_EXECUTION_VALIDATED' and f.get('state') == 'PUBLISHED']
+        res['findings'] = [_finding_view(f, [], 0.0) for f in local[:6]]
+        res['status'] = 'ANSWERED' if local else 'NOT_ESTABLISHED'
+        res['summary'] = (f'{len(local)} published finding(s) were executed and validated locally (for example local '
+                          'CAP or UI5 on synthetic data). None of them establishes SAP system or tenant behaviour.'
+                          if local else 'No published finding was executed and validated locally yet, so this has not '
+                          'been established.')
+        if not local:
+            res['not_established'] = ['No published finding has the local-execution tier.']
+        return res
+    if 'UNPROVEN' in intents and not findings and not caps and catalog:
+        res['catalog'] = [_catalog_view(c, levels) for c in catalog]
+        res['status'] = 'ANSWERED'
+        res['summary'] = (f'Everything is still unproven in published evidence: none of the {len(catalog)} catalog '
+                          'capabilities has a published hands-on finding yet. Listed capabilities come from official SAP '
+                          'references only.')
         return res
     if not findings and not caps:
         res['summary'] = ('No findings have been published yet, so this has not been established. Published content '
@@ -193,6 +299,12 @@ def answer(question: str, release: dict, *, status_of_content: str = 'OK') -> di
                           f"{docs} published finding(s) rest on documentation retrieval only, which shows what SAP publishes "
                           'but does not prove that anything runs in an SAP system.'
                           if (open_caps or weak) else 'Nothing published lists an open or unproven area for this question.')
+        if catalog:
+            without = [c for c in catalog if levels.get(c.get('capability_id')) not in _EVIDENCED]
+            res['catalog'] = [_catalog_view(c, levels) for c in without]
+            res['summary'] += (f' {len(without)} of {len(catalog)} catalog capabilities have no published hands-on '
+                               'evidence.')
+            res['status'] = 'ANSWERED'
     elif 'SYSTEM' in intents and not ({'LATEST', 'DOCUMENTATION'} & intents):
         special = 'SYSTEM'
         system = [(s, h, f) for s, h, f in pool

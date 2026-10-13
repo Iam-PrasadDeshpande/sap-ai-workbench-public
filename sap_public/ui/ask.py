@@ -1,26 +1,30 @@
-"""ASK THE WORKBENCH: questions answered from the owner's published findings only (no model, no private access)."""
+"""ASK THE EVIDENCE: evaluation questions answered from approved published findings only, with clearly labelled
+capability-catalog context from official SAP references (no model, no private access)."""
 from __future__ import annotations
 
 import streamlit as st
 
 from .. import ask as ask_engine
+from .. import catalog, evaluation, knowledge, limits
 from .. import findings as F
-from .. import knowledge, limits
 from ..contract import LIMITS
 from ..safety import https_url_on, md_escape
 from . import common
 from .common import chip
 
 EXAMPLES = (
-    'What have you actually validated with SAP CAP and MCP?',
-    'What are the limitations of AI-assisted ABAP RAP development?',
-    'Which SAP AI capabilities are proven hands-on?',
-    'How did Fiori/UI5 integration behave?',
-    'What remains blocked by SAP trial or license access?',
-    'What changed in your latest experiments?',
+    'What has SAP exposed for AI development?',
+    'Which SAP AI capabilities have been assessed?',
+    "What can SAP's public developer MCP do?",
+    'Has SAP CAP MCP integration been validated?',
+    'Which technologies require SAP BTP entitlements?',
+    'What was validated locally but not in an SAP system?',
+    'What remains unproven?',
+    'Which capability is worth evaluating next?',
 )
 STATUS_CHIP = {'ANSWERED': ('Answered from published findings', 'green'), 'PARTIAL': ('Partly answered', 'orange'),
-               'NOT_ESTABLISHED': ('Not established', 'red')}
+               'NOT_ESTABLISHED': ('Not established', 'red'),
+               'CATALOG_CONTEXT': ('Catalog context: official SAP references, not evidence', 'blue')}
 
 
 def _set(q: str) -> None:
@@ -32,20 +36,21 @@ def _set(q: str) -> None:
 def render() -> None:
     c = common.content()
     rel = c['release']
-    st.title('Ask the Workbench')
-    st.caption('Answers are assembled from the published findings only. If the published evidence does not cover a '
-               'question, the answer says it has not been established. Nothing you type is stored or sent to any '
-               'private system.')
+    st.title('Ask the Evidence')
+    st.caption('Answers are assembled from the approved published findings only. Questions about what SAP exposes are '
+               'answered from the capability catalog and labelled as documentation context. If the published evidence '
+               'does not cover a question, the answer says it has not been established. Nothing you type is stored or '
+               'sent to any private system.')
     common.content_banner(c)
     if 'ask_q_input' not in st.session_state and st.session_state.get('ask_question'):
         st.session_state['ask_q_input'] = st.session_state['ask_question']
     q = st.text_input('Your question', key='ask_q_input', max_chars=ask_engine.MAX_QUESTION,
-                      placeholder='e.g. What have you validated with SAP CAP and MCP?')
+                      placeholder='e.g. Has SAP CAP MCP integration been validated?')
     run = st.button('Ask', type='primary', key='ask_run')
     st.caption('Try one of these:')
-    cols = st.columns(3)
+    cols = st.columns(2)
     for i, ex in enumerate(EXAMPLES):
-        cols[i % 3].button(ex, key=f'ask_ex_{i}', on_click=_set, args=(ex,))
+        cols[i % 2].button(ex, key=f'ask_ex_{i}', on_click=_set, args=(ex,))
     if run:
         st.session_state['ask_question'] = q
     autorun = st.session_state.pop('ask_autorun', False)
@@ -57,7 +62,8 @@ def render() -> None:
         common.footer()
         return
 
-    res = ask_engine.answer(question, rel, status_of_content=c['status'])
+    res = ask_engine.answer(question, rel, status_of_content=c['status'],
+                            catalog=catalog.capabilities()['capabilities'])
     label, color = STATUS_CHIP[res['status']]
     st.markdown(chip(label, color) + f"  content version {md_escape(str(res.get('release_version', 0)))}")
     st.write(md_escape(res['summary'], 900))
@@ -84,6 +90,15 @@ def render() -> None:
                     + md_escape(cap.get('note', ''), 240))
     for lim in res['limitations']:
         st.markdown(f"- Limitation ({md_escape(lim['title'], 80)}): {md_escape(lim['text'], 260)}")
+    if res.get('catalog'):
+        with st.container(border=True):
+            st.markdown('**Capability catalog context** ' + chip('official SAP references, not evidence', 'gray'))
+            for x in res['catalog'][:12]:
+                st.markdown(f"- **{md_escape(x['name'], 120)}** ({md_escape(x['capability_id'])}, "
+                            f"{md_escape(ask_engine.CATEGORY_TEXT.get(x['category'], x['category']).lower(), 80)}): "
+                            f"evidence level {md_escape(evaluation.LEVEL_TEXT.get(x['evidence_level'], x['evidence_level']), 60).lower()}. "
+                            + (f"Needs: {md_escape(x['access'], 160)}. " if 'NEXT' not in res['intents'] else '')
+                            + (f"Next: {md_escape(x['next_action'], 200)}" if 'NEXT' in res['intents'] else ''))
     for ch in res['changes']:
         st.markdown('- ' + md_escape(ch if isinstance(ch, str) else str(ch.get('text', '')), 260))
     if res['not_established']:

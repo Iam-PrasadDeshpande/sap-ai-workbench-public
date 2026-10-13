@@ -2,12 +2,13 @@
  "schema": "sap-public.release/1",
  "edition": "PUBLIC_INTERACTIVE",
  "version": "0.1.0",
- "publication_status": "NOT_PUBLISHED",
- "published_on": null,
+ "release_stage": "TECHNICAL_PREVIEW",
+ "owner_acceptance": "NOT_RECORDED",
  "capabilities": [
-  "Browse, search and compare the owner's published, evidence-backed findings",
-  "Ask questions answered only from published findings; unsupported questions are reported as not established",
-  "Capability map: what is validated hands-on, read-only, blocked or not yet established",
+  "SAP AI capability catalog from official SAP sources (developers.sap.com first), classified as AI-native, AI-enabling framework, AI integration tooling or discovery service",
+  "Evidence-level assessment of each capability on eight dimensions, never a score, computed only from approved published evidence",
+  "Hands-on evaluations: published findings read through identify, evaluate, align with hands-on, prove, compare and scope for improvement",
+  "Ask the Evidence: answers only from published findings, with catalog context labelled as documentation; unsupported questions are reported as not established",
   "Versioned, hash-verified content releases with supersession, retraction and rollback",
   "Optional supplementary lookup in SAP's public developer content, labelled as documentation",
   "Optional synthetic practice exercises for learning the method"
@@ -20,6 +21,6 @@
   "Session history is not stored; reload clears it."
  ],
  "changes": [
-  "Observer-focused research site: published findings, evidence-grounded questions, capability map and versioned content."
+  "SAP AI capability evaluation site: canonical capability catalog shared with the private workbench, evidence-level assessments, hands-on evaluations and evidence-grounded questions."
  ]
 }

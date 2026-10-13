@@ -1,8 +1,9 @@
-"""SAP AI Evaluation Workbench - public research site (Streamlit Community Cloud entry point).
+"""SAP AI Evaluation Workbench - public SAP AI capability evaluation site (Streamlit Community Cloud entry point).
 
-An evidence-backed, read-only view of the owner's published engineering findings. Five workspaces: Research (home),
-Findings, Ask, Capabilities, Method & Evidence. Self-contained: it imports nothing outside this folder and contains no
-privileged capability (see sap_public/contract.py and the isolation tests).
+A read-only, evidence-driven view of SAP AI and AI-enabling developer capabilities: the canonical capability catalog,
+the owner's approved hands-on evaluations and questions answered from them. Five workspaces: Mission & Overview, SAP AI
+Capabilities, Hands-on Evaluations, Ask the Evidence, Evaluation Framework. Self-contained: it imports nothing outside
+this folder and contains no privileged capability (see sap_public/contract.py and the isolation tests).
 """
 from __future__ import annotations
 
@@ -12,11 +13,11 @@ from sap_public.ui import ask, common, findings, home, method, tools
 st.set_page_config(page_title='SAP AI Evaluation Workbench', page_icon='🧭', layout='wide')
 
 WORKSPACES = (
-    ('home', 'Research', ':material/home:', home.render),
-    ('findings', 'Findings', ':material/fact_check:', findings.render),
-    ('ask', 'Ask the Workbench', ':material/forum:', ask.render),
-    ('capabilities', 'Capabilities', ':material/build:', tools.render),
-    ('method', 'Method & Evidence', ':material/rule:', method.render),
+    ('home', 'Mission & Overview', ':material/flag:', home.render),
+    ('capabilities', 'SAP AI Capabilities', ':material/build:', tools.render),
+    ('findings', 'Hands-on Evaluations', ':material/science:', findings.render),
+    ('ask', 'Ask the Evidence', ':material/forum:', ask.render),
+    ('method', 'Evaluation Framework', ':material/rule:', method.render),
 )
 common.PAGES.clear()
 for key, title, icon, fn in WORKSPACES:

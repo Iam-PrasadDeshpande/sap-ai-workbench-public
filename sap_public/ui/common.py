@@ -22,7 +22,7 @@ PRACTICE_VIEW = 'Practice exercises (optional)'
 
 SITE = 'https://prasaddeshpande.com'
 FOOTER_LINKS = (
-    ('Research Methodology', 'Research methodology'),
+    ('Evaluation Methodology', 'Evaluation methodology'),
     ('Evidence & Limitations', 'Evidence & limitations'),
     ('Privacy', 'Privacy'),
     ('Contact', 'Contact'),

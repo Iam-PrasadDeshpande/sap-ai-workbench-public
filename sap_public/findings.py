@@ -196,6 +196,19 @@ def _normalize_capability(c: dict) -> dict:
     return c
 
 
+def _evaluation_texts(e: dict):
+    """Every public text of one R8 capability evaluation (screened like findings and capability notes)."""
+    yield str(e.get('capability_id', ''))
+    for d in (e.get('dimensions') or {}).values():
+        if isinstance(d, dict):
+            yield str(d.get('statement', ''))
+    for c in e.get('components') or []:
+        if isinstance(c, dict):
+            for k in ('name', 'proven', 'not_proven'):
+                yield str(c.get(k, ''))
+            yield ' '.join(map(str, (c.get('operations') or []) + (c.get('passed_checks') or [])))
+
+
 def _retractions(root: Path, idx: dict, entries: list) -> dict:
     """Retractions are authoritative across versions: the index's list and every tombstone in ANY release file
     (verified or not) apply to whichever release is served, including a fallback or a rolled-back release. Honouring an
@@ -229,7 +242,7 @@ def _tombstone(f: dict, info: dict) -> dict:
 
 
 def empty_release(note: str = 'No findings have been published yet.') -> dict:
-    return {'schema': RELEASE_SCHEMA, 'version': 0, 'published_at': None, 'findings': [], 'capabilities': [],
+    return {'schema': RELEASE_SCHEMA, 'version': 0, 'published_at': None, 'findings': [], 'capabilities': [], 'evaluations': [],
             'changes': [], 'note': note, 'digest': ''}
 
 
@@ -274,7 +287,14 @@ def load(root: Path | None = None, *, allow_fixture: bool = False) -> dict:
             else:
                 dropped += 1
                 problems.append('capability entry with non-public content dropped')
-        rel = {**rel, 'findings': findings, 'capabilities': caps}
+        evals = []
+        for e in rel.get('evaluations') or []:
+            if isinstance(e, dict) and not violations(' '.join(_evaluation_texts(e))):
+                evals.append(e)
+            else:
+                dropped += 1
+                problems.append('evaluation entry with non-public content dropped')
+        rel = {**rel, 'findings': findings, 'capabilities': caps, 'evaluations': evals}
         status = 'DEGRADED' if n > 0 or dropped else ('OK' if findings or caps else 'EMPTY')
         gone_titles = [str(f.get('title', '')) for f in findings if f.get('state') == 'RETRACTED' and f.get('title')]
         history = [{'version': e.get('version'), 'published_at': e.get('published_at'),

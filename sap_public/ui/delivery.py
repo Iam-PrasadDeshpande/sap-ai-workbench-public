@@ -6,6 +6,7 @@ import streamlit as st
 from .. import catalog, integrity
 from ..contract import ABSENT_CAPABILITIES, EDITION, LIMITS, VERSION
 from ..safety import md_escape
+from . import common
 from .common import chip
 
 
@@ -13,17 +14,34 @@ def render() -> None:
     rel = catalog.release()
     st.subheader('Release and integrity')
     st.caption('What this public edition is, what has been verified, and what it will not do.')
-    c1, c2, c3 = st.columns(3)
+    content = common.content()['release']
+    n_find = len([f for f in content.get('findings', []) if f.get('state') != 'RETRACTED'])
+    n_eval = len(content.get('evaluations', []))
+    version = content.get('version', 0)
+    stage = {'TECHNICAL_PREVIEW': 'Technical preview'}.get(rel.get('release_stage'), 'Not stated')
+    accepted = rel.get('owner_acceptance') == 'ACCEPTED'
+    st.markdown('**Release status.** Four separate facts; none of them implies another.')
+    c1, c2, c3, c4 = st.columns(4)
     with c1.container(border=True):
-        st.caption('PUBLISHED VERSION')
-        st.markdown(f'**{md_escape(rel["version"])}** ' + chip(rel['edition'].replace('_', ' ').title(), 'blue'))
+        st.caption('APPLICATION')
+        st.markdown(chip('Release stage: ' + stage + ' build', 'blue'))
+        st.caption(f'Version {md_escape(rel["version"])}. A release-stage label only; it makes no statement about hosting.')
     with c2.container(border=True):
-        st.caption('PUBLICATION')
-        pub = rel.get('published_on')
-        st.markdown(chip('Published ' + md_escape(str(pub)), 'green') if pub else chip('Not yet published', 'orange'))
+        st.caption('OWNER UAT AND ACCEPTANCE')
+        st.markdown(chip('Accepted by the owner', 'green') if accepted else chip('Not recorded yet', 'orange'))
+        st.caption("Acceptance is the owner's own recorded decision, separate from deployment.")
     with c3.container(border=True):
-        st.caption('PUBLIC EXPERIMENT AVAILABILITY')
-        st.markdown(chip('Read-only research site', 'green') + '  ' + chip('1 optional SAP documentation lookup', 'blue'))
+        st.caption('PUBLISHED EVALUATION CONTENT')
+        if n_find or n_eval:
+            st.markdown(chip(f'Content release {version} available', 'green'))
+        else:
+            st.markdown(chip('No evaluation content published yet', 'gray'))
+        st.caption('Versioned and hash-verified; see the attestation below.')
+    with c4.container(border=True):
+        st.caption('APPROVED FINDINGS')
+        st.markdown(chip(f'{n_find} approved' if n_find else 'Zero findings approved', 'green' if n_find else 'gray'))
+        st.caption('A finding appears only after the owner approves its exact content.')
+    st.caption('Official SAP references on the capability pages are source checks, not approved findings.')
 
     st.subheader('Supported capabilities')
     for c in rel['capabilities']:
