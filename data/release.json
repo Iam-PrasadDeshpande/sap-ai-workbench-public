@@ -1,0 +1,25 @@
+{
+ "schema": "sap-public.release/1",
+ "edition": "PUBLIC_INTERACTIVE",
+ "version": "0.1.0",
+ "publication_status": "NOT_PUBLISHED",
+ "published_on": null,
+ "capabilities": [
+  "Browse, search and compare the owner's published, evidence-backed findings",
+  "Ask questions answered only from published findings; unsupported questions are reported as not established",
+  "Capability map: what is validated hands-on, read-only, blocked or not yet established",
+  "Versioned, hash-verified content releases with supersession, retraction and rollback",
+  "Optional supplementary lookup in SAP's public developer content, labelled as documentation",
+  "Optional synthetic practice exercises for learning the method"
+ ],
+ "verified_public_tests": "This file does not embed test results. Before release the build is checked against the source revision named in PUBLIC_MANIFEST.json: the public test suite (isolation, security and functional tests), a clean install on Windows and Linux, and a real-browser run. The qualification report for that revision is the evidence; it is held by the repository owner.",
+ "known_limitations": [
+  "Public SAP endpoints are anonymous and best-effort; results can change or be unavailable.",
+  "No SAP system, trial, CAP, ADT or model is reachable from this edition.",
+  "Comparisons are qualitative and partly rest on observations from the project's own test runs in a private environment (assistant-run, not independently verified).",
+  "Session history is not stored; reload clears it."
+ ],
+ "changes": [
+  "Observer-focused research site: published findings, evidence-grounded questions, capability map and versioned content."
+ ]
+}

@@ -1,0 +1,583 @@
+{
+ "schema": "sap-public.comparison/1",
+ "facets": [
+  [
+   "capability_fit",
+   "Capability fit"
+  ],
+  [
+   "sap_alignment",
+   "SAP architecture alignment"
+  ],
+  [
+   "hands_on",
+   "Hands-on availability"
+  ],
+  [
+   "access",
+   "Required access"
+  ],
+  [
+   "licensing",
+   "Licensing considerations"
+  ],
+  [
+   "dependencies",
+   "Technical dependencies"
+  ],
+  [
+   "limitations",
+   "Limitations"
+  ],
+  [
+   "confidence",
+   "Evidence confidence"
+  ],
+  [
+   "next_step",
+   "Next validation step"
+  ]
+ ],
+ "pairs": [
+  {
+   "id": "rap-vs-cap",
+   "title": "ABAP RAP or SAP CAP for an AI-enabled application",
+   "question": "Where should the business logic and data model of a new AI-enabled SAP application live?",
+   "options": [
+    {
+     "id": "rap",
+     "name": "ABAP RAP (ABAP RESTful Application Programming Model)",
+     "cells": {
+      "capability_fit": {
+       "text": "Business objects with behaviour, authorization and OData exposure inside ABAP; a natural home when the data and logic already live in ABAP / S/4HANA.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/abap-cloud"
+      },
+      "sap_alignment": {
+       "text": "Documented SAP-standard model for ABAP-based apps, including generated UI services.",
+       "basis": "DOCUMENTATION",
+       "source": "https://developers.sap.com/tutorials/abap-environment-rap100-generate-ui-service"
+      },
+      "hands_on": {
+       "text": "Needs an ABAP system. ADT tooling was exercised in project test runs on a private ABAP Trial; this public edition cannot run ABAP.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "access": {
+       "text": "An ABAP environment (for example a trial) and ADT. Not available to anonymous visitors.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/abap-cloud"
+      },
+      "licensing": {
+       "text": "Depends on the ABAP environment you use. Check SAP's current terms; not verified here.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/abap-cloud"
+      },
+      "dependencies": {
+       "text": "ABAP runtime, ADT, authorizations; AI calls need an outbound service or SAP AI API.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/abap-cloud"
+      },
+      "limitations": {
+       "text": "Not a model runtime: AI capabilities are consumed through services you call.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "confidence": {
+       "text": "LOW to MEDIUM: documentation and public tutorials only; nothing executed here.",
+       "basis": "DOCUMENTATION",
+       "source": "https://developers.sap.com/tutorials/abap-environment-rap100-generate-ui-service"
+      },
+      "next_step": {
+       "text": "Run the public knowledge lookup for RAP, then the tutorial on a trial ABAP system.",
+       "basis": "DOCUMENTATION",
+       "source": "https://developers.sap.com/tutorials/abap-environment-rap100-generate-ui-service"
+      }
+     }
+    },
+    {
+     "id": "cap",
+     "name": "SAP CAP (Cloud Application Programming Model)",
+     "cells": {
+      "capability_fit": {
+       "text": "CDS-modelled services with OData and (via a plugin) MCP exposure; suited to new cloud-side services and agent-facing APIs.",
+       "basis": "DOCUMENTATION",
+       "source": "https://cap.cloud.sap/docs/"
+      },
+      "sap_alignment": {
+       "text": "SAP's application programming model for cloud-native services; see the CAP documentation.",
+       "basis": "DOCUMENTATION",
+       "source": "https://cap.cloud.sap/docs/"
+      },
+      "hands_on": {
+       "text": "Runs locally with Node.js. The project ran a local CAP service with OData and MCP on fabricated data in its own test runs; the public edition shows the technique only on a synthetic lab.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "access": {
+       "text": "Node.js and project-local packages; no SAP system is needed to prototype.",
+       "basis": "DOCUMENTATION",
+       "source": "https://cap.cloud.sap/docs/"
+      },
+      "licensing": {
+       "text": "The @sap/cds packages carry an SAP developer licence (test / non-productive use). Productive use needs an SAP-licensed platform; check current terms.",
+       "basis": "DOCUMENTATION",
+       "source": "https://cap.cloud.sap/docs/"
+      },
+      "dependencies": {
+       "text": "Node.js, CDS compiler/runtime, a database plug-in; BTP services for production.",
+       "basis": "DOCUMENTATION",
+       "source": "https://cap.cloud.sap/docs/"
+      },
+      "limitations": {
+       "text": "Does not run inside the ABAP stack; reaching ABAP data needs integration.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "confidence": {
+       "text": "MEDIUM for the local prototype (observed in project test runs on synthetic data); LOW for tenant behaviour.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "next_step": {
+       "text": "Run the synthetic billing lab, then repeat the pattern against your own CAP project.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      }
+     }
+    }
+   ],
+   "priorities": [
+    {
+     "id": "data_in_abap",
+     "text": "My data and business logic already live in ABAP / S/4HANA",
+     "favors": "rap",
+     "because": "RAP keeps logic next to ABAP data and authorizations."
+    },
+    {
+     "id": "local_today",
+     "text": "I need a hands-on path on my own machine today",
+     "favors": "cap",
+     "because": "CAP prototypes run locally with Node.js and no SAP system."
+    },
+    {
+     "id": "agent_api",
+     "text": "I want to expose records to agents through an MCP surface",
+     "favors": "cap",
+     "because": "An MCP plugin for CAP is published; RAP has no equivalent verified here."
+    },
+    {
+     "id": "abap_skills",
+     "text": "My team is ABAP-first and the target is an ABAP environment",
+     "favors": "rap",
+     "because": "It reuses ABAP skills and tooling."
+    }
+   ]
+  },
+  {
+   "id": "adt-mcp-vs-cap-mcp",
+   "title": "ADT MCP or CAP MCP for agent-assisted development",
+   "question": "Which MCP surface should an engineering agent use, and for what?",
+   "options": [
+    {
+     "id": "adt",
+     "name": "ADT MCP server (ABAP Development Tools)",
+     "cells": {
+      "capability_fit": {
+       "text": "Agent-assisted ABAP/RAP development: generators, creation, ATC and transport workflows.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "sap_alignment": {
+       "text": "Exposes ABAP development tooling to MCP clients.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "hands_on": {
+       "text": "Project test run on a private ABAP Trial: 20 tools; an authenticated read-only listing of generators and creatable object types worked. No repository-browsing tool was present, the server advertised no read-only hints, and no SAP object readback was obtained.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "access": {
+       "text": "Local server, an authenticated session to an ABAP system and a token held by that system's owner. Not available here.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "licensing": {
+       "text": "Depends on the ABAP system and tooling licence; not verified here.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "dependencies": {
+       "text": "Eclipse ADT or equivalent host, ABAP system connection, token.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "limitations": {
+       "text": "Most tools create, activate, fix or transport; a client must allowlist read-only tools itself.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "confidence": {
+       "text": "LOW: single private observation, not independently verified, not reproducible publicly.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "next_step": {
+       "text": "On your own trial: list tools, review each, allowlist read-only ones, compare with Eclipse ADT.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      }
+     }
+    },
+    {
+     "id": "capmcp",
+     "name": "CAP MCP adapter (@cap-js/mcp)",
+     "cells": {
+      "capability_fit": {
+       "text": "Exposes a CAP service's model and data to agents through a small, bounded tool set.",
+       "basis": "DOCUMENTATION",
+       "source": "https://www.npmjs.com/package/@cap-js/mcp"
+      },
+      "sap_alignment": {
+       "text": "Published SAP plugin for CAP.",
+       "basis": "DOCUMENTATION",
+       "source": "https://www.npmjs.com/package/@cap-js/mcp"
+      },
+      "hands_on": {
+       "text": "Project test run: a local service exposed exactly describe and query; mutating requests were refused for read-only entities.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "access": {
+       "text": "Node.js and the CAP project; no SAP system.",
+       "basis": "DOCUMENTATION",
+       "source": "https://www.npmjs.com/package/@cap-js/mcp"
+      },
+      "licensing": {
+       "text": "Apache-2.0 plugin; it runs on @sap/cds, which has its own SAP developer licence.",
+       "basis": "DOCUMENTATION",
+       "source": "https://www.npmjs.com/package/@cap-js/mcp"
+      },
+      "dependencies": {
+       "text": "A CAP project using @sap/cds.",
+       "basis": "DOCUMENTATION",
+       "source": "https://www.npmjs.com/package/@cap-js/mcp"
+      },
+      "limitations": {
+       "text": "Only as safe as the service model: entities must be declared read-only.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "confidence": {
+       "text": "MEDIUM for the local prototype on synthetic data; LOW beyond that.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "next_step": {
+       "text": "Run the synthetic lab, then model your own entities as read-only and inspect the MCP tools list.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      }
+     }
+    }
+   ],
+   "priorities": [
+    {
+     "id": "build_abap",
+     "text": "The agent must help create or change ABAP/RAP objects",
+     "favors": "adt",
+     "because": "ADT MCP exposes creation, generator and transport workflows."
+    },
+    {
+     "id": "read_service",
+     "text": "The agent only needs to read data from a service I own",
+     "favors": "capmcp",
+     "because": "CAP MCP exposes a small describe/query surface that can be kept read-only."
+    },
+    {
+     "id": "no_sap_system",
+     "text": "I have no SAP system to connect to yet",
+     "favors": "capmcp",
+     "because": "It runs without any SAP system."
+    },
+    {
+     "id": "strict_readonly",
+     "text": "I need a read-only boundary I can verify",
+     "favors": "capmcp",
+     "because": "The tool set is tiny; ADT MCP needs a client-side allowlist because it advertises no hints."
+    }
+   ]
+  },
+  {
+   "id": "custom-vs-managed-ai",
+   "title": "Custom AI extension or a managed SAP AI service",
+   "question": "Should the AI capability be built on your own model service or on an SAP-managed AI service?",
+   "options": [
+    {
+     "id": "custom",
+     "name": "Custom AI extension (your own model service)",
+     "cells": {
+      "capability_fit": {
+       "text": "Full control over model choice, prompts and data flow; useful for narrow, well-bounded tasks.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "sap_alignment": {
+       "text": "Fits SAP extension principles when it stays loosely coupled to the core.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "hands_on": {
+       "text": "The public synthetic lab shows deterministic rules and where a model could add value; it runs no model.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "access": {
+       "text": "Access to a model endpoint you choose; credentials are yours to protect.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "licensing": {
+       "text": "Model and hosting terms are yours; check data-use and AI-training clauses of any SAP developer tooling you build on.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "dependencies": {
+       "text": "Model hosting, evaluation harness, security review.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "limitations": {
+       "text": "You own evaluation, safety, monitoring and compliance.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "confidence": {
+       "text": "LOW: general reasoning, no SAP-specific evidence executed.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "next_step": {
+       "text": "Define a deterministic baseline first (the synthetic lab), then test whether a model beats it.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      }
+     }
+    },
+    {
+     "id": "managed",
+     "name": "Managed SAP AI service (SAP AI Core / Generative AI Hub)",
+     "cells": {
+      "capability_fit": {
+       "text": "SAP-managed access to models with SAP governance and integration points.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      },
+      "sap_alignment": {
+       "text": "Documented SAP AI platform on BTP.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      },
+      "hands_on": {
+       "text": "Needs a BTP entitlement. NOT verified in the public edition; no call is made.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      },
+      "access": {
+       "text": "SAP BTP account with the relevant entitlement and service key.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      },
+      "licensing": {
+       "text": "Chargeable service; current plans and prices are on SAP's pages and are not reproduced here.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      },
+      "dependencies": {
+       "text": "BTP subaccount, entitlements, SDK or REST access.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      },
+      "limitations": {
+       "text": "Availability of trial or free usage must be checked on SAP's current pages; NOT_VERIFIED here.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      },
+      "confidence": {
+       "text": "LOW: documentation only; no execution evidence in this edition.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      },
+      "next_step": {
+       "text": "Check entitlement on your BTP account, then run a minimal read-only inventory call.",
+       "basis": "DOCUMENTATION",
+       "source": "https://help.sap.com/docs/sap-ai-core"
+      }
+     }
+    }
+   ],
+   "priorities": [
+    {
+     "id": "sap_governance",
+     "text": "I need SAP-managed governance and integration",
+     "favors": "managed",
+     "because": "SAP's managed AI platform is documented to provide it."
+    },
+    {
+     "id": "model_choice",
+     "text": "I need full control over the model and data flow",
+     "favors": "custom",
+     "because": "A custom service lets you choose and host the model."
+    },
+    {
+     "id": "no_btp",
+     "text": "I have no BTP entitlement today",
+     "favors": "custom",
+     "because": "The managed service requires an entitlement."
+    },
+    {
+     "id": "baseline_first",
+     "text": "I first want a deterministic baseline to beat",
+     "favors": "custom",
+     "because": "A simple custom rule baseline needs no platform."
+    }
+   ]
+  },
+  {
+   "id": "fiori-vs-generic-ui",
+   "title": "SAPUI5 / Fiori or a generic front end",
+   "question": "Which front-end approach fits an SAP-connected application?",
+   "options": [
+    {
+     "id": "fiori",
+     "name": "SAPUI5 / SAP Fiori",
+     "cells": {
+      "capability_fit": {
+       "text": "SAP design system, controls, data binding to OData, and Fiori elements for annotation-driven UIs.",
+       "basis": "DOCUMENTATION",
+       "source": "https://ui5.sap.com/"
+      },
+      "sap_alignment": {
+       "text": "SAP's standard UI technology and tooling, including a published UI5 MCP server.",
+       "basis": "DOCUMENTATION",
+       "source": "https://ui5.sap.com/"
+      },
+      "hands_on": {
+       "text": "Project test run: a small UI5 app on a local CAP service rendered and read OData in a real browser; the official UI5 manifest validator found real defects that were fixed.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "access": {
+       "text": "Node.js tooling; the UI5 runtime is served from SAP's public CDN.",
+       "basis": "DOCUMENTATION",
+       "source": "https://ui5.sap.com/"
+      },
+      "licensing": {
+       "text": "OpenUI5 is open source; SAPUI5 and some typings carry SAP developer licence terms.",
+       "basis": "DOCUMENTATION",
+       "source": "https://ui5.sap.com/"
+      },
+      "dependencies": {
+       "text": "UI5 runtime and tooling; an OData or REST back end.",
+       "basis": "DOCUMENTATION",
+       "source": "https://ui5.sap.com/"
+      },
+      "limitations": {
+       "text": "Learning curve; theming and controls follow SAP conventions.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "confidence": {
+       "text": "MEDIUM for the local prototype (observed in project test runs); LOW for launchpad integration.",
+       "basis": "PROJECT_TEST_OBSERVATION",
+       "source": ""
+      },
+      "next_step": {
+       "text": "Validate your manifest with the UI5 tooling, then bind to your service.",
+       "basis": "DOCUMENTATION",
+       "source": "https://ui5.sap.com/"
+      }
+     }
+    },
+    {
+     "id": "generic",
+     "name": "Generic front end (for example React or Vue)",
+     "cells": {
+      "capability_fit": {
+       "text": "Flexible UX and a large ecosystem; no SAP-specific controls out of the box.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "sap_alignment": {
+       "text": "Not an SAP-standard UI; Fiori launchpad integration and design compliance are yours to build.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "hands_on": {
+       "text": "Not exercised in this project.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "access": {
+       "text": "Standard web tooling.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "licensing": {
+       "text": "Per library; no SAP licence involved for the UI layer itself.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "dependencies": {
+       "text": "A build chain and an API the UI can call; accessibility and i18n are yours.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "limitations": {
+       "text": "Accessibility, theming, localization and SAP UX conformance need your own effort.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "confidence": {
+       "text": "LOW: general reasoning only.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      },
+      "next_step": {
+       "text": "Prototype one screen against the same OData service and compare effort.",
+       "basis": "DOCUMENTATION",
+       "source": ""
+      }
+     }
+    }
+   ],
+   "priorities": [
+    {
+     "id": "launchpad",
+     "text": "It must run inside SAP Fiori launchpad with SAP design conformance",
+     "favors": "fiori",
+     "because": "It is SAP's standard UI technology."
+    },
+    {
+     "id": "odata_binding",
+     "text": "I want declarative binding to an OData service",
+     "favors": "fiori",
+     "because": "UI5 has an OData V4 model and Fiori elements."
+    },
+    {
+     "id": "existing_team",
+     "text": "My team already ships React/Vue products",
+     "favors": "generic",
+     "because": "It reuses existing skills and pipelines."
+    },
+    {
+     "id": "custom_ux",
+     "text": "I need a highly custom user experience outside SAP conventions",
+     "favors": "generic",
+     "because": "It is not bound to SAP control conventions."
+    }
+   ]
+  }
+ ]
+}

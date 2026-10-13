@@ -1,0 +1,131 @@
+{
+ "schema": "sap-public.tools/1",
+ "states": [
+  "PUBLICLY_AVAILABLE",
+  "DOCUMENTED",
+  "REQUIRES_SETUP",
+  "REQUIRES_TRIAL",
+  "REQUIRES_COMMERCIAL_LICENSE",
+  "NOT_VERIFIED",
+  "NOT_IMPLEMENTED"
+ ],
+ "tools": [
+  {
+   "id": "search-mcp",
+   "name": "SAP Developers Search MCP",
+   "state": "PUBLICLY_AVAILABLE",
+   "runs_here": true,
+   "what": "Semantic search over SAP developer tutorials and missions.",
+   "url": "https://developers.sap.com/mcp/search",
+   "note": "Anonymous, best-effort. Used by the Knowledge lookup in this edition."
+  },
+  {
+   "id": "graph-mcp",
+   "name": "SAP Developers Knowledge Graph MCP",
+   "state": "PUBLICLY_AVAILABLE",
+   "runs_here": true,
+   "what": "Concept and tutorial relationships.",
+   "url": "https://developers.sap.com/mcp/graph",
+   "note": "Anonymous, best-effort. Used by the Knowledge lookup in this edition."
+  },
+  {
+   "id": "graphql",
+   "name": "SAP Developers public GraphQL",
+   "state": "DOCUMENTED",
+   "runs_here": false,
+   "what": "Published concept catalogue (paged).",
+   "url": "https://developers.sap.com/graphql/public",
+   "note": "Used by the private edition for discovery snapshots; not called from here."
+  },
+  {
+   "id": "cap-mcp",
+   "name": "CAP MCP adapter (@cap-js/mcp)",
+   "state": "REQUIRES_SETUP",
+   "runs_here": false,
+   "what": "Exposes a CAP service to agents (describe, query).",
+   "url": "https://www.npmjs.com/package/@cap-js/mcp",
+   "note": "Needs Node.js and a CAP project on your machine. Demonstrated in project test runs (private edition)."
+  },
+  {
+   "id": "ui5-mcp",
+   "name": "UI5 MCP server (@ui5/mcp-server)",
+   "state": "REQUIRES_SETUP",
+   "runs_here": false,
+   "what": "UI5 guidelines, API reference and manifest validation for agents.",
+   "url": "https://www.npmjs.com/package/@ui5/mcp-server",
+   "note": "Needs Node.js locally."
+  },
+  {
+   "id": "fiori-mcp",
+   "name": "Fiori MCP server (@sap-ux/fiori-mcp-server)",
+   "state": "REQUIRES_SETUP",
+   "runs_here": false,
+   "what": "Fiori app generation and modification tools for agents.",
+   "url": "https://www.npmjs.com/package/@sap-ux/fiori-mcp-server",
+   "note": "Includes write tools and, in the project's review, a tool that downloads a model on first use; review before use."
+  },
+  {
+   "id": "adt-mcp",
+   "name": "ADT MCP server",
+   "state": "REQUIRES_TRIAL",
+   "runs_here": false,
+   "what": "Agent access to ABAP Development Tools workflows.",
+   "url": "https://help.sap.com/docs/abap-cloud",
+   "note": "Needs an ABAP system (for example a trial) and an authenticated session. Never available publicly."
+  },
+  {
+   "id": "dev-cli",
+   "name": "SAP Developer CLI",
+   "state": "NOT_VERIFIED",
+   "runs_here": false,
+   "what": "Command-line access to developer content.",
+   "url": "https://github.com/SAP-samples/sap-devs-cli",
+   "note": "Installed from source; its init command can change configuration. Not verified here."
+  },
+  {
+   "id": "ai-skills",
+   "name": "SAP AI skills library",
+   "state": "NOT_VERIFIED",
+   "runs_here": false,
+   "what": "Reusable skills for AI coding assistants.",
+   "url": "https://developers.sap.com",
+   "note": "No verified, locatable artifact was found by the project."
+  },
+  {
+   "id": "api-hub",
+   "name": "SAP Business Accelerator Hub APIs",
+   "state": "REQUIRES_SETUP",
+   "runs_here": false,
+   "what": "API contracts and sandbox.",
+   "url": "https://api.sap.com",
+   "note": "Registration and an API key are needed for sandbox calls."
+  },
+  {
+   "id": "ai-sdk",
+   "name": "SAP Cloud SDK for AI",
+   "state": "REQUIRES_SETUP",
+   "runs_here": false,
+   "what": "Client SDK for SAP AI Core and Generative AI Hub.",
+   "url": "https://www.npmjs.com/package/@sap-ai-sdk/orchestration",
+   "note": "The SDK package is open source (Apache-2.0); the service it calls needs an AI Core entitlement."
+  },
+  {
+   "id": "ai-core",
+   "name": "SAP AI Core / Generative AI Hub",
+   "state": "REQUIRES_COMMERCIAL_LICENSE",
+   "runs_here": false,
+   "what": "Managed AI platform on SAP BTP.",
+   "url": "https://help.sap.com/docs/sap-ai-core",
+   "note": "Entitlement-gated and chargeable. Not called from this edition."
+  },
+  {
+   "id": "joule",
+   "name": "SAP Joule / Joule Studio",
+   "state": "NOT_IMPLEMENTED",
+   "runs_here": false,
+   "what": "SAP's AI copilot and agent tooling.",
+   "url": "https://help.sap.com/docs/joule",
+   "note": "No public programmatic interface was found by this project; nothing is simulated here."
+  }
+ ]
+}

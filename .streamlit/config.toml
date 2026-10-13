@@ -1,0 +1,21 @@
+# Public edition configuration. No [server] section: Streamlit Community Cloud manages address, port and headless mode.
+[browser]
+gatherUsageStats = false
+
+# Contrast of text/background and primary/background is asserted (>= 4.5:1) by tests/test_public_ui_contract.py.
+[theme.light]
+primaryColor = "#0B57A4"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#EEF3F9"
+textColor = "#0F1B2D"
+linkColor = "#0B57A4"
+
+[theme.dark]
+primaryColor = "#7DB8F5"
+backgroundColor = "#0E1624"
+secondaryBackgroundColor = "#17233A"
+textColor = "#E8EEF7"
+linkColor = "#7DB8F5"
+
+[theme]
+baseRadius = "0.5rem"

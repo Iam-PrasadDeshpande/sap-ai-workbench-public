@@ -1,0 +1,16 @@
+{
+ "current": "releases/0001.json",
+ "current_digest": "cf1636d67d3ed533ce6206063a93de7de9dafe0bedf06183555fd93f8b2c3c2b",
+ "releases": [
+  {
+   "digest": "cf1636d67d3ed533ce6206063a93de7de9dafe0bedf06183555fd93f8b2c3c2b",
+   "file": "releases/0001.json",
+   "findings": 0,
+   "note": "First release. No findings have been approved for publication yet.",
+   "parent_digest": "",
+   "published_at": null,
+   "version": 1
+  }
+ ],
+ "schema": "sap-public.content-index/1"
+}

@@ -1,0 +1,13 @@
+{
+ "capabilities": [],
+ "changes": [],
+ "digest": "cf1636d67d3ed533ce6206063a93de7de9dafe0bedf06183555fd93f8b2c3c2b",
+ "findings": [],
+ "note": "First release. No findings have been approved for publication yet.",
+ "parent_digest": "",
+ "policy_digest": "",
+ "published_at": null,
+ "schema": "sap-public.content-release/1",
+ "source": "PRIVATE_WORKBENCH_RECEIPTS",
+ "version": 1
+}
