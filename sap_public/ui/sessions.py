@@ -13,6 +13,10 @@ from . import common, ks_page
 from .common import chip
 
 NOTE_VIEW = 'Research notes'
+SCOPE_TAGS = {
+    'R2_CURRENT': ('KS01 R2 · current', 'green'), 'R3_HISTORICAL': ('Earlier baseline · historical', 'orange'),
+    'SAP_DOCUMENTED': ('SAP documented', 'gray'), 'MIXED_LABELLED': ('R2 and historical, labelled', 'violet'),
+    'SYNTHESIS': ('Synthesis', 'gray'), 'METHOD': ('Method', 'gray')}
 
 
 def view_model(doc: dict) -> dict:
@@ -25,8 +29,13 @@ def view_model(doc: dict) -> dict:
         for el in sections:
             if el.get('view', views[0]['key']) == v['key']:
                 n += 1
+                tags = []
+                if el.get('stage'):
+                    tags.append(('Stage: ' + str(el['stage'])[:40], 'blue'))
+                if el.get('scope') in SCOPE_TAGS:
+                    tags.append(SCOPE_TAGS[el['scope']])
                 secs.append({'number': n, 'title': el.get('title', ''), 'markdown': el.get('markdown', ''),
-                             'diagram': bool(el.get('diagram'))})
+                             'diagram': bool(el.get('diagram')), 'tags': tags})
         if secs:
             out_views.append({'key': v['key'], 'name': v['name'], 'sections': secs})
     diagram = None
@@ -37,6 +46,7 @@ def view_model(doc: dict) -> dict:
         lines.append(md_escape(str(doc['lineage_note']), 400))
     return {
         'key_prefix': 'ks_pub',
+        'wrap_tables': True,
         'heading': f"{doc['session_id']}: {doc['title']}",
         'subtitle': doc.get('subtitle', ''),
         'meta': [
@@ -49,7 +59,7 @@ def view_model(doc: dict) -> dict:
                                 'independently re-verified beyond what each claim states.'},
         'views': out_views,
         'claims': doc.get('claims') or [],
-        'claim_columns': ('claim_id', 'claim', 'evidence_class', 'limitation'),
+        'claim_columns': ('claim_id', 'claim', 'evidence_class', 'scope', 'status', 'limitation'),
         'claims_title': 'Evidence register (public projection)',
         'references': doc.get('references') or [],
         'diagram': diagram,

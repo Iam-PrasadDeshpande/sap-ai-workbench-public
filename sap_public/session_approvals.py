@@ -9,10 +9,11 @@ Do not add an entry in a content-only change. An entry is made by the owner, aft
 of the exact approved content.
 """
 APPROVED_CONTENT_SHA256: dict[str, str] = {
-    # KS01 research note R6 (eight-view single-source projection). Owner-approved 2026-10-15 for this exact digest
-    # (including the owner's scoped-qualification and D012 signing authorization for this release). The earlier owner
-    # approvals did not carry over: R5 was 65e176d175ef3f890d3fb0373822031cb8053beb7fb20629a41c689062856200 (the same words, a different
-    # structure, reproduced exactly by canonical/knowledge_sessions/KS01.canonical.json lineage) and R3 was
+    # KS01 research note R7 (comprehensive eight-view research content). Owner-approved 2026-10-15 for this exact digest,
+    # together with D012 signing, the scoped qualification profile and publication of this release. Earlier
+    # approvals do not carry over: R6 was bdb147f90a07f3611f4929b024fa246e0136187a7930d08879aa087a968f29ee, R5 was
+    # 65e176d175ef3f890d3fb0373822031cb8053beb7fb20629a41c689062856200 (its approved sentences are reproduced verbatim
+    # inside R7, proven by the canonical lineage check) and R3 was
     # aadb01ff9ee5b1f403dd738323ab2e370be88284b00e0dd79e746e7a7da813af.
-    'KS01': 'bdb147f90a07f3611f4929b024fa246e0136187a7930d08879aa087a968f29ee',
+    'KS01': 'b3f4da6d43b3e2ab16ecb76ced012dbb7170453c89e669166606b6457c93a82e',
 }

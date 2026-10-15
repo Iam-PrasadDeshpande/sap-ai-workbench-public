@@ -3,10 +3,10 @@
   "session_id": "KS01",
   "title": "SAP ADT MCP: Results from a 20-Tool Hands-on Evaluation",
   "subtitle": "Trial-system RAP generation, save-sequence ABAP Unit, ATC and documented tool limitations",
-  "revision": "R6",
+  "revision": "R7",
   "date": "2026-10-15",
   "evidence_status": "Closed R2 trial assessment; evidence reviewed with explicit limitations; not production qualification",
-  "lineage_note": "Restructured from the owner-approved R5 article into the eight knowledge-session views. No factual claim was added or removed; the approved article is reproduced exactly by the legacy projection.",
+  "lineage_note": "R7 restores the full research depth of the private R3 research master, corrected by the closed KS01 R2 findings. Sentences approved in R5 are retained verbatim; R3 observations are kept as explicitly historical evidence.",
   "views": [
     {
       "key": "overview",
@@ -43,77 +43,410 @@
   ],
   "sections": [
     {
+      "key": "ov-summary",
+      "title": "Executive summary",
+      "markdown": "**What SAP ADT MCP provides.** ABAP Development Tools for Visual Studio Code ships a built-in ADT MCP Server. SAP's tutorial (modified 2026-09-17) lists 13 tools for listing destinations, creating ABAP objects, generating RAP objects, activating, running ABAP Unit, running ATC and handling transports. In the live trial assessment reported here (KS01 R2) the connected server exposed **20 tools**. The two counts are different evidence scopes and are not merged into one inventory (see the MCP tool inventory tab).\n\n**Why it matters.** It gives an AI coding agent a typed, auditable way to perform ADT operations that used to be reachable only through a user interface. The agent calls a generator tool instead of a person clicking through a wizard. That is a real change in how development operations can be orchestrated.\n\n**What the agent contributes.** The model plans, chooses tools, drafts ABAP source and interprets results. The MCP server exposes operations and does not reason. MCP is a protocol: a server may expose code-generation or source-writing operations, and the ADT MCP Server inspected exposes RAP generation but no general-purpose arbitrary source-read or source-write operation.\n\n**What the integration can and cannot do.** In the configuration tested, the server could create objects from metadata, run a RAP generator, activate objects by file URI, run ABAP Unit and ATC, and read transports and service bindings. It exposed no tool that reads or writes arbitrary ABAP source. Source editing happened through the VS Code editor over the `abap:` virtual filesystem, which is what SAP's own agent instructions describe.\n\n**What the closed R2 experiment established.** A RAP generator run reported 14 related repository artifacts for a student-management business object. A developer agent implemented a save-time validation; three ABAP Unit tests that drive the RAP save sequence ran with an overall PASS; the final ATC worklist reported five open P2/P3 findings; and an OData V4 service was published and discovered. It did **not** establish OData runtime behaviour, update/delete coverage, authorization behaviour, or an independent read-back of the final source.\n\n**Engineering conclusion.** Treat ADT MCP as an orchestration surface for ADT operations, not as an autonomous ABAP coding environment. Object creation succeeding is not evidence that a business requirement is implemented. SAP itself labels the server experimental and not for productive use.",
+      "view": "overview",
+      "stage": "DISCOVER",
+      "scope": "R2_CURRENT"
+    },
+    {
       "key": "what-was-evaluated",
       "title": "What was evaluated",
       "markdown": "In a trial ABAP environment, the connected ADT MCP Server exposed 20 tools. A RAP student-management scenario generated 14 related repository artifacts. Activation tools, ATC runs, service discovery and ABAP Unit were exercised. SAP describes the ADT MCP Server as experimental and not intended for productive use.",
-      "view": "overview"
+      "view": "overview",
+      "stage": "EVALUATE",
+      "scope": "R2_CURRENT"
     },
     {
-      "key": "sap-stated-position",
-      "title": "What SAP states",
-      "markdown": "SAP describes the ADT MCP Server as experimental and not intended for productive use (claim R510). Setup instructions are in the SAP tutorial linked under References.",
-      "view": "offering"
+      "key": "ov-method",
+      "title": "Evaluation method: six stages",
+      "markdown": "The research followed one six-stage method. Each section in this note names the stage it belongs to, so a statement can be traced to the question it answers.\n\n| Stage | Question | What was done in KS01 | Where to read it |\n| --- | --- | --- | --- |\n| DISCOVER | What does SAP actually offer, and what does the live server actually expose? | Read SAP's tutorials; captured the live tool schemas and destinations | SAP official offering; MCP tool inventory |\n| EVALUATE | What would each tool do, and what could it change? | Classified tools by read, write and server-side execution; checked prerequisites and mutating behaviour before calling anything | MCP tool inventory; Architecture |\n| ALIGN WITH HANDS-ON | Which realistic development scenario exercises those tools? | Chose a bounded RAP student-management scenario with owner-approved write boundaries | Hands-on evidence |\n| PROVE | What do the receipts and test results actually show? | Executed generation, activation, ABAP Unit and ATC; recorded each outcome and its evidence class | Hands-on evidence; MCP tool inventory |\n| COMPARE | How does this compare with the alternatives and with the documented intent? | Compared documented tools with observed tools, and MCP-assisted work with manual and template-based approaches | Comparative assessment |\n| IMPROVE | What should change, and what remains open? | Recorded defects, limitations, recommendations and the next experiments | Conclusions and recommendations |\n\nThe site-wide lifecycle strip uses the labels IDENTIFY and SCOPE FOR IMPROVEMENT for the first and last stages; they mean the same as DISCOVER and IMPROVE here.",
+      "view": "overview",
+      "scope": "METHOD"
+    },
+    {
+      "key": "ov-problem",
+      "title": "Problem statement: four modes that are routinely conflated",
+      "markdown": "Four things are routinely conflated:\n\n| Mode | Who writes the logic | Who performs system operations | Where the proof comes from |\n| --- | --- | --- | --- |\n| Traditional ABAP development | Developer | Developer in ADT (Eclipse or VS Code) | Developer-run activation, ABAP Unit, ATC, review |\n| AI-assisted ABAP development | Model drafts, developer pastes or edits | Developer | Same as above; the model adds speed, not proof |\n| MCP-enabled tool orchestration | Model drafts; an editor-integrated agent can write into the editor | Agent calls MCP tools (create, activate, test, ATC) | Tool responses from SAP, still needing independent interpretation |\n| Fully automated development | Model | Agent | Would need requirement-to-test traceability; not demonstrated here |\n\n**Why object creation is not proof.** A generator creating a CDS view, behavior definition and service binding shows that a template was instantiated. It says nothing about whether a rating must be between 1 and 5, whether duplicate reviews are rejected, or whether a calculation is correct. Those rules live in source that a template does not contain. The only proof that a requirement is met is an executed test of that requirement, ideally against a read-back of the activated object.",
+      "view": "overview",
+      "stage": "DISCOVER",
+      "scope": "SYNTHESIS"
+    },
+    {
+      "key": "ov-results",
+      "title": "Results at a glance",
+      "markdown": "| Question | Result | Evidence strength |\n| --- | --- | --- |\n| How many tools did the live server expose? | 20 | Observed in the tool listing; server build metadata not exposed |\n| How were the 20 tools classified? | 13 PASS, 2 PASS with limitation, 2 permission blocked, 2 prerequisite unavailable, 1 not tested; no whole-tool FAIL | Final matrix from receipts and re-runs |\n| Were RAP objects generated? | 14 related repository artifacts reported | Generator response; repository not independently enumerated |\n| Was custom business validation implemented and tested? | Yes, through a developer agent; three save-sequence tests, overall PASS | Agent-supplied source plus MCP runner result; no per-method count in the MCP output |\n| Was ATC clean? | No: five open P2/P3 findings | Curated worklist summary |\n| Was the OData service tested at runtime? | No: published and discovered only | Service metadata observed; no HTTP functional request |\n| Is it production ready? | Not claimed; SAP states the server is experimental | SAP documentation |\n\nEach row is expanded with its evidence and limits in the tabs named in the method table.",
+      "view": "overview",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "ov-evidence-reading",
+      "title": "How to read the evidence",
+      "markdown": "Every material statement in this note belongs to a claim in the evidence register (References and supporting evidence tab). Each claim carries an evidence class and a scope.\n\n**Evidence classes.**\n\n| Class | Meaning |\n| --- | --- |\n| SAP_DOCUMENTED | Stated on an SAP page or repository read for this research |\n| TOOL_CONTRACT_VERIFIED | Read from a live tool listing or a tool schema |\n| SAP_LIVE_VERIFIED | A response from the live trial system through the MCP server |\n| LOCAL_EXECUTION_VERIFIED | Observed in our own local execution |\n| MCP_REPORTED and related classes | Reported by an MCP tool response in the final KS01 R2 assessment; the curated receipts are summaries, not raw transcripts |\n| AGENT_SOURCE_PLUS_MCP_RESPONSE, EDITOR_AGENT_REPORTED | Source or a diagnosis supplied by the SAP developer agent in VS Code, combined with MCP results |\n| OWNER_REPORTED | Stated by the research owner; not independently verified |\n| OBSERVED_LIMITATION, NOT_VERIFIED | A limit that was observed, or something that was not established |\n\n**Scopes.** *R2 current* is the closed KS01 R2 assessment and is the factual baseline. *R3 historical* is an earlier baseline hands-on that used a different scenario, a different object set and a different trial session. Its observations are kept because they explain how the investigation evolved, but they are never mixed into R2 results. *SAP documented* is what SAP's pages state. *Superseded* marks an earlier statement that a later result replaced.\n\nHash-verifying the evidence archive establishes that the packaged bytes are intact. It does not establish direct access to the SAP system.",
+      "view": "overview",
+      "stage": "EVALUATE",
+      "scope": "METHOD"
+    },
+    {
+      "key": "of-documented",
+      "title": "What SAP documents",
+      "markdown": "Primary authority is SAP's developer tutorials and the SAP-samples repository, read on 2026-10-13. Dates were taken from the pages' own metadata and visible \"Created on\" lines: the ADT MCP tutorial was created 2026-09-01 and modified 2026-09-17; the other two tutorials were modified 2026-10-06 and 2026-09-30; the RAP130 repository was last pushed 2026-06-03. Tutorials change; re-check before relying on a specific tool name or restriction.\n\n| Element | What SAP documents | Claim |\n| --- | --- | --- |\n| ABAP Development Tools for VS Code | Extension connecting VS Code to ABAP systems; navigation, object creation and editing, activation, ABAP Unit, ATC; includes a built-in ADT MCP Server | C04 |\n| Supported systems | SAP BTP ABAP Environment, SAP S/4HANA Cloud (Public and Private), SAP S/4HANA on-premise 2025 or higher; HTTP for cloud, RFC for on-premise | C04 |\n| ADT MCP Server | Enabled in the extension; 13 tools listed by name; \"experimental feature that may change at any time without notice. It is not intended for productive use.\" | C01, C02 |\n| Compatible agents | \"Any coding agent that supports Visual Studio Code's virtual workspace filesystem\"; GitHub Copilot confirmed | C03 |\n| Core tools tutorial | Create, edit, debug, activate, ABAP Unit, ATC, Fiori preview in VS Code; explicitly excludes agentic AI | C05 |\n| RAP130 workshop | Builds a transactional Fiori elements app with RAP in VS Code using the ADT MCP Server and a coding agent; requires \"SAP Joule for developers, ABAP AI capabilities\" enabled; Copilot is the primary tested agent; Apache-2.0 | C06 |\n| ABAP Cloud, RAP, ABAP Unit, ATC | Part of the ABAP Cloud development model in the cited tutorials; ABAP Unit and ATC are exposed as MCP tools | C02, C05 |",
+      "view": "offering",
+      "stage": "DISCOVER",
+      "scope": "SAP_DOCUMENTED"
+    },
+    {
+      "key": "of-interpretation",
+      "title": "How to interpret the official offering",
+      "markdown": "- The server is **experimental** by SAP's own statement. Nothing in this note presents it as production-ready.\n- The tutorial's tool list and the tool lists observed on live systems differ in count and in some names (see the MCP tool inventory tab).\n- Joule for developers is a prerequisite of the RAP130 workshop. It was not part of our hands-on, so no Joule claim is made from our evidence.\n- SAP's tutorials describe intended behaviour. They are not execution evidence, and none of our results is a statement about SAP's other systems or releases.",
+      "view": "offering",
+      "stage": "DISCOVER",
+      "scope": "SAP_DOCUMENTED"
+    },
+    {
+      "key": "ar-reference",
+      "title": "Reference architecture: two paths into the system",
+      "markdown": "The diagram shows two paths into the ABAP system. The **tool-invocation path** is MCP protocol calls to typed operations. The **source-editing path** is editor integration through VS Code and the `abap:` virtual filesystem. Both end in the ABAP repository, where activation, ABAP Unit and ATC run server side and return the execution evidence.\n\n**Accessible text explanation.**\n\n1. A **business requirement** reaches the **AI model**. The model, wrapped by an **agent orchestration** loop, decides what to do next.\n2. For system operations, the agent uses an **MCP client** to call the **SAP ADT MCP Server**. These calls are typed operations: list destinations, create an object from metadata, run a RAP generator, activate objects by URI, run ABAP Unit, run ATC, read transports and service bindings. This is the tool-invocation path.\n3. For **source code**, the path is different. The agent must write into the file the ADT extension exposes through VS Code's `abap:` virtual filesystem, using editor APIs. This is the source-editing path. It does not go through any tool observed on the MCP server.\n4. The two paths meet in the **ABAP repository**. Activation, ABAP Unit and ATC then run server side and return results; those results, not the agent's narrative, are the execution evidence.\n5. A **human** approves boundaries (system, package, names, transport) and reviews outcomes.",
+      "view": "architecture",
+      "stage": "ALIGN WITH HANDS-ON",
+      "scope": "SYNTHESIS",
+      "diagram": true
     },
     {
       "key": "where-adt-mcp-fits",
       "title": "Where ADT MCP fits",
       "markdown": "ADT MCP is a typed tool interface within a broader agent-assisted workflow. Its value is in exposing controlled SAP operations. It does not replace the coding agent, IDE, SAP authorizations, executable tests or governance.",
-      "view": "architecture"
+      "view": "architecture",
+      "stage": "COMPARE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "ar-protocol-vs-server",
+      "title": "Protocol capability versus server capability",
+      "markdown": "MCP is a protocol: it defines how a client discovers and calls tools that a server chooses to expose. A server may expose generation tools, source-writing tools, both or neither; the protocol itself guarantees none of them. What a specific server offers is determined by its tool list.\n\nThe ADT MCP Server inspected exposes RAP generation but no general-purpose source read or write tool. So \"uses MCP\" and \"can write ABAP source\" are independent properties; for ADT, the second depends on the agent host and the editor integration. The responsibilities differ: the **model** drafts, the **generator implementation** (server side) instantiates templates, and the **editor integration** writes into the file the system exposes.",
+      "view": "architecture",
+      "stage": "DISCOVER",
+      "scope": "SYNTHESIS"
+    },
+    {
+      "key": "ar-not-autonomous",
+      "title": "Why this server is not a complete autonomous coding environment",
+      "markdown": "- No tool reads or writes ABAP source.\n- The create-object tool accepts metadata only; its description says the content must not contain source.\n- The activation and unit-test tools take URIs of files in the VS Code virtual filesystem and expect them to be saved first; they presuppose an editor that has already written the source.\n- There is no delete tool and no direct activation-state read tool in the inspected lists.\n\nEach of these is a finding about the tested tool lists. It is not a statement about other builds, other agents' own tools, or future releases.",
+      "view": "architecture",
+      "stage": "EVALUATE",
+      "scope": "MIXED_LABELLED"
     },
     {
       "key": "source-editing-path",
       "title": "Source-editing path",
       "markdown": "Custom ABAP source was handled through a compatible VS Code SAP developer-agent editing path, rather than a general-purpose MCP source-write tool. The editor-agent-provided source and MCP test results support the reported lifecycle; an independent live source readback was not available to the reviewer.",
       "view": "architecture",
-      "diagram": true
+      "stage": "ALIGN WITH HANDS-ON",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "ar-security",
+      "title": "Security and governance",
+      "markdown": "- **SAP system authorization.** Every MCP call executes with the SAP user's authorizations. The agent has no authority beyond the logged-in user.\n- **ADT session authority.** The MCP server relies on the VS Code extension's authenticated destination; expiry shows as a \"user was logged off\" response. Do not extract or reuse session credentials to work around this.\n- **MCP tool permissions.** The server advertises no read-only or destructive hints, so a client or reviewer cannot rely on annotations. Maintain your own allowlist.\n- **Agent authority.** A model that can call the generator can create many objects at once. Treat that as a write with blast radius. In KS01 R2 the agent host's permission classifier denied the object-creation and AI-fix tool calls; the boundary was respected, not bypassed.\n- **Human approval boundaries.** Approve system, package, names and transport before generation. An earlier baseline run produced doubled-prefix object names after the names had been approved, because the approved names were not what the tool produced; verify the planned object list against the tool's naming rules before calling.\n- **Repository source protection.** The `abap:` filesystem is the system of record; local copies are not authoritative.\n- **Transport governance.** The transport query used in the evidence is not discriminating (see the tool inventory): it returned the same answer for a package that does not exist. Productive use requires transport and change control that this evidence does not cover.\n- **Activation versus functional validation.** An activated object and a clean ATC run are not proof of correct behavior.",
+      "view": "architecture",
+      "stage": "EVALUATE",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "in-scopes",
+      "title": "Evidence scopes, kept separate",
+      "markdown": "Several bodies of evidence exist. They come from different sources, sessions and times, and are **not merged into one live inventory**.\n\n| Scope | What it is | Date / build | Tools | Reliability for \"what this server does\" |\n| --- | --- | --- | --- | --- |\n| S: SAP tutorial | The tool table on SAP's \"Enable the ADT MCP Server\" page | Page created 2026-09-01, modified 2026-09-17 | 13 entries | Documents intended tools; says nothing about a given system or build |\n| R: Earlier discovery | An authenticated discovery of \"ADT MCP Server 1.0.0\" recorded in the workbench's earlier tool review | Date and extension build not stated in the record | 20 tools | A real listing from one session; no version evidence |\n| E: Baseline hands-on session | The tool list seen in the earlier baseline hands-on (2026-10-13), plus the calls actually executed against SAP | 2026-10-13; extension 1.1.2 installed locally | 20 tools listed; 9 tool families executed | Strongest for \"what ran\" in that session; server build not recorded |\n| D: Partial schemas | Input fields recorded in the baseline receipts (create_object, activate_objects, run_unit_tests, generator schema, transport-get, fetch_services) | 2026-10-13 | subset | Fields only; complete input and output schemas were not captured |\n| L: KS01 R2 live listing | The live inventory of the closed KS01 R2 assessment, with schemas captured and every tool classified | KS01 R2, closed 2026-10-15; server build metadata not exposed | 20 tools | Current factual baseline for tool behaviour in this research |\n\nScopes R, E and L list the same 20 tool names. That agreement is an observation about three sessions; it is not proof that the builds are identical.",
+      "view": "inventory",
+      "stage": "DISCOVER",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "in-differences",
+      "title": "Tutorial list versus observed lists",
+      "markdown": "| Difference | Detail | Status |\n| --- | --- | --- |\n| Count | The tutorial lists 13 entries; the observed sessions list 20 tools. Seven observed tools are absent from the tutorial table: `abap_creation-run_validation`, `abap_generators-get_schema`, `abap_atc_get_result`, `abap_atc_get_ai_fix_result`, `abap_transport-unifiedDifference`, `abap_business_services-fetch_services`, `abap_business_services-fetch_service_information` | Observed |\n| Spelling | Tutorial: `abap_creation-get_all_createable_objects`; receipts: `abap_creation-get_all_creatable_objects` | Observed |\n| Typographical variant in the tutorial table | The create-object row is written `abap_createion-crate_object`; the correct form `abap_creation-create_object` appears elsewhere on the same page | Observed in the page HTML, 2026-10-13 |\n| Shortened name | Tutorial: `abap_atc_apply_ai`; observed sessions: `abap_atc_apply_ai_fix` | Observed |\n| ATC description | The tutorial describes `abap_atc_run` as getting the result of a run by worklist; the observed sessions list a separate `abap_atc_get_result` | Observed |\n| Cause | Server version drift, documentation lag, or documentation shorthand | **Unverified**: no version evidence for either list |",
+      "view": "inventory",
+      "stage": "DISCOVER",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "in-final-matrix",
+      "title": "The 20 tools: purpose, class and R2 classification",
+      "markdown": "Read/write classification is **ours**; the server advertised no read-only or destructive hint on any tool. The R2 status is the final classification of the closed assessment; the last column keeps the earlier baseline observation separately so the two runs are not blended.\n\n| # | Tool | Purpose | Class (ours) | In SAP tutorial | R2 status | R2 verified scope and limitation | Earlier baseline note |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 1 | `abap_list_destinations` | List configured destinations | Read | Yes | PASS | Only one destination returned | Returned configured names, not a system ID |\n| 2 | `abap_creation-get_all_creatable_objects` | List creatable object types | Read | Yes (spelled createable) | PASS | 21 creatable types returned | May be static metadata; not proof of a live session |\n| 3 | `abap_creation-get_object_type_details` | Object-type creation details | Read | Yes | PASS | Class and interface type details returned | Not exercised |\n| 4 | `abap_creation-run_validation` | Validate a name or metadata without creating | Read | No | PASS | Valid input accepted; an invalid name rejected | Two payload errors for other object types; cause not analyzed |\n| 5 | `abap_creation-create_object` | Create an object from metadata | Write | Yes (table typo) | PERMISSION_BLOCKED | Denied by the agent host's permission classifier; a validated payload was prepared; not bypassed | No receipt; description forbids source content |\n| 6 | `abap_generators-list_generators` | List RAP generators | Read | Yes | PASS | Three generators listed | A logged-off error in one session; three generators in another |\n| 7 | `abap_generators-get_schema` | Generator input schema | Read | No | PASS | Generator schema retrieved | First call timed out; retry succeeded |\n| 8 | `abap_generators-generate_objects` | Validate and generate RAP objects | Write | Yes | PASS | 14 RAP-related artifacts reported created | Three runs, including a doubled-prefix naming defect |\n| 9 | `abap_transport-get` | Show relevant transport requests | Read | Yes | PASS_WITH_LIMITATION | Non-discriminating: the same answer for a package that does not exist | Returned no recording requirement for the reference package |\n| 10 | `abap_transport-create` | Create a transport request | Write | Yes | NOT_TESTED | Deliberately skipped by the owner; schema read | Not exercised |\n| 11 | `abap_transport-unifiedDifference` | Transport difference | Read | No | PREREQUISITE_UNAVAILABLE | Invalid transport rejected cleanly; no valid transport existed for a positive path | Not exercised |\n| 12 | `abap_activate_objects` | Activate objects | Write | Yes | PASS | Several successful activations, including the edited behavior definition, class and test include | Not exercised; files must be saved first |\n| 13 | `abap_run_unit_tests` | Run ABAP Unit | Server-side execution | Yes | PASS | A failing run (two failures with line references) and a passing run observed; final overall PASS; the output carries no per-method count | Not executed |\n| 14 | `abap_atc_run` | Start an ATC run | Server-side execution | Yes (described as getting the result) | PASS | Seven or more worklists generated, including the final one | Worklists obtained; per-call split not itemized |\n| 15 | `abap_atc_get_result` | Fetch an ATC worklist result | Read | No | PASS | Findings with priorities returned | See ATC run |\n| 16 | `abap_atc_apply_ai_fix` | Apply an AI fix to a finding | Write | Yes (as `abap_atc_apply_ai`) | PERMISSION_BLOCKED | Denied by the classifier twice; no eligible fix existed | Not exercised |\n| 17 | `abap_atc_get_ai_fix_result` | Result of an AI fix | Read | No | PREREQUISITE_UNAVAILABLE | No AI-fix job could be started | Not exercised |\n| 18 | `abap_atc_execute_deterministic_quickfixes` | Apply deterministic quick fixes | Write | Yes | PASS_WITH_LIMITATION | Clean no-op on a worklist with findings but no applicable fix; null-pointer error on an empty worklist; no fix applied | Not exercised |\n| 19 | `abap_business_services-fetch_services` | Read the services of a binding | Read | No | PASS | Published state discovered | Binding read before and after creation; publishing is not an MCP tool |\n| 20 | `abap_business_services-fetch_service_information` | Read OData service information | Read | No | PASS | OData V4 service and entity set discovered after publishing | Not exercised |",
+      "view": "inventory",
+      "stage": "PROVE",
+      "scope": "MIXED_LABELLED"
     },
     {
       "key": "tool-assessment-outcome",
       "title": "Tool assessment outcome (20 tools)",
       "markdown": "| Tool assessment | Count |\n| --- | ---: |\n| PASS | 13 |\n| PASS with limitation | 2 |\n| Permission blocked | 2 |\n| Prerequisite unavailable | 2 |\n| Not tested by owner decision | 1 |",
-      "view": "inventory"
+      "view": "inventory",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "in-nonpass",
+      "title": "Why some tools did not PASS",
+      "markdown": "The object-creation and AI-fix tools were rejected by the agent host's permission classifier. The permission boundary was respected, not bypassed. The transport-difference tool lacked a valid transport to inspect and the AI-fix-result tool lacked a real AI-fix job. The transport-creation tool was deliberately skipped by owner instruction.\n\nThese outcomes are disclosed as what they are. They are not tool failures, and they are not successful positive paths. The tally contains no whole-tool FAIL, but it is not 20 tools demonstrated on a successful positive path.",
+      "view": "inventory",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "in-absent",
+      "title": "Absent categories and what R2 added",
+      "markdown": "**Absent categories** (absent from the 20-tool lists in scopes R, E and L): read ABAP source, write ABAP source, delete an object, list package contents, read activation status, publish a service binding. Absence is established for those lists only; it is not a statement about other builds, other agents' own tools, or future releases.\n\n**Tutorial tool classes and what KS01 R2 added.** The earlier baseline had not exercised activation, ABAP Unit, AI fix, quick fixes or transport creation. KS01 R2 exercised activation and ABAP Unit with real passing and failing runs, ran deterministic quick fixes (a no-op, a null-pointer error on an empty worklist, and no applied fix), had AI fix blocked by the permission classifier, and skipped transport creation by owner decision.",
+      "view": "inventory",
+      "stage": "PROVE",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "ho-environment",
+      "title": "KS01 R2: environment and scope",
+      "markdown": "| Attribute | Evaluated value |\n| --- | --- |\n| System | SAP BTP ABAP Environment trial system |\n| Destination | One destination exposed by the server |\n| Client | Not exposed by the tools |\n| Test artifacts | A dedicated development package; owner-approved KS01 test artifacts only |\n| Application | RAP student-management scenario |\n| Live ADT MCP tools | 20, schemas captured; server build metadata not exposed |\n| SAP system ID | Not established by MCP |\n| Write boundary | Owner-approved test artifacts only; no deletion; no transport |\n| External publication | Controlled separately from SAP execution |",
+      "view": "handson",
+      "stage": "ALIGN WITH HANDS-ON",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "ho-lifecycle",
+      "title": "KS01 R2: lifecycle actually executed",
+      "markdown": "| Stage | Channel | Result |\n| --- | --- | --- |\n| Generate 14 RAP objects | MCP generator tool, re-issued after owner confirmation | PASS |\n| Publish the service binding | Owner, in the ADT editor | Done |\n| Read the generated source | SAP developer agent in VS Code over the `abap:` virtual filesystem, launched by the owner | PASS; originals recorded |\n| Implement the validation (behavior definition and local handler) | The same agent in the VS Code editor | PASS; validation on save: name not initial, status one of ACTIVE, INACTIVE, GRADUATED |\n| Activate | MCP activation tool (by the agent) plus ATC read-back | PASS |\n| ABAP Unit | MCP unit-test tool, run by the agent and independently by Claude Code | Final run: three methods, overall PASSED |\n| ATC on the implemented objects | MCP ATC tools, Claude Code | Final worklist: five open P2/P3 findings |\n| Service | MCP business-service tools | Published OData V4 service, entity set discovered |",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "ho-artifacts",
+      "title": "KS01 R2: generated RAP artifact inventory",
+      "markdown": "The generator response reported 14 related repository artifacts with generator-determined names: a database table; CDS root and projection views; behavior definitions for the root and the projection; metadata extension and access-control artifacts; two behavior pool classes; a service definition and a service binding; and paired companion artifacts of the NONT and RONT kinds.\n\nDo not infer an independently enumerated activation status for all 14 artifacts from the generator response alone. The final ATC inventory covered 13 of them and did not check the RONT companion.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
     },
     {
       "key": "rap-validation-and-abap-unit",
       "title": "RAP validation and ABAP Unit",
       "markdown": "The final test implementation contained three methods for a valid status, missing name and invalid status. They exercised the RAP business-object save sequence using `MODIFY ENTITIES` and `COMMIT ENTITIES` with an OSQL test double; the MCP runner reported an overall PASS. The test result omitted a per-method count, so the three cases are established from the final editor-agent source excerpt.\n\nEarlier failures were traced to RAP transactional-buffer leakage across tests. A `ROLLBACK ENTITIES` call in test setup provided isolation. This diagnosis is supported by the packaged test history, not by a fresh direct SAP repository readback from the reviewer.",
-      "view": "handson"
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
     },
     {
-      "key": "atc-result",
-      "title": "ATC result",
-      "markdown": "The final ATC worklist reported five open priority-2/priority-3 findings, mainly message-literal and test-code SELECT hygiene issues. These were not waived or presented as an ATC-clean result.",
-      "view": "handson"
+      "key": "ho-validation-detail",
+      "title": "KS01 R2: the business validation in detail",
+      "markdown": "The behavior definition declares a validation that runs on save for create and update, over two fields: the name and the status. The implemented handler rejects an empty name and permits only the status values ACTIVE, INACTIVE and GRADUATED.\n\nThe three final test methods cover a valid record, an empty name and an invalid status. Each uses RAP EML `MODIFY ENTITIES` and `COMMIT ENTITIES` rather than merely calling a helper method, and an OSQL test double isolates persistence for the table. The two negative cases assert the reported validation message and the rejection; the positive case asserts that nothing was rejected or reported and that the row reached the double.\n\n**Supported conclusion:** RAP business-object save-sequence validation exercised by ABAP Unit with an OSQL test double, overall PASS.\n\n**Not supported:** end-to-end OData HTTP validation, update and delete coverage, authorization verification, or acceptance as a production-grade business application.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
     },
     {
-      "key": "deterministic-quickfix",
-      "title": "Deterministic quickfix",
-      "markdown": "The deterministic quickfix tool produced a null-pointer error when invoked on an empty ATC worklist. On a nonempty worklist without an applicable fix, it returned an empty, non-error result. No actual deterministic quickfix application was demonstrated. Permission blocks were respected rather than overridden.",
-      "view": "handson"
+      "key": "ho-test-diagnosis",
+      "title": "KS01 R2: why earlier test runs failed, and the diagnosis that was withdrawn",
+      "markdown": "Earlier test runs failed repeatedly. Failed records left in the RAP transactional buffer by the negative tests were re-validated in later test methods, so the valid-record test saw exactly two failed lines that belonged to the previous cases. The ninth test iteration added `ROLLBACK ENTITIES` in the test class setup, and the tenth removed a temporary diagnostic method that was failing on purpose. The handler and the behavior definition were unchanged after the fifth iteration.\n\nAn earlier diagnosis, that the validation's entity read returned initial values, was **wrong** and was withdrawn: the empty-name test passed with the status read correctly. The agent's conclusion was treated as a claim, and an independent re-run plus cross-test reasoning identified the buffer leakage. The evidence supports the test-isolation diagnosis; it is not a new root-cause experiment.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "ho-activation",
+      "title": "KS01 R2: activation and what the evidence supports",
+      "markdown": "Activation through the MCP activation tool returned success for the development objects, and subsequent ATC runs resolved the activated objects. The evidence does not contain an independent read-back of the active state of every one of the 14 generated artifacts, and no MCP tool in the inspected lists returns activation status. The supportable statement is therefore \"activation operations returned success\", not \"all 14 artifacts were independently verified active\".\n\nPublishing the service binding is not an MCP tool; the owner performed it in the ADT editor. The business-service tools then reported the binding as published, with the entity set discovered. That is service metadata discovery; it is separate from runtime acceptance of the service.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
     },
     {
       "key": "odata-service",
       "title": "OData service",
       "markdown": "The OData V4 service was reported published and its entity metadata retrieved. No HTTP runtime functional request was executed, so OData-level business behavior was not established.",
-      "view": "handson"
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "atc-result",
+      "title": "ATC result",
+      "markdown": "The final ATC worklist reported five open priority-2/priority-3 findings, mainly message-literal and test-code SELECT hygiene issues. These were not waived or presented as an ATC-clean result.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "ho-atc-detail",
+      "title": "KS01 R2: final ATC findings in detail",
+      "markdown": "Final worklist contents, as reported:\n\n| Priority | Finding | Location | Meaning |\n| --- | --- | --- | --- |\n| P3 | SLIN 1700 (two findings) | Behavior pool class | Message literals without text elements |\n| P3 | AMB_SINGLE | Test include | Single-row selection hygiene |\n| P2 | No WHERE condition (two findings) | Test include | Test SELECT statements without a WHERE clause |\n\nAn earlier SLIN 1205 finding was cleared. An earlier worklist had reported the behavior definitions and the projection behavior class clean. The final report is curated text, not a raw SAP JSON transcript; the RONT companion was not covered. This is an ATC-executed result with five findings, not an ATC-clean application, and it is not evidence that functional defects cannot exist.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "deterministic-quickfix",
+      "title": "Deterministic quickfix",
+      "markdown": "The deterministic quickfix tool produced a null-pointer error when invoked on an empty ATC worklist. On a nonempty worklist without an applicable fix, it returned an empty, non-error result. No actual deterministic quickfix application was demonstrated. Permission blocks were respected rather than overridden.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "ho-requirement",
+      "title": "Illustrative business requirement and who can do each step",
+      "markdown": "**Requirement (illustrative).** A book review has ISBN, title, author, rating, text and reviewer. The rating must be an integer from 1 to 5; a violating save must be rejected with a message. This scenario is illustrative and was not an executed KS01 scenario.\n\n**Development journey and who can do each step.**\n\n| Stage | What happens | Tested MCP in the earlier baseline | What happened in KS01 R2 |\n| --- | --- | --- | --- |\n| Requirement | Written by a human | Not applicable | Student-management validation defined by the owner |\n| Data model | Table and CDS views from the generator | Yes: generator tool | Yes: 14 artifacts |\n| ABAP business logic | Validation in the behavior implementation class | No tool; needs editor or agent integration | Written by the SAP developer agent in the VS Code editor |\n| Object creation | Generated, or the create-object tool | Yes | Generated; the create-object tool was permission blocked |\n| Source modification | Write into the behavior implementation | Not through MCP; the owner edited manually | Through the SAP developer agent, not through MCP |\n| Activation | Activation tool by file URI | Yes, once source is saved in the editor | Yes: several successful responses |\n| Testing | Unit-test tool | Tool exists; not executed | Executed: failing and passing runs, final overall PASS |\n| Evidence | ATC worklists, service binding state | Worklists and binding state read; behaviour not | Worklists, binding state and unit result read; OData runtime not |\n\n**Illustrative logic (NOT SAP-activated, NOT compiled, NOT tested, NOT part of KS01 R2):**\n\n```abap\n\" ILLUSTRATIVE ONLY - not created, activated or run in any SAP system.\nMETHOD validateRating.\n  READ ENTITIES OF zr_review IN LOCAL MODE\n    ENTITY Review FIELDS ( Rating ) WITH CORRESPONDING #( keys )\n    RESULT DATA(reviews).\n  LOOP AT reviews INTO DATA(review) WHERE Rating < 1 OR Rating > 5.\n    APPEND VALUE #( %tky = review-%tky ) TO failed-review.\n    APPEND VALUE #( %tky = review-%tky\n                    %msg = new_message_with_text( severity = if_abap_behv_message=>severity-error\n                                                  text     = 'Rating must be between 1 and 5' ) )\n      TO reported-review.\n  ENDLOOP.\nENDMETHOD.\n```\n\nNames such as `validateRating` assume a validation declared in the behavior definition; nothing here was checked against generated objects.",
+      "view": "handson",
+      "stage": "ALIGN WITH HANDS-ON",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "ho-r3-timeline",
+      "title": "Earlier baseline hands-on (historical): timeline and what each result is",
+      "markdown": "This is the earlier baseline hands-on (a Book Review RAP scenario on a separate trial-system session). It is historical: it used different objects and a different session from KS01 R2, and none of its numbers is a KS01 R2 result.\n\n| Step | Result | Class |\n| --- | --- | --- |\n| Preflight on the first destination | MCP tools registered and callable; destination listing OK; 21 creatable types returned; generator listing returned \"Your user was logged off\"; operations stopped, no retry | SAP_LIVE_VERIFIED for the responses |\n| Live qualification (read-only) on the second destination | Three generators listed; schema fetched (first call timed out); name validation OK for 6 object names, payload errors for two object types | SAP_LIVE_VERIFIED |\n| Generator run 1 | Rejected by validation (builtin types need a custom semantic type) | SAP_LIVE_VERIFIED |\n| Generator run 2 | **Defect (ours):** a prefix applied on top of the generator's own naming produced 13 response entries with doubled-prefix names, interpreted as 15 objects because two entries each represent paired repository objects. The repository was not independently enumerated | SAP_LIVE_VERIFIED for the response; count derived from entry notation |\n| Generator run 3 | Approved names; no validation messages; 13 response entries (interpreted as 15 objects by the same pairing); existence as reported by the generator response | SAP_LIVE_VERIFIED for the response |\n| ATC | 10 objects checked, 0 findings; re-run on 3 objects (2 behavior definitions, 1 class), 0 findings. A static check; zero findings does not show correct behaviour | SAP_LIVE_VERIFIED for the worklist results |\n| Service binding | OData V4, published, version 0001 | SAP_LIVE_VERIFIED |\n| Publishing the binding | Not an MCP tool; recorded as an Eclipse action; who performed it is not recorded | NOT_VERIFIED |\n| Fiori Elements launch, create, read, edit | Reported working | OWNER_REPORTED |\n| Manual ABAP source editing | Performed by the owner in the editor | OWNER_REPORTED |\n| ABAP Unit, CRUD regression | Not executed in that baseline; **superseded for the KS01 R2 application, where ABAP Unit was executed** | NOT_VERIFIED (baseline) |\n| Activation-status read-back | Not done; no tool in the inspected set returns it | NOT_VERIFIED |\n| Preview automation | Blocked: no authenticated SAP session; not bypassed | OBSERVED_LIMITATION |\n\n**Transport observation (exact).** The transport tool called for the reference package returned no recording requirement and no requests. Whether the target package is local, and what transport behaviour applies to it, was never read and is NOT_VERIFIED.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "R3_HISTORICAL"
+    },
+    {
+      "key": "ho-r3-sourcewrite",
+      "title": "Source-write investigation (historical) and the R2 outcome",
+      "markdown": "Three options were evaluated for getting agent-written source into SAP in the earlier baseline:\n\n- **A (a tool in the MCP server):** rejected, no such tool exists.\n- **B (editor integration reachable from Claude Code):** not reachable from the tools available in the tested session. The `abap:` path was not visible to local file tools, and no editor-API tool was exposed to the model. This is \"not established in this configuration\", not \"impossible\".\n- **C (direct ADT REST adapter reusing a session):** not selected; it would require session or credential reuse and unverified endpoints.\n\nThe research workbench's own ADT adapter is deliberately read-only, with a short allowlist of read tools, one allowed destination and write verbs refused. The investigation was closed as an accepted limitation.\n\n**What KS01 R2 added.** Option B was realized through a different route: the owner launched SAP's own `abap-developer` agent in VS Code, and that agent read and edited source over the `abap:` virtual filesystem. Claude Code itself still could not read or write that filesystem; it verified through MCP activation, ABAP Unit and ATC. This is a host-integration boundary, not a general conclusion that agents cannot edit ABAP.",
+      "view": "handson",
+      "stage": "ALIGN WITH HANDS-ON",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "ho-boundary",
+      "title": "Evidence boundary",
+      "markdown": "The distinction that matters is *SAP system execution* (responses from the live trial system through the MCP server) versus *local or tool-schema discovery* (inspecting tool lists and extension files). Tool-schema discovery shows what is offered, not what works.\n\nA further boundary applies to source. The final ABAP source was supplied by the SAP developer agent; it was not independently read back from the live repository by Claude Code or by the independent reviewer, and most MCP receipts in the archive are curated summaries, not unedited wire-level transcripts.",
+      "view": "handson",
+      "stage": "EVALUATE",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "ho-failures",
+      "title": "Failures, accepted limitations and incorrect assumptions",
+      "markdown": "**What worked in KS01 R2:** tool listing and classification, generation of 14 artifacts, activation, ABAP Unit with real failing and passing runs, ATC worklists with priorities, and service discovery after publishing.\n\n**What failed or was blocked in KS01 R2:** earlier unit-test iterations failed from transactional-buffer leakage; the object-creation and AI-fix tools were permission blocked; the deterministic quickfix tool raised a null-pointer error on an empty worklist; two tools lacked a prerequisite for a positive path.\n\n**What failed in the earlier baseline:** a logged-off session on one destination; generator run 1 validation rejection; a generator schema call timeout (retry succeeded); two validation payload errors; preview automation without an SAP session; the `abap:` filesystem not readable by local tools.\n\n**What was not tested:** OData HTTP functional and negative-path requests, update and delete paths, authorization scenarios, transport creation, a deterministic quickfix that actually applies a fix, an AI fix, a Copilot or other compatible-agent run, and Joule for developers.\n\n**Assumptions that proved incorrect:**\n\n- That the generator's `prefix` is a bare prefix; it is applied in addition to the generator's own naming, producing doubled-prefix objects.\n- That an ADT MCP server would offer source write; none is present.\n- That the tutorial tool names equal the server's names; they differ.\n- That SAP's tutorial pages carry no date; the page metadata shows creation and modification dates.\n- That a validation read returned initial values; the failures were buffer leakage between tests.\n\n**Accepted limitations:** no arbitrary source write via the tested MCP path; no object delete tool; no activation read-back; cleanup of the baseline run's objects is an owner action in ADT.\n\n**Optional versus essential:** a source-write adapter is optional for knowledge sharing and was closed. A compatible-agent hands-on with Copilot in VS Code would be the natural next experiment, but it is not required to state the findings above.",
+      "view": "handson",
+      "stage": "PROVE",
+      "scope": "MIXED_LABELLED"
     },
     {
       "key": "evaluation-scope",
       "title": "Scope: the MCP interface versus the surrounding workflow",
       "markdown": "This is a focused assessment of SAP ABAP Development Tools MCP, not a new attempt to establish whether agent-assisted SAP development can work end to end. Broader engineering workflows may combine models, coding agents, VS Code, SAP development tools and human approval. We evaluated what the MCP interface contributes, what was executed and what remains dependent on other components.",
-      "view": "comparison"
+      "view": "comparison",
+      "stage": "COMPARE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "cm-generator",
+      "title": "RAP generator versus custom business logic",
+      "markdown": "**A. Predefined generator functionality.** The generator tool instantiated a template from a schema and a field list. In the KS01 R2 hands-on it produced 14 related repository artifacts: a database table, CDS root and projection views, metadata and access-control artifacts, behavior definitions, behavior pool classes, a service definition and binding, and paired companion artifacts. This is genuine, useful scaffolding. The repository was not independently enumerated.\n\n**B. Arbitrary business requirements.** A rule such as \"status must be one of three values\" is a validation in the behavior implementation, or a CDS constraint, or a determination. A generator template has no input for that rule. The generator can create the class shell; the logic is source that someone must write.\n\n**C. Agent-generated source.** A model can propose that source. In KS01 R2 the SAP developer agent drafted and wrote the validation handler and the test include in the editor, and the MCP unit-test and ATC tools then ran against it. In the earlier baseline, by contrast, an AI-drafted test class existed only as a local file marked not created, not compiled and not run; its existence was the only fact established.\n\n**D. IDE-based implementation.** SAP's own agent definition says to add and edit source via the VS Code editor, opening the editor first using the provided file paths, then activating. Completing step C therefore depends on a compatible agent host that can write into the editor. Whether a given agent can do this against the `abap:` filesystem is a property of that agent, not of MCP. Claude Code in the tested sessions could not; SAP's own `abap-developer` agent could.\n\n**Takeaway.** A generator can create functional RAP artifacts without any general-purpose source-editing API. The gap between \"scaffold\" and \"implemented requirement\" is exactly the source-editing step, and the proof that it was closed is the executed test.",
+      "view": "comparison",
+      "stage": "COMPARE",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "cm-matrix",
+      "title": "Comparative engineering assessment",
+      "markdown": "Qualitative only. No performance, cost, maturity or productivity percentages or scores are claimed, because none were measured. Every cell depends on the SAP release, environment, tool support, agent access, authentication and authorization in use; none is a guarantee of compatibility or capability on another system.\n\n| Dimension | Eclipse ADT manual | VS Code ADT manual | ADT MCP plus Claude Code (tested) | Compatible VS Code agent workflow | Template-based RAP generation | Custom ABAP source implementation |\n| --- | --- | --- | --- | --- | --- | --- |\n| Capability coverage | Eclipse ADT feature set for the connected system type; not assessed here | Core ADT per SAP tutorial | Creation, generation, activation, ABAP Unit, ATC, transport reads, service discovery; no source tool in the inspected set | Tools plus editor edit; the SAP developer agent was exercised in R2, Copilot was not | Scaffolding for patterns the generator supports | Depends on release, authorization and the developer |\n| Source writing | Yes | Yes | **No** from Claude Code (not reachable); source was written by the SAP developer agent | Yes via the SAP developer agent in R2; other agents not verified | None beyond the template | Required |\n| Authentication | Interactive SAP login | Interactive SAP login | Reused destination session; logoff errors seen in the baseline | Same destination model | Same | Same |\n| Authorization | SAP user authorizations | Same | Same user authorizations, plus the agent host's tool permissions | Same, plus agent permission | Same | Same |\n| Developer control | Direct | Direct | Tool-call approvals; one generator call creates many objects; classifier blocked two writes in R2 | Depends on the agent | Parameter-level | Direct |\n| Testability | ABAP Unit and ATC available in the tool | ABAP Unit and ATC per SAP tutorial | ATC and ABAP Unit executed through MCP in R2 | Unit tool plus editor-written tests; exercised in R2 | Needs custom tests for custom logic | Depends on test design and execution |\n| Reproducibility | Manual | Manual | Receipts exist; the prefix defect shows input sensitivity | Depends on the agent | Deterministic for the same input | Depends on process |\n| Operational readiness | Not assessed in this work | Not assessed in this work | MCP server experimental per SAP | MCP server experimental per SAP | Generator readiness not assessed beyond trial runs; MCP wrapper experimental | Not assessed in this work |\n| Governance | Transport and review | Same | No delete tool; no source difference via MCP | Needs editor difference and review | Reviewable output | Code review |\n| Principal limitation | Manual effort | Manual effort | No source path from this client; final source agent-reported | Agent and editor dependency | Cannot express custom rules | Effort |",
+      "view": "comparison",
+      "stage": "COMPARE",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "cm-context",
+      "title": "CAPELLA and Synapse: context, not KS01 evidence",
+      "markdown": "Earlier CAPELLA and Synapse engineering explored broader AI-assisted SAP development workflows involving VS Code, Claude Code, implementation, activation, testing and integration. They provide separate architectural context. They are not execution receipts for the KS01 tool inventory, and no KS01 result is attributed to them.\n\nKS01 R2 is therefore not a fresh claim that AI agents can develop ABAP applications end to end. It is a focused, evidence-based assessment of SAP ADT MCP's 20 exposed tools and their role inside that larger engineering architecture. No controlled productivity, cost or latency figures were measured.",
+      "view": "comparison",
+      "stage": "COMPARE",
+      "scope": "R2_CURRENT"
     },
     {
       "key": "conclusion-and-limits",
       "title": "Conclusion and limits",
       "markdown": "The exercise demonstrates a useful development-tool workflow and candid limitations; it is not a production-readiness assessment, a productivity benchmark, or an all-tools-PASS claim.",
-      "view": "conclusions"
+      "view": "conclusions",
+      "stage": "IMPROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "cc-recommendations",
+      "title": "Engineering recommendations",
+      "markdown": "| Category | Recommendation |\n| --- | --- |\n| Usable now (per our evidence, on a trial system) | Use generators for scaffolding; activate and run ABAP Unit and ATC through the tools once source is saved; read service binding state; list destinations and generator schemas |\n| Supported with prerequisites | ADT for VS Code, a supported ABAP system, an authenticated destination; Joule for developers for the SAP workshop scenario |\n| Requires compatible tooling | Source editing and activation by URI need an agent that supports VS Code's virtual workspace filesystem; the SAP developer agent was exercised, other agents were not |\n| Experimental or restricted | The whole ADT MCP Server per SAP; do not use it on productive systems |\n| Not independently verified | OData runtime behaviour, update and delete paths, authorization, transport creation, a deterministic quickfix that applies a fix, AI fix tools, a Copilot workflow, Joule |",
+      "view": "conclusions",
+      "stage": "IMPROVE",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "cc-rules",
+      "title": "Practical rules",
+      "markdown": "1. Validate the full list of objects a generator will create before calling it.\n2. Never rely on a creation response as evidence of behavior.\n3. Require an executed test per requirement, and run it against the activated code.\n4. Record tool responses as receipts, and state which receipts are curated summaries.\n5. Keep an explicit read-only allowlist, and respect the agent host's permission boundary rather than working around it.",
+      "view": "conclusions",
+      "stage": "IMPROVE",
+      "scope": "SYNTHESIS"
+    },
+    {
+      "key": "cc-lessons",
+      "title": "Lessons learned",
+      "markdown": "1. A protocol capability is not a product capability. Evaluate the exact tools a server exposes.\n2. Scaffolding and implementation are different milestones; only tests of the requirement prove the second.\n3. The weakest link in an agent workflow is often the editor integration, not the model.\n4. Absence of a tool is a finding. Record it.\n5. Input conventions (like a generator `prefix`) are failure points; dry-run validation before write.\n6. Without a read-back tool, \"activated\" can only be inferred.\n7. Test isolation matters in RAP: a missing transactional-buffer reset made a correct handler look broken, and an agent's confident diagnosis was wrong until it was re-run independently.\n8. A PASS summary can hide detail. The unit-test result carried no per-method count, and a tool tally of \"no FAIL\" must still carry the quickfix null-pointer defect.",
+      "view": "conclusions",
+      "stage": "IMPROVE",
+      "scope": "SYNTHESIS"
+    },
+    {
+      "key": "cc-architect-checklist",
+      "title": "What an SAP architect should check",
+      "markdown": "Which tools are exposed and with what annotations; how source reaches the system and who can write it; whether tests are executed against activated code; whether a delete or rollback path exists; how authorization and transport are enforced; whether the agent host's permission model blocks writes you did not intend; the vendor's support statement.",
+      "view": "conclusions",
+      "stage": "IMPROVE",
+      "scope": "SYNTHESIS"
+    },
+    {
+      "key": "cc-improve",
+      "title": "Next research opportunities",
+      "markdown": "These are optional and are not prerequisites for publishing the closed R2 research honestly.\n\n- **OData negative-path test.** Execute create, invalid-input and authorization requests against the published service, with approved cleanup.\n- **A real quickfix application.** Exercise `abap_atc_execute_deterministic_quickfixes` when a genuine eligible finding exists. Adding text elements for the two message literals would also create such a candidate.\n- **Update and delete coverage and authorization tests** for the validation.\n- **Permission decisions** for the create-object and AI-fix tools, so their positive paths can be tested.\n- **A compatible-agent hands-on** with GitHub Copilot in VS Code, to compare against the SAP developer agent.\n- **Tooling feedback to SAP:** negative-path robustness of the quickfix tool, granular approval boundaries, and more complete read-back of activation state.",
+      "view": "conclusions",
+      "stage": "IMPROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "cc-not-claimed",
+      "title": "Claims this research does not support",
+      "markdown": "- \"20 out of 20 tools passed\" or \"zero tool bugs\".\n- \"The RAP service is fully functional over OData HTTP\".\n- \"ATC clean\" or \"production ready\".\n- \"All source was independently read from live SAP\".\n- \"Measured productivity savings\" or \"cost or latency improvement\".\n- \"Fully qualified\" or \"officially sealed\" release status for this website.",
+      "view": "conclusions",
+      "stage": "PROVE",
+      "scope": "R2_CURRENT"
+    },
+    {
+      "key": "rf-faq",
+      "title": "Frequently asked questions",
+      "markdown": "**1. What does MCP actually do here?** MCP is a protocol that lets an agent discover and call a server's operations as typed tools. The ADT MCP Server exposes ADT operations such as listing, creating, generating, activating, testing and ATC. It does not reason; the model does. Whether a given MCP server can generate or write source depends on the tools it exposes.\n\n**2. Does the ADT MCP Server generate ABAP source?** Its RAP generator tool instantiates objects from a template. We saw no tool that turns a requirement into custom business logic or writes arbitrary source into an object. Drafting custom source is done by the model; writing it needs an editor integration.\n\n**3. Can it write ABAP source?** Not through any tool we inspected. SAP's agent instructions say source is edited in the VS Code editor. In KS01 R2 the SAP developer agent edited the source there; Claude Code itself could not.\n\n**4. What can the RAP generators do?** Produce a consistent set of RAP artifacts for supported patterns (a UI service, a Web API service, a UI service from scratch on our system). They cannot express custom validations or calculations.\n\n**5. Which agents work?** SAP states any agent that supports VS Code's virtual workspace filesystem; Copilot is confirmed. Claude Code in our tested sessions could not reach that filesystem; that is a statement about our configuration. SAP's own developer agent worked.\n\n**6. Can I run ABAP Unit and ATC?** Yes, through the tools. In KS01 R2 we executed ABAP Unit with real failing and passing runs and a final overall PASS, and ATC with five open P2/P3 findings. ATC is a static check, and the unit result carries no per-method count.\n\n**7. Did all 20 tools pass?** No. Thirteen passed, two passed with limitations, two were permission blocked, two lacked prerequisites for a positive test, and one was deliberately not tested. There is no whole-tool FAIL classification, but an empty-worklist quickfix null-pointer error was observed.\n\n**8. Did the final ABAP Unit tests exercise RAP business validation?** The final source contains three tests using `MODIFY ENTITIES` and `COMMIT ENTITIES` with an OSQL test double, and the runner returned overall PASS. That establishes business-object save-sequence testing within that setup, not an OData HTTP end-to-end test.\n\n**9. Why did earlier unit-test attempts fail?** The evidence supports cross-test contamination in the RAP transactional buffer. `ROLLBACK ENTITIES` in test setup addressed it. The source was supplied by the SAP developer agent and was not independently reread from the live repository.\n\n**10. Was the service itself tested through OData?** No. Publication and metadata were observed, but no OData HTTP functional create, negative-path or authorization test was executed.\n\n**11. Was ATC clean?** No. The final report retained five P2/P3 findings: message literals and test-code SELECT hygiene. They must not be described as resolved or as proof of production readiness.\n\n**12. Is it secure?** It uses the logged-in user's SAP authorization, so it inherits that user's reach, and the server gives no tool annotations. Apply least privilege and your own allowlist; the agent host's permission model was an effective additional boundary in KS01 R2.\n\n**13. Is it ready for production?** SAP says it is experimental and not intended for productive use. This was a bounded trial-system research exercise; no production qualification, speed comparison, latency benchmark or cost saving was established.\n\n**14. What did CAPELLA and Synapse contribute?** Broader architectural context from separate engineering workflows. Their results were not counted as fresh KS01 R2 SAP execution receipts.\n\n**15. What stays the developer's responsibility?** Requirements, source review, tests, transports, activation decisions, cleanup (there is no delete tool) and acceptance.",
+      "view": "references",
+      "scope": "MIXED_LABELLED"
+    },
+    {
+      "key": "rf-external",
+      "title": "External references",
+      "markdown": "| ID | URL | Created | Last modified | Verification of content |\n| --- | --- | --- | --- | --- |\n| R1 | https://developers.sap.com/tutorials/abap-dev-adt-mcp-server-tools/ | 2026-09-01 | 2026-09-17 | Dates, tool names and the experimental warning read from the raw page HTML (page metadata and visible \"Created on\" line). Author as displayed: Wolfgang Woehrle; 15 min; beginner |\n| R2 | https://developers.sap.com/tutorials/abap-environment-adt-vscode/ | 2026-07-28 | 2026-10-06 | Dates from raw page HTML; feature and system statements read through a summarizing fetch |\n| R3 | https://developers.sap.com/tutorials/abap-environment-adt-coretools-vscode/ | 2026-07-29 | 2026-09-30 | Dates from raw page HTML; content read through a summarizing fetch |\n| R4 | https://github.com/SAP-samples/abap-platform-rap130 | not determined | repository last pushed 2026-06-03 | README read through the GitHub API; license Apache-2.0 from the API |\n\nMethod caveat: where a statement rests on a summarizing fetch rather than raw page HTML, it should be re-checked against the live page before relying on it. Date values are the pages' own metadata; SAP may have changed the pages since 2026-10-13.",
+      "view": "references",
+      "stage": "DISCOVER",
+      "scope": "SAP_DOCUMENTED"
     },
     {
       "key": "references",
       "title": "References",
       "markdown": "- SAP ADT MCP tutorial: https://developers.sap.com/tutorials/abap-dev-adt-mcp-server-tools/\n- SAP ADT for VS Code: https://developers.sap.com/tutorials/abap-environment-adt-vscode/",
-      "view": "references"
+      "view": "references",
+      "stage": "DISCOVER",
+      "scope": "SAP_DOCUMENTED"
+    },
+    {
+      "key": "rf-provenance",
+      "title": "Evidence provenance, review and authorship",
+      "markdown": "**Evidence sources, in order of authority.** SAP's published documentation; the live tool contract (the tool listings and schemas); observed MCP responses from the trial system; reports from the SAP developer agent in VS Code (source and read-back); and independent inspection of the packaged evidence.\n\n**Independent review.** A separate independent review of the closed R2 evidence archive returned ACCEPT_WITH_EXPLICIT_LIMITATIONS: the archive's integrity was verified, the tool matrix accepted with the quickfix defect disclosed, and publication permitted only with the limitations stated in this note. It is a research-publication acceptance, not an SAP productive-use approval. The evidence archive is kept privately; its SHA-256 is `b4934123a24865862f2b2b3e5cab0efa3cc037ad1f82346934b74cfaa803d30a`.\n\n**Limits of that review.** It verified packaged bytes, not a connection to the SAP system. Several receipts are curated textual reconstructions. The final source is agent-reported, and no SAP system ID is established.\n\n**Authorship and disclosure.** Independent technical research by Prasad Deshpande. The assessment was designed and directed by the owner. GPT supported editorial drafting and independent review of the supplied evidence package. Claude Code coordinated eligible SAP ADT MCP operations and verification, while a SAP developer agent in VS Code handled the ABAP source-editing path. The published findings distinguish tool responses, agent-reported source, documented SAP capabilities and untested areas. SAP, its products and trademarks belong to their respective owners; this independent publication is not affiliated with, approved by or endorsed by SAP.\n\n**What was withheld from this public edition.** Private system and destination identifiers, package and object names, raw receipts and worklist identifiers, local file paths and the research workbench's internal controls.",
+      "view": "references",
+      "scope": "METHOD"
     }
   ],
   "claims": [
@@ -121,61 +454,433 @@
       "claim_id": "R501",
       "claim": "Earlier integrated engineering work is separate context, not fresh KS01 execution evidence.",
       "evidence_class": "EDITORIAL_SCOPE",
-      "limitation": "Prior CAPELLA/Synapse work not counted in current MCP tool receipts"
+      "limitation": "Prior CAPELLA/Synapse work not counted in current MCP tool receipts",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R502",
       "claim": "The live ADT MCP server exposed 20 tools during the new trial assessment.",
       "evidence_class": "MCP_REPORTED",
-      "limitation": "No server-build metadata or SAP SID obtained"
+      "limitation": "No server-build metadata or SAP SID obtained",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R503",
       "claim": "A RAP generator produced responses for 14 repository artifacts.",
       "evidence_class": "MCP_REPORTED",
-      "limitation": "Repository inventory and activation not independently read back for all artifacts"
+      "limitation": "Repository inventory and activation not independently read back for all artifacts",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R504",
       "claim": "The final ABAP Unit source excerpt has three RAP EML save-sequence tests; MCP runner reported overall PASS.",
       "evidence_class": "AGENT_SOURCE_PLUS_MCP_RESPONSE",
-      "limitation": "No result-method count; final live source not independently re-read by GPT"
+      "limitation": "No result-method count; final live source not independently re-read by GPT",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R505",
       "claim": "ATC returned five remaining P2/P3 static analysis findings.",
       "evidence_class": "MCP_REPORTED",
-      "limitation": "Curated receipt, not raw SAP JSON; not an ATC clean result"
+      "limitation": "Curated receipt, not raw SAP JSON; not an ATC clean result",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R506",
       "claim": "20-tool statuses: 13 PASS, 2 limited, 2 blocked by permissions, 2 prerequisite-unavailable, 1 not tested.",
       "evidence_class": "MCP_EVALUATION_MATRIX",
-      "limitation": "The two limited tools did not demonstrate positive paths for all conditions"
+      "limitation": "The two limited tools did not demonstrate positive paths for all conditions",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R507",
       "claim": "Deterministic quickfix invoked against an empty worklist reported a null-pointer error.",
       "evidence_class": "MCP_REPORTED",
-      "limitation": "No successful eligible quickfix application demonstrated"
+      "limitation": "No successful eligible quickfix application demonstrated",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R508",
       "claim": "V4 service published and discoverable through MCP, without an OData HTTP functional test.",
       "evidence_class": "MCP_REPORTED",
-      "limitation": "OData business validation through HTTP not tested"
+      "limitation": "OData business validation through HTTP not tested",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R509",
       "claim": "Source edits were conducted via SAP developer agent in VS Code, not via a generic MCP source-write tool.",
       "evidence_class": "EDITOR_AGENT_REPORTED",
-      "limitation": "No independent live final-source readback by GPT or Claude"
+      "limitation": "No independent live final-source readback by GPT or Claude",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
     },
     {
       "claim_id": "R510",
       "claim": "ADT MCP Server is described by SAP as experimental and not for productive use.",
       "evidence_class": "SAP_DOCUMENTED",
-      "limitation": "Trial research is not production certification"
+      "limitation": "Trial research is not production certification",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R511",
+      "claim": "The three final ABAP Unit methods each drive the RAP save sequence with MODIFY ENTITIES and COMMIT ENTITIES against an OSQL test double; the test class setup calls ROLLBACK ENTITIES.",
+      "evidence_class": "AGENT_SOURCE_PLUS_MCP_RESPONSE",
+      "limitation": "Source supplied by the SAP developer agent; not independently re-read from the live repository",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R512",
+      "claim": "Earlier unit-test failures were caused by transactional-buffer leakage between test methods; an earlier diagnosis that the validation read returned initial values was withdrawn.",
+      "evidence_class": "AGENT_SOURCE_PLUS_MCP_RESPONSE",
+      "limitation": "Supported by the iteration history and an independent re-run; not a new root-cause experiment",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R513",
+      "claim": "Final ATC findings: two P3 SLIN 1700, one P3 AMB_SINGLE and two P2 no-WHERE findings in the test include; an earlier SLIN 1205 finding was cleared.",
+      "evidence_class": "MCP_REPORTED",
+      "limitation": "Curated worklist summary, not a raw SAP response; the RONT companion was not covered",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R514",
+      "claim": "The object-creation and AI-fix tools were denied by the agent host permission classifier; the boundary was respected, not bypassed.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "A property of the tested agent host configuration",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R515",
+      "claim": "The transport-difference and AI-fix-result tools lacked a prerequisite for a positive path; transport creation was skipped by owner decision.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "Positive paths of these tools remain untested",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R516",
+      "claim": "The final source was supplied by the SAP developer agent and was not read back directly by Claude Code or the independent reviewer.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "Indirect corroboration through activation, ABAP Unit and ATC only",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R517",
+      "claim": "The MCP unit-test output for a passing run carried only an overall status line, with no per-method count.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "The count of three comes from the source, not the runner",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R518",
+      "claim": "The transport query returned the same answer for a package that does not exist, so it is not a discriminating check.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "One probe; not a statement about every input",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R519",
+      "claim": "An independent review of the closed R2 evidence archive accepted it with explicit limitations; archive bytes verified, SAP system not accessed by the reviewer.",
+      "evidence_class": "INDEPENDENT_REVIEW",
+      "limitation": "Research-publication acceptance; not a production certification",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "R520",
+      "claim": "The server build metadata and the SAP system ID were not exposed by the tools.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "Client number inferred only indirectly",
+      "scope": "R2_CURRENT",
+      "status": "CURRENT",
+      "verified": "2026-10-15"
+    },
+    {
+      "claim_id": "C01",
+      "claim": "ADT MCP Server is experimental, may change, not for productive use.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "Page modified 2026-09-17; text read from raw HTML",
+      "scope": "SAP_DOCUMENTED",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C02",
+      "claim": "SAP's tutorial lists 13 tool entries; the table includes one misspelled name.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "Version of 2026-09-17; tools may change",
+      "scope": "SAP_DOCUMENTED",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C03",
+      "claim": "Any agent supporting VS Code's virtual workspace filesystem is compatible; Copilot confirmed.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "Page modified 2026-09-17; RAP130 README via the GitHub API",
+      "scope": "SAP_DOCUMENTED",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C04",
+      "claim": "Supported systems and connection types of ADT for VS Code.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "Page modified 2026-10-06; read through a summarizing fetch",
+      "scope": "SAP_DOCUMENTED",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C05",
+      "claim": "The core-tools tutorial covers create, edit, activate, ABAP Unit and ATC and excludes agentic AI.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "Page modified 2026-09-30; read through a summarizing fetch",
+      "scope": "SAP_DOCUMENTED",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C06",
+      "claim": "RAP130 requires Joule for developers ABAP AI; Copilot is primary; Apache-2.0.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "Repository last pushed 2026-06-03; README via the GitHub API",
+      "scope": "SAP_DOCUMENTED",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C07",
+      "claim": "A recorded earlier discovery (\"ADT MCP Server 1.0.0\") listed 20 tools.",
+      "evidence_class": "TOOL_CONTRACT_VERIFIED",
+      "limitation": "Date and extension build not stated; separate session",
+      "scope": "R3_HISTORICAL",
+      "status": "CONFIRMED_BY_R2_NAMES",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C08",
+      "claim": "No tool advertised read-only or destructive hints.",
+      "evidence_class": "TOOL_CONTRACT_VERIFIED",
+      "limitation": "Recorded in the earlier review; not re-checked in R2",
+      "scope": "R3_HISTORICAL",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C09",
+      "claim": "No tool in the 20-tool lists of the earlier recorded sessions reads or writes arbitrary ABAP source.",
+      "evidence_class": "TOOL_CONTRACT_VERIFIED",
+      "limitation": "Applies to those lists; the R2 list has the same 20 names",
+      "scope": "R3_HISTORICAL",
+      "status": "CONFIRMED_BY_R2_NAMES",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C10",
+      "claim": "The create-object tool takes metadata only; its description forbids source.",
+      "evidence_class": "TOOL_CONTRACT_VERIFIED",
+      "limitation": "Earlier session schema",
+      "scope": "R3_HISTORICAL",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C11",
+      "claim": "The activation and unit-test tools take abap: file URIs; files must be saved first.",
+      "evidence_class": "TOOL_CONTRACT_VERIFIED",
+      "limitation": "Earlier session schema",
+      "scope": "R3_HISTORICAL",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C12",
+      "claim": "SAP-shipped agent file instructs editing source via the VS Code editor.",
+      "evidence_class": "TOOL_CONTRACT_VERIFIED",
+      "limitation": "Extension 1.1.2",
+      "scope": "R3_HISTORICAL",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C13",
+      "claim": "Claude Code could not reach the abap: filesystem via local tools in the tested sessions.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "Configuration-specific; not a general claim",
+      "scope": "R3_HISTORICAL",
+      "status": "CONFIRMED_BY_R2",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C14",
+      "claim": "Baseline live SAP responses: destinations, three generators, schema, transport information and name validation.",
+      "evidence_class": "SAP_LIVE_VERIFIED",
+      "limitation": "Trial system; identifiers withheld",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C14b",
+      "claim": "In the baseline, two object types returned payload errors in name validation.",
+      "evidence_class": "SAP_LIVE_VERIFIED",
+      "limitation": "Cause not analyzed",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C15",
+      "claim": "Baseline generator run 3 returned 13 response entries (interpreted as 15 objects) with no validation messages.",
+      "evidence_class": "SAP_LIVE_VERIFIED",
+      "limitation": "Repository not independently enumerated; count derived from entry notation",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C16",
+      "claim": "Baseline generator run 2: a prefix applied on top of the generator naming produced doubled-prefix objects; no delete tool exists.",
+      "evidence_class": "SAP_LIVE_VERIFIED",
+      "limitation": "Operator error; separate from run 3",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C17",
+      "claim": "Baseline ATC: 0 findings on 10 objects, and on 3 objects in a re-run.",
+      "evidence_class": "SAP_LIVE_VERIFIED",
+      "limitation": "A different object set from KS01 R2; zero findings is not functional correctness",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C18",
+      "claim": "Baseline binding read-back: OData V4, published.",
+      "evidence_class": "SAP_LIVE_VERIFIED",
+      "limitation": "Publisher of the binding not recorded",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C19",
+      "claim": "Baseline Fiori Elements launch and create, read, edit were reported working.",
+      "evidence_class": "OWNER_REPORTED",
+      "limitation": "Not independently verified",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C20",
+      "claim": "In the baseline, ABAP Unit and CRUD regression were not executed.",
+      "evidence_class": "NOT_VERIFIED",
+      "limitation": "Superseded for the KS01 R2 application, where ABAP Unit was executed",
+      "scope": "R3_HISTORICAL",
+      "status": "SUPERSEDED_BY_R2",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C21",
+      "claim": "In the baseline, source editing was performed manually by the owner.",
+      "evidence_class": "OWNER_REPORTED",
+      "limitation": "No receipt of the edited source",
+      "scope": "R3_HISTORICAL",
+      "status": "SUPERSEDED_BY_R2",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C21b",
+      "claim": "In the baseline, an AI-drafted ABAP test class existed only as a local file marked not created, not compiled, not run.",
+      "evidence_class": "NOT_VERIFIED",
+      "limitation": "Existence only",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C22",
+      "claim": "Activation status was not read back from SAP; no tool in the inspected lists returns it.",
+      "evidence_class": "NOT_VERIFIED",
+      "limitation": "Still true in R2; ATC on active versions is indirect",
+      "scope": "R3_HISTORICAL",
+      "status": "CONFIRMED_BY_R2",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C24",
+      "claim": "The Claude Code VS Code extension exposes no generic write tool (static analysis; not runtime-tested).",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "Static string scan",
+      "scope": "R3_HISTORICAL",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C26",
+      "claim": "The tutorial spells createable and misspells the create-object row; receipts spell creatable.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "Spelling differences; version drift unverified",
+      "scope": "R3_HISTORICAL",
+      "status": "CURRENT",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C27",
+      "claim": "The tutorial lists 13 entries; the observed sessions list 20; 7 observed tools are absent from the tutorial table.",
+      "evidence_class": "OBSERVED_LIMITATION",
+      "limitation": "Cause unverified: no version evidence for either list",
+      "scope": "R3_HISTORICAL",
+      "status": "CONFIRMED_BY_R2_NAMES",
+      "verified": "2026-10-13"
+    },
+    {
+      "claim_id": "C28",
+      "claim": "The baseline transport query for the reference package returned no recording requirement and no requests; the target package classification was never read.",
+      "evidence_class": "SAP_LIVE_VERIFIED",
+      "limitation": "Target package type not verified",
+      "scope": "R3_HISTORICAL",
+      "status": "HISTORICAL_DISTINCT_RUN",
+      "verified": "2026-10-13"
     }
   ],
   "references": [
@@ -204,5 +909,5 @@
   },
   "diagram_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 940 620\" width=\"940\" height=\"620\" role=\"img\" aria-labelledby=\"t d\" font-family=\"Segoe UI, Arial, sans-serif\" font-size=\"13\">\n  <title id=\"t\">KS01 architecture: tool-invocation path and source-editing path</title>\n  <desc id=\"d\">A business requirement reaches an AI model and agent orchestration. The agent calls the SAP ADT MCP Server through an MCP client (tool-invocation path) and, separately, writes source through the VS Code editor and the abap virtual filesystem (source-editing path). Both reach the ABAP repository. Activation, ABAP Unit and ATC produce execution evidence. A developer approves and reviews.</desc>\n  <defs>\n    <marker id=\"ab\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#1d4ed8\"/></marker>\n    <marker id=\"ao\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#c2410c\"/></marker>\n    <marker id=\"ag\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#475569\"/></marker>\n  </defs>\n  <rect width=\"940\" height=\"620\" fill=\"#ffffff\"/>\n  <g stroke=\"#334155\" stroke-width=\"1.4\" fill=\"#f1f5f9\">\n    <rect x=\"20\" y=\"20\" width=\"170\" height=\"54\" rx=\"6\"/>\n    <rect x=\"250\" y=\"20\" width=\"150\" height=\"54\" rx=\"6\"/>\n    <rect x=\"460\" y=\"20\" width=\"190\" height=\"54\" rx=\"6\"/>\n    <rect x=\"710\" y=\"20\" width=\"190\" height=\"54\" rx=\"6\" fill=\"#dbeafe\"/>\n    <rect x=\"20\" y=\"170\" width=\"190\" height=\"60\" rx=\"6\" fill=\"#fef9c3\" stroke-dasharray=\"5 4\"/>\n    <rect x=\"435\" y=\"170\" width=\"240\" height=\"60\" rx=\"6\" fill=\"#ffedd5\"/>\n    <rect x=\"435\" y=\"270\" width=\"240\" height=\"50\" rx=\"6\" fill=\"#ffedd5\"/>\n    <rect x=\"690\" y=\"170\" width=\"230\" height=\"70\" rx=\"6\" fill=\"#dbeafe\"/>\n    <rect x=\"300\" y=\"380\" width=\"420\" height=\"56\" rx=\"6\" fill=\"#e2e8f0\"/>\n    <rect x=\"300\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"440\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"580\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"300\" y=\"558\" width=\"420\" height=\"42\" rx=\"6\" fill=\"#dcfce7\"/>\n  </g>\n  <g text-anchor=\"middle\" fill=\"#0f172a\">\n    <text x=\"105\" y=\"52\">Business requirement</text>\n    <text x=\"325\" y=\"52\">AI model</text>\n    <text x=\"555\" y=\"44\">Agent orchestration</text>\n    <text x=\"555\" y=\"62\" font-size=\"11\">plan, choose tool, read result</text>\n    <text x=\"805\" y=\"52\">MCP client</text>\n    <text x=\"115\" y=\"196\">Developer / owner</text>\n    <text x=\"115\" y=\"214\" font-size=\"11\">approves boundaries, reviews</text>\n    <text x=\"555\" y=\"196\">VS Code editor + ADT extension</text>\n    <text x=\"555\" y=\"214\" font-size=\"11\">writes source into the file</text>\n    <text x=\"555\" y=\"300\">abap: virtual filesystem</text>\n    <text x=\"805\" y=\"194\">SAP ADT MCP Server</text>\n    <text x=\"805\" y=\"212\" font-size=\"11\">typed ADT operations incl. RAP generation;</text>\n    <text x=\"805\" y=\"228\" font-size=\"11\">no general source-write tool in inspected lists</text>\n    <text x=\"510\" y=\"404\">ABAP repository</text>\n    <text x=\"510\" y=\"422\" font-size=\"11\">RAP / CDS / behavior implementation</text>\n    <text x=\"360\" y=\"507\">Activation</text>\n    <text x=\"500\" y=\"507\">ABAP Unit</text>\n    <text x=\"640\" y=\"507\">ATC</text>\n    <text x=\"510\" y=\"583\">Execution evidence (SAP responses, receipts)</text>\n  </g>\n  <g fill=\"none\" stroke-width=\"2\">\n    <path d=\"M190 47H250\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M400 47H460\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M650 47H710\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M805 74V170\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M555 74V170\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M555 230V270\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M555 320V380\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M805 240V408H720\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M115 170V110H500V74\" stroke=\"#475569\" stroke-dasharray=\"5 4\" marker-end=\"url(#ag)\"/>\n    <path d=\"M360 436V480M500 436V480M640 436V480\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M360 524V558M500 524V558M640 524V558\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M900 240V579H720\" stroke=\"#1d4ed8\" stroke-dasharray=\"5 4\" marker-end=\"url(#ab)\"/>\n  </g>\n  <g font-size=\"11\" fill=\"#1e293b\">\n    <text x=\"815\" y=\"130\">tool calls (MCP protocol)</text>\n    <text x=\"565\" y=\"130\">editor API: compatible agent required</text>\n    <text x=\"725\" y=\"330\" fill=\"#1d4ed8\">tool results</text>\n  </g>\n  <g>\n    <rect x=\"20\" y=\"290\" width=\"250\" height=\"130\" rx=\"6\" fill=\"#fff7ed\" stroke=\"#c2410c\" stroke-width=\"1\"/>\n    <text x=\"32\" y=\"312\" font-size=\"12\" font-weight=\"600\" fill=\"#9a3412\">Reading the diagram</text>\n    <text x=\"32\" y=\"332\" font-size=\"11\" fill=\"#1e293b\">Blue: tool-invocation path (MCP).</text>\n    <text x=\"32\" y=\"350\" font-size=\"11\" fill=\"#1e293b\">Orange: source-editing path (editor).</text>\n    <text x=\"32\" y=\"372\" font-size=\"11\" fill=\"#1e293b\">In the lists we inspected, the MCP server</text>\n    <text x=\"32\" y=\"388\" font-size=\"11\" fill=\"#1e293b\">exposes RAP generation but no general</text>\n    <text x=\"32\" y=\"404\" font-size=\"11\" fill=\"#1e293b\">source read or write tool.</text>\n  </g>\n</svg>\n",
   "diagram_caption": "Tool-invocation path and source-editing path",
-  "content_sha256": "bdb147f90a07f3611f4929b024fa246e0136187a7930d08879aa087a968f29ee"
+  "content_sha256": "b3f4da6d43b3e2ab16ecb76ced012dbb7170453c89e669166606b6457c93a82e"
 }

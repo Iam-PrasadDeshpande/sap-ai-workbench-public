@@ -13,8 +13,9 @@ View model (dict):
   heading      '<id>: <title>'                    subtitle  one line
   meta         [{'caption': str, 'text': str} | {'caption': str, 'chip': (label, colour)}]  (three columns)
   identity     None | {'lines': [markdown], 'caption': str}             'Content identity' expander
-  views        [{'key', 'name', 'sections': [{'number', 'title', 'markdown', 'diagram': bool}]}]
+  views        [{'key', 'name', 'sections': [{'number', 'title', 'markdown', 'diagram': bool, 'tags': [(label, colour)]}]}]
   claims       [{'claim_id', 'claim', 'evidence_class', ...}]           shown on the 'references' view
+  wrap_tables  True: render tables wrapped (st.table) instead of a scrolling grid
   claim_columns, claims_title
   references   [{'label', 'url'}]                                       shown on the 'references' view
   diagram      None | {'source': path-or-svg, 'caption': str, 'mermaid': str | None}
@@ -51,6 +52,8 @@ def render(vm: dict, *, choose, chip, blocks, plain, esc=lambda s, n=0: s) -> No
     view = next(v for v in views if v['name'] == pick)
     for idx, sec in enumerate(view['sections']):
         with st.expander(f"{sec['number']}. {esc(sec['title'], 160)}", expanded=(idx == 0)):
+            if sec.get('tags'):                    # method stage and evidence scope of this section
+                st.markdown('  '.join(chip(label, colour) for label, colour in sec['tags']))
             _blocks(vm, sec, f"{view['key']}_{sec['number']}", blocks, plain)
     if view['key'] == 'references':
         claims = vm.get('claims') or []
@@ -89,7 +92,10 @@ def _blocks(vm: dict, sec: dict, key: str, blocks, plain) -> None:
         elif b[0] == 'table':
             header, rows = b[1], b[2]
             data = [{h: plain(c) for h, c in zip(header, r, strict=False)} for r in rows]
-            st.dataframe(data, hide_index=True, key=f"{vm['key_prefix']}_t_{key}_{n}")
+            if vm.get('wrap_tables'):             # wrapped HTML table: long technical cells stay fully readable
+                st.table(data)
+            else:
+                st.dataframe(data, hide_index=True, key=f"{vm['key_prefix']}_t_{key}_{n}")
         elif b[0] == 'diagram':
             _diagram(vm)
     if sec.get('diagram'):
