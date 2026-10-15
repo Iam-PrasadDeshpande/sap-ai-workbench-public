@@ -3,63 +3,117 @@
   "session_id": "KS01",
   "title": "SAP ADT MCP: Results from a 20-Tool Hands-on Evaluation",
   "subtitle": "Trial-system RAP generation, save-sequence ABAP Unit, ATC and documented tool limitations",
-  "revision": "R5-editorial-unsigned-candidate",
+  "revision": "R6",
   "date": "2026-10-15",
   "evidence_status": "Closed R2 trial assessment; evidence reviewed with explicit limitations; not production qualification",
-  "references": [
+  "lineage_note": "Restructured from the owner-approved R5 article into the eight knowledge-session views. No factual claim was added or removed; the approved article is reproduced exactly by the legacy projection.",
+  "views": [
     {
-      "label": "Enable the ADT MCP Server in ABAP Development Tools for VS Code (SAP tutorial, modified 2026-09-17)",
-      "url": "https://developers.sap.com/tutorials/abap-dev-adt-mcp-server-tools/"
+      "key": "overview",
+      "name": "Executive overview"
     },
     {
-      "label": "ABAP Development Tools for Visual Studio Code (SAP tutorial, modified 2026-10-06)",
-      "url": "https://developers.sap.com/tutorials/abap-environment-adt-vscode/"
+      "key": "offering",
+      "name": "SAP official offering"
     },
     {
-      "label": "ABAP Basic Features for Visual Studio Code (SAP tutorial, modified 2026-09-30)",
-      "url": "https://developers.sap.com/tutorials/abap-environment-adt-coretools-vscode/"
+      "key": "architecture",
+      "name": "Architecture"
     },
     {
-      "label": "RAP130 workshop (SAP-samples, last pushed 2026-06-03)",
-      "url": "https://github.com/SAP-samples/abap-platform-rap130"
+      "key": "inventory",
+      "name": "MCP tool inventory"
+    },
+    {
+      "key": "handson",
+      "name": "Hands-on evidence"
+    },
+    {
+      "key": "comparison",
+      "name": "Comparative assessment"
+    },
+    {
+      "key": "conclusions",
+      "name": "Conclusions and recommendations"
+    },
+    {
+      "key": "references",
+      "name": "References and supporting evidence"
     }
   ],
-  "diagram_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 940 620\" width=\"940\" height=\"620\" role=\"img\" aria-labelledby=\"t d\" font-family=\"Segoe UI, Arial, sans-serif\" font-size=\"13\">\n  <title id=\"t\">KS01 architecture: tool-invocation path and source-editing path</title>\n  <desc id=\"d\">A business requirement reaches an AI model and agent orchestration. The agent calls the SAP ADT MCP Server through an MCP client (tool-invocation path) and, separately, writes source through the VS Code editor and the abap virtual filesystem (source-editing path). Both reach the ABAP repository. Activation, ABAP Unit and ATC produce execution evidence. A developer approves and reviews.</desc>\n  <defs>\n    <marker id=\"ab\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#1d4ed8\"/></marker>\n    <marker id=\"ao\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#c2410c\"/></marker>\n    <marker id=\"ag\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#475569\"/></marker>\n  </defs>\n  <rect width=\"940\" height=\"620\" fill=\"#ffffff\"/>\n  <g stroke=\"#334155\" stroke-width=\"1.4\" fill=\"#f1f5f9\">\n    <rect x=\"20\" y=\"20\" width=\"170\" height=\"54\" rx=\"6\"/>\n    <rect x=\"250\" y=\"20\" width=\"150\" height=\"54\" rx=\"6\"/>\n    <rect x=\"460\" y=\"20\" width=\"190\" height=\"54\" rx=\"6\"/>\n    <rect x=\"710\" y=\"20\" width=\"190\" height=\"54\" rx=\"6\" fill=\"#dbeafe\"/>\n    <rect x=\"20\" y=\"170\" width=\"190\" height=\"60\" rx=\"6\" fill=\"#fef9c3\" stroke-dasharray=\"5 4\"/>\n    <rect x=\"435\" y=\"170\" width=\"240\" height=\"60\" rx=\"6\" fill=\"#ffedd5\"/>\n    <rect x=\"435\" y=\"270\" width=\"240\" height=\"50\" rx=\"6\" fill=\"#ffedd5\"/>\n    <rect x=\"690\" y=\"170\" width=\"230\" height=\"70\" rx=\"6\" fill=\"#dbeafe\"/>\n    <rect x=\"300\" y=\"380\" width=\"420\" height=\"56\" rx=\"6\" fill=\"#e2e8f0\"/>\n    <rect x=\"300\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"440\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"580\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"300\" y=\"558\" width=\"420\" height=\"42\" rx=\"6\" fill=\"#dcfce7\"/>\n  </g>\n  <g text-anchor=\"middle\" fill=\"#0f172a\">\n    <text x=\"105\" y=\"52\">Business requirement</text>\n    <text x=\"325\" y=\"52\">AI model</text>\n    <text x=\"555\" y=\"44\">Agent orchestration</text>\n    <text x=\"555\" y=\"62\" font-size=\"11\">plan, choose tool, read result</text>\n    <text x=\"805\" y=\"52\">MCP client</text>\n    <text x=\"115\" y=\"196\">Developer / owner</text>\n    <text x=\"115\" y=\"214\" font-size=\"11\">approves boundaries, reviews</text>\n    <text x=\"555\" y=\"196\">VS Code editor + ADT extension</text>\n    <text x=\"555\" y=\"214\" font-size=\"11\">writes source into the file</text>\n    <text x=\"555\" y=\"300\">abap: virtual filesystem</text>\n    <text x=\"805\" y=\"194\">SAP ADT MCP Server</text>\n    <text x=\"805\" y=\"212\" font-size=\"11\">typed ADT operations incl. RAP generation;</text>\n    <text x=\"805\" y=\"228\" font-size=\"11\">no general source-write tool in inspected lists</text>\n    <text x=\"510\" y=\"404\">ABAP repository</text>\n    <text x=\"510\" y=\"422\" font-size=\"11\">RAP / CDS / behavior implementation</text>\n    <text x=\"360\" y=\"507\">Activation</text>\n    <text x=\"500\" y=\"507\">ABAP Unit</text>\n    <text x=\"640\" y=\"507\">ATC</text>\n    <text x=\"510\" y=\"583\">Execution evidence (SAP responses, receipts)</text>\n  </g>\n  <g fill=\"none\" stroke-width=\"2\">\n    <path d=\"M190 47H250\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M400 47H460\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M650 47H710\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M805 74V170\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M555 74V170\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M555 230V270\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M555 320V380\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M805 240V408H720\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M115 170V110H500V74\" stroke=\"#475569\" stroke-dasharray=\"5 4\" marker-end=\"url(#ag)\"/>\n    <path d=\"M360 436V480M500 436V480M640 436V480\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M360 524V558M500 524V558M640 524V558\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M900 240V579H720\" stroke=\"#1d4ed8\" stroke-dasharray=\"5 4\" marker-end=\"url(#ab)\"/>\n  </g>\n  <g font-size=\"11\" fill=\"#1e293b\">\n    <text x=\"815\" y=\"130\">tool calls (MCP protocol)</text>\n    <text x=\"565\" y=\"130\">editor API: compatible agent required</text>\n    <text x=\"725\" y=\"330\" fill=\"#1d4ed8\">tool results</text>\n  </g>\n  <g>\n    <rect x=\"20\" y=\"290\" width=\"250\" height=\"130\" rx=\"6\" fill=\"#fff7ed\" stroke=\"#c2410c\" stroke-width=\"1\"/>\n    <text x=\"32\" y=\"312\" font-size=\"12\" font-weight=\"600\" fill=\"#9a3412\">Reading the diagram</text>\n    <text x=\"32\" y=\"332\" font-size=\"11\" fill=\"#1e293b\">Blue: tool-invocation path (MCP).</text>\n    <text x=\"32\" y=\"350\" font-size=\"11\" fill=\"#1e293b\">Orange: source-editing path (editor).</text>\n    <text x=\"32\" y=\"372\" font-size=\"11\" fill=\"#1e293b\">In the lists we inspected, the MCP server</text>\n    <text x=\"32\" y=\"388\" font-size=\"11\" fill=\"#1e293b\">exposes RAP generation but no general</text>\n    <text x=\"32\" y=\"404\" font-size=\"11\" fill=\"#1e293b\">source read or write tool.</text>\n  </g>\n</svg>\n",
   "sections": [
-    {
-      "key": "evaluation-scope",
-      "title": "Evaluation scope",
-      "markdown": "This is a focused assessment of SAP ABAP Development Tools MCP, not a new attempt to establish whether agent-assisted SAP development can work end to end. Broader engineering workflows may combine models, coding agents, VS Code, SAP development tools and human approval. We evaluated what the MCP interface contributes, what was executed and what remains dependent on other components."
-    },
     {
       "key": "what-was-evaluated",
       "title": "What was evaluated",
-      "markdown": "In a trial ABAP environment, the connected ADT MCP Server exposed 20 tools. A RAP student-management scenario generated 14 related repository artifacts. Activation tools, ATC runs, service discovery and ABAP Unit were exercised. SAP describes the ADT MCP Server as experimental and not intended for productive use."
+      "markdown": "In a trial ABAP environment, the connected ADT MCP Server exposed 20 tools. A RAP student-management scenario generated 14 related repository artifacts. Activation tools, ATC runs, service discovery and ABAP Unit were exercised. SAP describes the ADT MCP Server as experimental and not intended for productive use.",
+      "view": "overview"
+    },
+    {
+      "key": "sap-stated-position",
+      "title": "What SAP states",
+      "markdown": "SAP describes the ADT MCP Server as experimental and not intended for productive use (claim R510). Setup instructions are in the SAP tutorial linked under References.",
+      "view": "offering"
+    },
+    {
+      "key": "where-adt-mcp-fits",
+      "title": "Where ADT MCP fits",
+      "markdown": "ADT MCP is a typed tool interface within a broader agent-assisted workflow. Its value is in exposing controlled SAP operations. It does not replace the coding agent, IDE, SAP authorizations, executable tests or governance.",
+      "view": "architecture"
+    },
+    {
+      "key": "source-editing-path",
+      "title": "Source-editing path",
+      "markdown": "Custom ABAP source was handled through a compatible VS Code SAP developer-agent editing path, rather than a general-purpose MCP source-write tool. The editor-agent-provided source and MCP test results support the reported lifecycle; an independent live source readback was not available to the reviewer.",
+      "view": "architecture",
+      "diagram": true
+    },
+    {
+      "key": "tool-assessment-outcome",
+      "title": "Tool assessment outcome (20 tools)",
+      "markdown": "| Tool assessment | Count |\n| --- | ---: |\n| PASS | 13 |\n| PASS with limitation | 2 |\n| Permission blocked | 2 |\n| Prerequisite unavailable | 2 |\n| Not tested by owner decision | 1 |",
+      "view": "inventory"
     },
     {
       "key": "rap-validation-and-abap-unit",
       "title": "RAP validation and ABAP Unit",
-      "markdown": "The final test implementation contained three methods for a valid status, missing name and invalid status. They exercised the RAP business-object save sequence using `MODIFY ENTITIES` and `COMMIT ENTITIES` with an OSQL test double; the MCP runner reported an overall PASS. The test result omitted a per-method count, so the three cases are established from the final editor-agent source excerpt.\n\nEarlier failures were traced to RAP transactional-buffer leakage across tests. A `ROLLBACK ENTITIES` call in test setup provided isolation. This diagnosis is supported by the packaged test history, not by a fresh direct SAP repository readback from the reviewer."
+      "markdown": "The final test implementation contained three methods for a valid status, missing name and invalid status. They exercised the RAP business-object save sequence using `MODIFY ENTITIES` and `COMMIT ENTITIES` with an OSQL test double; the MCP runner reported an overall PASS. The test result omitted a per-method count, so the three cases are established from the final editor-agent source excerpt.\n\nEarlier failures were traced to RAP transactional-buffer leakage across tests. A `ROLLBACK ENTITIES` call in test setup provided isolation. This diagnosis is supported by the packaged test history, not by a fresh direct SAP repository readback from the reviewer.",
+      "view": "handson"
     },
     {
-      "key": "atc-and-tool-results",
-      "title": "ATC and tool results",
-      "markdown": "The final ATC worklist reported five open priority-2/priority-3 findings, mainly message-literal and test-code SELECT hygiene issues. These were not waived or presented as an ATC-clean result.\n\n| Tool assessment | Count |\n| --- | ---: |\n| PASS | 13 |\n| PASS with limitation | 2 |\n| Permission blocked | 2 |\n| Prerequisite unavailable | 2 |\n| Not tested by owner decision | 1 |\n\nThe deterministic quickfix tool produced a null-pointer error when invoked on an empty ATC worklist. On a nonempty worklist without an applicable fix, it returned an empty, non-error result. No actual deterministic quickfix application was demonstrated. Permission blocks were respected rather than overridden."
+      "key": "atc-result",
+      "title": "ATC result",
+      "markdown": "The final ATC worklist reported five open priority-2/priority-3 findings, mainly message-literal and test-code SELECT hygiene issues. These were not waived or presented as an ATC-clean result.",
+      "view": "handson"
     },
     {
-      "key": "service-and-source-boundaries",
-      "title": "Service and source boundaries",
-      "markdown": "The OData V4 service was reported published and its entity metadata retrieved. No HTTP runtime functional request was executed, so OData-level business behavior was not established.\n\nCustom ABAP source was handled through a compatible VS Code SAP developer-agent editing path, rather than a general-purpose MCP source-write tool. The editor-agent-provided source and MCP test results support the reported lifecycle; an independent live source readback was not available to the reviewer."
+      "key": "deterministic-quickfix",
+      "title": "Deterministic quickfix",
+      "markdown": "The deterministic quickfix tool produced a null-pointer error when invoked on an empty ATC worklist. On a nonempty worklist without an applicable fix, it returned an empty, non-error result. No actual deterministic quickfix application was demonstrated. Permission blocks were respected rather than overridden.",
+      "view": "handson"
     },
     {
-      "key": "architectural-conclusion",
-      "title": "Architectural conclusion",
-      "markdown": "ADT MCP is a typed tool interface within a broader agent-assisted workflow. Its value is in exposing controlled SAP operations. It does not replace the coding agent, IDE, SAP authorizations, executable tests or governance.\n\nThe exercise demonstrates a useful development-tool workflow and candid limitations; it is not a production-readiness assessment, a productivity benchmark, or an all-tools-PASS claim."
+      "key": "odata-service",
+      "title": "OData service",
+      "markdown": "The OData V4 service was reported published and its entity metadata retrieved. No HTTP runtime functional request was executed, so OData-level business behavior was not established.",
+      "view": "handson"
+    },
+    {
+      "key": "evaluation-scope",
+      "title": "Scope: the MCP interface versus the surrounding workflow",
+      "markdown": "This is a focused assessment of SAP ABAP Development Tools MCP, not a new attempt to establish whether agent-assisted SAP development can work end to end. Broader engineering workflows may combine models, coding agents, VS Code, SAP development tools and human approval. We evaluated what the MCP interface contributes, what was executed and what remains dependent on other components.",
+      "view": "comparison"
+    },
+    {
+      "key": "conclusion-and-limits",
+      "title": "Conclusion and limits",
+      "markdown": "The exercise demonstrates a useful development-tool workflow and candid limitations; it is not a production-readiness assessment, a productivity benchmark, or an all-tools-PASS claim.",
+      "view": "conclusions"
     },
     {
       "key": "references",
       "title": "References",
-      "markdown": "- SAP ADT MCP tutorial: https://developers.sap.com/tutorials/abap-dev-adt-mcp-server-tools/\n- SAP ADT for VS Code: https://developers.sap.com/tutorials/abap-environment-adt-vscode/"
+      "markdown": "- SAP ADT MCP tutorial: https://developers.sap.com/tutorials/abap-dev-adt-mcp-server-tools/\n- SAP ADT for VS Code: https://developers.sap.com/tutorials/abap-environment-adt-vscode/",
+      "view": "references"
     }
   ],
   "claims": [
@@ -124,5 +178,31 @@
       "limitation": "Trial research is not production certification"
     }
   ],
-  "content_sha256": "65e176d175ef3f890d3fb0373822031cb8053beb7fb20629a41c689062856200"
+  "references": [
+    {
+      "label": "Enable the ADT MCP Server in ABAP Development Tools for VS Code (SAP tutorial, modified 2026-09-17)",
+      "url": "https://developers.sap.com/tutorials/abap-dev-adt-mcp-server-tools/"
+    },
+    {
+      "label": "ABAP Development Tools for Visual Studio Code (SAP tutorial, modified 2026-10-06)",
+      "url": "https://developers.sap.com/tutorials/abap-environment-adt-vscode/"
+    },
+    {
+      "label": "ABAP Basic Features for Visual Studio Code (SAP tutorial, modified 2026-09-30)",
+      "url": "https://developers.sap.com/tutorials/abap-environment-adt-coretools-vscode/"
+    },
+    {
+      "label": "RAP130 workshop (SAP-samples, last pushed 2026-06-03)",
+      "url": "https://github.com/SAP-samples/abap-platform-rap130"
+    }
+  ],
+  "featured": {
+    "order": 1,
+    "title": "SAP ADT MCP — 20-Tool Hands-on Evaluation",
+    "description": "Explore RAP development, ABAP Unit validation, ATC findings, the architecture and what SAP ADT MCP could — and could not — prove.",
+    "action_label": "Explore KS01"
+  },
+  "diagram_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 940 620\" width=\"940\" height=\"620\" role=\"img\" aria-labelledby=\"t d\" font-family=\"Segoe UI, Arial, sans-serif\" font-size=\"13\">\n  <title id=\"t\">KS01 architecture: tool-invocation path and source-editing path</title>\n  <desc id=\"d\">A business requirement reaches an AI model and agent orchestration. The agent calls the SAP ADT MCP Server through an MCP client (tool-invocation path) and, separately, writes source through the VS Code editor and the abap virtual filesystem (source-editing path). Both reach the ABAP repository. Activation, ABAP Unit and ATC produce execution evidence. A developer approves and reviews.</desc>\n  <defs>\n    <marker id=\"ab\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#1d4ed8\"/></marker>\n    <marker id=\"ao\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#c2410c\"/></marker>\n    <marker id=\"ag\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#475569\"/></marker>\n  </defs>\n  <rect width=\"940\" height=\"620\" fill=\"#ffffff\"/>\n  <g stroke=\"#334155\" stroke-width=\"1.4\" fill=\"#f1f5f9\">\n    <rect x=\"20\" y=\"20\" width=\"170\" height=\"54\" rx=\"6\"/>\n    <rect x=\"250\" y=\"20\" width=\"150\" height=\"54\" rx=\"6\"/>\n    <rect x=\"460\" y=\"20\" width=\"190\" height=\"54\" rx=\"6\"/>\n    <rect x=\"710\" y=\"20\" width=\"190\" height=\"54\" rx=\"6\" fill=\"#dbeafe\"/>\n    <rect x=\"20\" y=\"170\" width=\"190\" height=\"60\" rx=\"6\" fill=\"#fef9c3\" stroke-dasharray=\"5 4\"/>\n    <rect x=\"435\" y=\"170\" width=\"240\" height=\"60\" rx=\"6\" fill=\"#ffedd5\"/>\n    <rect x=\"435\" y=\"270\" width=\"240\" height=\"50\" rx=\"6\" fill=\"#ffedd5\"/>\n    <rect x=\"690\" y=\"170\" width=\"230\" height=\"70\" rx=\"6\" fill=\"#dbeafe\"/>\n    <rect x=\"300\" y=\"380\" width=\"420\" height=\"56\" rx=\"6\" fill=\"#e2e8f0\"/>\n    <rect x=\"300\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"440\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"580\" y=\"480\" width=\"120\" height=\"44\" rx=\"6\"/>\n    <rect x=\"300\" y=\"558\" width=\"420\" height=\"42\" rx=\"6\" fill=\"#dcfce7\"/>\n  </g>\n  <g text-anchor=\"middle\" fill=\"#0f172a\">\n    <text x=\"105\" y=\"52\">Business requirement</text>\n    <text x=\"325\" y=\"52\">AI model</text>\n    <text x=\"555\" y=\"44\">Agent orchestration</text>\n    <text x=\"555\" y=\"62\" font-size=\"11\">plan, choose tool, read result</text>\n    <text x=\"805\" y=\"52\">MCP client</text>\n    <text x=\"115\" y=\"196\">Developer / owner</text>\n    <text x=\"115\" y=\"214\" font-size=\"11\">approves boundaries, reviews</text>\n    <text x=\"555\" y=\"196\">VS Code editor + ADT extension</text>\n    <text x=\"555\" y=\"214\" font-size=\"11\">writes source into the file</text>\n    <text x=\"555\" y=\"300\">abap: virtual filesystem</text>\n    <text x=\"805\" y=\"194\">SAP ADT MCP Server</text>\n    <text x=\"805\" y=\"212\" font-size=\"11\">typed ADT operations incl. RAP generation;</text>\n    <text x=\"805\" y=\"228\" font-size=\"11\">no general source-write tool in inspected lists</text>\n    <text x=\"510\" y=\"404\">ABAP repository</text>\n    <text x=\"510\" y=\"422\" font-size=\"11\">RAP / CDS / behavior implementation</text>\n    <text x=\"360\" y=\"507\">Activation</text>\n    <text x=\"500\" y=\"507\">ABAP Unit</text>\n    <text x=\"640\" y=\"507\">ATC</text>\n    <text x=\"510\" y=\"583\">Execution evidence (SAP responses, receipts)</text>\n  </g>\n  <g fill=\"none\" stroke-width=\"2\">\n    <path d=\"M190 47H250\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M400 47H460\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M650 47H710\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M805 74V170\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M555 74V170\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M555 230V270\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M555 320V380\" stroke=\"#c2410c\" marker-end=\"url(#ao)\"/>\n    <path d=\"M805 240V408H720\" stroke=\"#1d4ed8\" marker-end=\"url(#ab)\"/>\n    <path d=\"M115 170V110H500V74\" stroke=\"#475569\" stroke-dasharray=\"5 4\" marker-end=\"url(#ag)\"/>\n    <path d=\"M360 436V480M500 436V480M640 436V480\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M360 524V558M500 524V558M640 524V558\" stroke=\"#475569\" marker-end=\"url(#ag)\"/>\n    <path d=\"M900 240V579H720\" stroke=\"#1d4ed8\" stroke-dasharray=\"5 4\" marker-end=\"url(#ab)\"/>\n  </g>\n  <g font-size=\"11\" fill=\"#1e293b\">\n    <text x=\"815\" y=\"130\">tool calls (MCP protocol)</text>\n    <text x=\"565\" y=\"130\">editor API: compatible agent required</text>\n    <text x=\"725\" y=\"330\" fill=\"#1d4ed8\">tool results</text>\n  </g>\n  <g>\n    <rect x=\"20\" y=\"290\" width=\"250\" height=\"130\" rx=\"6\" fill=\"#fff7ed\" stroke=\"#c2410c\" stroke-width=\"1\"/>\n    <text x=\"32\" y=\"312\" font-size=\"12\" font-weight=\"600\" fill=\"#9a3412\">Reading the diagram</text>\n    <text x=\"32\" y=\"332\" font-size=\"11\" fill=\"#1e293b\">Blue: tool-invocation path (MCP).</text>\n    <text x=\"32\" y=\"350\" font-size=\"11\" fill=\"#1e293b\">Orange: source-editing path (editor).</text>\n    <text x=\"32\" y=\"372\" font-size=\"11\" fill=\"#1e293b\">In the lists we inspected, the MCP server</text>\n    <text x=\"32\" y=\"388\" font-size=\"11\" fill=\"#1e293b\">exposes RAP generation but no general</text>\n    <text x=\"32\" y=\"404\" font-size=\"11\" fill=\"#1e293b\">source read or write tool.</text>\n  </g>\n</svg>\n",
+  "diagram_caption": "Tool-invocation path and source-editing path",
+  "content_sha256": "bdb147f90a07f3611f4929b024fa246e0136187a7930d08879aa087a968f29ee"
 }

@@ -21,7 +21,7 @@ from . import session_approvals as A
 ROOT = Path(__file__).resolve().parents[1]
 SESSIONS_DIR = ROOT / 'content' / 'sessions'
 INDEX_SCHEMA = 'sap-public.sessions-index/1'
-SESSION_SCHEMA = 'sap-public.session/1'
+SESSION_SCHEMA = 'sap-public.session/1'     # views/featured/diagram flags are optional additions; flat sections stay
 _ID = re.compile(r'^KS\d{2}$')
 _HTTP = re.compile(r'https?://[^\s)>\]|"]+', re.IGNORECASE)   # case-insensitive: HTTPS://x is a link too
 ALLOWED_HOSTS = ('developers.sap.com', 'help.sap.com', 'api.sap.com')   # exact hostnames, https only
@@ -101,9 +101,28 @@ def schema_problems(doc: dict) -> list[str]:
             if not isinstance(el, dict) or not all(_str(el.get(k)) for k in req):
                 out.append(f'malformed {name} element')
                 break
-    for k in ('title', 'subtitle', 'revision', 'date', 'evidence_status'):
+    for k in ('title', 'subtitle', 'revision', 'date', 'evidence_status', 'lineage_note', 'diagram_caption'):
         if k in doc and not isinstance(doc[k], str):
             out.append(f'{k} is not text')
+    views = doc.get('views')
+    if views is not None:
+        if not isinstance(views, list) or not views or not all(
+                isinstance(v, dict) and _str(v.get('key')) and _str(v.get('name')) for v in views):
+            out.append('malformed views')
+        else:
+            keys = [v['key'] for v in views]
+            if len(set(keys)) != len(keys):
+                out.append('duplicate view key')
+            for el in doc.get('sections') or []:
+                if isinstance(el, dict) and el.get('view') not in keys:
+                    out.append('section names an unknown view')
+                    break
+    elif any(isinstance(el, dict) and 'view' in el for el in doc.get('sections') or []):
+        out.append('sections name a view but no views are declared')
+    feat = doc.get('featured')
+    if feat is not None and (not isinstance(feat, dict) or not all(_str(feat.get(k)) for k in
+                                                                    ('title', 'description', 'action_label'))):
+        out.append('malformed featured banner')
     return out
 
 
@@ -198,6 +217,22 @@ def load(root: Path | None = None, registry=None) -> dict:
         else:
             shown.append(doc)
     return {'status': 'OK' if shown else 'EMPTY', 'sessions': shown, 'withheld': withheld}
+
+
+def featured(sessions: list) -> list[dict]:
+    """Banner entries of approved sessions that declare `featured`, ordered by featured.order then session id.
+
+    The banner text is the session's own data: featuring KS02 or KS03 means setting `featured` in that session's
+    canonical file. There is no separate banner content source and nothing here can show an unapproved session.
+    """
+    out = []
+    for d in sessions:
+        f = d.get('featured')
+        if isinstance(f, dict):
+            out.append({'session_id': d['session_id'], 'label': f'FEATURED KNOWLEDGE SESSION • {d["session_id"]}',
+                        'title': f['title'], 'description': f['description'], 'action_label': f['action_label'],
+                        'order': f.get('order') if isinstance(f.get('order'), int) else 1000})
+    return sorted(out, key=lambda e: (e['order'], e['session_id']))
 
 
 def blocks(markdown: str) -> list[tuple]:

@@ -9,8 +9,10 @@ Do not add an entry in a content-only change. An entry is made by the owner, aft
 of the exact approved content.
 """
 APPROVED_CONTENT_SHA256: dict[str, str] = {
-    # KS01 research note R5-editorial-unsigned-candidate. PROPOSED digest, NOT yet owner-approved: this entry is the unsigned
-    # candidate's registry value and has effect only after owner digest approval, GPT review and D012 signing.
-    # Superseded R3 approval (2026-10-14) was for aadb01ff9ee5b1f403dd738323ab2e370be88284b00e0dd79e746e7a7da813af.
-    'KS01': '65e176d175ef3f890d3fb0373822031cb8053beb7fb20629a41c689062856200',
+    # KS01 research note R6 (eight-view single-source projection). Owner-approved 2026-10-15 for this exact digest
+    # (including the owner's scoped-qualification and D012 signing authorization for this release). The earlier owner
+    # approvals did not carry over: R5 was 65e176d175ef3f890d3fb0373822031cb8053beb7fb20629a41c689062856200 (the same words, a different
+    # structure, reproduced exactly by canonical/knowledge_sessions/KS01.canonical.json lineage) and R3 was
+    # aadb01ff9ee5b1f403dd738323ab2e370be88284b00e0dd79e746e7a7da813af.
+    'KS01': 'bdb147f90a07f3611f4929b024fa246e0136187a7930d08879aa087a968f29ee',
 }

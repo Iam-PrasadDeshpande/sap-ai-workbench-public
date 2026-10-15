@@ -104,6 +104,7 @@ def render() -> None:
         sessions.render()
         common.footer()
         return
+    sessions.featured_banner()
     common.content_banner(c)
     items = F.visible(rel)
     tomb = F.retracted(rel)
