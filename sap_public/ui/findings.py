@@ -6,7 +6,7 @@ import streamlit as st
 
 from .. import findings as F
 from ..safety import https_url_on, md_escape
-from . import common
+from . import common, sessions
 from .common import chip
 from .home import finding_card
 
@@ -99,6 +99,11 @@ def render() -> None:
     st.caption('Published results of hands-on experiments run in the private engineering workbench, each with its '
                'execution target, checks, evidence and limits. A public documentation retrieval is labelled as such and '
                'is never presented as SAP system execution. Read-only.')
+    view = common.choose('View', ('Findings', 'Research notes'), key='fnd_view', default=st.query_params.get('view'))
+    if view == 'Research notes':
+        sessions.render()
+        common.footer()
+        return
     common.content_banner(c)
     items = F.visible(rel)
     tomb = F.retracted(rel)
