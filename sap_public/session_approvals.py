@@ -20,5 +20,5 @@ APPROVED_CONTENT_SHA256: dict[str, str] = {
     # The digest covers the exact public content including the featured object. This entry is part of the UNSIGNED source
     # commit; it takes effect only through an owner-approved, D012-signed and qualified release. Any change to the public
     # KS04 content changes the digest and needs a new entry.
-    'KS04': '29057777c1156e0b007f7fcf93423bbde0b8b6a9b26c79b7fcb36d6cdd13031d',
+    'KS04': 'f6c6e43ab04ef1f678054c01291d8968a9d75b6be7bd729478c1fbdcd7bca080',
 }

@@ -14,10 +14,10 @@
    ".md"
   ]
  },
- "artifact_digest": "5ea13f3a486ef530326edcb9ce38350de925cedb67763fa9db3cae5ba04588dd",
+ "artifact_digest": "561ad2f8bb5dc0773d7767f996f11931ea74917351fe58bf155e132b09563d5c",
  "built_by": "scripts/build_public_artifact.py",
  "content_at_build": {
-  "content_digest": "3069a5de9cbde732f4982b9f51813376b9f7b132c63dea2ef9184fefe9e42a33",
+  "content_digest": "e3db889769e8f83ff14d43521e40055127045c2b3913c312c39abd5ac70d920f",
   "current_release": "releases/0001.json",
   "current_release_digest": "cf1636d67d3ed533ce6206063a93de7de9dafe0bedf06183555fd93f8b2c3c2b",
   "files": [
@@ -35,7 +35,7 @@
    },
    {
     "path": "content/sessions/KS04.json",
-    "sha256": "3333a72010cd3b8de1f0760aac5c829f774b9c7e9db1875411e62fb3396a0596"
+    "sha256": "8f54b76cb988bdb670bec700d0b7f5e13a5d085f7b5dc1471b0080bd59642124"
    },
    {
     "path": "content/sessions/index.json",
@@ -155,7 +155,7 @@
   },
   {
    "path": "sap_public/session_approvals.py",
-   "sha256": "1e2d887b08aecd30478dad6f6cdc1138840ed3c4bd44b0ee6248355ca4d91e08"
+   "sha256": "4c603413b661dfd5f0c50cfad07ef9e1c626d95f3acfc1d0934710a86185feab"
   },
   {
    "path": "sap_public/sessions.py",
@@ -219,6 +219,6 @@
   }
  ],
  "schema": "sap-public.artifact-manifest/1",
- "source_commit": "df368ae3cdc62c031ab51371763d7f0436c7f125",
+ "source_commit": "a292dd70fd4789cd727b7a6275ee54500d1e18b6",
  "version": "0.1.0"
 }
