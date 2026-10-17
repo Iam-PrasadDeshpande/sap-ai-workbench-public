@@ -16,4 +16,9 @@ APPROVED_CONTENT_SHA256: dict[str, str] = {
     # inside R7, proven by the canonical lineage check) and R3 was
     # aadb01ff9ee5b1f403dd738323ab2e370be88284b00e0dd79e746e7a7da813af.
     'KS01': 'b3f4da6d43b3e2ab16ecb76ced012dbb7170453c89e669166606b6457c93a82e',
+    # KS04 research note, public edition 1.0 (CAP MCP: development-time server versus runtime adapter), featured banner order 0.
+    # The digest covers the exact public content including the featured object. This entry is part of the UNSIGNED source
+    # commit; it takes effect only through an owner-approved, D012-signed and qualified release. Any change to the public
+    # KS04 content changes the digest and needs a new entry.
+    'KS04': '29057777c1156e0b007f7fcf93423bbde0b8b6a9b26c79b7fcb36d6cdd13031d',
 }

@@ -1,0 +1,677 @@
+{
+  "schema": "sap-public.session/1",
+  "session_id": "KS04",
+  "title": "SAP CAP MCP: Development-Time Assistant Versus Runtime Service Exposure",
+  "subtitle": "A two-track, evidence-based assessment of the CAP development server and the CAP runtime MCP adapter, with mocked-authorization tests, browser-origin observations and a blocked installation.",
+  "revision": "1.0",
+  "date": "2026-10-17",
+  "evidence_status": "Track B executed under mocked authentication; Track A source-read only, installation blocked offline; not production qualification",
+  "lineage_note": "",
+  "views": [
+    {
+      "key": "overview",
+      "name": "Executive overview"
+    },
+    {
+      "key": "offering",
+      "name": "SAP official offering"
+    },
+    {
+      "key": "architecture",
+      "name": "Architecture"
+    },
+    {
+      "key": "inventory",
+      "name": "MCP tool inventory"
+    },
+    {
+      "key": "handson",
+      "name": "Hands-on evidence"
+    },
+    {
+      "key": "comparison",
+      "name": "Comparative assessment"
+    },
+    {
+      "key": "conclusions",
+      "name": "Conclusions and recommendations"
+    },
+    {
+      "key": "references",
+      "name": "References and supporting evidence"
+    }
+  ],
+  "sections": [
+    {
+      "key": "ov-summary",
+      "title": "Executive summary",
+      "markdown": "*Research stages: 1 DISCOVER, 4 PROVE.*\n\n**Executive summary.** SAP ships two separate products under the CAP MCP name. One helps an AI coding agent while a developer builds a CAP application. The other lets an AI client talk to the running application. They have different versions, different maturity, different tools and different risks, and this research keeps them apart on purpose.\n\nThe runtime adapter, `@cap-js/mcp` 1.5.0, was exercised on a synthetic billing fixture with 48 rows, 22 of them open [C14]. It served `describe` and `query`, rejected anonymous calls with HTTP 401, and under mocked authentication it enforced roles and row restrictions: a viewer saw 38 rows and no summary entity, an analyst saw all 48 rows and a 14-row summary, and users without matching roles saw an empty tool list [C35][C36]. Nothing in the data changed [C37].\n\nThe development server, `@cap-js/mcp-server` 0.0.8, could not be installed offline because its dependency tarballs were not in the local npm cache. No network fallback was used, so all ten planned tests are BLOCKED. That is an environment result, not a defect in SAP's package [C08][C40].\n\nThe security work found behavior worth knowing about and nothing that was independently shown to be exploitable. A foreign `Origin` header is reflected by CAP's development CORS middleware, not by the MCP plugin [C41]. In a real browser, JSON-RPC calls to the MCP endpoint were not readable from another origin, but an anonymous OData GET on a synthetic open service was [C42]. Foreign `Host` headers were accepted everywhere and never reflected [C43]. The unmodified server listens on all interfaces [C45].",
+      "view": "overview",
+      "stage": "DISCOVER, PROVE"
+    },
+    {
+      "key": "ov-two-products",
+      "title": "Two products, never merged",
+      "markdown": "*Research stages: 1 DISCOVER, 2 EVALUATE.*\n\n**Two products, never merged.** The table is the shortest correct statement of the difference. Everything later in this session follows from it.\n\n| | Track A: `@cap-js/mcp-server` | Track B: `@cap-js/mcp` |\n|---|---|---|\n| Purpose | Helps an AI coding agent understand CAP models and documentation during development | Exposes custom CAP application services to MCP clients at runtime |\n| Process and transport | Separate local process started by the client, talking over standard input and output [C01][C02] | A plugin inside the CAP application, reached by HTTP POST to a path per service [C10] |\n| Tools | `search_model` and `search_docs`, known from source only [C02] | `describe`, `query` and, when unbound actions exist, `call` [C10][C11] |\n| What it touches | CDS source files inside the client's roots and a documentation index [C05][C06] | Live application data through CAP's service layer [C14] |\n| Version and maturity | 0.0.8, pre-1.0, published 2026-10-14 [C04] | 1.5.0; the adapters are generally available since the September 2026 CAP release [C30]; tools are documented as not a stable API [C19] |\n| Result in this research | BLOCKED, 10 of 10 tests [C08][C40] | Executed: baseline, mocked authorization, Origin and Host tests [C31][C35][C41] |\n\nThe general-availability statement in SAP's release notes is about the Node.js and Java runtime adapters. It says nothing about the development server, whose maturity this research could not establish [C30].",
+      "view": "overview",
+      "stage": "DISCOVER, EVALUATE"
+    },
+    {
+      "key": "ov-findings",
+      "title": "Findings in plain engineering terms",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**Findings in plain engineering terms.**\n\n*The runtime adapter respects CAP's authorization rules.* The adapter does not invent a new permission model. It sits in front of the normal CAP service layer, so `@requires` and `@restrict` annotations decide what a caller sees. On the fixture, anonymous requests got HTTP 401 and JSON-RPC error `-32001`. Authenticated callers without a matching role received an empty tool list and `-32601 Method not found` on a call attempt, with no data [C35][C36]. This is mocked authentication. It tells us how the engine applies rules once a user is established; it does not tell us anything about XSUAA or IAS [C39].\n\n*Two results are FAIL against the expectations stated before the tests ran.* The first, B08b, is that `initialize` returns the service name, its doc comment and the `@mcp.instructions` text to any authenticated user, even one with no roles [C38]. The second, B11c, is that CAP's default mocked-user set includes a wildcard entry, so a user name nobody defined still authenticates, with no roles [C39]. Neither exposed a protected row. Both are recorded as FAIL because each contradicted a stated expectation, and neither is relabelled.\n\n*The Origin reflection seen in the first test series comes from CAP, not from the plugin.* The first series recorded the reflection as an observation only [C17]. Three independent observations point the same way: it appears on non-MCP paths such as `/health`; it appears in a CAP project that does not load the MCP plugin; and it disappears when the environment variable `CDS_SERVER_CORS=false` is set [C41]. The source of the `@sap/cds` server supports the same attribution [C33].\n\n*Readability is narrower than reflection suggests.* Reflection of an origin does not mean a browser page can read everything. The JSON-RPC requests failed at the preflight step because the response listed allowed methods but no allowed headers. An anonymous OData GET on a synthetic service did succeed cross-origin in the default development configuration [C42][C44].\n\n*Track A is documented but not demonstrated.* Its tool contracts, its path-root check and its start-up download of a documentation bundle are all known from the published repository at a pinned commit [C02][C05][C06]. None of that was executed.",
+      "view": "overview",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ov-method",
+      "title": "Method: six stages, applied to both tracks",
+      "markdown": "*Research stages: 2 EVALUATE.*\n\n**Method: six stages, applied to both tracks.** The research ran in two test series. Series 1 tested the runtime adapter read-only against a synthetic fixture. Series 2 added authorization, browser-origin and network observations and an attempt to install the development server. Test IDs such as B08b and B11c come from the research test plan. The research follows DISCOVER, EVALUATE, ALIGN WITH HANDS-ON, PROVE, COMPARE and IMPROVE. The table says what each stage produced here and where Track A fell short of it.\n\n| Stage | What was done | Status | Where to read it |\n|---|---|---|---|\n| 1 DISCOVER | Read SAP's guide, release notes and READMEs, queried registry metadata, read source, located installed dependencies | Complete | SAP official offering; Architecture |\n| 2 EVALUATE | Classified every source by authority and separated documented, source-read and executed facts; corrected errors found in series 1 | Complete | Overview \"How to read the evidence\"; References |\n| 3 ALIGN WITH HANDS-ON | Mapped each documented claim to a test | Complete for Track B; mapped but not executable for Track A | Hands-on evidence, \"From documented claim to test\" |\n| 4 PROVE | Track B: the series 1 baseline plus 16 authorization records, 51 HTTP observation records and 16 browser records. Track A: attempted and BLOCKED | Track B complete; Track A blocked | Hands-on evidence |\n| 5 COMPARE | Development-time server against runtime adapter, and against the KS01 ADT baseline | Complete on available evidence | Comparative assessment |\n| 6 IMPROVE | Recommendations and next experiments | Complete as proposals | Conclusions and recommendations |\n\nStage 4 is the honest weak point: for Track A it ended in a documented block, so Stages 5 and 6 treat Track A as source-researched only [C40].",
+      "view": "overview",
+      "stage": "EVALUATE"
+    },
+    {
+      "key": "ov-reading",
+      "title": "How to read the evidence",
+      "markdown": "*Research stages: 2 EVALUATE.*\n\n**How to read the evidence.** Each substantive statement carries a claim ID such as [C41]. The evidence register in References gives the class, the scope and the limits for that claim. Untagged sentences are explanation, not findings.\n\n| Class | Meaning in this session |\n|---|---|\n| SAP_DOCUMENTED | SAP says so in its published guide or release notes |\n| SOURCE_CODE_VERIFIED | Read in published source code; not executed |\n| REGISTRY_METADATA | Reported by the npm registry on the stated date |\n| LOCAL_FILE_VERIFIED | Checked against local files or integrity manifests |\n| LOCAL_EXECUTION_VERIFIED | A real local execution happened and was recorded (a transport exchange, or for a client-side check a result record); the records are not published |\n| OBSERVED_LIMITATION | An observed behavior or gap that limits what can be claimed |\n| NOT_VERIFIED | Not found, not run or blocked |\n\nThree rules apply throughout. A FAIL against an expectation stays a FAIL. A mocked-authentication result is never read as XSUAA or IAS proof; the short form is MOCKED_AUTHORIZATION_PROOF is not PRODUCTION_XSUAA_OR_IAS_PROOF. HTTP 200 is never read as success on its own, because the adapter returns many errors inside HTTP 200 responses [C16].",
+      "view": "overview",
+      "stage": "EVALUATE"
+    },
+    {
+      "key": "ov-not-claimed",
+      "title": "What this assessment does not claim",
+      "markdown": "*Research stages: 2 EVALUATE, 6 IMPROVE.*\n\n**What this assessment does not claim.**\n\n- That the development server works, or that it fails. It was not run [C40].\n- That mocked-authentication results hold under XSUAA or IAS.\n- That any observation is a vulnerability in SAP software. The security vocabulary used here is OBSERVED_BEHAVIOR, CONFIGURATION_DEPENDENT, REPRODUCED_SECURITY_IMPACT and UNRESOLVED, and no finding reached REPRODUCED_SECURITY_IMPACT.\n- That DNS rebinding is or is not possible. It was not tested [C43].\n- That the generic `call` tool is safe or unsafe. The fixtures define no unbound actions, so `call` never appeared and was never executed [C11].\n- Any performance, productivity or maturity score.\n- That the results transfer to other CAP versions, other configurations or production deployments.",
+      "view": "overview",
+      "stage": "EVALUATE, IMPROVE"
+    },
+    {
+      "key": "of-track-a",
+      "title": "Track A: what SAP describes",
+      "markdown": "*Research stages: 1 DISCOVER.*\n\n**Track A: what SAP describes.** SAP describes `@cap-js/mcp-server` as a Model Context Protocol server for the SAP Cloud Application Programming Model, used for AI-assisted development of CAP applications, which SAP calls agentic coding. A client registers it as `npx -y @cap-js/mcp-server`, or runs the installed binary `cds-mcp` [C01]. The npm registry lists version 0.0.8, modified on 2026-10-14, under the Apache-2.0 licence and maintained by SAP accounts [C04].\n\nSAP's own README states that the tools do not constitute a stable API [C01]. That sentence matters for planning: a prompt or an agent configuration built around today's tool names and parameters can break on the next release.\n\nThe package sits in front of two jobs. One is answering questions about the CDS model in a project; the other is searching CAP documentation. Both jobs are visible in the published source at commit `52ca33043423` [C02]. This research read that source. It did not install or run the package [C08].",
+      "view": "offering",
+      "stage": "DISCOVER"
+    },
+    {
+      "key": "of-track-b",
+      "title": "Track B: what SAP describes",
+      "markdown": "*Research stages: 1 DISCOVER.*\n\n**Track B: what SAP describes.** The CAP guide for the MCP adapter says the plugin \"allows to easily expose given CAP services via the Model Context Protocol\". A developer annotates a service with `@mcp`, and the adapter serves it at a path per service [C10]. The guide calls `@mcp` \"just another protocol\" next to OData and REST, which has a practical meaning: CAP features that apply to every protocol, such as `@cds.query.limit`, apply here as well [C10].\n\nThe adapter exposes three generic tools. `describe` returns the model of the service. `query` runs a CQL read. `call` invokes an unbound action, and it appears only when the service actually has unbound actions [C10]. Options named in the guide include a path prefix, one tool per action, a format option and `@mcp.instructions`, which sends free text to the client at initialization [C10].\n\nOne behavior of the default setup deserves a sentence of its own. With autowire on, which is the default, the adapter registers the endpoints it serves in the local client configuration files, together with mock credentials. The fixtures used here set autowire to false, and series 2 recorded a hash baseline of the client configuration rather than claiming an unchanged file [C25].",
+      "view": "offering",
+      "stage": "DISCOVER"
+    },
+    {
+      "key": "of-maturity",
+      "title": "Maturity and release status, stated precisely",
+      "markdown": "*Research stages: 1 DISCOVER, 2 EVALUATE.*\n\n**Maturity and release status, stated precisely.** The September 2026 CAP release notes say the MCP protocol adapters for Node.js and Java, introduced as beta in the June 2026 release, are now generally available. The notes also list the changes that came with it: a streamlined `describe` output, CQL for `query`, the action tool renamed from `call_action` to `call`, and Node.js fixes for exposed `.drafts` and `.texts` entities and CodeList entities [C30].\n\nThree limits on that statement:\n\n- General availability applies to the runtime adapters. It does not make the development server `@cap-js/mcp-server` generally available, and the version it reports is 0.0.8 [C04][C30].\n- The release notes do not say which npm version of `@cap-js/mcp` is the generally available build. The version tested here is 1.5.0, which the registry shows as modified on 2026-09-17 [C04][C30].\n- The guide still describes the tools as not a stable API [C19]. General availability of the adapter and stability of the tool contract are separate things.\n\nSeries 1 described Track B as Beta, based on a search-result page title and an earlier review. That wording was withdrawn in series 2 [C30].",
+      "view": "offering",
+      "stage": "DISCOVER, EVALUATE"
+    },
+    {
+      "key": "of-boundaries",
+      "title": "What SAP says the adapter does not do",
+      "markdown": "*Research stages: 2 EVALUATE.*\n\n**What SAP says the adapter does not do.** The guide's limitations are specific, and they define the enterprise boundary of the whole approach [C19][C20]:\n\n- It is intended for **custom** CAP services only. SAP states that it is not an endorsed way to expose or proxy SAP Application APIs, referring to SAP API Policy section 2.2.2 [C20].\n- The tools are meant for language models and agents, and they are not a stable API [C19].\n- Data changes happen only through unbound actions. There are no direct create, update or delete tools yet [C19].\n- There is no input or output validation against prompt injection, no rate limiting, no audit logging and no approval workflow [C19].\n- XSUAA with PKCE is documented as not fully implemented. SAP points to MCP Gateway or Agent Gateway for productive use [C19].\n\nRead the last two bullets together. The adapter is a protocol surface. It does not supply the controls an enterprise normally wraps around a new access path to business data, and SAP says so itself.",
+      "view": "offering",
+      "stage": "EVALUATE"
+    },
+    {
+      "key": "of-docs",
+      "title": "Documentation access and drift",
+      "markdown": "*Research stages: 1 DISCOVER.*\n\n**Documentation access and drift.** The official guide is reachable at `cap.cloud.sap/docs/guides/ai/cap-mcp`. Series 1 reported the guide pages as 404 because it used the wrong paths; series 2 fetched the live Markdown and withdrew that limitation. Compared with the copy in the repository, the live text differs only in one example block and a trailing newline, and the Current Limitations sections are identical [C24].\n\nThe release notes for September 2026 and June 2026 were read on 2026-10-16. If any of these pages is refreshed later, the fetch time should be recorded, and a changed SAP page should be distinguished from the version read for this note rather than silently replacing it.",
+      "view": "offering",
+      "stage": "DISCOVER"
+    },
+    {
+      "key": "ar-two-paths",
+      "title": "Two products, two trust paths",
+      "markdown": "*Research stages: 1 DISCOVER, 3 ALIGN WITH HANDS-ON.*\n\n**Two products, two trust paths.** The two diagrams below are separate on purpose. They have different callers, different data and different failure modes. The marker on each link says what kind of evidence stands behind it: EXECUTED means a real exchange was recorded, SOURCE-READ means it was read in published source and never run.\n\n```text\nTRACK A: development time (SOURCE-READ only; BLOCKED, not executed)\n\n  coding agent --stdio--> cds-mcp 0.0.8\n                           |-- search_model --> CDS sources inside the client roots\n                           |-- search_docs  --> local documentation embeddings\n                           '-- at start-up, unless offline --> download of a\n                               documentation bundle from cap.cloud.sap\n```\n\n```text\nTRACK B: run time (EXECUTED on the synthetic fixture)\n\n  MCP client --HTTP POST /mcp/service--> CAP HTTP server\n     1. development CORS middleware (on by default outside production)\n     2. CAP authentication: mocked here; XSUAA or IAS in production (NOT TESTED)\n     3. @cap-js/mcp 1.5.0 plugin: describe, query, call\n     4. CAP service layer: @requires and @restrict decide roles and rows\n     5. database (synthetic billing data)\n```\n\nTrack A is a local helper. A client starts it, it answers questions about a model and about documentation, and no user identity is involved [C02][C05]. Track B is not a separate process. It is a protocol adapter inside the CAP application, so every request passes through the application's own middleware, authentication and authorization before the plugin runs a read [C36][C41].",
+      "view": "architecture",
+      "stage": "DISCOVER, ALIGN"
+    },
+    {
+      "key": "ar-track-a-path",
+      "title": "Track A in detail (source-read, not executed)",
+      "markdown": "*Research stages: 1 DISCOVER.*\n\n**Track A in detail (source-read, not executed).** The source declares two tools. `search_model` takes `projectPath`, an optional `name` and `kind`, a `topN` and a `namesOnly` flag. `search_docs` takes a `query` and `maxResults`. Both carry read-only annotations, which are advisory [C02][C03].\n\nThree behaviors matter for anyone who plans to install it.\n\n*Path restriction.* `search_model` canonicalises `projectPath` and refuses a path outside the roots the client advertises, or outside the working directory when the client advertises none. CDS compilation runs in a worker thread [C05]. This is a filesystem boundary, not an identity boundary.\n\n*Network at start-up.* Unless the package is started in offline mode with the `--offline` flag or `CDS_MCP_OFFLINE`, it downloads a documentation embeddings bundle from `cap.cloud.sap/resources/embeddings` into the package folder. The default embedding model is `BAAI/bge-small-en-v1.5` [C06].\n\n*Heavy dependencies.* Installation pulls in `onnxruntime-node`, which has a postinstall script, and `@huggingface/transformers` [C07]. The source also imports the documentation search and reranker modules statically in `tools.js`, so missing native bindings could in principle prevent start-up even for `search_model`. That is an inference from import structure and is untested.",
+      "view": "architecture",
+      "stage": "DISCOVER"
+    },
+    {
+      "key": "ar-track-b-path",
+      "title": "Track B in detail (executed)",
+      "markdown": "*Research stages: 3 ALIGN WITH HANDS-ON, 4 PROVE.*\n\n**Track B in detail (executed).** The executed request path starts with the MCP handshake. `initialize` returned protocol version 2025-06-18, a `serverInfo` equal to the service name and `instructions` equal to the text in `@mcp.instructions` [C13]. `tools/list` returned `describe` and `query` and nothing else, because the fixtures define no unbound actions [C11].\n\nResponses use a compact tabular text encoding, supplied by the `@toon-format/toon` dependency, together with `structuredContent` JSON [C26]. In query results the `count` field is the total number of matching rows, not the number returned: 22 against 3 in the top-three query [C29]. `describe` reports the query limits as default null and maximum 1000, and an unbounded SELECT returned all 48 rows [C28].\n\nErrors arrive in two shapes. Validation and CQL errors come back as HTTP 200 with `isError` set. An unknown tool comes back as JSON-RPC error `-32602`. Unknown entity names are rejected by enum validation [C16]. A client that checks only the HTTP status will miss most failures.",
+      "view": "architecture",
+      "stage": "ALIGN, PROVE"
+    },
+    {
+      "key": "ar-cds-primer",
+      "title": "Why this is possible: CDS, services and protocol adapters",
+      "markdown": "*Research stages: 1 DISCOVER.*\n\n**Why this is possible: CDS, services and protocol adapters.** This section is explanation for readers who do not work in CAP daily. It makes no findings.\n\nA CAP application describes its data and services in CDS, the Core Data Services modeling language. A CDS service exposes entities and actions. CAP's runtime turns that model into a service layer in Node.js or Java, and *protocol adapters* serve the same service layer over different protocols. OData and REST are the familiar adapters. The MCP adapter is another one, activated by the `@mcp` annotation. Because every adapter reaches the same service layer, annotations such as `@requires` and `@restrict` apply no matter how the request arrived [C10][C36].\n\nThat design explains two results. It explains why role enforcement worked without any MCP-specific permission code: the adapter reached the same rules that OData would have used. It also explains why the Origin reflection was not an MCP feature: CORS handling belongs to the HTTP server that all adapters share, and it appeared on `/health` and on a project with no MCP plugin at all [C41].\n\nCQL, the CDS query language, is what the `query` tool accepts. The plugin parses the statement, accepts only SELECT, and then runs it through the normal service layer so authorization applies [C15][C36].",
+      "view": "architecture",
+      "stage": "DISCOVER"
+    },
+    {
+      "key": "ar-auth-model",
+      "title": "Where authorization decisions happen",
+      "markdown": "*Research stages: 2 EVALUATE, 4 PROVE.*\n\n**Where authorization decisions happen.** In the tested path, a request is accepted or refused at three separate points.\n\n1. *Authentication.* CAP decides who the caller is. Anonymous callers to the protected service received HTTP 401 and JSON-RPC `-32001`. Wrong credentials and forged identity headers also received 401 [C35].\n2. *Tool and entity exposure.* The plugin filters what a caller can see by role. A viewer saw one entity through `describe`; an analyst saw two. Callers without a matching role saw an empty tool list, and a call attempt returned `-32601 Method not found` with HTTP 200, not a 403 [C36].\n3. *Row restriction.* CAP applies the `@restrict` condition. The viewer role was limited to rows whose status is not RESOLVED, so a query that asked for RESOLVED rows returned none [C36].\n\nA fourth point sits outside that sequence, and it is the reason B08b failed. `initialize` happens before the role filtering, so its answer, with the service name, doc comment and instructions, goes to every authenticated caller [C38]. The lesson is architectural: treat what `initialize` sends as a trust boundary of its own.\n\n*Mocked versus real authentication.* The tests used CAP's mocked authentication. Production deployments use XSUAA or IAS. The mocked set includes a wildcard user, which is how unknown names authenticated with no roles [C39]. SAP documents XSUAA with PKCE as not fully implemented in the adapter [C19]. None of this was tested against a real identity provider.",
+      "view": "architecture",
+      "stage": "EVALUATE, PROVE"
+    },
+    {
+      "key": "ar-protocol",
+      "title": "What the MCP exchange looks like on the wire",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**What the MCP exchange looks like on the wire.** The transport is streamable HTTP carrying JSON-RPC. The client sends `initialize`, then an `initialized` notification, which is answered with HTTP 202 and no body, then `tools/list` and `tools/call`. The series 1 accounting counts that notification as one of 24 raw transport records [C31].\n\nTwo details influence client code. The endpoint rejected `Content-Type: text/plain` with HTTP 415, so a POST that a browser could send without a preflight does not reach the tool layer [C44]. And denial under authorization is expressed inside the protocol, as `-32601` or an empty tool list, not as an HTTP status, which means a client that treats HTTP 200 as success will read a denial as a normal response [C36].",
+      "view": "architecture",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ar-network",
+      "title": "Network behavior",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**Network behavior.** Three separate network facts came out of the security work, and they should not be blended.\n\n*Binding.* CAP's server code calls `app.listen(port)` without a host, so the unmodified server listens on all interfaces, observed as the IPv6 wildcard address. Series 1 had described the fixture as loopback because it only connected through the loopback address. That wording was wrong and is withdrawn. The series 2 test copies were forced to the loopback address with a preload shim that applies only to the test processes [C34][C45]. Whether the original is reachable from another machine was not tested.\n\n*CORS.* Outside production, `@sap/cds` enables a development CORS middleware. It reflects the request `Origin`, and for a preflight it answers with allowed methods but no allowed headers [C41][C44]. Setting `CDS_SERVER_CORS=false` removed the reflection without any file change [C41].\n\n*Host.* Foreign and variant Host values, including `X-Forwarded-Host`, were accepted with HTTP 200 in all three configurations and were never reflected. This is behavior of the base server, not of the plugin. Whether it permits DNS rebinding was not tested and stays UNRESOLVED [C43].",
+      "view": "architecture",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ar-enterprise",
+      "title": "Enterprise implications",
+      "markdown": "*Research stages: 6 IMPROVE.*\n\n**Enterprise implications.** The architecture is simple enough to explain in one sentence: the adapter makes a CAP service reachable by an AI client, and everything else about that access still has to be provided. That has five consequences.\n\n- *Identity must be real before data is real.* Development mode lets an unannotated service answer anonymous callers [C18]. A service that carries real data needs `@requires` or `@restrict`, and the identity provider behind it needs its own test [C35][C39].\n- *Expose a narrow service.* The guide's advice to build a focused projection for MCP follows directly from the exposure model [C10].\n- *Metadata is exposed.* Doc comments and `@mcp.instructions` travel to authenticated callers at initialization [C38].\n- *Controls live outside the adapter.* SAP documents the absence of rate limiting, audit logging and approval steps, and points to a gateway layer [C19].\n- *Mutation is an action design question.* Reads were limited by SELECT-only parsing and CAP rules. Writes would come through unbound actions, whose authorization was not exercised here because none existed [C15][C19].",
+      "view": "architecture",
+      "stage": "IMPROVE"
+    },
+    {
+      "key": "in-table",
+      "title": "Tool inventory",
+      "markdown": "*Research stages: 3 ALIGN WITH HANDS-ON, 4 PROVE.*\n\n**Tool inventory.** Five tools across two products. The Evidence column says what the research actually did with each. Track A rows are source declarations; no live `tools/list` exists for Track A.\n\n| Track | Tool | Parameters | Annotations (advisory) | Evidence | Reach, if called by an authorized caller |\n|---|---|---|---|---|---|\n| B | `describe` | `entities?`, `actions?` (enums) | readOnlyHint true, destructiveHint false, idempotentHint true | **Executed** [C11][C12] | Service metadata, filtered by role [C36] |\n| B | `query` | `cql` (SELECT only) | readOnlyHint true, idempotentHint true, openWorldHint false | **Executed** [C14][C15] | Data permitted by CAP authorization [C36] |\n| B | `call` | `action` (enum), `parameters?` | not observable, no actions exist | Documented only [C10]; **absent live** [C11] | Can change data through unbound actions [C19] |\n| A | `search_model` | `projectPath`, `name?`, `kind?`, `topN`, `namesOnly` | readOnlyHint true, destructiveHint false, idempotentHint false | Source-read; **BLOCKED** [C02][C40] | CDS sources inside client roots [C05] |\n| A | `search_docs` | `query`, `maxResults` | readOnlyHint true, destructiveHint false, idempotentHint true | Source-read; **BLOCKED** [C02][C40] | Local index; network use at start-up [C06] |\n\nHow to read the last column: it names what a tool could reach, not what it is guaranteed to do. For `describe` and `query`, the observed reach was limited by three independent layers: the SELECT-only parser, CAP's role and row rules, and, in the research test client, an allowlist. For `call`, no layer was exercised, so no statement is made about action authorization.",
+      "view": "inventory",
+      "stage": "ALIGN, PROVE"
+    },
+    {
+      "key": "in-b-tools",
+      "title": "The Track B tools in depth",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**The Track B tools in depth.**\n\n*`describe`* returns service metadata and accepts optional `entities` and `actions` arguments, each limited to an enum of names. It reported a query limit default of null and a maximum of 1000 [C28]. Under role filtering a viewer saw one entity and an analyst saw two, with no leaked entity names or terms for the denied entity [C36].\n\n*`query`* takes a CQL string. The tests ran counts, a top-three sort on open amounts and grouped summaries, and the results matched ground truth computed independently from the seed CSV: 48 rows in total, 22 OPEN, and the top three open entries BX-0004, BX-0035 and BX-0043 [C14]. The result `count` is the number of matches, not the number of rows returned [C29].\n\n*`call`* is documented as the way to invoke an unbound action [C10]. It was absent from `tools/list` because neither fixture defines one [C11]. That is not a discrepancy between documentation and behavior. A generic tool with nothing to call is correctly not listed. It does mean the single tool that can change data was never exercised, and any claim about mutation safety has to rest on SAP's documentation and the SELECT-only behavior of `query`, not on a test of `call` [C15][C19].",
+      "view": "inventory",
+      "stage": "PROVE"
+    },
+    {
+      "key": "in-a-tools",
+      "title": "The Track A tools in depth (source-read)",
+      "markdown": "*Research stages: 1 DISCOVER.*\n\n**The Track A tools in depth (source-read).**\n\n*`search_model`* searches the CDS model of a project, optionally by name and kind, and returns up to `topN` results. The `projectPath` it receives is canonicalised and must be inside the client's advertised roots, or the working directory when none is advertised [C05]. The source marks the tool read-only and non-destructive, and marks it as not idempotent [C03].\n\n*`search_docs`* searches CAP documentation using local embeddings and returns up to `maxResults` results. The embeddings bundle is downloaded at start-up unless the server runs offline [C06]. This gives `search_docs` a network footprint that `search_model` does not have.\n\nNone of this has been checked against behavior. The statement \"the source declares\" is correct; the statement \"the server lists\" is not available, because no `tools/list` from a running Track A server exists [C02][C40].",
+      "view": "inventory",
+      "stage": "DISCOVER"
+    },
+    {
+      "key": "in-advisory",
+      "title": "readOnlyHint is a hint, not a guard",
+      "markdown": "*Research stages: 2 EVALUATE, 4 PROVE.*\n\n**`readOnlyHint` is a hint, not a guard.** The annotation is metadata the server chooses to send. A client may use it to decide what to show or whether to ask for confirmation, but nothing about the protocol makes the server obey it. Both live Track B tools advertise `readOnlyHint` true, and `query` also advertises `openWorldHint` false. That tells us what the server says about itself. It does not prove what the tool does [C12].\n\nThree separate things did the protecting in these tests:\n\n1. The `query` tool accepts SELECT only. The plugin source has an explicit check, and the CQL parser rejected four DML-shaped strings, a DELETE, an INSERT, an UPDATE and a stacked statement. A recount afterwards still returned 48 [C15].\n2. CAP's authorization decided which entities and rows an identity could reach [C36].\n3. The research test client's allowlist refused the `call` tool before any request was sent [C27]. This is a client-side check of the test setup, not a property of the adapter, and only that one refusal was recorded.\n\nThe first guard describes the `query` path only. It does not show that the adapter cannot change data, because unbound actions reached through `call` can [C15][C19].",
+      "view": "inventory",
+      "stage": "EVALUATE, PROVE"
+    },
+    {
+      "key": "in-absent",
+      "title": "Documented versus observed",
+      "markdown": "*Research stages: 2 EVALUATE.*\n\n**Documented versus observed.** The guide lists three Track B tools and the fixtures expose two. No contradiction: `call` appears only with unbound actions [C10][C11]. For Track A, the inventory is entirely declared; the research obtained no initialization record and no tool list from a running server [C40].\n\nThis section also records two Track B items that are absent for a different reason: the `cqn` format option and the `prefix` and `per_action_tool` options exist in the guide and were not exercised [C10].",
+      "view": "inventory",
+      "stage": "EVALUATE"
+    },
+    {
+      "key": "ho-alignment",
+      "title": "From documented claim to test",
+      "markdown": "*Research stages: 3 ALIGN WITH HANDS-ON.*\n\n**From documented claim to test.** Stage 3 of the method matches each thing SAP documents with a test that could confirm or contradict it. The table is the bridge between the SAP offering and the evidence.\n\n| Documented claim | Test | Result |\n|---|---|---|\n| The server sends instructions at initialize | Series 1 T01 | Confirmed [C13] |\n| `describe` and `query` are served; `call` only with actions | Series 1 T02 to T04 | Confirmed [C11] |\n| `query` reads through CQL and accepts SELECT only | Series 1 T05 to T08, N04 to N07 | Confirmed; the parser rejected DML-shaped strings [C14][C15] |\n| Authorization follows CAP | Series 2 B02 to B13 | Confirmed under mocked authentication; two findings [C35] to [C39] |\n| Entities and actions are filtered by role | Series 2 B05 to B10 | Confirmed [C36] |\n| Tools are not a stable API | none | Not testable in one run |\n| Production XSUAA or IAS behavior | none | **Not tested** |\n| Track A `search_model` root restriction | A08, A09 | **BLOCKED** [C40] |\n| Track A start-up network behavior | A01 | **BLOCKED** [C40] |",
+      "view": "handson",
+      "stage": "ALIGN"
+    },
+    {
+      "key": "ho-baseline",
+      "title": "The series 1 baseline, preserved and recounted",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**The series 1 baseline, preserved and recounted.** Series 1 produced 25 deterministic result records. Reconciling them with the raw transcript showed that 23 are backed by raw transport records and 2 (the first two checks) are test-client checks with no transport record. The transcript holds 24 transport records, one of which is the `initialized` notification answered with HTTP 202. Hence the correct statement is 25 result records over 24 raw transport records, not 25 exchanges [C31].\n\nGround truth came from the seed CSV, computed independently of the server: 48 rows, 22 OPEN, 10 RESOLVED, and the top three open entries BX-0004, BX-0035 and BX-0043. The `query` results matched [C14]. The four DML-shaped strings were rejected at the CQL parser, and a recount after all negative tests returned 48 [C15].\n\nThis baseline and the series 2 authorization matrix are separate. The series 1 count is 25 of 25 result records PASS, with read-only `describe` and `query` only. The series 2 count is 14 PASS and 2 FAIL across 16 records. Neither number substitutes for the other, and a series 1 PASS says nothing about authorization [C31].",
+      "view": "handson",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ho-matrix",
+      "title": "The authorization matrix",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**The authorization matrix.** Sixteen result records, 14 PASS and 2 FAIL, over 42 raw transport records [C31]. The two FAIL rows are the point of the exercise.\n\n| ID | Scenario | Expected | Actual | Status |\n|---|---|---|---|---|\n| B01 | Listener binding | Loopback address only | Loopback address only | PASS [C34] |\n| B02 | Anonymous to protected service | Rejected | initialize, tools/list, describe, query and summary: HTTP 401 and -32001 | PASS [C35] |\n| B03 | Valid users initialize | OK | viewer OK, analyst OK | PASS [C35] |\n| B04 | Tool surface | describe, query | Both users: describe and query | PASS [C35] |\n| B05 | Roleless identities | Denied | norole, outsider and the built-in alice: empty tools/list, -32601 on describe and query | PASS [C36] |\n| B06 | Permitted data | analyst 48, viewer 38 | 48 and 38 | PASS [C36] |\n| B07 | Restricted role | Summary denied; RESOLVED rows 0 | Entity not resolvable; count 0; no rows | PASS [C36] |\n| B08 | describe boundaries | viewer 1 entity, analyst 2, no leak to denied | As expected; no leaked terms | PASS [C36] |\n| B08b | initialize disclosure to a roleless user | Nothing disclosed | Service name, doc comment and instructions disclosed | **FAIL** [C38] |\n| B09 | query by denied identities | No data | None | PASS [C36] |\n| B10 | Missing roles | Denied | -32601, distinguishable from anonymous 401 | PASS [C35][C36] |\n| B11 | Malformed authentication yields no data | No count | None for 7 variants | PASS [C35] |\n| B11c | Unknown user or undecodable Basic rejected at authentication | 401 | Authenticated with no roles (wildcard mock user) | **FAIL** [C39] |\n| B11b | Forged identity headers | Denied | 401 | PASS [C35] |\n| B13 | Control service anonymous | 48 | 48 | PASS [C18] |\n| B12 | No mutation; hashes unchanged | Identical; recount 48 | Identical; 48; node_modules intact | PASS [C37] |\n\nAnonymous requests were rejected, role limits held on both tools, and no protected row reached a caller who should not have had it. The matrix reports mocked authentication only. MOCKED_AUTHORIZATION_PROOF is not PRODUCTION_XSUAA_OR_IAS_PROOF.",
+      "view": "handson",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ho-failures",
+      "title": "The two findings that stay FAIL",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**The two findings that stay FAIL.** Each contradicted an expectation written before the run, and each is explained by behavior that can be read in source and in the recorded exchanges. Neither is reclassified.\n\n*B08b: initialize metadata reaches a roleless user.* A user with no roles authenticated, received an empty tool list and was refused every call. Yet the `initialize` answer carried the service name, the service doc comment and the full `@mcp.instructions` text [C38]. The plugin answers `initialize` before it applies role filtering. What this establishes is a bounded metadata-disclosure design consideration: whatever a developer writes in a doc comment or in the instructions is readable by every authenticated caller. It does not show that protected rows leaked, and it is not a proven vulnerability. The practical rule is to keep secrets, private model details and credentials out of doc comments and instructions [C38].\n\n*B11c: unknown users authenticate.* CAP's default mocked-user source contains a wildcard entry, so a user name nobody defined, and one undecodable Basic input, was accepted as an authenticated user with no roles instead of receiving 401. The identity could not read protected data [C39]. This is mocked development authentication, and the source that explains it was read. It is not an XSUAA or IAS defect, and it should not be described as one. It does tell a team something useful: a test suite that runs on mocked users can pass a \"reject unknown user\" check only if the preset is changed.\n\nBoth results are real. Neither is a reason to avoid the adapter. Both are reasons to know what the development defaults do.",
+      "view": "handson",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ho-security",
+      "title": "Security observations and what they do not show",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**Security observations and what they do not show.** Three local server configurations were used, all bound to the loopback address by a test-only preload shim (the unmodified server is not; see Network behavior): the default development setup, the same fixture with `CDS_SERVER_CORS=false` set in the process environment, and a minimal CAP project that does not load `@cap-js/mcp`. Test origins were an invalid example domain and the loopback origins. No external host was contacted.\n\n| Question | Observation | Classification |\n|---|---|---|\n| Is a foreign Origin reflected? | Yes in the default configuration, on MCP, OData, `/health` and 404 paths. Absent with CORS disabled. Reflected in the plugin-free project too [C41] | CONFIGURATION_DEPENDENT |\n| Which component is responsible? | The `@sap/cds` development CORS middleware, supported by three configurations and the source [C41][C33] | Supported |\n| What does a preflight return? | Allowed methods GET, HEAD, PUT, PATCH, POST, DELETE; no allowed headers [C44] | OBSERVED_BEHAVIOR |\n| Can an MCP POST be sent as a simple request? | `Content-Type: text/plain` returns HTTP 415 [C44] | OBSERVED_BEHAVIOR |\n| Foreign or variant Host? | Accepted with HTTP 200 in all configurations; not reflected [C43] | OBSERVED_BEHAVIOR; DNS-rebinding impact UNRESOLVED |\n| Listener binding of the unmodified server | All interfaces [C45] | OBSERVED_BEHAVIOR |\n| Metadata at initialize | Service name, doc comment and instructions go to any authenticated identity [C38] | OBSERVED_BEHAVIOR, design-dependent |\n| Unknown users under mocked authentication | Authenticate with no roles [C39] | CONFIGURATION_DEPENDENT |\n\n**Confirmed security impact: none independently supported.** The security vocabulary is OBSERVED_BEHAVIOR, CONFIGURATION_DEPENDENT, REPRODUCED_SECURITY_IMPACT and UNRESOLVED, and no finding is in the third class. The reflected Origin and the accepted Host are observations, not confirmed vulnerabilities.",
+      "view": "handson",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ho-browser",
+      "title": "Browser readability: what a page on another origin could read",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**Browser readability: what a page on another origin could read.** A real browser (Chromium driven by Playwright) loaded a test page from one loopback origin and called a server on another. Eight variants ran against the default development configuration and again with CORS disabled, sixteen browser records in total [C42].\n\n| Variant | Request | Default development configuration |\n|---|---|---|\n| V1 | MCP POST, `application/json` plus the MCP protocol header | Blocked at preflight; not readable |\n| V1b | MCP POST, `application/json` only | Blocked at preflight; not readable |\n| V2 | MCP POST, `text/plain` body (a simple request) | Reached the server; the HTTP 415 error text was **readable** |\n| V3 | GET of an OData collection on an open synthetic service | **Readable**; a synthetic row came back |\n| V4 | MCP POST to the protected service with an Authorization header | Blocked at preflight; not readable |\n| V5 | No-cors control, `text/plain` POST | Opaque response; not readable |\n| V6 | GET of the protected OData collection with an Authorization header | Blocked at preflight; not readable |\n| V7 | GET of the protected OData collection without credentials | HTTP 401 text readable; no data |\n\nWith CORS disabled, nothing was readable in any variant [C42]. The summary is narrow. JSON-RPC calls to the MCP endpoint were not readable cross-origin in this test, and credentialed requests were stopped before they were sent. What a foreign page could read was an anonymous synthetic OData GET, plus two error texts. That is a property of CAP's default development configuration on an unprotected service. It is not evidence of a data-exfiltration bug in the MCP adapter, and its meaning for a real developer machine depends on what an anonymous local service serves.",
+      "view": "handson",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ho-security-classes",
+      "title": "The security observation register",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**The security observation register.** These eight observations carry the full classification. The right-hand column holds the claims they rest on.\n\n| ID | Observation | Responsible component | Classification | Claims |\n|---|---|---|---|---|\n| SF1 | A foreign Origin is reflected on every CAP path; absent with CORS disabled; present without the plugin | `@sap/cds` development CORS middleware | CONFIGURATION_DEPENDENT | [C41] |\n| SF2 | MCP JSON-RPC POSTs from another origin are blocked at preflight; text/plain gets 415 | CAP CORS plus the MCP content-type check | OBSERVED_BEHAVIOR | [C42][C44] |\n| SF3 | A page on another origin read a synthetic row from an anonymous OData GET in the default configuration | `@sap/cds` development CORS | CONFIGURATION_DEPENDENT; real-deployment impact not confirmed | [C42] |\n| SF4 | Protected service from a foreign origin: anonymous 401; credentialed requests blocked at preflight | CAP authentication plus CORS | OBSERVED_BEHAVIOR | [C42] |\n| SF5 | Any Host value accepted with 200; not reflected; same without the plugin | Base HTTP server, not the plugin | OBSERVED_BEHAVIOR; impact UNRESOLVED | [C43] |\n| SF6 | The unmodified server listens on all interfaces | `@sap/cds` server start | OBSERVED_BEHAVIOR | [C45] |\n| SF7 | initialize returns service name, doc comment and instructions to a roleless authenticated user | Plugin ordering | OBSERVED_BEHAVIOR, design-dependent | [C38] |\n| SF8 | Unknown user names authenticate with no roles under mocked authentication | CAP default mocked preset | CONFIGURATION_DEPENDENT | [C39] |",
+      "view": "handson",
+      "stage": "PROVE"
+    },
+    {
+      "key": "ho-not-executed",
+      "title": "What was not executed",
+      "markdown": "*Research stages: 4 PROVE.*\n\n**What was not executed.** Track A in full [C40]. Production XSUAA, IAS and PKCE. The `call` tool and any unbound action. The `cqn` format and the `prefix` and `per_action_tool` options. Load and concurrency. DNS rebinding. Network reachability of the all-interfaces listener. The Java adapter. Any BTP deployment.",
+      "view": "handson",
+      "stage": "PROVE"
+    },
+    {
+      "key": "cm-dimensions",
+      "title": "Development-time server versus runtime adapter",
+      "markdown": "*Research stages: 5 COMPARE.*\n\n**Development-time server versus runtime adapter.** The two tracks answer different questions, so the comparison is by dimension, not by score.\n\n| Dimension | Track A: development time | Track B: runtime |\n|---|---|---|\n| Question answered | How to build with CAP; what is in the model | What the application holds and does for a caller |\n| Data touched | Source files and documentation | Application data |\n| Misuse blast radius | Disclosure of project source inside the roots | Disclosure of business data within CAP authorization, and change of data through actions |\n| Trust boundary | Filesystem roots; no user identity [C05] | CAP authentication and authorization; the plugin filters by role [C36] |\n| Network | Documentation bundle fetch unless offline [C06] | Inbound HTTP; development CORS and Host behavior [C41][C43] |\n| Write capability | None in the tool contract [C03] | `query` is SELECT only; unbound actions can change data [C15][C19] |\n| Maturity | 0.0.8 [C04] | 1.5.0; adapter generally available; tools not a stable API [C30][C19] |\n| Prerequisites | Package, native and ML dependencies, optional documentation bundle | A CAP application, the plugin, authentication setup |\n| Execution evidence | None; BLOCKED [C40] | Executed [C31][C35][C41] |\n| Main limitation found | Could not be installed offline here | Development defaults must not be mistaken for a production posture |",
+      "view": "comparison",
+      "stage": "COMPARE"
+    },
+    {
+      "key": "cm-blast",
+      "title": "Reading the blast-radius row",
+      "markdown": "*Research stages: 5 COMPARE.*\n\n**Reading the blast-radius row.** A development-time server and a runtime adapter fail in different places, which is why the controls differ. This section is analysis from the source and from the executed Track B tests. The Track A reasoning below was not tested.\n\nTrack A's reach is the developer's workspace. If a caller supplies a `projectPath`, the damage is bounded by the roots the client advertised, and the source says the path is checked against them [C05]. The harm is leakage of source text to the agent that asked, and the agent already runs in the developer's environment. Its practical risks are supply-chain ones: a package with native modules and a start-up download. Those are installation concerns, and they are the reason the research could not run it [C07][C08].\n\nTrack B's reach is the business data of a service. A caller that clears authentication can read whatever CAP authorization lets that identity read, and, once an unbound action exists, can ask the application to change data. The adapter adds no rate limiting, audit trail or approval step [C19]. For this track the control questions are the familiar ones: who is the caller, which roles do they hold, which rows may they see, and where is the access logged. The test showed the first three answered correctly under mocked authentication [C36]. The fourth belongs to the layer around the adapter.",
+      "view": "comparison",
+      "stage": "COMPARE"
+    },
+    {
+      "key": "cm-ks01",
+      "title": "Against the KS01 ADT MCP baseline",
+      "markdown": "*Research stages: 5 COMPARE.*\n\n**Against the KS01 ADT MCP baseline.** KS01 evaluated the SAP ADT MCP server, which performs operations on an ABAP system under that system's authorization: creating objects, generating RAP artifacts, activating, running unit tests and ATC. SAP labels that server experimental. CAP Track B reads an application's own data under CAP authorization and is generally available with documented limitations [C30][C19].\n\nThese are different layers of the stack and different kinds of risk. ADT MCP acts on a development system's repository; CAP Track B exposes an application's runtime data. The honest comparison is a positioning statement, not a ranking, and no performance, productivity or maturity score is given. The comparison also does not transfer KS01's results to CAP: KS01's tool counts and test outcomes are not evidence about CAP MCP.",
+      "view": "comparison",
+      "stage": "COMPARE"
+    },
+    {
+      "key": "cm-dev-vs-prod",
+      "title": "Development defaults versus a production posture",
+      "markdown": "*Research stages: 5 COMPARE.*\n\n**Development defaults versus a production posture.** Four observed behaviors differ from what a productive deployment should rely on. Each is tied to what was seen, with the limits of the observation.\n\n| Development default | What was observed | Limit of the observation |\n|---|---|---|\n| Anonymous access when no `@requires` or `@restrict` exists | All calls succeeded without credentials on the open control service [C18] | Development mode; the gate applies when annotations exist or the environment is production |\n| Reflected CORS | Foreign Origin reflected by CAP's development middleware [C41] | Off with `CDS_SERVER_CORS=false`; browser reads of MCP JSON-RPC failed at preflight [C42] |\n| Wildcard mock user | Unknown user names authenticate with no roles [C39] | Mocked authentication only |\n| All-interface listener | Unmodified server listens on every interface [C45] | Reachability from another host not tested |\n\nA fifth item is not a default but a design property: `initialize` metadata goes to every authenticated caller [C38]. The table is a map of where to look when moving from the local fixture to a real deployment. It is not a vulnerability list.",
+      "view": "comparison",
+      "stage": "COMPARE"
+    },
+    {
+      "key": "cc-conclusions",
+      "title": "Conclusions",
+      "markdown": "*Research stages: 6 IMPROVE.*\n\n**Conclusions.** Four conclusions follow from the evidence, and each is limited to what that evidence covers.\n\n1. *Track B gives an agent typed, read-first access to a CAP service, and under mocked authentication its role and row restrictions held.* Anonymous callers were refused, roles filtered tools and rows, and no data changed [C35][C36][C37].\n2. *The adapter is a protocol surface, not a control.* SAP says it adds no rate limiting, audit logging, approval workflow or injection defence [C19]. Anyone using it for productive data has to supply those around it.\n3. *Development defaults differ from a production posture in four observed ways:* anonymous access without `@requires`, reflected CORS, a wildcard mock user and, for the unmodified server, an all-interface listener [C18][C39][C41][C45].\n4. *Track A remains unproven here.* The reason is environmental, an offline package set that is incomplete, and not a finding about the product [C40].\n\nWhat is not concluded is as important: no security vulnerability is claimed, no production authentication claim is made, and no statement is made about the development server's behavior.",
+      "view": "conclusions",
+      "stage": "IMPROVE"
+    },
+    {
+      "key": "cc-recommendations",
+      "title": "Recommendations",
+      "markdown": "*Research stages: 6 IMPROVE.*\n\n**Recommendations.** They are written for a team that wants to try the runtime adapter safely, and each points to the evidence it rests on.\n\n| # | Recommendation | Basis |\n|---|---|---|\n| 1 | Never run an MCP-exposed CAP service in development mode with real data. Set `@requires` and roles, and bind to the loopback address. | [C34][C18] |\n| 2 | Keep `cds.mcp.autowire` set to false in experiments. | [C25] |\n| 3 | Keep sensitive text out of doc comments and `@mcp.instructions`; they are sent at `initialize` to any authenticated caller. | [C38] |\n| 4 | Treat mocked users as a test aid and remember the wildcard user. | [C39] |\n| 5 | Expose a narrow, projection-based service for MCP. | [C10] |\n| 6 | In clients, branch on `isError` and on JSON-RPC `error`, not on the HTTP status; treat `count` as the total number of matches. | [C16][C29] |\n| 7 | Do not point the adapter at SAP Application APIs. | [C20] |\n| 8 | Test production authentication, XSUAA or IAS, separately before claiming productive suitability. | [C19] |",
+      "view": "conclusions",
+      "stage": "IMPROVE"
+    },
+    {
+      "key": "cc-next-experiments",
+      "title": "Meaningful next experiments",
+      "markdown": "*Research stages: 6 IMPROVE.*\n\n**Meaningful next experiments.** These are proposals. None has been run, and each needs its own approval where it crosses the boundaries set for earlier stages.\n\n- *Track A offline execution.* With a verified offline package set, run the ten planned tests A01 to A10, in particular the `projectPath` root restriction, start-up behavior with and without the documentation bundle, and whether missing native bindings stop even `search_model` [C07][C40].\n- *A bounded `call` test.* Add one unbound action to a synthetic fixture, with its own role, and test authorization, failure behavior and audit expectations. This is the only way to learn what the generic mutation path does [C19].\n- *Production-style authentication.* In a non-production environment, test identity, authorization and the `initialize` metadata disclosure under the chosen identity provider, with PKCE limits in mind [C19][C38].\n- *Network exposure.* Test reachability of the all-interface listener and DNS rebinding in a controlled lab, to turn two UNRESOLVED items into findings or non-findings [C43][C45].\n- *Repeat the browser tests across a second browser,* because the existing record covers one browser and one run per configuration [C42].",
+      "view": "conclusions",
+      "stage": "IMPROVE"
+    },
+    {
+      "key": "cc-lessons",
+      "title": "Technical lessons",
+      "markdown": "*Research stages: 6 IMPROVE.*\n\n**Technical lessons.**\n\n- *HTTP 200 is not success.* The adapter reports tool errors inside 200 responses and denial inside the protocol. Client code and test code both have to read the body [C16][C36].\n- *Metadata is a boundary.* What a server says about itself at initialization is data. Review it as you would a response body [C38].\n- *Write the expectation before the run, and keep the failures.* Two FAILs and four superseded expectation errors taught more about the adapter than the 14 passes did, because each pointed to a place where the assumed behavior and the real behavior differed [C38][C39].\n- *Attribute a behavior before you report it.* The Origin reflection looked like a plugin issue until a plugin-free project and a one-variable configuration change moved it to the CAP runtime [C41].\n- *A mock is not a proxy for production.* Authentication tests with mocked users show how rules are applied. They do not show how a real identity provider behaves [C39].\n- *Say what was not run.* Track A's ten BLOCKED tests carry more value stated plainly than hidden behind a total [C40].",
+      "view": "conclusions",
+      "stage": "IMPROVE"
+    },
+    {
+      "key": "rf-external",
+      "title": "External references",
+      "markdown": "*Research stages: 2 EVALUATE.*\n\n**External references.** All were read on 2026-10-16. They are listed by name and location as plain text, not as links: this site links only to a small set of SAP hosts, and the CAP documentation host is not one of them.\n\n| Ref | Source |\n|---|---|\n| E1 | CAP guide \"Model Context Protocol Adapter\", cap.cloud.sap/docs/guides/ai/cap-mcp [C24] |\n| E2 | CAP release notes for September 2026 and June 2026 [C30] |\n| E3 | The `cap-js/mcp-server` README and library source at commit 52ca33043423, dated 2026-10-14 [C02][C05][C06] |\n| E4 | The `cap-js/mcp` README (installed copy) and plugin source [C10][C15][C18] |\n| E5 | npm registry metadata queried on 2026-10-16 [C04][C07] |\n| E6 | `@sap/cds` 10.1.1 source: server start, environment defaults and the authentication middleware [C33][C39][C41] |",
+      "view": "references",
+      "stage": "EVALUATE"
+    },
+    {
+      "key": "rf-limitations",
+      "title": "Limitations of this assessment",
+      "markdown": "*Research stages: 2 EVALUATE.*\n\n**Limitations of this assessment.**\n\n- One workstation, synthetic data and short runs; no statistical statement.\n- Track A rests on repository source at a commit, not on the npm tarball, and has no execution evidence [C40].\n- Authentication was mocked. The fixtures were created for the test, and their design, not CAP's defaults, determines the role results.\n- The browser tests used one browser (Chromium through Playwright) and two loopback origins [C42].\n- DNS rebinding, reachability from other hosts and production deployments were not tested [C43][C45].\n- The release notes do not name the generally available npm version [C30].\n- Two earlier attempts were superseded by corrected runs: the first Track B run and the first authorization run. The results above come from the corrected runs.\n- No statement here is stronger than the evidence-register entry it cites.",
+      "view": "references",
+      "stage": "EVALUATE"
+    },
+    {
+      "key": "rf-glossary",
+      "title": "Glossary",
+      "markdown": "*Research stages: 2 EVALUATE.*\n\n**Glossary.**\n\n| Term | Meaning here |\n|---|---|\n| CAP | SAP Cloud Application Programming Model |\n| CDS | Core Data Services, CAP's modeling language |\n| CQL | CDS Query Language, the read syntax accepted by the `query` tool |\n| MCP | Model Context Protocol, the protocol between an AI client and a tool server |\n| JSON-RPC | The request and response format MCP uses |\n| Unbound action | A service-level operation not attached to one entity; the only data-changing path the adapter documents |\n| Mocked authentication | CAP's development-time user list; not an identity provider |\n| XSUAA, IAS | SAP's production authentication services, not tested here |\n| PKCE | An OAuth extension; documented as not fully implemented in the adapter |",
+      "view": "references",
+      "stage": "EVALUATE"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C01",
+      "claim": "@cap-js/mcp-server is an MCP server for AI-assisted development of CAP applications; start via npx -y @cap-js/mcp-server / cds-mcp.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "May state SAP describes it so.",
+      "scope": "Track A",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C02",
+      "claim": "Two tools: search_model(projectPath,name?,kind?,topN,namesOnly) and search_docs(query,maxResults); stdio transport.",
+      "evidence_class": "SOURCE_CODE_VERIFIED",
+      "limitation": "Say \"source declares\"; not \"server lists\".",
+      "scope": "Track A",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C03",
+      "claim": "Both Track A tools carry readOnlyHint=true, destructiveHint=false.",
+      "evidence_class": "SOURCE_CODE_VERIFIED",
+      "limitation": "Advisory annotation only.",
+      "scope": "Track A",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C04",
+      "claim": "@cap-js/mcp-server latest 0.0.8 (modified 2026-10-14), Apache-2.0, SAP maintainers; @cap-js/mcp latest 1.5.0 (2026-09-17).",
+      "evidence_class": "REGISTRY_METADATA",
+      "limitation": "Registry state at 2026-10-16T04:50Z. Tarball not downloaded or compared.",
+      "scope": "Both",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C05",
+      "claim": "search_model canonicalises projectPath and refuses paths outside client-advertised roots (or cwd); CDS compile runs in a worker thread.",
+      "evidence_class": "SOURCE_CODE_VERIFIED",
+      "limitation": "Not executed; do not say \"tested\".",
+      "scope": "Track A",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C06",
+      "claim": "Unless offline, startup downloads a docs embeddings bundle from cap.cloud.sap/resources/embeddings into the package embeddings folder; default model BAAI/bge-small-en-v1.5; --offline / CDS_MCP_OFFLINE disable.",
+      "evidence_class": "SOURCE_CODE_VERIFIED",
+      "limitation": "Not executed.",
+      "scope": "Track A",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C07",
+      "claim": "Track A dependencies include onnxruntime-node (postinstall script) and @huggingface/transformers.",
+      "evidence_class": "REGISTRY_METADATA",
+      "limitation": "Install behavior not tested.",
+      "scope": "Track A",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C08",
+      "claim": "Track A (`@cap-js/mcp-server` version 0.0.8) was NOT installed or executed in series 2: offline install failed ENOTCACHED; required tarballs absent from the npm cache and local artifacts. All Track A tests A01-A10 are BLOCKED.",
+      "evidence_class": "NOT_VERIFIED (BLOCKED)",
+      "limitation": "BLOCKED_OFFLINE_PACKAGE_UNAVAILABLE. Not a failure of the package.",
+      "scope": "Track A",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C10",
+      "claim": "Adapter exposes services annotated @mcp at an HTTP path of the form /mcp/ followed by the service name, with generic describe, query, call; same CAP features (e.g. @cds.query.limit); per_action_tool, prefix, format options; @mcp.instructions.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C11",
+      "claim": "Live tools/list on the fixture returned exactly describe and query (no call, since no unbound actions).",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C12",
+      "claim": "Both live tools advertise readOnlyHint=true (query also openWorldHint=false). The annotation is advisory metadata declared by the server; it does not enforce or prove read-only behavior.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Never write \"the tools are read-only because readOnlyHint is true\".",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C13",
+      "claim": "initialize: protocol 2025-06-18, serverInfo BillingExceptionService, listChanged false, instructions equal @mcp.instructions.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C14",
+      "claim": "count(*)=48, OPEN top-3 = BX-0004/BX-0035/BX-0043, grouped summary rows equal seed ground truth computed independently from the CSV.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Synthetic data; one run.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C15",
+      "claim": "The query tool (SELECT only) rejected DELETE, INSERT, UPDATE and stacked-statement strings at the CQL parser; recount after all negatives = 48; fixture source hashes unchanged.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Does not show the adapter cannot mutate data: unbound actions via call can (C19). The plugin source also has an explicit SELECT-only check.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C16",
+      "claim": "Errors surface as HTTP 200 with isError=true (validation, CQL errors) or JSON-RPC error -32602 (unknown tool); unknown entity names are rejected by enum validation.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C17",
+      "claim": "OBSERVATION (series 1 and 2): a foreign Origin was answered with Access-Control-Allow-Origin reflecting it. Series 2 attributes it to the @sap/cds development CORS middleware (see C41); not a confirmed vulnerability.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED / OBSERVED_LIMITATION",
+      "limitation": "Observation. Series 2 execution attributes the reflection to the @sap/cds development CORS middleware (see C41). Say observed; do not say vulnerable or exposed.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C18",
+      "claim": "OBSERVED (development mode, fixture): no auth header sent and all calls succeeded. SOURCE-READ: plugin gates a service only when @requires/@restrict exist or NODE_ENV=production. SAP-DOCUMENTED authentication behavior was not tested.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED / SOURCE_CODE_VERIFIED",
+      "limitation": "Do not generalize to deployed or authenticated setups.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C19",
+      "claim": "No input/output validation vs prompt injection; no rate limiting, audit logging or approval workflow; XSUAA/PKCE not fully implemented; tools not a stable API; mutation only via unbound actions.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C20",
+      "claim": "Adapter is for custom CAP services only; not an endorsed path to expose or proxy SAP Application APIs (SAP API Policy 2.2.2).",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C24",
+      "claim": "The CAP MCP guide is reachable at cap.cloud.sap/docs/guides/ai/cap-mcp(.md); series 1 used wrong paths and wrongly reported 404. Live text differs from the series 1 repository copy only in an example block and trailing newline; Current Limitations sections are identical.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "Withdraws the series 1 \"docs 404\" limitation.",
+      "scope": "Docs",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C25",
+      "claim": "Autowire (default) registers served MCP endpoints in local client configuration files with mock credentials (documented); the test fixtures set autowire=false. A hash comparison of the local client configuration file from series 1 cannot be reproduced from retained files; series 2 records a new hash-only baseline.",
+      "evidence_class": "SAP_DOCUMENTED / NOT_VERIFIED (series 1 hash check)",
+      "limitation": "Do not read this as evidence that series 1 left the client configuration unchanged.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C26",
+      "claim": "Responses use a compact tabular text encoding (@toon-format/toon dependency) and structuredContent JSON.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C27",
+      "claim": "In a local execution the research test client refused the tool `call` before any network call, because the tool was not on the client's allowlist (a retained result record; no raw transport record).",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "A client-side check of the test setup, not a property of the adapter; no request reached the server. One refusal was recorded. Public wording is narrower than the private claim, which also covers local file integrity checks.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C28",
+      "claim": "describe reports queryLimits default=null, max=1000; an unbounded SELECT returned all 48 rows.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Small dataset.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C29",
+      "claim": "count in query results is the total match count, not the number of returned rows (22 vs 3).",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C30",
+      "claim": "SAP Sept 2026 release notes: the MCP protocol adapters for Node.js and Java, introduced as beta in the June 2026 release, are now generally available. Tools remain documented as not a stable API.",
+      "evidence_class": "SAP_DOCUMENTED",
+      "limitation": "Withdraws the series 1 \"Beta\" wording. GA applies to the adapters; the release notes do not state which npm version is the GA build.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C31",
+      "claim": "Evidence accounting: 25 result records (23 transport-backed + 2 test-client checks) over 24 raw transport records (one is the initialized notification, HTTP 202).",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Use these counts, not \"25 exchanges\".",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C33",
+      "claim": "Reading the @sap/cds 10.1.1 source (CORS middleware; default: enabled when not in production) attributes the Origin reflection to the @sap/cds development CORS middleware; execution in three configurations supports this (see C41).",
+      "evidence_class": "SOURCE_CODE_VERIFIED + LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Attributed to the @sap/cds development CORS middleware. Not a vulnerability statement.",
+      "scope": "Track B security",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C34",
+      "claim": "Series 2 fixtures listen on the IPv4 loopback address only (listener inspection of the node process, forced by a test-only preload shim); the unmodified CAP server listens on all interfaces (the IPv6 wildcard address).",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Reachability from other hosts untested.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C35",
+      "claim": "Mocked-auth fixture: anonymous requests to the protected service get HTTP 401 / JSON-RPC -32001; wrong password gets 401; forged identity headers are ignored; viewer and analyst initialize successfully and see tools describe+query.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Mocked authentication only; not XSUAA/IAS.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C36",
+      "claim": "Role enforcement under mocked auth: viewer sees only non-RESOLVED rows ({'analyst': 48, 'viewer': 38}), cannot read ExceptionSummary, and WHERE status=RESOLVED returns 0 rows; analyst sees all 48 rows and the 14-row summary; identities without matching roles get an empty tools/list and -32601 on describe/query with no data.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Denial is expressed as tool-not-exposed (HTTP 200 + JSON-RPC -32601), not 403.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C37",
+      "claim": "No mutation: fixture and original-fixture content hashes identical before/after; analyst recount = 48; node_modules intact for both.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C38",
+      "claim": "initialize discloses serverInfo (service name, doc-comment description) and @mcp.instructions to any authenticated identity, including one with no roles (B08b FAIL against the \"no disclosure\" expectation).",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED / OBSERVED_LIMITATION",
+      "limitation": "Keep sensitive text out of doc comments and @mcp.instructions.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C39",
+      "claim": "CAP default mocked-auth preset contains a wildcard user, so unknown user names and undecodable Basic credentials authenticate with no roles instead of receiving 401 (B11c FAIL against the \"rejected\" expectation).",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED + SOURCE_CODE_VERIFIED",
+      "limitation": "Development-only mocked behavior; says nothing about production IAS/XSUAA.",
+      "scope": "Track B",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C40",
+      "claim": "Track A tests A01-A10: 10 BLOCKED, 0 PASS, 0 FAIL.",
+      "evidence_class": "NOT_VERIFIED (BLOCKED)",
+      "limitation": "",
+      "scope": "Track A",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C41",
+      "claim": "Origin reflection attribution: reflected on /health, OData and 404 paths in the default config; reflected in a plugin-free CAP project; absent everywhere with CDS_SERVER_CORS=false (no file change). Responsible component: @sap/cds development CORS middleware.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED + SOURCE_CODE_VERIFIED",
+      "limitation": "CONFIGURATION_DEPENDENT (default outside production). Not a confirmed vulnerability.",
+      "scope": "Track B security",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C42",
+      "claim": "Browser (Playwright, two loopback origins): default dev config: MCP JSON-RPC POSTs (application/json, with Authorization) blocked by failed preflight (no Allow-Headers), text/plain POST reaches server and returns readable 415 error text; anonymous OData GET readable cross-origin (synthetic row). CORS disabled: nothing readable.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Synthetic data, loopback only. Security impact on real deployments not independently confirmed.",
+      "scope": "Track B security",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C43",
+      "claim": "Foreign and variant Host headers (evil.example, the loopback host name, the IPv6 loopback literal) and X-Forwarded-Host were accepted with HTTP 200 in all three configurations, including a plugin-free project; Host is not reflected.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "DNS-rebinding impact not tested (UNRESOLVED).",
+      "scope": "Track B security",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C44",
+      "claim": "Preflight responses (default dev) carry Access-Control-Allow-Methods \"GET,HEAD,PUT,PATCH,POST,DELETE\" and no Access-Control-Allow-Headers; MCP endpoint rejects Content-Type text/plain with HTTP 415.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "",
+      "scope": "Track B security",
+      "verified": "2026-10-16"
+    },
+    {
+      "claim_id": "C45",
+      "claim": "Correction: series 1 described the fixture as loopback; the original server actually listens on all interfaces. Series 1 only connected through the IPv4 loopback address.",
+      "evidence_class": "LOCAL_EXECUTION_VERIFIED",
+      "limitation": "Series 1 wording withdrawn.",
+      "scope": "Prior",
+      "verified": "2026-10-16"
+    }
+  ],
+  "references": [],
+  "featured": {
+    "order": 0,
+    "title": "SAP CAP MCP — What the Hands-on Actually Proved",
+    "description": "Two CAP MCP implementations, two different outcomes. Development-time MCP remained blocked by offline installation; runtime MCP recorded 14 PASS and 2 FAIL under mocked authentication. Explore the evidence and limitations.",
+    "action_label": "Explore KS04"
+  },
+  "content_sha256": "29057777c1156e0b007f7fcf93423bbde0b8b6a9b26c79b7fcb36d6cdd13031d"
+}
