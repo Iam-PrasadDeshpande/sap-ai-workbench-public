@@ -1,0 +1,39 @@
+{
+  "mission": "ABAPLINT_R4_TECHNICAL_REVALIDATION_AND_EVIDENCE_ALIGNMENT_R1",
+  "originalCases": 42,
+  "originalSources": 57,
+  "priorityReviews": 6,
+  "scopedInterpretationsQualified": 5,
+  "exactReleaseSyntaxUnresolved": [
+    "T04_06"
+  ],
+  "allSAPCompilerVerifications": "NOT_EXECUTED",
+  "controlsCreated": 8,
+  "controlsPubliclyReproduced": 8,
+  "historicalOutcomesReproduced": 42,
+  "historicalScores": {
+    "strictStaticClean": 21,
+    "policyAcceptanceBlindspots": 8,
+    "selectedLocallyVerifiedCases": 15,
+    "matched": 57,
+    "returned": 76,
+    "frozenExpected": 77
+  },
+  "historicalPreservation": {
+    "historicalEntriesVerified": 6970,
+    "protectedPublicOriginalRecords": 242,
+    "mismatches": 0,
+    "addedHistoricalFiles": 0
+  },
+  "originalArchiveUnchanged": true,
+  "upstreamDefectsEstablished": 0,
+  "SAPCalls": 0,
+  "GitHubPublication": "NOT_EXECUTED",
+  "installations": 0,
+  "limitations": [
+    "Target SAP release/compiler/activation and physical DDIC data state unavailable",
+    "T04_06 exact release-specific grammar unresolved",
+    "Synthetic SQLite adapter is not SAP HANA or SAP LUW semantics",
+    "Pinned public dependencies and matching extension server remain external prerequisites"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "controls": [
+    {
+      "id": "SR_T03_05_ROOT_ONLY",
+      "staticQualified": true,
+      "staticMatches": true,
+      "runtimeMatches": true,
+      "runtimeStatus": "ARTIFACT_TRANSPILED_NO_BEHAVIOR"
+    },
+    {
+      "id": "SR_T04_06_SUBRC_ONLY",
+      "staticQualified": true,
+      "staticMatches": true,
+      "runtimeMatches": true,
+      "runtimeStatus": "LOCAL_VERIFIED"
+    },
+    {
+      "id": "SR_T04_06_USING_CLIENT",
+      "staticQualified": true,
+      "staticMatches": true,
+      "runtimeMatches": true,
+      "runtimeStatus": "LOCAL_TOOLCHAIN_ERROR"
+    },
+    {
+      "id": "SR_T04_06_NO_ESCAPE",
+      "staticQualified": true,
+      "staticMatches": true,
+      "runtimeMatches": true,
+      "runtimeStatus": "LOCAL_VERIFIED"
+    },
+    {
+      "id": "SR_T06_06_ZERO_ROW",
+      "staticQualified": true,
+      "staticMatches": true,
+      "runtimeMatches": true,
+      "runtimeStatus": "LOCAL_VERIFIED"
+    },
+    {
+      "id": "SR_T06_07_ZERO_ROW",
+      "staticQualified": true,
+      "staticMatches": true,
+      "runtimeMatches": true,
+      "runtimeStatus": "LOCAL_VERIFIED"
+    },
+    {
+      "id": "SR_T06_08_ZERO_ROW",
+      "staticQualified": true,
+      "staticMatches": true,
+      "runtimeMatches": true,
+      "runtimeStatus": "LOCAL_VERIFIED"
+    },
+    {
+      "id": "SR_T06_06_NOTNULL_SCHEMA",
+      "staticQualified": true,
+      "staticMatches": true,
+      "runtimeMatches": true,
+      "runtimeStatus": "LOCAL_TOOLCHAIN_ERROR"
+    }
+  ],
+  "matched": 8,
+  "total": 8,
+  "pooledWithHistoricalCases": false,
+  "SAPCompiler": "NOT_EXECUTED"
+}

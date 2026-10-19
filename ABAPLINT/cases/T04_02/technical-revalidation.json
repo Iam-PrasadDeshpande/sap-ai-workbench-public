@@ -1,0 +1,49 @@
+{
+  "CASE_ID": "T04_02",
+  "SCENARIO": "Authorization result ignored",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Intentional negative test",
+  "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Ignored authorization return code negative; check_subrc concerns return-code handling, not real authorization policy verification.",
+  "STATIC_RESULT": "VALIDATION_FAIL",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 4
+          },
+          "end": {
+            "line": 7,
+            "character": 59
+          }
+        },
+        "code": "check_subrc",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/check_subrc/"
+        },
+        "message": "Check sy-subrc",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": "Access decision must honor failed authorization result; frozen static policy check_subrc can only cover selected patterns.",
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+  "OFFSTACK_RESULT": {
+    "status": "UNSUPPORTED",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T04_02/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T04_02/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_02",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Ignored authorization return code negative; check_subrc concerns return-code handling, not real authorization policy verification."
+}

@@ -1,0 +1,50 @@
+{
+  "id": "T03_04",
+  "track": "T03",
+  "title": "CDS missing association target",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "DEFECT",
+  "defect": "Missing association target from frozen inventory",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "artifactOnly": true,
+  "sourceFiles": [
+    {
+      "file": "zr4_view.ddls.asddls",
+      "sha256": "1970ac53a0c31fe62451c6b72dfe663efc6f611fb135e031fc7da26ed98542e5"
+    },
+    {
+      "file": "zr4_data.tabl.xml",
+      "sha256": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+    }
+  ],
+  "rootCause": {
+    "classification": "MISSING_DEPENDENCY",
+    "secondary": [
+      "UNSUPPORTED_SEMANTIC_CHECK"
+    ],
+    "explanation": "Association target is absent. The transpiler reported an unsupported association definition; this is not independently established as an enabled-rule defect.",
+    "scope": "CDS parser coverage does not promise full association/target resolution."
+  },
+  "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "J",
+      "capability": "CDS",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "K",
+      "capability": "RAP behavior definitions",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "L",
+      "capability": "EML references",
+      "classification": "STATIC_BLIND_SPOT"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

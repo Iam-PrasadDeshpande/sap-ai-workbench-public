@@ -1,0 +1,48 @@
+{
+  "CASE_ID": "T04_04",
+  "SCENARIO": "Explicit synthetic policy guard",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Simulated semantic scenario",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Explicit integer guard simulation; local matched output is not a SAP role or authorization test.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": null,
+    "frozenReferences": [
+      {
+        "input": {
+          "IV": 0
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "IV": 1
+        },
+        "expected": 1
+      },
+      {
+        "input": {
+          "IV": -1
+        },
+        "expected": 0
+      }
+    ]
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+  "OFFSTACK_RESULT": {
+    "status": "LOCAL_VERIFIED",
+    "returned": 3,
+    "matched": 3,
+    "frozenExpected": 3,
+    "record": "cases/T04_04/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T04_04/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_04",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Explicit integer guard simulation; local matched output is not a SAP role or authorization test."
+}

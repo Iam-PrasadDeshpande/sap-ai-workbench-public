@@ -1,0 +1,33 @@
+{
+  "id": "T06_09",
+  "label": "T06_09",
+  "utc": "2026-10-19T09:25:39.388Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [
+    {
+      "operation": "select",
+      "sql": "SELECT sum( amount )  from \"zr4_data\" WHERE \"id\" > 99"
+    }
+  ],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "database": "Node built-in SQLite, in-memory, custom minimal adapter; not SAP HANA",
+  "completed": 1,
+  "referenceExecuted": 1,
+  "referencePassed": 1,
+  "status": "LOCAL_VERIFIED"
+}

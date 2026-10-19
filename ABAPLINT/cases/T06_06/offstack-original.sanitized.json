@@ -1,0 +1,33 @@
+{
+  "id": "T06_06",
+  "label": "T06_06",
+  "utc": "2026-10-19T09:25:33.835Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "actual": 1,
+      "completed": true,
+      "expected": 1,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [
+    {
+      "operation": "select",
+      "sql": "SELECT count( * )  from \"zr4_data\" WHERE \"amount\" IS NULL"
+    }
+  ],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "database": "Node built-in SQLite, in-memory, custom minimal adapter; not SAP HANA",
+  "completed": 1,
+  "referenceExecuted": 1,
+  "referencePassed": 1,
+  "status": "LOCAL_VERIFIED"
+}

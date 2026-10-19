@@ -1,0 +1,32 @@
+{
+  "caseId": "T03_07",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 8,
+            "character": 13
+          },
+          "end": {
+            "line": 8,
+            "character": 17
+          }
+        },
+        "code": "keyword_case",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/keyword_case/"
+        },
+        "message": "Identifiers should be lower case: \"Item\"",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "f10b660e71165e80fefa6bca154eb5ce170a721747052e131969915bc9b642b5",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

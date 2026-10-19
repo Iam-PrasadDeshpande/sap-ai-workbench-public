@@ -1,0 +1,38 @@
+{
+  "id": "T04_03",
+  "label": "T04_03",
+  "utc": "2026-10-19T09:25:06.285Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {
+        "IV": 0
+      },
+      "actual": 1,
+      "completed": true,
+      "expected": 0,
+      "pass": false
+    },
+    {
+      "input": {
+        "IV": 1
+      },
+      "actual": 1,
+      "completed": true,
+      "expected": 1,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 2,
+  "referenceExecuted": 2,
+  "referencePassed": 1,
+  "status": "REFERENCE_MISMATCH"
+}

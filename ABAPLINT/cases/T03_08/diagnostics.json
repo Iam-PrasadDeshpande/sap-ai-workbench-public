@@ -1,0 +1,12 @@
+{
+  "caseId": "T03_08",
+  "state": "VALIDATION_PASS",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": []
+  },
+  "historicalLSPLogSha256": "2d4ce54fdbea998f086f107cc99e4e5c098c75b3012e930a9dead85e9d71092d",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

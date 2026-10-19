@@ -1,0 +1,49 @@
+{
+  "CASE_ID": "T03_07",
+  "SCENARIO": "EML entity read with absent behavior contract",
+  "SOURCE_TYPE": "ABAP_EML",
+  "TEST_CATEGORY": "Requires additional qualification",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Only keyword_case on Item was reported. That finding does not check the intended EML contract or establish a complete valid RAP model.",
+  "STATIC_RESULT": "VALIDATION_FAIL",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 8,
+            "character": 13
+          },
+          "end": {
+            "line": 8,
+            "character": 17
+          }
+        },
+        "code": "keyword_case",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/keyword_case/"
+        },
+        "message": "Identifiers should be lower case: \"Item\"",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "DEFECT",
+    "frozenDefect": "EML entity and behavior contract absent from frozen inventory.",
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+  "OFFSTACK_RESULT": {
+    "status": "UNSUPPORTED",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T03_07/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T03_07/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_07",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Only keyword_case on Item was reported. That finding does not check the intended EML contract or establish a complete valid RAP model."
+}

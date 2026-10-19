@@ -1,0 +1,43 @@
+{
+  "id": "T06_10",
+  "track": "T06",
+  "title": "Open SQL from internal table",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {},
+      "expected": 12
+    }
+  ],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "6496c8e21861acc2d545005f16f21077789a2b7bcbec5f89a9c9cba814661c81"
+    }
+  ],
+  "rootCause": {
+    "classification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "secondary": [],
+    "explanation": "Only the recorded parser/artifact/runtime stage was exercised; enterprise semantics remain unsupported or unverified in this configured path.",
+    "scope": "Do not promote artifact handling, style findings or failed invocation to semantic verification."
+  },
+  "historicalStaticClassification": "PARTIAL",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "R",
+      "capability": "Numeric semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "S",
+      "capability": "Open SQL/database semantics",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

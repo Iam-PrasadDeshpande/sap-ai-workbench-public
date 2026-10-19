@@ -1,0 +1,58 @@
+{
+  "CASE_ID": "T04_06",
+  "SCENARIO": "Explicit cross-client classic SQL",
+  "SOURCE_TYPE": "ABAP; DDIC_XML",
+  "TEST_CATEGORY": "Requires additional qualification",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Classic v758 CLIENT SPECIFIED with @rv: only check_subrc observed. Exact release-specific SELECT/strict-mode legality remains unresolved. Obsolete syntax is not by itself proof this fixture fails the SAP compiler.",
+  "STATIC_RESULT": "VALIDATION_FAIL",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 4
+          },
+          "end": {
+            "line": 7,
+            "character": 65
+          }
+        },
+        "code": "check_subrc",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/check_subrc/"
+        },
+        "message": "Check sy-subrc",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": null,
+    "frozenReferences": [
+      {
+        "input": {},
+        "expected": 104
+      }
+    ]
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "UNRESOLVED_REQUIRES_SAP",
+  "OFFSTACK_RESULT": {
+    "status": "LOCAL_VERIFIED",
+    "returned": 1,
+    "matched": 1,
+    "frozenExpected": 1,
+    "record": "cases/T04_06/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T04_06/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_06",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [
+    "SR_T04_06_SUBRC_ONLY",
+    "SR_T04_06_USING_CLIENT",
+    "SR_T04_06_NO_ESCAPE"
+  ],
+  "INTERPRETATION": "Classic v758 CLIENT SPECIFIED with @rv: only check_subrc observed. Exact release-specific SELECT/strict-mode legality remains unresolved. Obsolete syntax is not by itself proof this fixture fails the SAP compiler."
+}

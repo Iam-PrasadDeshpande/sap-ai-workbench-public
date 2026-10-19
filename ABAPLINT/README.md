@@ -75,3 +75,31 @@ AI-generated ABAP
 - [Open SteamGate](https://github.com/oisee/open-steamgate)
 
 *Independent research; not affiliated with or endorsed by SAP SE, abaplint, or Open SteamGate. Historical local evidence was frozen with documented gaps. Publication and evidence-release review remain separate decisions.*
+
+## Exact 42-case R4 review package
+
+The original summary above is retained. This research-branch candidate includes a traceable review package of the original 42 frozen R4 cases: [case index](CASE_INDEX.md), [methodology and setup](METHODOLOGY.md), [exact configurations](config/cloud.json), [rule-scope interpretation](RULE_SCOPE.md), [provenance](results/provenance.json) and [public artifact manifest](EVIDENCE_MANIFEST.sha256).
+
+This is a local research reproduction package, not an upstream bug list. Eight historical clean known-defect acceptances are individually explained; most involve configuration, missing metadata or semantic checks outside the qualified rule scope. No upstream issue is confirmed here. Original sources and configuration bytes are retained, while traces and portable harnesses are sanitized derivatives. Read [reproduction validation](results/reproduction-validation.json) for actual coverage and any failures. Public external dependencies and the exact extension server are required; this is not a dependency-free/self-contained distribution.
+
+The original summary-only evidence-release caveat remains historical context. This additional package releases the enumerated synthetic R4 inputs and sanitized outputs; it does not release unrelated private inventories or establish independent human-gold, SAP equivalence, or full enterprise semantics.
+
+### Public harness validation
+
+The portable package was independently rerun locally with freshly installed pinned npm dependencies and the matching installed extension server: **42/42 original static diagnostic outcomes and 42/42 original runtime outcomes reproduced**, including intended failures and unsupported cases; T06_07's separate adapter recovery also reproduced. The final selected references remain 57/76 of 77 expectations. Reproduction is not a claim that all programs passed or that SAP behavior is equivalent. See [validation record](results/reproduction-validation.json).
+
+
+## Technical revalidation (2026-10-19)
+
+All 42 original cases and 57 source artifacts retained. This is a technical interpretation audit, not a new generation benchmark. All 42 descriptions reconciled; six priority cases reviewed; eight supplemental controls excluded from historical denominators.
+
+5/6 priority interpretations qualified within local evidence; T04_06 release-specific SELECT grammar unresolved. SAP compiler/activation/runtime: NOT_EXECUTED for all cases. Zero demonstrated upstream defects. The eight historical policy acceptance blind spots are not eight product defects.
+
+- T02_05: ordinary available local classes; component/release violation not established.
+- T03_05: missing root confounds missing implementation-class attribution; root-only control is not a repaired BO.
+- T04_06: classic v758; check_subrc is unrelated to CLIENT SPECIFIED legality. Exact target syntax requires SAP verification.
+- T06_06/07/08: valid selected SQLite oracles over an injected NULL; target SAP DDIC physical nullability unverified. Zero-row controls reveal which outputs discriminate the data states.
+
+Historical outcomes remain 21/42 strictly clean, 8 policy acceptance blind spots, 15 locally verified main cases, and selected 57/76 returned matches against 77 frozen expectations. Original-only is 56/75. Retain 19 mismatches and T06_10 missing returned result. Three earlier CDS supplements remain separate.
+
+See [TECHNICAL_REVALIDATION.md](TECHNICAL_REVALIDATION.md).

@@ -1,0 +1,29 @@
+{
+  "CASE_ID": "T04_01",
+  "SCENARIO": "Authorization result checked",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Representative language pattern",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. AUTHORITY-CHECK pattern needs SAP authorization state and kernel; local processing cannot verify role enforcement.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": null,
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+  "OFFSTACK_RESULT": {
+    "status": "UNSUPPORTED",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T04_01/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T04_01/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_01",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "AUTHORITY-CHECK pattern needs SAP authorization state and kernel; local processing cannot verify role enforcement."
+}

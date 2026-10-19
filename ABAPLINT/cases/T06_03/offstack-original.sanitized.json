@@ -1,0 +1,27 @@
+{
+  "id": "T06_03",
+  "label": "T06_03",
+  "utc": "2026-10-19T09:25:28.386Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "actual": 124,
+      "completed": true,
+      "expected": 124,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 1,
+  "referenceExecuted": 1,
+  "referencePassed": 1,
+  "status": "LOCAL_VERIFIED"
+}

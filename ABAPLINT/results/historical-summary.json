@@ -1,0 +1,119 @@
+{
+  "mission": "ABAPLINT_R4_ENTERPRISE_ABAP_SEMANTIC_PORTABILITY_EXECUTION_R1",
+  "utc": "2026-10-19T09:30:56.549Z",
+  "authorization": "T3_EXPLICIT_OWNER_APPROVAL_FOR_R4",
+  "projectRoot": "<LOCAL_PROJECT>",
+  "workspace": "<HISTORICAL_R4>",
+  "tracksExecuted": 6,
+  "frozenCasesExecuted": 42,
+  "gateAAttempts": 42,
+  "gateAQualified": 42,
+  "gateAStates": {
+    "VALIDATION_PASS": 21,
+    "VALIDATION_FAIL": 21
+  },
+  "gateBOriginalAttempts": 42,
+  "gateBAdapterRecoveryAttempts": 1,
+  "gateBOriginalStatuses": {
+    "LOCAL_VERIFIED": 16,
+    "LOCAL_TOOLCHAIN_ERROR": 10,
+    "SMOKE_COMPLETED_NO_ORACLE": 3,
+    "ARTIFACT_TRANSPILED_NO_BEHAVIOR": 3,
+    "EXECUTION_ERROR": 7,
+    "REFERENCE_MISMATCH": 3
+  },
+  "gateBFinalClassifications": {
+    "LOCAL_VERIFIED": 15,
+    "PARTIAL": 14,
+    "UNSUPPORTED": 13
+  },
+  "gateBOriginalTranspiled": 32,
+  "gateBOriginalInvoked": 29,
+  "gateBFinalReferenceExpected": 77,
+  "gateBFinalReferenceCompleted": 76,
+  "gateBFinalReferenceMatched": 57,
+  "strictStaticFalseNegatives": 8,
+  "falseNegativeIds": [
+    "T01_03",
+    "T03_02",
+    "T03_04",
+    "T03_05",
+    "T03_06",
+    "T05_03",
+    "T05_04",
+    "T06_01"
+  ],
+  "falsePositiveConfirmed": 0,
+  "falsePositiveQualification": "No confirmed false-positive finding against this exact rule policy; no SAP syntax-validity or general false-positive-rate claim.",
+  "otherSemanticMissesBlockedByDifferentRule": [
+    "T03_07",
+    "T04_03"
+  ],
+  "unsupportedCaseCount": 13,
+  "unsupportedCategories": [
+    "CALL_TRANSACTION_HOST_OPERATION",
+    "BDEF_SEMANTIC_EXECUTION",
+    "CDS_ASSOCIATION_DATABASE_GENERATION",
+    "RAP_EML_AND_COMMIT_ENTITIES",
+    "SAP_AUTHORIZATION_KERNEL",
+    "IMPLICIT_CLIENT_HANDLING_IN_R4_ADAPTER",
+    "SAP_ENQUEUE_AND_UPDATE_ENVIRONMENT",
+    "INTERNAL_TABLE_SQL_IN_CONFIGURED_RUNTIME"
+  ],
+  "unsupportedByCase": {
+    "T02_01": "CALL TRANSACTION host operation returns unsupported status",
+    "T02_02": "CALL TRANSACTION host operation returns unsupported status",
+    "T03_04": "Association database-view generation unsupported on this fixture",
+    "T03_05": "BDEF behavior/implementation contracts not executed",
+    "T03_06": "Malformed BDEF artifact accepted without semantic execution",
+    "T03_07": "EML execution emits Void type ReadEntities",
+    "T03_08": "COMMIT ENTITIES transpilation unsupported",
+    "T04_01": "Authorization host kernel absent",
+    "T04_02": "Authorization host kernel absent",
+    "T04_05": "R4 custom adapter does not implement implicit client handling",
+    "T05_03": "Enqueue function/lock environment absent",
+    "T05_04": "Update function/scheduler environment absent",
+    "T06_10": "Internal-table SQL unavailable in configured runtime: no database/materialization supplied"
+  },
+  "sapEvidenceRequiredCases": 42,
+  "sapSystemContactsIssued": 0,
+  "publicDocumentationReads": true,
+  "modelCalls": 0,
+  "subagents": 0,
+  "dependencyInstalls": 0,
+  "originalCaseElapsedSumMs": 76886,
+  "arithmeticRegression": {
+    "case": "T06_01",
+    "matched": 10,
+    "total": 27,
+    "cause": "Source-level calculation-type pitfall against declared mathematical truncation contract, not newly established runtime bug"
+  },
+  "clientPipelineMismatch": {
+    "case": "T04_05",
+    "expected": 5,
+    "actual": 104,
+    "attribution": "Configured R4 custom adapter omits implicit client handling; not attributed as upstream bug or live SAP vulnerability"
+  },
+  "adapterRecovery": {
+    "case": "T06_07",
+    "sourceAndOracleUnchanged": true,
+    "originalFailure": "R4 adapter did not translate UP TO 1 ROWS",
+    "finalMatched": 1,
+    "total": 1
+  },
+  "oracleUnresolved": 0,
+  "oracleAudit": "77/77",
+  "enterpriseReadiness": "CONDITIONAL_LOCAL_ENGINEERING_GATE_ONLY; SAP_READINESS_NOT_ESTABLISHED",
+  "agenticRecommendation": "Use provenance/dependency/release/feature guards, then static gate, then supported behavioral probes; require SAP evidence before SAP readiness. Never let runtime success override a static rejection or missing enterprise contract.",
+  "evidenceFreeze": "MANIFEST_CREATED; read independent verification receipts for final status",
+  "historicalFilesModified": 0,
+  "externalWrites": "No intentional non-R4 experiment writes; shared host/tool infrastructure telemetry is outside complete observation.",
+  "ownerDecisionsRequired": "NONE_FOR_COMPLETED_LOCAL_MISSION; separate explicit SAP authorization needed for live follow-up",
+  "supplementaryCDSDDL": {
+    "classification": "POST_HOC_CAPABILITY_PROBE_NOT_POOLED",
+    "matched": 3,
+    "total": 3,
+    "result": "results/cds-ddl-supplement.json",
+    "scope": "Generated SQLite view projection; not SAP CDS or RAP behavior"
+  }
+}

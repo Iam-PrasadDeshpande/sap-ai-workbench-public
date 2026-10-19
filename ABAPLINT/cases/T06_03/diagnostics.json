@@ -1,0 +1,32 @@
+{
+  "caseId": "T06_03",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 9
+          },
+          "end": {
+            "line": 7,
+            "character": 15
+          }
+        },
+        "code": "prefer_inline",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/prefer_inline/"
+        },
+        "message": "Prefer Inline Declarations, AMOUNT",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "c7f7262c21be10bf6c624c12d6cf9896e7a7053f8b8cc12513e8c15e1cb7668c",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

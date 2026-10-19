@@ -1,0 +1,48 @@
+{
+  "id": "T05_01",
+  "track": "T05",
+  "title": "COMMIT WORK with no configured database",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "v758",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {},
+      "expected": 1
+    }
+  ],
+  "sapRequirement": "No-connection return is not persistence; verify update completion, rollback boundaries and SAP LUW.",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "a9d109dd7fa0fe7ea38a889e77c8bb55d32f7b6ada1238aa1e63010895bb7ed6"
+    }
+  ],
+  "rootCause": {
+    "classification": "EXPECTED_STATIC_ACCEPTANCE",
+    "secondary": [],
+    "explanation": "No contradiction of a supported static rule contract is established by this case. Retain all policy findings and behavioral outcomes separately.",
+    "scope": "Observed exact rule policy; no SAP correctness inference."
+  },
+  "historicalStaticClassification": "LOCAL_VERIFIED",
+  "historicalBehaviorClassification": "PARTIAL",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "O",
+      "capability": "Transaction semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "P",
+      "capability": "Enqueue/lock behavior",
+      "classification": "UNSUPPORTED_OFFSTACK"
+    },
+    {
+      "id": "Q",
+      "capability": "Update processing",
+      "classification": "UNSUPPORTED_OFFSTACK"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

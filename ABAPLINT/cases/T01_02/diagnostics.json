@@ -1,0 +1,32 @@
+{
+  "caseId": "T01_02",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 9
+          },
+          "end": {
+            "line": 7,
+            "character": 22
+          }
+        },
+        "code": "check_syntax",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/check_syntax/"
+        },
+        "message": "Class zcl_r4_absent not found",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "2799c0fc19a637baf7ab84fba2d0f0ac28c1cb3509ae1fb7aa4a8edec8850bfe",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

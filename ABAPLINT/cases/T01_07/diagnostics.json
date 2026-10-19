@@ -1,0 +1,32 @@
+{
+  "caseId": "T01_07",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 9
+          },
+          "end": {
+            "line": 7,
+            "character": 12
+          }
+        },
+        "code": "unknown_types",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/unknown_types/"
+        },
+        "message": "Variable \"REF\" contains unknown: REF, unable to resolve zif_r4_missing",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "c8ce6b08e2a59e83a681d3e53776c8aa988ed4be029da459c3e72d30c565e868",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

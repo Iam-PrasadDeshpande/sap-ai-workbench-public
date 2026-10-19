@@ -1,0 +1,34 @@
+{
+  "CASE_ID": "T05_01",
+  "SCENARIO": "COMMIT WORK with no configured database",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Simulated semantic scenario",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. COMMIT/ROLLBACK statement with scalar return and no material DB change cannot establish SAP LUW behavior.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": null,
+    "frozenReferences": [
+      {
+        "input": {},
+        "expected": 1
+      }
+    ]
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+  "OFFSTACK_RESULT": {
+    "status": "PARTIAL",
+    "returned": 1,
+    "matched": 1,
+    "frozenExpected": 1,
+    "record": "cases/T05_01/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T05_01/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T05_01",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "COMMIT/ROLLBACK statement with scalar return and no material DB change cannot establish SAP LUW behavior."
+}

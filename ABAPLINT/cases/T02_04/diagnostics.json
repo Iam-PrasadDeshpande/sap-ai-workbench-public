@@ -1,0 +1,12 @@
+{
+  "caseId": "T02_04",
+  "state": "VALIDATION_PASS",
+  "reason": null,
+  "profile": "v758",
+  "configuration": "../../config/v758.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": []
+  },
+  "historicalLSPLogSha256": "99f67ebeee525a149c3e7f76fbb9bb1e6cce5cf7ec4f4c1539a485adb586f4ea",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

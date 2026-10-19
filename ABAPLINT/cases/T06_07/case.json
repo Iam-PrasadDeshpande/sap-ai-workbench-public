@@ -1,0 +1,68 @@
+{
+  "id": "T06_07",
+  "track": "T06",
+  "title": "Open SQL null to initial conversion",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {},
+      "expected": 0
+    }
+  ],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "sql": {
+    "client": false,
+    "rows": [
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        null
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        -2
+      ]
+    ]
+  },
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "38af4e9e50fd8e9ec8f16b90470760b337f85ad4671baa71c658e0a7560a2eec"
+    },
+    {
+      "file": "zr4_data.tabl.xml",
+      "sha256": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+    }
+  ],
+  "rootCause": {
+    "classification": "OFFSTACK_ADAPTER_LIMITATION",
+    "secondary": [],
+    "explanation": "The original minimal SQLite adapter omitted UP TO-to-LIMIT translation. Separate recovery uses the same source/oracle.",
+    "scope": "Configured local adapter behavior, not SAP behavior."
+  },
+  "historicalStaticClassification": "LOCAL_VERIFIED",
+  "historicalBehaviorClassification": "LOCAL_VERIFIED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "R",
+      "capability": "Numeric semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "S",
+      "capability": "Open SQL/database semantics",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

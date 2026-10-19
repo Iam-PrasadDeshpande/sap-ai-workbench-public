@@ -1,0 +1,49 @@
+{
+  "CASE_ID": "T01_06",
+  "SCENARIO": "Missing transparent table",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Intentional negative test",
+  "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion.",
+  "STATIC_RESULT": "VALIDATION_FAIL",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 30
+          },
+          "end": {
+            "line": 7,
+            "character": 41
+          }
+        },
+        "code": "check_syntax",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/check_syntax/"
+        },
+        "message": "Database table or view \"zr4_missing\" not found",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "DEFECT",
+    "frozenDefect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+  "OFFSTACK_RESULT": {
+    "status": "PARTIAL",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T01_06/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T01_06/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_06",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion."
+}

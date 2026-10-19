@@ -1,0 +1,124 @@
+{
+  "id": "T03_01_CDS_DDL_SUPPLEMENT",
+  "classification": "POST_HOC_CAPABILITY_PROBE_NOT_POOLED",
+  "why": "Original T03_01 generated DDL without invoking view behavior. Exercise the available generated SQLite view in a separately frozen supplement; no fixture is replaced or repaired.",
+  "source": "fixtures/cases/T03_01/zr4_view.ddls.asddls",
+  "setupSha256": "a558bf476b4d8dbe162ecfd4192ca5278d396398955bd2b672a45ec556da43bd",
+  "schema": [
+    "CREATE TABLE 'zr4_data' ('id' INT, 'amount' INT, PRIMARY KEY('id'));",
+    "CREATE VIEW \"zr4_view\" AS SELECT \"zr4_data\".\"id\" AS \"id\", \"zr4_data\".\"amount\" AS \"amount\" FROM \"zr4_data\";"
+  ],
+  "scenarios": [
+    {
+      "name": "empty",
+      "rows": [],
+      "expected": []
+    },
+    {
+      "name": "nonempty",
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          7
+        ]
+      ],
+      "expected": [
+        {
+          "id": 1,
+          "amount": 5
+        },
+        {
+          "id": 2,
+          "amount": 7
+        }
+      ]
+    },
+    {
+      "name": "negative-and-zero",
+      "rows": [
+        [
+          1,
+          -2
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "expected": [
+        {
+          "id": 1,
+          "amount": -2
+        },
+        {
+          "id": 2,
+          "amount": 0
+        }
+      ]
+    }
+  ],
+  "boundary": "SQLite view projection only; no SAP CDS authorization, associations, RAP, HANA execution or activation.",
+  "utc": "2026-10-19T09:30:08.813Z",
+  "results": [
+    {
+      "name": "empty",
+      "actual": [],
+      "expected": [],
+      "pass": true
+    },
+    {
+      "name": "nonempty",
+      "actual": [
+        {
+          "id": 1,
+          "amount": 5
+        },
+        {
+          "id": 2,
+          "amount": 7
+        }
+      ],
+      "expected": [
+        {
+          "id": 1,
+          "amount": 5
+        },
+        {
+          "id": 2,
+          "amount": 7
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "negative-and-zero",
+      "actual": [
+        {
+          "id": 1,
+          "amount": -2
+        },
+        {
+          "id": 2,
+          "amount": 0
+        }
+      ],
+      "expected": [
+        {
+          "id": 1,
+          "amount": -2
+        },
+        {
+          "id": 2,
+          "amount": 0
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "matched": 3,
+  "total": 3
+}

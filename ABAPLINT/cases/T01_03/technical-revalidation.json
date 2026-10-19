@@ -1,0 +1,29 @@
+{
+  "CASE_ID": "T01_03",
+  "SCENARIO": "Missing external class outside error namespace",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Intentional negative test",
+  "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. CL_* is outside the frozen errorNamespace. Missing external class acceptance does not demonstrate a failure of the configured namespace contract.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "DEFECT",
+    "frozenDefect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "CONFIGURATION_LIMITATION",
+  "OFFSTACK_RESULT": {
+    "status": "PARTIAL",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T01_03/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T01_03/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_03",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "CL_* is outside the frozen errorNamespace. Missing external class acceptance does not demonstrate a failure of the configured namespace contract."
+}

@@ -1,0 +1,6 @@
+{
+  "candidateFilesScannedBeforeThisReceipt": 383,
+  "findings": [],
+  "originalSourcesSanitized": 0,
+  "scope": "Bounded pattern scan for personal paths, host/account identifiers, private addresses and credential signatures. Not a guarantee against every possible secret pattern."
+}

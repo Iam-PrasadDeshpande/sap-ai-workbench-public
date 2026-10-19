@@ -1,0 +1,32 @@
+{
+  "caseId": "T01_05",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 9
+          },
+          "end": {
+            "line": 7,
+            "character": 15
+          }
+        },
+        "code": "unknown_types",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/unknown_types/"
+        },
+        "message": "Variable \"HEADER\" contains unknown: ZR4_HEADER not found, lookup",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "7ffafe59c1f003ca594abd9f506af6e1bc6fe1bd5636bd9a2ce11434be309640",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

@@ -1,0 +1,43 @@
+{
+  "CASE_ID": "T01_01",
+  "SCENARIO": "Available synthetic cross-class dependency",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Representative language pattern",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Available synthetic local dependency; no real SAP catalog or release contract established.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [],
+    "zcl_r4_dep.clas.abap": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "CLEAN",
+    "frozenDefect": null,
+    "frozenReferences": [
+      {
+        "input": {
+          "IV": 0
+        },
+        "expected": 1
+      },
+      {
+        "input": {
+          "IV": -2
+        },
+        "expected": -1
+      }
+    ]
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+  "OFFSTACK_RESULT": {
+    "status": "LOCAL_VERIFIED",
+    "returned": 2,
+    "matched": 2,
+    "frozenExpected": 2,
+    "record": "cases/T01_01/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T01_01/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_01",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Available synthetic local dependency; no real SAP catalog or release contract established."
+}

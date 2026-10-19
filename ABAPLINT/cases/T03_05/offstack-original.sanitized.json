@@ -1,0 +1,16 @@
+{
+  "id": "T03_05",
+  "label": "T03_05",
+  "utc": "2026-10-19T09:24:55.265Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true
+  },
+  "checks": [],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "load",
+  "status": "ARTIFACT_TRANSPILED_NO_BEHAVIOR",
+  "coverage": "Transpiler returning does not establish CDS/BDEF semantic execution"
+}

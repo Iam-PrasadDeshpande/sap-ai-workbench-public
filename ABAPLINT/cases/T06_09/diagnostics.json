@@ -1,0 +1,32 @@
+{
+  "caseId": "T06_09",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 4
+          },
+          "end": {
+            "line": 7,
+            "character": 62
+          }
+        },
+        "code": "check_subrc",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/check_subrc/"
+        },
+        "message": "Check sy-subrc",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "e9b5eb6150eacc860663c8e74127ca277db311053abdb52421274e1440c93227",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

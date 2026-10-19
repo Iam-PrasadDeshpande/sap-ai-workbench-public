@@ -1,0 +1,62 @@
+{
+  "id": "T04_05",
+  "track": "T04",
+  "title": "Implicit client handling over local client table",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {},
+      "expected": 5
+    }
+  ],
+  "sapRequirement": "Target client isolation, privileged cross-client paths and actual DDIC client dependency.",
+  "sql": {
+    "client": true,
+    "rows": [
+      [
+        "100",
+        1,
+        5
+      ],
+      [
+        "200",
+        2,
+        99
+      ]
+    ]
+  },
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "32f6777cc29a59e7a5c5928d3a9808fb24c0c2c97cb0ad838d2fff33478890f8"
+    },
+    {
+      "file": "zr4_data.tabl.xml",
+      "sha256": "b44acf9be8bbccd7a13633baea12961a5e45ee589bc9197fbc955d31df3a5413"
+    }
+  ],
+  "rootCause": {
+    "classification": "OFFSTACK_ADAPTER_LIMITATION",
+    "secondary": [],
+    "explanation": "The custom SQLite adapter omits implicit client filtering. No upstream defect or live SAP vulnerability was established.",
+    "scope": "Configured local adapter behavior, not SAP behavior."
+  },
+  "historicalStaticClassification": "PARTIAL",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "M",
+      "capability": "Authorization",
+      "classification": "SAP_VERIFICATION_REQUIRED"
+    },
+    {
+      "id": "N",
+      "capability": "Client isolation",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

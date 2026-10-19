@@ -1,0 +1,56 @@
+{
+  "id": "T02_05",
+  "track": "T02",
+  "title": "API exists locally but release contract absent",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {
+        "IV": 4
+      },
+      "expected": 5
+    }
+  ],
+  "sapRequirement": "Authoritative API release state and usage contract for the exact target release/language version; local presence is insufficient.",
+  "params": "iv type i",
+  "releaseContract": "NOT_SUPPLIED",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "7370af3b9155305e3b935a945169903609805cb04546dbbca70af3ee7f2d255e"
+    },
+    {
+      "file": "zcl_r4_dep.clas.abap",
+      "sha256": "d745ffaf9cdeace214a3d1caa5d3890d39268c4c04958ccdc9145cf39e0965cf"
+    }
+  ],
+  "rootCause": {
+    "classification": "EXPECTED_STATIC_ACCEPTANCE",
+    "secondary": [],
+    "explanation": "No contradiction of a supported static rule contract is established by this case. Retain all policy findings and behavioral outcomes separately.",
+    "scope": "Observed exact rule policy; no SAP correctness inference."
+  },
+  "historicalStaticClassification": "LOCAL_VERIFIED",
+  "historicalBehaviorClassification": "LOCAL_VERIFIED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "B",
+      "capability": "ABAP syntax version handling",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "H",
+      "capability": "Released SAP APIs",
+      "classification": "SAP_VERIFICATION_REQUIRED"
+    },
+    {
+      "id": "I",
+      "capability": "ABAP Cloud restrictions",
+      "classification": "LOCAL_PARTIAL"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

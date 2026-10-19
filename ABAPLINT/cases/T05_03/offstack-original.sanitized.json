@@ -1,0 +1,25 @@
+{
+  "id": "T05_03",
+  "label": "T05_03",
+  "utc": "2026-10-19T09:25:17.239Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "completed": false,
+      "error": "CX_SY_DYN_CALL_ILLEGAL_FUNC not found"
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 0,
+  "referenceExecuted": 0,
+  "referencePassed": 0,
+  "status": "EXECUTION_ERROR"
+}

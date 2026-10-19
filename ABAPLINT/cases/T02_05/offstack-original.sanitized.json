@@ -1,0 +1,29 @@
+{
+  "id": "T02_05",
+  "label": "T02_05",
+  "utc": "2026-10-19T09:24:46.229Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {
+        "IV": 4
+      },
+      "actual": 5,
+      "completed": true,
+      "expected": 5,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 1,
+  "referenceExecuted": 1,
+  "referencePassed": 1,
+  "status": "LOCAL_VERIFIED"
+}

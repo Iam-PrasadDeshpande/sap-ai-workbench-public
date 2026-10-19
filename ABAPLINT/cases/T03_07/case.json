@@ -1,0 +1,43 @@
+{
+  "id": "T03_07",
+  "track": "T03",
+  "title": "EML entity read with absent behavior contract",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "DEFECT",
+  "defect": "EML entity and behavior contract absent from frozen inventory.",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "1465f8a34018ee77f7605dbc0cf081953b92b5ba64df1f1dfca0fe4c066a985c"
+    }
+  ],
+  "rootCause": {
+    "classification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "secondary": [],
+    "explanation": "Only the recorded parser/artifact/runtime stage was exercised; enterprise semantics remain unsupported or unverified in this configured path.",
+    "scope": "Do not promote artifact handling, style findings or failed invocation to semantic verification."
+  },
+  "historicalStaticClassification": "PARTIAL",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "J",
+      "capability": "CDS",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "K",
+      "capability": "RAP behavior definitions",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "L",
+      "capability": "EML references",
+      "classification": "STATIC_BLIND_SPOT"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

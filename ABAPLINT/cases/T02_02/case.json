@@ -1,0 +1,44 @@
+{
+  "id": "T02_02",
+  "track": "T02",
+  "title": "Same transaction in classic v758",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "v758",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "target": "v758",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "91d1486fb353c26708c918aa09271323e73887db8f7773e2e8255ede5097c975"
+    }
+  ],
+  "rootCause": {
+    "classification": "EXPECTED_STATIC_ACCEPTANCE",
+    "secondary": [],
+    "explanation": "No contradiction of a supported static rule contract is established by this case. Retain all policy findings and behavioral outcomes separately.",
+    "scope": "Observed exact rule policy; no SAP correctness inference."
+  },
+  "historicalStaticClassification": "LOCAL_VERIFIED",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "B",
+      "capability": "ABAP syntax version handling",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "H",
+      "capability": "Released SAP APIs",
+      "classification": "SAP_VERIFICATION_REQUIRED"
+    },
+    {
+      "id": "I",
+      "capability": "ABAP Cloud restrictions",
+      "classification": "LOCAL_PARTIAL"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

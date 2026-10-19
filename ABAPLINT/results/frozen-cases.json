@@ -1,0 +1,1317 @@
+[
+  {
+    "id": "T01_01",
+    "track": "T01",
+    "title": "Available synthetic cross-class dependency",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run importing iv type i returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = zcl_r4_dep=>inc( iv ).\n  endmethod.\nendclass.\n",
+      "zcl_r4_dep.clas.abap": "class zcl_r4_dep definition public final create public.\n public section.\n class-methods inc importing iv type i returning value(rv) type i.\nendclass.\nclass zcl_r4_dep implementation.\n method inc.\n rv = iv + 1.\n endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "CLEAN",
+    "defect": null,
+    "reference": [
+      {
+        "input": {
+          "IV": 0
+        },
+        "expected": 1
+      },
+      {
+        "input": {
+          "IV": -2
+        },
+        "expected": -1
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "params": "iv type i"
+  },
+  {
+    "id": "T01_02",
+    "track": "T01",
+    "title": "Missing custom class",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = zcl_r4_absent=>calculate( ).\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "dependencyAbsent": true
+  },
+  {
+    "id": "T01_03",
+    "track": "T01",
+    "title": "Missing external class outside error namespace",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = cl_r4_absent=>calculate( ).\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "dependencyAbsent": true
+  },
+  {
+    "id": "T01_04",
+    "track": "T01",
+    "title": "Missing data element",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    data value type zr4_amount.\n    rv = value.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "dependencyAbsent": true
+  },
+  {
+    "id": "T01_05",
+    "track": "T01",
+    "title": "Missing DDIC structure/component",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    data header type zr4_header.\n    rv = header-amount.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "dependencyAbsent": true
+  },
+  {
+    "id": "T01_06",
+    "track": "T01",
+    "title": "Missing transparent table",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    select single amount from zr4_missing into @rv.\n    if sy-subrc <> 0.\n      rv = -1.\n    endif.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "dependencyAbsent": true
+  },
+  {
+    "id": "T01_07",
+    "track": "T01",
+    "title": "Missing interface reference",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    data ref type ref to zif_r4_missing.\n    if ref is bound.\n      rv = 1.\n    endif.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "dependencyAbsent": true
+  },
+  {
+    "id": "T02_01",
+    "track": "T02",
+    "title": "Classic transaction in Cloud profile",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    call transaction 'SE38'.\n    rv = 1.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "RESTRICTION",
+    "defect": null,
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "target": "Cloud"
+  },
+  {
+    "id": "T02_02",
+    "track": "T02",
+    "title": "Same transaction in classic v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    call transaction 'SE38'.\n    rv = 1.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "target": "v758"
+  },
+  {
+    "id": "T02_03",
+    "track": "T02",
+    "title": "Modern expression under old v702",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v702",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = conv i( 1 ).\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "RESTRICTION",
+    "defect": null,
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+  },
+  {
+    "id": "T02_04",
+    "track": "T02",
+    "title": "Modern expression under v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = conv i( 1 ).\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "CLEAN",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 1
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+  },
+  {
+    "id": "T02_05",
+    "track": "T02",
+    "title": "API exists locally but release contract absent",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run importing iv type i returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = zcl_r4_dep=>inc( iv ).\n  endmethod.\nendclass.\n",
+      "zcl_r4_dep.clas.abap": "class zcl_r4_dep definition public final create public.\n public section.\n class-methods inc importing iv type i returning value(rv) type i.\nendclass.\nclass zcl_r4_dep implementation.\n method inc.\n rv = iv + 1.\n endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {
+          "IV": 4
+        },
+        "expected": 5
+      }
+    ],
+    "sapRequirement": "Authoritative API release state and usage contract for the exact target release/language version; local presence is insufficient.",
+    "params": "iv type i",
+    "releaseContract": "NOT_SUPPLIED"
+  },
+  {
+    "id": "T03_01",
+    "track": "T03",
+    "title": "CDS over local synthetic table",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zr4_view.ddls.asddls": "@AccessControl.authorizationCheck: #NOT_REQUIRED\ndefine view entity ZR4_VIEW as select from zr4_data { key id, amount }\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "artifactOnly": true
+  },
+  {
+    "id": "T03_02",
+    "track": "T03",
+    "title": "CDS missing source",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zr4_view.ddls.asddls": "@AccessControl.authorizationCheck: #NOT_REQUIRED\ndefine view entity ZR4_VIEW as select from zr4_missing { key id, amount }\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Missing CDS source from frozen inventory",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "artifactOnly": true
+  },
+  {
+    "id": "T03_03",
+    "track": "T03",
+    "title": "Malformed CDS definition",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zr4_view.ddls.asddls": "define view entity ZR4_VIEW as select from { invalid ???"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Deliberately malformed CDS syntax",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "artifactOnly": true
+  },
+  {
+    "id": "T03_04",
+    "track": "T03",
+    "title": "CDS missing association target",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zr4_view.ddls.asddls": "define view entity ZR4_VIEW as select from zr4_data association [0..1] to ZR4_ABSENT as _Other on $projection.id = _Other.id { key id, _Other }",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Missing association target from frozen inventory",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "artifactOnly": true
+  },
+  {
+    "id": "T03_05",
+    "track": "T03",
+    "title": "Managed BDEF with missing implementation class",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zr4_view.bdef.asbdef": "managed implementation in class zbp_r4_missing unique;\nstrict ( 2 );\ndefine behavior for ZR4_VIEW alias Item\npersistent table zr4_data\nlock master\nauthorization master ( instance )\n{ create; update; delete; field ( readonly ) id; }",
+      "zr4_view.ddls.asddls": "@AccessControl.authorizationCheck: #NOT_REQUIRED\ndefine view entity ZR4_VIEW as select from zr4_data { key id, amount }\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Referenced managed implementation class absent from frozen inventory.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "artifactOnly": true
+  },
+  {
+    "id": "T03_06",
+    "track": "T03",
+    "title": "Deliberately malformed BDEF",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zr4_bad.bdef.asbdef": "THIS IS NOT A BEHAVIOR DEFINITION ??? {{{"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Deliberately malformed BDEF artifact; no valid grammar header.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "artifactOnly": true
+  },
+  {
+    "id": "T03_07",
+    "track": "T03",
+    "title": "EML entity read with absent behavior contract",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    read entities of zr4_missing\n      entity Item\n      all fields with value #( ( id = 1 ) )\n      result data(items).\n    rv = lines( items ).\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "EML entity and behavior contract absent from frozen inventory.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+  },
+  {
+    "id": "T03_08",
+    "track": "T03",
+    "title": "RAP commit without business object/save environment",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    commit entities.\n    rv = 1.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [],
+    "sapRequirement": "RAP save sequence, validation failures, authorization and transactional consistency on target SAP."
+  },
+  {
+    "id": "T04_01",
+    "track": "T04",
+    "title": "Authorization result checked",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    authority-check object 'S_TCODE' id 'TCD' field 'SE38'.\n    if sy-subrc = 0.\n      rv = 1.\n    else.\n      rv = 0.\n    endif.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [],
+    "sapRequirement": "Actual target authorization object/roles, positive and negative users; no host authorization kernel supplied."
+  },
+  {
+    "id": "T04_02",
+    "track": "T04",
+    "title": "Authorization result ignored",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    authority-check object 'S_TCODE' id 'TCD' field 'SE38'.\n    rv = 1.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": "Access decision must honor failed authorization result; frozen static policy check_subrc can only cover selected patterns.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+  },
+  {
+    "id": "T04_03",
+    "track": "T04",
+    "title": "Missing deny branch in synthetic policy",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run importing iv type i returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = 1.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": "Frozen synthetic policy: iv=0 must deny; iv=1 may allow. This candidate ignores its input.",
+    "reference": [
+      {
+        "input": {
+          "IV": 0
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "IV": 1
+        },
+        "expected": 1
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "params": "iv type i",
+    "behaviorDefect": true
+  },
+  {
+    "id": "T04_04",
+    "track": "T04",
+    "title": "Explicit synthetic policy guard",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run importing iv type i returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = cond #( when iv = 1 then 1 else 0 ).\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {
+          "IV": 0
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "IV": 1
+        },
+        "expected": 1
+      },
+      {
+        "input": {
+          "IV": -1
+        },
+        "expected": 0
+      }
+    ],
+    "sapRequirement": "Local iv policy is not SAP authorization; validate user/role/object mapping and all access paths on target.",
+    "params": "iv type i"
+  },
+  {
+    "id": "T04_05",
+    "track": "T04",
+    "title": "Implicit client handling over local client table",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    select sum( amount ) from zr4_data into @rv.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>MANDT</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>CLNT</DATATYPE><LENG>3</LENG><INTTYPE>C</INTTYPE><INTLEN>6</INTLEN></DD03P><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 5
+      }
+    ],
+    "sapRequirement": "Target client isolation, privileged cross-client paths and actual DDIC client dependency.",
+    "sql": {
+      "client": true,
+      "rows": [
+        [
+          "100",
+          1,
+          5
+        ],
+        [
+          "200",
+          2,
+          99
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T04_06",
+    "track": "T04",
+    "title": "Explicit cross-client classic SQL",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    select sum( amount ) from zr4_data client specified into @rv.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>MANDT</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>CLNT</DATATYPE><LENG>3</LENG><INTTYPE>C</INTTYPE><INTLEN>6</INTLEN></DD03P><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 104
+      }
+    ],
+    "sapRequirement": "Explicit privileged cross-client access requires target policy and negative tests; aggregate local behavior is not a security approval.",
+    "sql": {
+      "client": true,
+      "rows": [
+        [
+          "100",
+          1,
+          5
+        ],
+        [
+          "200",
+          2,
+          99
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T05_01",
+    "track": "T05",
+    "title": "COMMIT WORK with no configured database",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    commit work.\n    rv = 1.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 1
+      }
+    ],
+    "sapRequirement": "No-connection return is not persistence; verify update completion, rollback boundaries and SAP LUW."
+  },
+  {
+    "id": "T05_02",
+    "track": "T05",
+    "title": "ROLLBACK WORK with no configured database",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rollback work.\n    rv = 1.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 1
+      }
+    ],
+    "sapRequirement": "No-connection return is not rollback; verify target DB state and registered update tasks."
+  },
+  {
+    "id": "T05_03",
+    "track": "T05",
+    "title": "Absent enqueue function",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    call function 'ENQUEUE_EZR4_MISSING'.\n    rv = 1.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Frozen inventory has no enqueue function/lock object; contention cannot be assessed.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "dependencyAbsent": true
+  },
+  {
+    "id": "T05_04",
+    "track": "T05",
+    "title": "Absent update function",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    call function 'ZR4_UPDATE_MISSING' in update task.\n    commit work and wait.\n    rv = sy-subrc.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "DEFECT",
+    "defect": "Frozen inventory has no update function. SAP update-task scheduler not available.",
+    "reference": [],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "dependencyAbsent": true
+  },
+  {
+    "id": "T05_05",
+    "track": "T05",
+    "title": "Local SQLite transaction rollback",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    data row type zr4_data.\n    row-id = 9.\n    row-amount = 10.\n    insert zr4_data from @row.\n    if sy-subrc <> 0.\n      rv = -999.\n      return.\n    endif.\n    rollback work.\n    select sum( amount ) from zr4_data into @rv.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 10
+      }
+    ],
+    "sapRequirement": "Only SQLite transaction adapter evaluated; SAP update-task, enqueue ownership, commit ordering and save sequence remain unverified.",
+    "transaction": true,
+    "sql": {
+      "client": false,
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T05_06",
+    "track": "T05",
+    "title": "Local SQLite transaction commit",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "v758",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    data row type zr4_data.\n    row-id = 9.\n    row-amount = 10.\n    insert zr4_data from @row.\n    if sy-subrc <> 0.\n      rv = -999.\n      return.\n    endif.\n    commit work.\n    select sum( amount ) from zr4_data into @rv.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 20
+      }
+    ],
+    "sapRequirement": "Only SQLite transaction adapter evaluated; SAP update-task, enqueue ownership, commit ordering and save sequence remain unverified.",
+    "transaction": true,
+    "sql": {
+      "client": false,
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T06_01",
+    "track": "T06",
+    "title": "R3 regression: integer intermediate before truncation",
+    "provenance": "R3_ARITHMETIC_REGRESSION_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run importing numerator type i denominator type i returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = trunc( numerator / denominator ).\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": "Frozen mathematical contract truncates exact rational toward zero; integer intermediate may violate it.",
+    "reference": [
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": -2
+        },
+        "expected": 3
+      },
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": 2
+        },
+        "expected": -3
+      },
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": 3
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": -2
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": 2
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": 3
+        },
+        "expected": -1
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": -2
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": 2
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": 3
+        },
+        "expected": 1
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": -2
+        },
+        "expected": -3
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": 2
+        },
+        "expected": 3
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": 3
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": -2
+        },
+        "expected": -1073741823
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": 2
+        },
+        "expected": 1073741823
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": 3
+        },
+        "expected": 715827882
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": -2
+        },
+        "expected": 1073741824
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": 2
+        },
+        "expected": -1073741824
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": 3
+        },
+        "expected": -715827882
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "params": "numerator type i denominator type i",
+    "behaviorDefect": true
+  },
+  {
+    "id": "T06_02",
+    "track": "T06",
+    "title": "R3 regression: decimal before division",
+    "provenance": "R3_ARITHMETIC_REGRESSION_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run importing numerator type i denominator type i returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    rv = trunc( conv decfloat34( numerator ) / denominator ).\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": -2
+        },
+        "expected": 3
+      },
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": 2
+        },
+        "expected": -3
+      },
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": 3
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": -2
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": 2
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": 3
+        },
+        "expected": -1
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": -2
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": 2
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": 3
+        },
+        "expected": 1
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": -2
+        },
+        "expected": -3
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": 2
+        },
+        "expected": 3
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": 3
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": -2
+        },
+        "expected": -1073741823
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": 2
+        },
+        "expected": 1073741823
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": 3
+        },
+        "expected": 715827882
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": -2
+        },
+        "expected": 1073741824
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": 2
+        },
+        "expected": -1073741824
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": 3
+        },
+        "expected": -715827882
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "params": "numerator type i denominator type i"
+  },
+  {
+    "id": "T06_03",
+    "track": "T06",
+    "title": "Packed decimal rounding boundary",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    data amount type p length 8 decimals 2.\n    amount = conv decfloat34( '1.235' ).\n    rv = amount * 100.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 124
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+  },
+  {
+    "id": "T06_04",
+    "track": "T06",
+    "title": "Decimal cancellation beyond binary integer exactness",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    data amount type decfloat34.\n    amount = conv decfloat34( '9007199254740993' ) - conv decfloat34( '9007199254740992' ).\n    rv = amount.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 1
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "oracleBasis": "Exact integer subtraction using BigInt, not binary Number arithmetic."
+  },
+  {
+    "id": "T06_05",
+    "track": "T06",
+    "title": "Open SQL filtering and aggregation",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    select sum( amount ) from zr4_data where amount > 0 into @rv.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 12
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "sql": {
+      "client": false,
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T06_06",
+    "track": "T06",
+    "title": "Open SQL null predicate",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    select count( * ) from zr4_data where amount is null into @rv.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 1
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "sql": {
+      "client": false,
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T06_07",
+    "track": "T06",
+    "title": "Open SQL null to initial conversion",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    select single amount from zr4_data where id = 2 into @rv.\n    if sy-subrc <> 0.\n      rv = -999.\n    endif.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 0
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "sql": {
+      "client": false,
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T06_08",
+    "track": "T06",
+    "title": "Open SQL null aggregate",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    select sum( amount ) from zr4_data into @rv.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 10
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "sql": {
+      "client": false,
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T06_09",
+    "track": "T06",
+    "title": "Empty SQL aggregate initial result",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    select sum( amount ) from zr4_data where id > 99 into @rv.\n  endmethod.\nendclass.\n",
+      "zr4_data.tabl.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<abapGit version=\"v1.0.0\" serializer=\"LCL_OBJECT_TABL\" serializer_version=\"v1.0.0\">\n<asx:abap xmlns:asx=\"http://www.sap.com/abapxml\" version=\"1.0\"><asx:values>\n<DD02V><TABNAME>ZR4_DATA</TABNAME><DDLANGUAGE>E</DDLANGUAGE><TABCLASS>TRANSP</TABCLASS><DDTEXT>R4 synthetic</DDTEXT><CONTFLAG>A</CONTFLAG><EXCLASS>1</EXCLASS></DD02V>\n<DD09L><TABNAME>ZR4_DATA</TABNAME><TABART>APPL0</TABART><TABKAT>0</TABKAT></DD09L>\n<DD03P_TABLE><DD03P><FIELDNAME>ID</FIELDNAME><KEYFLAG>X</KEYFLAG><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P><DD03P><FIELDNAME>AMOUNT</FIELDNAME><DATATYPE>INT4</DATATYPE><INTTYPE>I</INTTYPE><INTLEN>4</INTLEN><LENG>10</LENG></DD03P></DD03P_TABLE>\n</asx:values></asx:abap></abapGit>"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 0
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+    "sql": {
+      "client": false,
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "T06_10",
+    "track": "T06",
+    "title": "Open SQL from internal table",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "profile": "cloud",
+    "files": {
+      "zcl_r4_case.clas.abap": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    types: begin of row_type,\n      id type i,\n      amount type i,\n    end of row_type.\n    data rows type standard table of row_type with empty key.\n    rows = value #( ( id = 1 amount = 5 ) ( id = 2 amount = 7 ) ).\n    select sum( amount ) from @rows as row into @rv.\n  endmethod.\nendclass.\n"
+    },
+    "expectedStatic": "OBSERVE",
+    "defect": null,
+    "reference": [
+      {
+        "input": {},
+        "expected": 12
+      }
+    ],
+    "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+  }
+]

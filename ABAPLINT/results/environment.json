@@ -1,0 +1,25 @@
+{
+  "node": "v24.18.0",
+  "core": "2.120.81",
+  "extension": "0.6.698",
+  "transpiler": "2.14.8",
+  "runtime": "2.14.8",
+  "serverSha256": "a5b462c564958592aafd41d2044ef2df2c22a4ad4df19b5d49577155a3b22587",
+  "cloudConfigSha256": "c8c999cac95baa1ebec47b22d735dd9d743184c16073e84e303c78a6a1521146",
+  "ruleEntries": 22,
+  "dependencies": [],
+  "syntax": {
+    "version": "Cloud",
+    "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+  },
+  "installedArtifactsVerifiedDuringPreparation": true,
+  "selfContained": false,
+  "externalPrerequisites": [
+    "Node 24.18.0 or separately validated compatible Node with node:sqlite",
+    "Public npm packages pinned by package-lock",
+    "Exact VS Code extension 0.6.698 out-native/server.js matching recorded SHA-256; supply ABAPLINT_SERVER"
+  ],
+  "unpublishedToolingRequired": false,
+  "portableHarness": "Public sanitized derivatives; independent validation required",
+  "sap": "NOT_EXECUTED"
+}

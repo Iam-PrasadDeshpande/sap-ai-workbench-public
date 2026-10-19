@@ -1,0 +1,25 @@
+{
+  "id": "T06_10",
+  "label": "T06_10",
+  "utc": "2026-10-19T09:25:41.223Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "completed": false,
+      "error": "Error: Runtime, database not initialized\n    at Context.defaultDB (node_modules\\@abaplint\\runtime\\build\\src\\context.js:21:19)\n    at select (node_modules\\@abaplint\\runtime\\build\\src\\statements\\select.js:7:42)\n    at Statements.select (node_modules\\@abaplint\\runtime\\build\\src\\statements\\index.js:137:36)\n    at zcl_r4_case.run (zcl_r4_case.clas.mjs:32:27)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:21:258)"
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 0,
+  "referenceExecuted": 0,
+  "referencePassed": 0,
+  "status": "EXECUTION_ERROR"
+}

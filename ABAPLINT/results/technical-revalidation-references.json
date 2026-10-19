@@ -1,0 +1,74 @@
+[
+  {
+    "id": "SAP_CLOUD",
+    "title": "SAP ABAP Cloud key concepts",
+    "url": "https://help.sap.com/docs/abap-cloud/developer-guide-from-classic-abap-to-abap-cloud/overview-of-key-concepts-in-abap-cloud",
+    "assessment": "Same software component or released contract; component and release metadata absent here.",
+    "accessedUTC": "2026-10-19",
+    "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+    "compilerVerification": false
+  },
+  {
+    "id": "SAP_BDEF",
+    "title": "SAP entity behavior definition",
+    "url": "https://help.sap.com/docs/abap-cloud/abap-keyword/abenbdl_define_beh.html",
+    "assessment": "Root entity behavior definition mandatory. Current documentation, not a compiler check of a pinned SAP release.",
+    "accessedUTC": "2026-10-19",
+    "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+    "compilerVerification": false
+  },
+  {
+    "id": "SAP_BDEF_HEADER",
+    "title": "SAP behavior definition header",
+    "url": "https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/ABENBDL_BDEF_HEADER.html",
+    "assessment": "Managed implementation class can be optional in some models; do not infer every managed BO needs a custom class.",
+    "accessedUTC": "2026-10-19",
+    "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+    "compilerVerification": false
+  },
+  {
+    "id": "SAP_DDIC",
+    "title": "SAP NetWeaver 7.31 DDIC initial values",
+    "url": "https://help.sap.com/docs/SAP_NETWEAVER_731_BW_ABAP/ec1c9c8191b74de98feb94001a95dd76/cf21ebf0446011d189700000e8322d00.html",
+    "assessment": "Fresh or converted table columns default NOT NULL; later field addition can differ. Historical documentation is not target Cloud DDIC proof.",
+    "accessedUTC": "2026-10-19",
+    "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+    "compilerVerification": false
+  },
+  {
+    "id": "SAP_NULL",
+    "title": "SAP ABAP SQL cheat sheet",
+    "url": "https://github.com/SAP-samples/abap-cheat-sheets/blob/main/03_ABAP_SQL.md",
+    "assessment": "NULL differs from ABAP initial; outer joins can produce NULL; transfer without indicators can yield type-initial values.",
+    "accessedUTC": "2026-10-19",
+    "access": "Primary repository substantive text retrieved",
+    "compilerVerification": false
+  },
+  {
+    "id": "SAP_AGG",
+    "title": "SAP SQL aggregate functions",
+    "url": "https://help.sap.com/docs/abap-cloud/abap-keywords/sql-agg-agg-func?q=KOL1",
+    "assessment": "SUM ignores NULL. Exact target data state remains unverified.",
+    "accessedUTC": "2026-10-19",
+    "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+    "compilerVerification": false
+  },
+  {
+    "id": "SAP_SELECT_758",
+    "title": "SAP 7.58 SELECT client documentation attempted",
+    "url": "https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abapselect_client_obsolete.htm",
+    "assessment": "Exact release page inaccessible; no decisive syntax conclusion from it.",
+    "accessedUTC": "2026-10-19",
+    "access": "Unavailable",
+    "compilerVerification": false
+  },
+  {
+    "id": "SAP_STRICT",
+    "title": "SAP ABAP SQL strict mode 7.54",
+    "url": "https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/abenabap_sql_strictmode_754.htm",
+    "assessment": "Retrieved restriction describes write statements; not sufficient to reject the SELECT fixture.",
+    "accessedUTC": "2026-10-19",
+    "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+    "compilerVerification": false
+  }
+]

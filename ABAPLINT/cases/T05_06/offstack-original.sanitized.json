@@ -1,0 +1,41 @@
+{
+  "id": "T05_06",
+  "label": "T05_06",
+  "utc": "2026-10-19T09:25:22.805Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "actual": 20,
+      "completed": true,
+      "expected": 20,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [
+    {
+      "operation": "insert",
+      "sql": "INSERT INTO \"zr4_data\" (id,amount) VALUES (9,10)"
+    },
+    {
+      "operation": "commit",
+      "active": true
+    },
+    {
+      "operation": "select",
+      "sql": "SELECT sum( amount )  from \"zr4_data\""
+    }
+  ],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "database": "Node built-in SQLite, in-memory, custom minimal adapter; not SAP HANA",
+  "completed": 1,
+  "referenceExecuted": 1,
+  "referencePassed": 1,
+  "status": "LOCAL_VERIFIED"
+}

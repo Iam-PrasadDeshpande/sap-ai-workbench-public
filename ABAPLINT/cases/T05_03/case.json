@@ -1,0 +1,46 @@
+{
+  "id": "T05_03",
+  "track": "T05",
+  "title": "Absent enqueue function",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "v758",
+  "expectedStatic": "DEFECT",
+  "defect": "Frozen inventory has no enqueue function/lock object; contention cannot be assessed.",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "dependencyAbsent": true,
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "bd4b3e3aeb6c5c054b98afb4df53b65382bd3a34670a9bbd67d3be78a9165b20"
+    }
+  ],
+  "rootCause": {
+    "classification": "MISSING_DEPENDENCY",
+    "secondary": [
+      "UNSUPPORTED_SEMANTIC_CHECK"
+    ],
+    "explanation": "Classic v758 case supplies no enqueue function/lock object. Invocation fails. The pinned CALL FUNCTION syntax path checks absent functions specifically in Cloud; this case is classic.",
+    "scope": "Pinned call_function.runSyntax performs the missing/not-released function check for LanguageVersion.Cloud, not equivalent classic validation."
+  },
+  "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "O",
+      "capability": "Transaction semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "P",
+      "capability": "Enqueue/lock behavior",
+      "classification": "UNSUPPORTED_OFFSTACK"
+    },
+    {
+      "id": "Q",
+      "capability": "Update processing",
+      "classification": "UNSUPPORTED_OFFSTACK"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

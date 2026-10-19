@@ -1,0 +1,11 @@
+{
+  "id": "SR_T04_06_NO_ESCAPE",
+  "originCase": "T04_06",
+  "change": "Start from the subrc-handled form; remove only the host-variable escape @, retaining classic CLIENT SPECIFIED.",
+  "expected": "Observe classic parser behavior separately from the escaped-host form; no SAP legality promise.",
+  "profile": "v758",
+  "sourceHashes": {
+    "zcl_r4_case.clas.abap": "bdc36b5c945f44a9598f3d7f17f5f6de47463fd65404c6e0061300bab757a44b",
+    "zr4_data.tabl.xml": "b44acf9be8bbccd7a13633baea12961a5e45ee589bc9197fbc955d31df3a5413"
+  }
+}

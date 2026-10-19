@@ -1,0 +1,26 @@
+{
+  "id": "T02_01",
+  "label": "T02_01",
+  "utc": "2026-10-19T09:24:38.774Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "actual": 1,
+      "completed": true,
+      "smokeOnly": true
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 1,
+  "referenceExecuted": 0,
+  "referencePassed": 0,
+  "status": "SMOKE_COMPLETED_NO_ORACLE"
+}

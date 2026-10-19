@@ -1,0 +1,68 @@
+{
+  "id": "T06_05",
+  "track": "T06",
+  "title": "Open SQL filtering and aggregation",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {},
+      "expected": 12
+    }
+  ],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "sql": {
+    "client": false,
+    "rows": [
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        null
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        -2
+      ]
+    ]
+  },
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "f84c5947e9c9feeec91e5bdd5af599073117511942c9fa6072a6e1fb9c02a54e"
+    },
+    {
+      "file": "zr4_data.tabl.xml",
+      "sha256": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+    }
+  ],
+  "rootCause": {
+    "classification": "EXPECTED_STATIC_RULE_FINDING",
+    "secondary": [],
+    "explanation": "No contradiction of a supported static rule contract is established by this case. Retain all policy findings and behavioral outcomes separately.",
+    "scope": "Observed exact rule policy; no SAP correctness inference."
+  },
+  "historicalStaticClassification": "PARTIAL",
+  "historicalBehaviorClassification": "LOCAL_VERIFIED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "R",
+      "capability": "Numeric semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "S",
+      "capability": "Open SQL/database semantics",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

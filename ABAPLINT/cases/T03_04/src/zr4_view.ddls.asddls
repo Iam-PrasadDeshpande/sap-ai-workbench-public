@@ -1,0 +1,1 @@
+define view entity ZR4_VIEW as select from zr4_data association [0..1] to ZR4_ABSENT as _Other on $projection.id = _Other.id { key id, _Other }

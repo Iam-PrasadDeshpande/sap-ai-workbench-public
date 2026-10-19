@@ -1,0 +1,43 @@
+{
+  "id": "T03_08",
+  "track": "T03",
+  "title": "RAP commit without business object/save environment",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [],
+  "sapRequirement": "RAP save sequence, validation failures, authorization and transactional consistency on target SAP.",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "8fe430178af34835508b67b1f30ff3765405f89d9651a7227b71f93a575d7a84"
+    }
+  ],
+  "rootCause": {
+    "classification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "secondary": [],
+    "explanation": "Only the recorded parser/artifact/runtime stage was exercised; enterprise semantics remain unsupported or unverified in this configured path.",
+    "scope": "Do not promote artifact handling, style findings or failed invocation to semantic verification."
+  },
+  "historicalStaticClassification": "LOCAL_VERIFIED",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "J",
+      "capability": "CDS",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "K",
+      "capability": "RAP behavior definitions",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "L",
+      "capability": "EML references",
+      "classification": "STATIC_BLIND_SPOT"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

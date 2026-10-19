@@ -1,0 +1,11 @@
+{
+  "id": "SR_T06_08_ZERO_ROW",
+  "originCase": "T06_08",
+  "change": "Keep ABAP/DDIC source byte-identical; replace the seeded nullable row amount null with integer initial value 0. Leave the permissive adapter schema unchanged.",
+  "expected": "SUM remains 10 for NULL or 0 in this row set, so the original aggregate cannot discriminate those data states.",
+  "profile": "cloud",
+  "sourceHashes": {
+    "zcl_r4_case.clas.abap": "32f6777cc29a59e7a5c5928d3a9808fb24c0c2c97cb0ad838d2fff33478890f8",
+    "zr4_data.tabl.xml": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+  }
+}

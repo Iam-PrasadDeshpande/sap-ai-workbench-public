@@ -1,0 +1,38 @@
+{
+  "id": "T04_01",
+  "track": "T04",
+  "title": "Authorization result checked",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [],
+  "sapRequirement": "Actual target authorization object/roles, positive and negative users; no host authorization kernel supplied.",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "d05baaafda02ab48de7c2ef62779507dad108f6630d249cfee5f67b2f995df10"
+    }
+  ],
+  "rootCause": {
+    "classification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "secondary": [],
+    "explanation": "Only the recorded parser/artifact/runtime stage was exercised; enterprise semantics remain unsupported or unverified in this configured path.",
+    "scope": "Do not promote artifact handling, style findings or failed invocation to semantic verification."
+  },
+  "historicalStaticClassification": "LOCAL_VERIFIED",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "M",
+      "capability": "Authorization",
+      "classification": "SAP_VERIFICATION_REQUIRED"
+    },
+    {
+      "id": "N",
+      "capability": "Client isolation",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

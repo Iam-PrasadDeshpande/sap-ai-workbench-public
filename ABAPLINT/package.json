@@ -1,0 +1,14 @@
+{
+  "name": "abaplint-r4-public-reproduction",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@abaplint/core": "2.120.81",
+    "@abaplint/runtime": "2.14.8",
+    "@abaplint/transpiler": "2.14.8"
+  },
+  "scripts": {
+    "reproduce": "node harness/reproduce.cjs",
+    "verify": "node harness/verify.cjs"
+  }
+}

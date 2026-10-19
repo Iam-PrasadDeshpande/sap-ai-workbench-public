@@ -1,0 +1,25 @@
+{
+  "id": "T03_07",
+  "label": "T03_07",
+  "utc": "2026-10-19T09:24:58.937Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "completed": false,
+      "error": "Error: Void type: ReadEntities\n    at zcl_r4_case.clas.mjs:22:32\n    at zcl_r4_case.run (zcl_r4_case.clas.mjs:22:71)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:21:258)"
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 0,
+  "referenceExecuted": 0,
+  "referencePassed": 0,
+  "status": "EXECUTION_ERROR"
+}

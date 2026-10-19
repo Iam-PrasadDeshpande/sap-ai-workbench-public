@@ -1,0 +1,230 @@
+{
+  "id": "T06_01",
+  "track": "T06",
+  "title": "R3 regression: integer intermediate before truncation",
+  "provenance": "R3_ARITHMETIC_REGRESSION_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": "Frozen mathematical contract truncates exact rational toward zero; integer intermediate may violate it.",
+  "reference": [
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": -2
+      },
+      "expected": 3
+    },
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": 2
+      },
+      "expected": -3
+    },
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": 3
+      },
+      "expected": -2
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": -2
+      },
+      "expected": 2
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": 2
+      },
+      "expected": -2
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": 3
+      },
+      "expected": -1
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": -2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": 2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": 3
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": -2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": 2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": 3
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": -2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": 2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": 3
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": -2
+      },
+      "expected": -2
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": 2
+      },
+      "expected": 2
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": 3
+      },
+      "expected": 1
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": -2
+      },
+      "expected": -3
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": 2
+      },
+      "expected": 3
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": 3
+      },
+      "expected": 2
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": -2
+      },
+      "expected": -1073741823
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": 2
+      },
+      "expected": 1073741823
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": 3
+      },
+      "expected": 715827882
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": -2
+      },
+      "expected": 1073741824
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": 2
+      },
+      "expected": -1073741824
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": 3
+      },
+      "expected": -715827882
+    }
+  ],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "params": "numerator type i denominator type i",
+  "behaviorDefect": true,
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "a18598057031fb13b6fc791251d889fb66c63ff39fdae971429f159a5a82840b"
+    }
+  ],
+  "rootCause": {
+    "classification": "EXPECTED_STATIC_ACCEPTANCE",
+    "secondary": [],
+    "explanation": "The valid expression has integer intermediate calculation semantics, while the frozen mathematical oracle requests truncation of the exact quotient. This is a source-contract pitfall, not a requirement a static syntax rule promises to verify.",
+    "scope": "check_syntax does not prove the stated business/mathematical contract. Original 10/27 matches are retained; no runtime defect established."
+  },
+  "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+  "historicalBehaviorClassification": "PARTIAL",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "R",
+      "capability": "Numeric semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "S",
+      "capability": "Open SQL/database semantics",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

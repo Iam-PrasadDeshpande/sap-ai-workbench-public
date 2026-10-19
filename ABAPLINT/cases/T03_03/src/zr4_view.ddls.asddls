@@ -1,0 +1,1 @@
+define view entity ZR4_VIEW as select from { invalid ???

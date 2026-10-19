@@ -1,0 +1,62 @@
+{
+  "CASE_ID": "T04_03",
+  "SCENARIO": "Missing deny branch in synthetic policy",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Simulated semantic scenario",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Integer authorization-policy simulation. unused_variables on iv is unrelated to policy enforcement; preserve the frozen mismatch.",
+  "STATIC_RESULT": "VALIDATION_FAIL",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 2,
+            "character": 26
+          },
+          "end": {
+            "line": 2,
+            "character": 28
+          }
+        },
+        "code": "unused_variables",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/unused_variables/"
+        },
+        "message": "Variable \"iv\" not used",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": "Frozen synthetic policy: iv=0 must deny; iv=1 may allow. This candidate ignores its input.",
+    "frozenReferences": [
+      {
+        "input": {
+          "IV": 0
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "IV": 1
+        },
+        "expected": 1
+      }
+    ]
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+  "OFFSTACK_RESULT": {
+    "status": "PARTIAL",
+    "returned": 2,
+    "matched": 1,
+    "frozenExpected": 2,
+    "record": "cases/T04_03/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T04_03/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_03",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Integer authorization-policy simulation. unused_variables on iv is unrelated to policy enforcement; preserve the frozen mismatch."
+}

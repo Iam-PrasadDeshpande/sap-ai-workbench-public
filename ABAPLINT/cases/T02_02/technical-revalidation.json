@@ -1,0 +1,29 @@
+{
+  "CASE_ID": "T02_02",
+  "SCENARIO": "Same transaction in classic v758",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Representative language pattern",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Classic transaction statement under the classic profile; local runtime lacks the SAP transaction environment.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": null,
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+  "OFFSTACK_RESULT": {
+    "status": "UNSUPPORTED",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T02_02/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T02_02/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T02_02",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Classic transaction statement under the classic profile; local runtime lacks the SAP transaction environment."
+}

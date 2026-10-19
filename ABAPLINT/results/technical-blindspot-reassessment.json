@@ -1,0 +1,58 @@
+[
+  {
+    "id": "T01_03",
+    "historicalLabel": "KNOWN_DEFECT_STATIC_ACCEPTANCE_UNDER_FROZEN_POLICY",
+    "technicalRootCause": "CONFIGURATION_LIMITATION",
+    "interpretation": "CL_* is outside the frozen errorNamespace. Missing external class acceptance does not demonstrate a failure of the configured namespace contract.",
+    "upstreamDefectEstablished": false
+  },
+  {
+    "id": "T03_02",
+    "historicalLabel": "KNOWN_DEFECT_STATIC_ACCEPTANCE_UNDER_FROZEN_POLICY",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA",
+    "interpretation": "Intentional missing CDS dependency. Processing does not establish dependency resolution or target SAP activation; no demonstrated upstream contract violation.",
+    "upstreamDefectEstablished": false
+  },
+  {
+    "id": "T03_04",
+    "historicalLabel": "KNOWN_DEFECT_STATIC_ACCEPTANCE_UNDER_FROZEN_POLICY",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA",
+    "interpretation": "Intentional missing CDS dependency. Processing does not establish dependency resolution or target SAP activation; no demonstrated upstream contract violation.",
+    "upstreamDefectEstablished": false
+  },
+  {
+    "id": "T03_05",
+    "historicalLabel": "KNOWN_DEFECT_STATIC_ACCEPTANCE_UNDER_FROZEN_POLICY",
+    "technicalRootCause": "MULTIPLE_DEFECTS_IN_FIXTURE",
+    "interpretation": "Missing implementation class is not the sole issue: associated CDS lacks root. Strict managed authorization and key creation also require target modeling review. No SAP compiler execution.",
+    "upstreamDefectEstablished": false
+  },
+  {
+    "id": "T03_06",
+    "historicalLabel": "KNOWN_DEFECT_STATIC_ACCEPTANCE_UNDER_FROZEN_POLICY",
+    "technicalRootCause": "UNSUPPORTED_SEMANTIC_CHECK",
+    "interpretation": "Intentionally malformed BDEF accepted by the observed policy; no BDEF semantic validation contract established for the configured tool.",
+    "upstreamDefectEstablished": false
+  },
+  {
+    "id": "T05_03",
+    "historicalLabel": "KNOWN_DEFECT_STATIC_ACCEPTANCE_UNDER_FROZEN_POLICY",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA",
+    "interpretation": "Missing function module metadata. Pinned missing-function check is Cloud-specific while this case uses classic configuration; silence is not an established upstream defect.",
+    "upstreamDefectEstablished": false
+  },
+  {
+    "id": "T05_04",
+    "historicalLabel": "KNOWN_DEFECT_STATIC_ACCEPTANCE_UNDER_FROZEN_POLICY",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA",
+    "interpretation": "Missing function module metadata. Pinned missing-function check is Cloud-specific while this case uses classic configuration; silence is not an established upstream defect.",
+    "upstreamDefectEstablished": false
+  },
+  {
+    "id": "T06_01",
+    "historicalLabel": "KNOWN_DEFECT_STATIC_ACCEPTANCE_UNDER_FROZEN_POLICY",
+    "technicalRootCause": "VALID_NEGATIVE_TEST",
+    "interpretation": "ABAP numeric expression is a negative against the mathematical oracle; 17 mismatches do not imply that check_syntax promises mathematical contract verification.",
+    "upstreamDefectEstablished": false
+  }
+]

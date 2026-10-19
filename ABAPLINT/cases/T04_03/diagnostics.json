@@ -1,0 +1,32 @@
+{
+  "caseId": "T04_03",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 2,
+            "character": 26
+          },
+          "end": {
+            "line": 2,
+            "character": 28
+          }
+        },
+        "code": "unused_variables",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/unused_variables/"
+        },
+        "message": "Variable \"iv\" not used",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "c90d1e3efca264084c5e1e10ee9a5dc118a8de4e4c03244a71a53632a3d01926",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

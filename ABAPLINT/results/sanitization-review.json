@@ -1,0 +1,17 @@
+{
+  "status": "SANITIZATION_REVIEW_PASSED",
+  "candidateFilesScanned": 300,
+  "requiredCaseCount": 42,
+  "sourceOccurrencesVerified": 57,
+  "sourceSanitizedDerivatives": 0,
+  "executableHarnessDerivatives": 3,
+  "allExecutableDerivativesIndependentlyRerun": true,
+  "sanitizedDerivativeFiles": 95,
+  "withheldRequiredCaseArtifacts": 0,
+  "findings": [],
+  "reviewScope": "Each enumerated public candidate file scanned; synthetic source/config compared against original byte digests. Host roots/process IDs sanitized in data. This is a bounded content review, not a guarantee against every possible secret pattern.",
+  "historicalReadmePreserved": true,
+  "upstreamIssuesConfirmed": 0,
+  "privatePathsPublished": false,
+  "caseOutcomesReproduced": 42
+}

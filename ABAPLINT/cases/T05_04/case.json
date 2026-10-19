@@ -1,0 +1,46 @@
+{
+  "id": "T05_04",
+  "track": "T05",
+  "title": "Absent update function",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "v758",
+  "expectedStatic": "DEFECT",
+  "defect": "Frozen inventory has no update function. SAP update-task scheduler not available.",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "dependencyAbsent": true,
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "e3174055796f31f9bc72316beb8e2dc07ea10fa2041be00b342dbf91d2c49e74"
+    }
+  ],
+  "rootCause": {
+    "classification": "MISSING_DEPENDENCY",
+    "secondary": [
+      "UNSUPPORTED_SEMANTIC_CHECK"
+    ],
+    "explanation": "Classic v758 case supplies no update function or SAP scheduler. Invocation fails before update semantics. No supported classic missing-function promise was established.",
+    "scope": "The enabled check_syntax function-resolution behavior differs by language profile; it cannot establish a SAP update environment."
+  },
+  "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "O",
+      "capability": "Transaction semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "P",
+      "capability": "Enqueue/lock behavior",
+      "classification": "UNSUPPORTED_OFFSTACK"
+    },
+    {
+      "id": "Q",
+      "capability": "Update processing",
+      "classification": "UNSUPPORTED_OFFSTACK"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

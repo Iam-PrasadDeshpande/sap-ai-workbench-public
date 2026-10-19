@@ -1,0 +1,75 @@
+{
+  "utc": "2026-10-19T09:27:43.080Z",
+  "clientMetadata": {
+    "firstField": "MANDT",
+    "firstFieldType": "CLNT",
+    "firstFieldKey": true,
+    "tableKeys": [
+      "MANDT",
+      "ID"
+    ],
+    "xmlSha256": "b44acf9be8bbccd7a13633baea12961a5e45ee589bc9197fbc955d31df3a5413",
+    "evidence": "Frozen XML first DD03P is key MANDT type CLNT; actual core table parsed and keys read."
+  },
+  "checks": [
+    {
+      "name": "Client reference enumerated/direct SQL",
+      "pass": true
+    },
+    {
+      "name": "CALL TRANSACTION fail status visible",
+      "pass": true
+    }
+  ],
+  "clientReproduction": {
+    "filtered": 5,
+    "unfiltered": 104,
+    "frozenExpected": 5,
+    "rawResult": 104,
+    "attribution": "Configured R4 pipeline lacks implicit client filtering. The custom minimal SQLite adapter accepts generated SQL unchanged and does not implement implicit client handling. This is not proof of an upstream defect, supported official-adapter behavior, or live SAP vulnerability."
+  },
+  "transactionSmoke": {
+    "subrc": 4,
+    "message": "not supported in open-abap",
+    "meaning": "CALL TRANSACTION returns an unsupported-operation status; surrounding method returning 1 is not successful transaction execution."
+  },
+  "noConnectionCommit": {
+    "connectionCount": 0,
+    "returned": true,
+    "meaning": "No database participants: neither persistence nor rollback behavior demonstrated."
+  },
+  "supportingSourceIdentities": [
+    {
+      "path": "@abaplint/core/build/src/objects/behavior_definition.js",
+      "sha256": "d9ad96d8cf661e6bcbe2e5edf99473700df09a6f37e42ce67794899ee8d7ac4d"
+    },
+    {
+      "path": "@abaplint/core/build/src/rules/cds_parser_error.js",
+      "sha256": "36fd45f7afed6246c12e4ea53ab006a6795bfa89ac2d3831ceae75ef506fe556"
+    },
+    {
+      "path": "@abaplint/transpiler/build/src/statements/select.js",
+      "sha256": "2ec83e6687013aa00cfb9db206996b043d2862c9c32ca4324e35a416536ca98f"
+    },
+    {
+      "path": "@abaplint/runtime/build/src/db/db.d.ts",
+      "sha256": "cc50a43e2ee705c44cfd647b85cc92c82c4b013586db76367e26fa5a46bfe53e"
+    },
+    {
+      "path": "@abaplint/runtime/build/src/statements/call_transaction.js",
+      "sha256": "a7e8efa361e8b25638e2c505b24abdda98b9b796f96322f40b3ac90b42e9dd13"
+    },
+    {
+      "path": "@abaplint/runtime/build/src/statements/commit.js",
+      "sha256": "5511242171d41b868c1348fb031ba95c43014199a0b974b867a65c26a1bcb135"
+    },
+    {
+      "path": "@abaplint/runtime/build/src/statements/rollback.js",
+      "sha256": "c4cccd8d83d394b6b427cea92e306243dda9f17dfa29ffd854a16539fd721301"
+    },
+    {
+      "path": "@abaplint/transpiler/build/src/statements/authority_check.js",
+      "sha256": "6ec99aa50d12e0dab408b3384f4c4d2e93a4920db30c08701022a789c2890b24"
+    }
+  ]
+}

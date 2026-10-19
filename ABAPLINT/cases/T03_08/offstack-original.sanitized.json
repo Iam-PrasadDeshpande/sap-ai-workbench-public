@@ -1,0 +1,13 @@
+{
+  "id": "T03_08",
+  "label": "T03_08",
+  "utc": "2026-10-19T09:25:00.803Z",
+  "stages": {},
+  "checks": [],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "transpile",
+  "status": "LOCAL_TOOLCHAIN_ERROR",
+  "error": "Error: Statement CommitEntities not supported, commit entities.\n    at Traversal.traverseStatement (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1230:15)\n    at Traversal.traverse (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:167:25)\n    at Traversal.traverseProcedureLevel (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1133:38)\n    at Traversal.traverseStructure (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1193:25)\n    at Traversal.traverseStructure (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1205:38)\n    at Traversal.traverse (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:164:25)\n    at MethodTranspiler.transpile (node_modules\\@abaplint\\transpiler\\build\\src\\structures\\method.js:44:39)\n    at Traversal.traverseStructure (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1200:40)\n    at Traversal.traverse (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:164:25)\n    at ClassImplementationTranspiler.transpile (node_modules\\@abaplint\\transpiler\\build\\src\\structures\\class_implementation.js:45:39)"
+}

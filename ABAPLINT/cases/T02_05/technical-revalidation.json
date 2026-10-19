@@ -1,0 +1,37 @@
+{
+  "CASE_ID": "T02_05",
+  "SCENARIO": "API exists locally but release contract absent",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Representative language pattern",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Two ordinary local Z classes, no component boundary or release contract supplied. Frozen expectedStatic is OBSERVE and defect is null. This is not an established unreleased-API violation.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [],
+    "zcl_r4_dep.clas.abap": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": null,
+    "frozenReferences": [
+      {
+        "input": {
+          "IV": 4
+        },
+        "expected": 5
+      }
+    ]
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+  "OFFSTACK_RESULT": {
+    "status": "LOCAL_VERIFIED",
+    "returned": 1,
+    "matched": 1,
+    "frozenExpected": 1,
+    "record": "cases/T02_05/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T02_05/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T02_05",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Two ordinary local Z classes, no component boundary or release contract supplied. Frozen expectedStatic is OBSERVE and defect is null. This is not an established unreleased-API violation."
+}

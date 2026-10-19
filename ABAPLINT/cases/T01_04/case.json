@@ -1,0 +1,49 @@
+{
+  "id": "T01_04",
+  "track": "T01",
+  "title": "Missing data element",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "DEFECT",
+  "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "dependencyAbsent": true,
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "6a90f67a7e50761d53e10874961696a9c6e841102076143427382c9b215e8c6a"
+    }
+  ],
+  "rootCause": {
+    "classification": "MISSING_DEPENDENCY",
+    "secondary": [],
+    "explanation": "Required synthetic dependency is absent from this frozen inventory.",
+    "scope": "Exact case profile and namespace only."
+  },
+  "historicalStaticClassification": "PARTIAL",
+  "historicalBehaviorClassification": "PARTIAL",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "C",
+      "capability": "ABAP Objects",
+      "classification": "LOCAL_VERIFIED"
+    },
+    {
+      "id": "E",
+      "capability": "Cross-object dependencies",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "F",
+      "capability": "DDIC contracts",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "G",
+      "capability": "SAP standard dependencies",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

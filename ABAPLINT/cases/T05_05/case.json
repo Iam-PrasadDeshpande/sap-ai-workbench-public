@@ -1,0 +1,74 @@
+{
+  "id": "T05_05",
+  "track": "T05",
+  "title": "Local SQLite transaction rollback",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "v758",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {},
+      "expected": 10
+    }
+  ],
+  "sapRequirement": "Only SQLite transaction adapter evaluated; SAP update-task, enqueue ownership, commit ordering and save sequence remain unverified.",
+  "transaction": true,
+  "sql": {
+    "client": false,
+    "rows": [
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        null
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        -2
+      ]
+    ]
+  },
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "cad000920ad4222feffaabfb0965c9714a9ac20c269efbbe6f5fa438f6caeab3"
+    },
+    {
+      "file": "zr4_data.tabl.xml",
+      "sha256": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+    }
+  ],
+  "rootCause": {
+    "classification": "EXPECTED_STATIC_RULE_FINDING",
+    "secondary": [],
+    "explanation": "No contradiction of a supported static rule contract is established by this case. Retain all policy findings and behavioral outcomes separately.",
+    "scope": "Observed exact rule policy; no SAP correctness inference."
+  },
+  "historicalStaticClassification": "PARTIAL",
+  "historicalBehaviorClassification": "LOCAL_VERIFIED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "O",
+      "capability": "Transaction semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "P",
+      "capability": "Enqueue/lock behavior",
+      "classification": "UNSUPPORTED_OFFSTACK"
+    },
+    {
+      "id": "Q",
+      "capability": "Update processing",
+      "classification": "UNSUPPORTED_OFFSTACK"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

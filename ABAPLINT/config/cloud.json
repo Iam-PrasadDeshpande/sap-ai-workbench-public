@@ -1,0 +1,38 @@
+{
+  "global": {
+    "files": "/src/**/*.*"
+  },
+  "dependencies": [],
+  "syntax": {
+    "version": "Cloud",
+    "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+  },
+  "rules": {
+    "parser_error": true,
+    "check_syntax": true,
+    "unknown_types": true,
+    "unused_variables": true,
+    "unused_types": true,
+    "unused_methods": true,
+    "unreachable_code": true,
+    "cds_parser_error": true,
+    "check_subrc": true,
+    "keyword_case": {
+      "style": "lower"
+    },
+    "line_length": {
+      "length": 120
+    },
+    "prefer_inline": true,
+    "empty_statement": true,
+    "check_abstract": true,
+    "superclass_final": true,
+    "xml_consistency": true,
+    "xml_bom": true,
+    "tabl_enhancement_category": true,
+    "avoid_use": true,
+    "prefer_insert_into_table": true,
+    "method_length": true,
+    "cyclomatic_complexity": true
+  }
+}

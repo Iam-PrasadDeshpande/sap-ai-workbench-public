@@ -1,0 +1,1248 @@
+[
+  {
+    "caseId": "T01_01",
+    "track": "T01",
+    "title": "Available synthetic cross-class dependency",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T01_01/src/zcl_r4_case.clas.abap",
+      "cases/T01_01/src/zcl_r4_dep.clas.abap"
+    ],
+    "readme": "cases/T01_01/README.md",
+    "metadata": "cases/T01_01/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T01_01/diagnostics.json",
+    "lspTrace": "cases/T01_01/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T01_01/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T01_01/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 2,
+    "referenceCompleted": 2,
+    "referenceMatched": 2,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T01_01/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T01_02",
+    "track": "T01",
+    "title": "Missing custom class",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T01_02/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T01_02/README.md",
+    "metadata": "cases/T01_02/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T01_02/diagnostics.json",
+    "lspTrace": "cases/T01_02/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T01_02/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T01_02/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T01_02/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T01_03",
+    "track": "T01",
+    "title": "Missing external class outside error namespace",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T01_03/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T01_03/README.md",
+    "metadata": "cases/T01_03/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T01_03/diagnostics.json",
+    "lspTrace": "cases/T01_03/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T01_03/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T01_03/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "CONFIGURATION_GAP",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T01_03/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "CONFIGURATION_LIMITATION"
+  },
+  {
+    "caseId": "T01_04",
+    "track": "T01",
+    "title": "Missing data element",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T01_04/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T01_04/README.md",
+    "metadata": "cases/T01_04/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T01_04/diagnostics.json",
+    "lspTrace": "cases/T01_04/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T01_04/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T01_04/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T01_04/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T01_05",
+    "track": "T01",
+    "title": "Missing DDIC structure/component",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T01_05/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T01_05/README.md",
+    "metadata": "cases/T01_05/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T01_05/diagnostics.json",
+    "lspTrace": "cases/T01_05/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T01_05/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T01_05/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T01_05/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T01_06",
+    "track": "T01",
+    "title": "Missing transparent table",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T01_06/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T01_06/README.md",
+    "metadata": "cases/T01_06/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T01_06/diagnostics.json",
+    "lspTrace": "cases/T01_06/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T01_06/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T01_06/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T01_06/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T01_07",
+    "track": "T01",
+    "title": "Missing interface reference",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T01_07/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T01_07/README.md",
+    "metadata": "cases/T01_07/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T01_07/diagnostics.json",
+    "lspTrace": "cases/T01_07/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T01_07/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T01_07/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T01_07/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T02_01",
+    "track": "T02",
+    "title": "Classic transaction in Cloud profile",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T02_01/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T02_01/README.md",
+    "metadata": "cases/T02_01/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T02_01/diagnostics.json",
+    "lspTrace": "cases/T02_01/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T02_01/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T02_01/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T02_01/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "VALID_NEGATIVE_TEST"
+  },
+  {
+    "caseId": "T02_02",
+    "track": "T02",
+    "title": "Same transaction in classic v758",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T02_02/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T02_02/README.md",
+    "metadata": "cases/T02_02/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T02_02/diagnostics.json",
+    "lspTrace": "cases/T02_02/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T02_02/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T02_02/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T02_02/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T02_03",
+    "track": "T02",
+    "title": "Modern expression under old v702",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T02_03/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T02_03/README.md",
+    "metadata": "cases/T02_03/case.json",
+    "config": "config/v702.json",
+    "diagnostics": "cases/T02_03/diagnostics.json",
+    "lspTrace": "cases/T02_03/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T02_03/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T02_03/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T02_03/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "VALID_NEGATIVE_TEST"
+  },
+  {
+    "caseId": "T02_04",
+    "track": "T02",
+    "title": "Modern expression under v758",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T02_04/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T02_04/README.md",
+    "metadata": "cases/T02_04/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T02_04/diagnostics.json",
+    "lspTrace": "cases/T02_04/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T02_04/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T02_04/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T02_04/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T02_05",
+    "track": "T02",
+    "title": "API exists locally but release contract absent",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T02_05/src/zcl_r4_case.clas.abap",
+      "cases/T02_05/src/zcl_r4_dep.clas.abap"
+    ],
+    "readme": "cases/T02_05/README.md",
+    "metadata": "cases/T02_05/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T02_05/diagnostics.json",
+    "lspTrace": "cases/T02_05/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T02_05/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T02_05/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T02_05/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T03_01",
+    "track": "T03",
+    "title": "CDS over local synthetic table",
+    "sourceTypes": [
+      "CDS",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T03_01/src/zr4_view.ddls.asddls",
+      "cases/T03_01/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T03_01/README.md",
+    "metadata": "cases/T03_01/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T03_01/diagnostics.json",
+    "lspTrace": "cases/T03_01/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T03_01/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T03_01/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T03_01/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T03_02",
+    "track": "T03",
+    "title": "CDS missing source",
+    "sourceTypes": [
+      "CDS"
+    ],
+    "sourceFiles": [
+      "cases/T03_02/src/zr4_view.ddls.asddls"
+    ],
+    "readme": "cases/T03_02/README.md",
+    "metadata": "cases/T03_02/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T03_02/diagnostics.json",
+    "lspTrace": "cases/T03_02/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T03_02/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T03_02/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T03_02/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T03_03",
+    "track": "T03",
+    "title": "Malformed CDS definition",
+    "sourceTypes": [
+      "CDS"
+    ],
+    "sourceFiles": [
+      "cases/T03_03/src/zr4_view.ddls.asddls"
+    ],
+    "readme": "cases/T03_03/README.md",
+    "metadata": "cases/T03_03/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T03_03/diagnostics.json",
+    "lspTrace": "cases/T03_03/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T03_03/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T03_03/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T03_03/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "VALID_NEGATIVE_TEST"
+  },
+  {
+    "caseId": "T03_04",
+    "track": "T03",
+    "title": "CDS missing association target",
+    "sourceTypes": [
+      "CDS",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T03_04/src/zr4_view.ddls.asddls",
+      "cases/T03_04/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T03_04/README.md",
+    "metadata": "cases/T03_04/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T03_04/diagnostics.json",
+    "lspTrace": "cases/T03_04/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T03_04/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T03_04/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T03_04/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T03_05",
+    "track": "T03",
+    "title": "Managed BDEF with missing implementation class",
+    "sourceTypes": [
+      "BDEF",
+      "CDS",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T03_05/src/zr4_view.bdef.asbdef",
+      "cases/T03_05/src/zr4_view.ddls.asddls",
+      "cases/T03_05/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T03_05/README.md",
+    "metadata": "cases/T03_05/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T03_05/diagnostics.json",
+    "lspTrace": "cases/T03_05/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T03_05/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T03_05/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T03_05/technical-revalidation.json",
+    "technicalTestCategory": "Requires additional qualification",
+    "technicalRootCause": "MULTIPLE_DEFECTS_IN_FIXTURE"
+  },
+  {
+    "caseId": "T03_06",
+    "track": "T03",
+    "title": "Deliberately malformed BDEF",
+    "sourceTypes": [
+      "BDEF"
+    ],
+    "sourceFiles": [
+      "cases/T03_06/src/zr4_bad.bdef.asbdef"
+    ],
+    "readme": "cases/T03_06/README.md",
+    "metadata": "cases/T03_06/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T03_06/diagnostics.json",
+    "lspTrace": "cases/T03_06/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T03_06/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T03_06/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T03_06/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "UNSUPPORTED_SEMANTIC_CHECK"
+  },
+  {
+    "caseId": "T03_07",
+    "track": "T03",
+    "title": "EML entity read with absent behavior contract",
+    "sourceTypes": [
+      "ABAP_EML"
+    ],
+    "sourceFiles": [
+      "cases/T03_07/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T03_07/README.md",
+    "metadata": "cases/T03_07/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T03_07/diagnostics.json",
+    "lspTrace": "cases/T03_07/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T03_07/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T03_07/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T03_07/technical-revalidation.json",
+    "technicalTestCategory": "Requires additional qualification",
+    "technicalRootCause": "UNSUPPORTED_SEMANTIC_CHECK"
+  },
+  {
+    "caseId": "T03_08",
+    "track": "T03",
+    "title": "RAP commit without business object/save environment",
+    "sourceTypes": [
+      "ABAP_EML"
+    ],
+    "sourceFiles": [
+      "cases/T03_08/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T03_08/README.md",
+    "metadata": "cases/T03_08/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T03_08/diagnostics.json",
+    "lspTrace": "cases/T03_08/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T03_08/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T03_08/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T03_08/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "UNSUPPORTED_SEMANTIC_CHECK"
+  },
+  {
+    "caseId": "T04_01",
+    "track": "T04",
+    "title": "Authorization result checked",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T04_01/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T04_01/README.md",
+    "metadata": "cases/T04_01/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T04_01/diagnostics.json",
+    "lspTrace": "cases/T04_01/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T04_01/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T04_01/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T04_01/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "UNSUPPORTED_SEMANTIC_CHECK"
+  },
+  {
+    "caseId": "T04_02",
+    "track": "T04",
+    "title": "Authorization result ignored",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T04_02/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T04_02/README.md",
+    "metadata": "cases/T04_02/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T04_02/diagnostics.json",
+    "lspTrace": "cases/T04_02/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T04_02/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T04_02/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T04_02/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "VALID_NEGATIVE_TEST"
+  },
+  {
+    "caseId": "T04_03",
+    "track": "T04",
+    "title": "Missing deny branch in synthetic policy",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T04_03/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T04_03/README.md",
+    "metadata": "cases/T04_03/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T04_03/diagnostics.json",
+    "lspTrace": "cases/T04_03/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T04_03/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T04_03/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 2,
+    "referenceCompleted": 2,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T04_03/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "UNSUPPORTED_SEMANTIC_CHECK"
+  },
+  {
+    "caseId": "T04_04",
+    "track": "T04",
+    "title": "Explicit synthetic policy guard",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T04_04/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T04_04/README.md",
+    "metadata": "cases/T04_04/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T04_04/diagnostics.json",
+    "lspTrace": "cases/T04_04/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T04_04/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T04_04/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 3,
+    "referenceCompleted": 3,
+    "referenceMatched": 3,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T04_04/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T04_05",
+    "track": "T04",
+    "title": "Implicit client handling over local client table",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T04_05/src/zcl_r4_case.clas.abap",
+      "cases/T04_05/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T04_05/README.md",
+    "metadata": "cases/T04_05/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T04_05/diagnostics.json",
+    "lspTrace": "cases/T04_05/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T04_05/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T04_05/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 0,
+    "rootCauseClassification": "OFFSTACK_ADAPTER_LIMITATION",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T04_05/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "OFFSTACK_ADAPTER_LIMITATION"
+  },
+  {
+    "caseId": "T04_06",
+    "track": "T04",
+    "title": "Explicit cross-client classic SQL",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T04_06/src/zcl_r4_case.clas.abap",
+      "cases/T04_06/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T04_06/README.md",
+    "metadata": "cases/T04_06/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T04_06/diagnostics.json",
+    "lspTrace": "cases/T04_06/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T04_06/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T04_06/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T04_06/technical-revalidation.json",
+    "technicalTestCategory": "Requires additional qualification",
+    "technicalRootCause": "UNRESOLVED_REQUIRES_SAP"
+  },
+  {
+    "caseId": "T05_01",
+    "track": "T05",
+    "title": "COMMIT WORK with no configured database",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T05_01/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T05_01/README.md",
+    "metadata": "cases/T05_01/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T05_01/diagnostics.json",
+    "lspTrace": "cases/T05_01/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T05_01/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T05_01/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T05_01/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "UNSUPPORTED_SEMANTIC_CHECK"
+  },
+  {
+    "caseId": "T05_02",
+    "track": "T05",
+    "title": "ROLLBACK WORK with no configured database",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T05_02/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T05_02/README.md",
+    "metadata": "cases/T05_02/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T05_02/diagnostics.json",
+    "lspTrace": "cases/T05_02/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T05_02/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T05_02/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T05_02/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "UNSUPPORTED_SEMANTIC_CHECK"
+  },
+  {
+    "caseId": "T05_03",
+    "track": "T05",
+    "title": "Absent enqueue function",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T05_03/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T05_03/README.md",
+    "metadata": "cases/T05_03/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T05_03/diagnostics.json",
+    "lspTrace": "cases/T05_03/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T05_03/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T05_03/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T05_03/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T05_04",
+    "track": "T05",
+    "title": "Absent update function",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T05_04/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T05_04/README.md",
+    "metadata": "cases/T05_04/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T05_04/diagnostics.json",
+    "lspTrace": "cases/T05_04/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T05_04/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T05_04/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 0,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "MISSING_DEPENDENCY",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T05_04/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "MISSING_DEPENDENCY_METADATA"
+  },
+  {
+    "caseId": "T05_05",
+    "track": "T05",
+    "title": "Local SQLite transaction rollback",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T05_05/src/zcl_r4_case.clas.abap",
+      "cases/T05_05/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T05_05/README.md",
+    "metadata": "cases/T05_05/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T05_05/diagnostics.json",
+    "lspTrace": "cases/T05_05/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T05_05/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T05_05/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T05_05/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "OFFSTACK_ADAPTER_LIMITATION"
+  },
+  {
+    "caseId": "T05_06",
+    "track": "T05",
+    "title": "Local SQLite transaction commit",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T05_06/src/zcl_r4_case.clas.abap",
+      "cases/T05_06/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T05_06/README.md",
+    "metadata": "cases/T05_06/case.json",
+    "config": "config/v758.json",
+    "diagnostics": "cases/T05_06/diagnostics.json",
+    "lspTrace": "cases/T05_06/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T05_06/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T05_06/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T05_06/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "OFFSTACK_ADAPTER_LIMITATION"
+  },
+  {
+    "caseId": "T06_01",
+    "track": "T06",
+    "title": "R3 regression: integer intermediate before truncation",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T06_01/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T06_01/README.md",
+    "metadata": "cases/T06_01/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_01/diagnostics.json",
+    "lspTrace": "cases/T06_01/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_01/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_01/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+    "offstackClassification": "PARTIAL",
+    "referenceExpected": 27,
+    "referenceCompleted": 27,
+    "referenceMatched": 10,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_01/technical-revalidation.json",
+    "technicalTestCategory": "Intentional negative test",
+    "technicalRootCause": "VALID_NEGATIVE_TEST"
+  },
+  {
+    "caseId": "T06_02",
+    "track": "T06",
+    "title": "R3 regression: decimal before division",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T06_02/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T06_02/README.md",
+    "metadata": "cases/T06_02/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_02/diagnostics.json",
+    "lspTrace": "cases/T06_02/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_02/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_02/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 27,
+    "referenceCompleted": 27,
+    "referenceMatched": 27,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_02/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T06_03",
+    "track": "T06",
+    "title": "Packed decimal rounding boundary",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T06_03/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T06_03/README.md",
+    "metadata": "cases/T06_03/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_03/diagnostics.json",
+    "lspTrace": "cases/T06_03/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_03/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_03/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_03/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T06_04",
+    "track": "T06",
+    "title": "Decimal cancellation beyond binary integer exactness",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T06_04/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T06_04/README.md",
+    "metadata": "cases/T06_04/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_04/diagnostics.json",
+    "lspTrace": "cases/T06_04/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_04/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_04/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_04/technical-revalidation.json",
+    "technicalTestCategory": "Representative language pattern",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T06_05",
+    "track": "T06",
+    "title": "Open SQL filtering and aggregation",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T06_05/src/zcl_r4_case.clas.abap",
+      "cases/T06_05/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T06_05/README.md",
+    "metadata": "cases/T06_05/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_05/diagnostics.json",
+    "lspTrace": "cases/T06_05/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_05/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_05/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_05/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "OFFSTACK_ADAPTER_LIMITATION"
+  },
+  {
+    "caseId": "T06_06",
+    "track": "T06",
+    "title": "Open SQL null predicate",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T06_06/src/zcl_r4_case.clas.abap",
+      "cases/T06_06/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T06_06/README.md",
+    "metadata": "cases/T06_06/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_06/diagnostics.json",
+    "lspTrace": "cases/T06_06/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_06/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_06/offstack-original.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_ACCEPTANCE",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_06/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "OFFSTACK_ADAPTER_LIMITATION"
+  },
+  {
+    "caseId": "T06_07",
+    "track": "T06",
+    "title": "Open SQL null to initial conversion",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T06_07/src/zcl_r4_case.clas.abap",
+      "cases/T06_07/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T06_07/README.md",
+    "metadata": "cases/T06_07/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_07/diagnostics.json",
+    "lspTrace": "cases/T06_07/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_07/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_07/offstack-adapter-v2.sanitized.json",
+    "strictStaticClean": true,
+    "historicalStaticClassification": "LOCAL_VERIFIED",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "OFFSTACK_ADAPTER_LIMITATION",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_07/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "OFFSTACK_ADAPTER_LIMITATION"
+  },
+  {
+    "caseId": "T06_08",
+    "track": "T06",
+    "title": "Open SQL null aggregate",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T06_08/src/zcl_r4_case.clas.abap",
+      "cases/T06_08/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T06_08/README.md",
+    "metadata": "cases/T06_08/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_08/diagnostics.json",
+    "lspTrace": "cases/T06_08/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_08/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_08/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_08/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "OFFSTACK_ADAPTER_LIMITATION"
+  },
+  {
+    "caseId": "T06_09",
+    "track": "T06",
+    "title": "Empty SQL aggregate initial result",
+    "sourceTypes": [
+      "ABAP",
+      "DDIC_XML"
+    ],
+    "sourceFiles": [
+      "cases/T06_09/src/zcl_r4_case.clas.abap",
+      "cases/T06_09/src/zr4_data.tabl.xml"
+    ],
+    "readme": "cases/T06_09/README.md",
+    "metadata": "cases/T06_09/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_09/diagnostics.json",
+    "lspTrace": "cases/T06_09/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_09/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_09/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "LOCAL_VERIFIED",
+    "referenceExpected": 1,
+    "referenceCompleted": 1,
+    "referenceMatched": 1,
+    "rootCauseClassification": "EXPECTED_STATIC_RULE_FINDING",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_09/technical-revalidation.json",
+    "technicalTestCategory": "Simulated semantic scenario",
+    "technicalRootCause": "VALID_REPRESENTATIVE_PATTERN"
+  },
+  {
+    "caseId": "T06_10",
+    "track": "T06",
+    "title": "Open SQL from internal table",
+    "sourceTypes": [
+      "ABAP"
+    ],
+    "sourceFiles": [
+      "cases/T06_10/src/zcl_r4_case.clas.abap"
+    ],
+    "readme": "cases/T06_10/README.md",
+    "metadata": "cases/T06_10/case.json",
+    "config": "config/cloud.json",
+    "diagnostics": "cases/T06_10/diagnostics.json",
+    "lspTrace": "cases/T06_10/lsp-trace.sanitized.json",
+    "offstackOriginal": "cases/T06_10/offstack-original.sanitized.json",
+    "offstackSelected": "cases/T06_10/offstack-original.sanitized.json",
+    "strictStaticClean": false,
+    "historicalStaticClassification": "PARTIAL",
+    "offstackClassification": "UNSUPPORTED",
+    "referenceExpected": 1,
+    "referenceCompleted": 0,
+    "referenceMatched": 0,
+    "rootCauseClassification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "reproducibility": "REPRODUCED_WITH_EXTERNAL_PINNED_PREREQUISITES",
+    "technicalRevalidation": "cases/T06_10/technical-revalidation.json",
+    "technicalTestCategory": "Requires additional qualification",
+    "technicalRootCause": "OFFSTACK_ADAPTER_LIMITATION"
+  }
+]

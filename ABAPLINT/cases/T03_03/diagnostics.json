@@ -1,0 +1,32 @@
+{
+  "caseId": "T03_03",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zr4_view.ddls.asddls": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 0,
+            "character": 56
+          }
+        },
+        "code": "cds_parser_error",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/cds_parser_error/"
+        },
+        "message": "CDS Parser error",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "a5da0c7a27faf62758cd88cefdc9bce24ac6bba91b1110a7fb7568ebf257546e",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

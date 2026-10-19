@@ -1,0 +1,51 @@
+{
+  "id": "T01_03",
+  "track": "T01",
+  "title": "Missing external class outside error namespace",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "DEFECT",
+  "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "dependencyAbsent": true,
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "dd7936a96ca807d3bb82f7da0bb13eeaf3c4299210b0e90b6dfe0210dacea080"
+    }
+  ],
+  "rootCause": {
+    "classification": "CONFIGURATION_GAP",
+    "secondary": [
+      "MISSING_DEPENDENCY"
+    ],
+    "explanation": "errorNamespace excludes CL_* names. The case intentionally supplies no such class. Silence under this policy is not a supported-rule contradiction.",
+    "scope": "check_syntax resolution is namespace/configuration dependent; missing target SAP catalogs are not supplied."
+  },
+  "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+  "historicalBehaviorClassification": "PARTIAL",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "C",
+      "capability": "ABAP Objects",
+      "classification": "LOCAL_VERIFIED"
+    },
+    {
+      "id": "E",
+      "capability": "Cross-object dependencies",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "F",
+      "capability": "DDIC contracts",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "G",
+      "capability": "SAP standard dependencies",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

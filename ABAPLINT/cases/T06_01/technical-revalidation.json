@@ -1,0 +1,219 @@
+{
+  "CASE_ID": "T06_01",
+  "SCENARIO": "R3 regression: integer intermediate before truncation",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Intentional negative test",
+  "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. ABAP numeric expression is a negative against the mathematical oracle; 17 mismatches do not imply that check_syntax promises mathematical contract verification.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": "Frozen mathematical contract truncates exact rational toward zero; integer intermediate may violate it.",
+    "frozenReferences": [
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": -2
+        },
+        "expected": 3
+      },
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": 2
+        },
+        "expected": -3
+      },
+      {
+        "input": {
+          "NUMERATOR": -7,
+          "DENOMINATOR": 3
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": -2
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": 2
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": -5,
+          "DENOMINATOR": 3
+        },
+        "expected": -1
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": -1,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 0,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": -2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": 2
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 1,
+          "DENOMINATOR": 3
+        },
+        "expected": 0
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": -2
+        },
+        "expected": -2
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": 2
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": 5,
+          "DENOMINATOR": 3
+        },
+        "expected": 1
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": -2
+        },
+        "expected": -3
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": 2
+        },
+        "expected": 3
+      },
+      {
+        "input": {
+          "NUMERATOR": 7,
+          "DENOMINATOR": 3
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": -2
+        },
+        "expected": -1073741823
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": 2
+        },
+        "expected": 1073741823
+      },
+      {
+        "input": {
+          "NUMERATOR": 2147483647,
+          "DENOMINATOR": 3
+        },
+        "expected": 715827882
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": -2
+        },
+        "expected": 1073741824
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": 2
+        },
+        "expected": -1073741824
+      },
+      {
+        "input": {
+          "NUMERATOR": -2147483648,
+          "DENOMINATOR": 3
+        },
+        "expected": -715827882
+      }
+    ]
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+  "OFFSTACK_RESULT": {
+    "status": "PARTIAL",
+    "returned": 27,
+    "matched": 10,
+    "frozenExpected": 27,
+    "record": "cases/T06_01/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T06_01/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_01",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "ABAP numeric expression is a negative against the mathematical oracle; 17 mismatches do not imply that check_syntax promises mathematical contract verification."
+}

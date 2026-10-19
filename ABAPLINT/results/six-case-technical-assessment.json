@@ -1,0 +1,369 @@
+[
+  {
+    "CASE_ID": "T02_05",
+    "ORIGINAL_SOURCE_HASH": {
+      "zcl_r4_case.clas.abap": "7370af3b9155305e3b935a945169903609805cb04546dbbca70af3ee7f2d255e",
+      "zcl_r4_dep.clas.abap": "d745ffaf9cdeace214a3d1caa5d3890d39268c4c04958ccdc9145cf39e0965cf"
+    },
+    "ORIGINAL_REQUIREMENT": {
+      "title": "API exists locally but release contract absent",
+      "expectedStatic": "OBSERVE",
+      "defect": null,
+      "sapRequirement": "Authoritative API release state and usage contract for the exact target release/language version; local presence is insufficient."
+    },
+    "EXPECTED_DEFECT": null,
+    "ACTUAL_STATIC_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [],
+      "zcl_r4_dep.clas.abap": []
+    },
+    "CONFIGURATION_AND_LANGUAGE_VERSION": {
+      "profile": "cloud",
+      "syntax": {
+        "version": "Cloud",
+        "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+      },
+      "sha256": "c8c999cac95baa1ebec47b22d735dd9d743184c16073e84e303c78a6a1521146",
+      "core": "2.120.81"
+    },
+    "ABAP_SYNTAX_ASSESSMENT": "Ordinary available local class call accepted by pinned Cloud policy; no independent SAP compiler.",
+    "SAP_MODELING_ASSESSMENT": "No software component identity, cross-component boundary or API release metadata. Same-component use can be valid under ABAP Cloud.",
+    "TEST_ORACLE_ASSESSMENT": "OBSERVE, defect null and one output 5 for IV=4. No frozen release-violation oracle.",
+    "ADDITIONAL_DEFECTS": "No additional source defect established.",
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "AUTHORITATIVE_REFERENCE": [
+      {
+        "id": "SAP_CLOUD",
+        "title": "SAP ABAP Cloud key concepts",
+        "url": "https://help.sap.com/docs/abap-cloud/developer-guide-from-classic-abap-to-abap-cloud/overview-of-key-concepts-in-abap-cloud",
+        "assessment": "Same software component or released contract; component and release metadata absent here.",
+        "accessedUTC": "2026-10-19",
+        "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+        "compilerVerification": false
+      }
+    ],
+    "SAP_COMPILER_VERIFICATION_STATUS": "NOT_EXECUTED",
+    "RECOMMENDED_PUBLIC_WORDING": "Two ordinary local Z classes, no component boundary or release contract supplied. Frozen expectedStatic is OBSERVE and defect is null. This is not an established unreleased-API violation.",
+    "QUALIFICATION_STATUS": "QUALIFIED_SCOPED_INTERPRETATION_ONLY"
+  },
+  {
+    "CASE_ID": "T03_05",
+    "ORIGINAL_SOURCE_HASH": {
+      "zr4_view.bdef.asbdef": "9abb44e9312e1e4d1b8663d94d81cd68adbb787a98c28810107266c3405b9d3c",
+      "zr4_view.ddls.asddls": "f3ccf45ac5d47bf153257c34b545b3813e3f6dfde9f08bba89d3e938f9667f1f",
+      "zr4_data.tabl.xml": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+    },
+    "ORIGINAL_REQUIREMENT": {
+      "title": "Managed BDEF with missing implementation class",
+      "expectedStatic": "DEFECT",
+      "defect": "Referenced managed implementation class absent from frozen inventory.",
+      "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "EXPECTED_DEFECT": "Referenced managed implementation class absent from frozen inventory.",
+    "ACTUAL_STATIC_DIAGNOSTICS": {
+      "zr4_view.bdef.asbdef": [],
+      "zr4_view.ddls.asddls": []
+    },
+    "CONFIGURATION_AND_LANGUAGE_VERSION": {
+      "profile": "cloud",
+      "syntax": {
+        "version": "Cloud",
+        "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+      },
+      "sha256": "c8c999cac95baa1ebec47b22d735dd9d743184c16073e84e303c78a6a1521146",
+      "core": "2.120.81"
+    },
+    "ABAP_SYNTAX_ASSESSMENT": "Local gate reports no diagnostics. This does not establish a syntactically and semantically valid RAP model.",
+    "SAP_MODELING_ASSESSMENT": "CDS is define view entity, not define root view entity. Root behavior definition is required by retrieved RAP documentation. Explicit referenced implementation class is absent. Authorization implementation and readonly key creation/numbering need further modeling review; no compiler error invented.",
+    "TEST_ORACLE_ASSESSMENT": "Single missing-class attribution is confounded by missing root and incomplete model context.",
+    "ADDITIONAL_DEFECTS": "Missing root is an independently identified modeling issue. Other strict managed-model questions remain unverified. Root-only control preserves all other choices.",
+    "ROOT_CAUSE_CLASSIFICATION": "MULTIPLE_DEFECTS_IN_FIXTURE",
+    "AUTHORITATIVE_REFERENCE": [
+      {
+        "id": "SAP_BDEF",
+        "title": "SAP entity behavior definition",
+        "url": "https://help.sap.com/docs/abap-cloud/abap-keyword/abenbdl_define_beh.html",
+        "assessment": "Root entity behavior definition mandatory. Current documentation, not a compiler check of a pinned SAP release.",
+        "accessedUTC": "2026-10-19",
+        "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+        "compilerVerification": false
+      },
+      {
+        "id": "SAP_BDEF_HEADER",
+        "title": "SAP behavior definition header",
+        "url": "https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/ABENBDL_BDEF_HEADER.html",
+        "assessment": "Managed implementation class can be optional in some models; do not infer every managed BO needs a custom class.",
+        "accessedUTC": "2026-10-19",
+        "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+        "compilerVerification": false
+      }
+    ],
+    "SAP_COMPILER_VERIFICATION_STATUS": "NOT_EXECUTED",
+    "RECOMMENDED_PUBLIC_WORDING": "Missing implementation class is not the sole issue: associated CDS lacks root. Strict managed authorization and key creation also require target modeling review. No SAP compiler execution.",
+    "QUALIFICATION_STATUS": "QUALIFIED_SCOPED_INTERPRETATION_ONLY"
+  },
+  {
+    "CASE_ID": "T04_06",
+    "ORIGINAL_SOURCE_HASH": {
+      "zcl_r4_case.clas.abap": "5aa5d481b48fa3bd773cb85720e417adb986999253efb6aa381a9d08622242f4",
+      "zr4_data.tabl.xml": "b44acf9be8bbccd7a13633baea12961a5e45ee589bc9197fbc955d31df3a5413"
+    },
+    "ORIGINAL_REQUIREMENT": {
+      "title": "Explicit cross-client classic SQL",
+      "expectedStatic": "OBSERVE",
+      "defect": null,
+      "sapRequirement": "Explicit privileged cross-client access requires target policy and negative tests; aggregate local behavior is not a security approval."
+    },
+    "EXPECTED_DEFECT": null,
+    "ACTUAL_STATIC_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 65
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "CONFIGURATION_AND_LANGUAGE_VERSION": {
+      "profile": "v758",
+      "syntax": {
+        "version": "v758",
+        "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+      },
+      "sha256": "5f6ee9f82b00b58b67009904e793ae6869cd4250a9f136537b9008153cfa1a28",
+      "core": "2.120.81"
+    },
+    "ABAP_SYNTAX_ASSESSMENT": "CLIENT SPECIFIED with escaped host variable under classic v758. check_subrc is the sole recorded diagnostic. Exact 7.58 SELECT grammar and applicable strict-mode legality unresolved; no verified SAP rejection.",
+    "SAP_MODELING_ASSESSMENT": "Synthetic client-dependent table and explicit cross-client SQLite behavior do not authorize or verify SAP client access.",
+    "TEST_ORACLE_ASSESSMENT": "Original expected scalar 104 is the synthetic adapter oracle. Subrc-only and no-escape controls match it. USING CLIENT control fails local transpilation, not SAP compilation.",
+    "ADDITIONAL_DEFECTS": "Unrelated return-code handling issue observed. Do not transfer write-statement restrictions to SELECT.",
+    "ROOT_CAUSE_CLASSIFICATION": "UNRESOLVED_REQUIRES_SAP",
+    "AUTHORITATIVE_REFERENCE": [
+      {
+        "id": "SAP_SELECT_758",
+        "title": "SAP 7.58 SELECT client documentation attempted",
+        "url": "https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abapselect_client_obsolete.htm",
+        "assessment": "Exact release page inaccessible; no decisive syntax conclusion from it.",
+        "accessedUTC": "2026-10-19",
+        "access": "Unavailable",
+        "compilerVerification": false
+      },
+      {
+        "id": "SAP_STRICT",
+        "title": "SAP ABAP SQL strict mode 7.54",
+        "url": "https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/abenabap_sql_strictmode_754.htm",
+        "assessment": "Retrieved restriction describes write statements; not sufficient to reject the SELECT fixture.",
+        "accessedUTC": "2026-10-19",
+        "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+        "compilerVerification": false
+      }
+    ],
+    "SAP_COMPILER_VERIFICATION_STATUS": "NOT_EXECUTED",
+    "RECOMMENDED_PUBLIC_WORDING": "Classic v758 CLIENT SPECIFIED with @rv: only check_subrc observed. Exact release-specific SELECT/strict-mode legality remains unresolved. Obsolete syntax is not by itself proof this fixture fails the SAP compiler.",
+    "QUALIFICATION_STATUS": "UNRESOLVED_EXACT_RELEASE_SYNTAX"
+  },
+  {
+    "CASE_ID": "T06_06",
+    "ORIGINAL_SOURCE_HASH": {
+      "zcl_r4_case.clas.abap": "7f0568ab5d24881ac8a74549804a60023e9a87f6bf30cc55e75cc7ec8ed1d9ca",
+      "zr4_data.tabl.xml": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+    },
+    "ORIGINAL_REQUIREMENT": {
+      "title": "Open SQL null predicate",
+      "expectedStatic": "OBSERVE",
+      "defect": null,
+      "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "EXPECTED_DEFECT": null,
+    "ACTUAL_STATIC_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "CONFIGURATION_AND_LANGUAGE_VERSION": {
+      "profile": "cloud",
+      "syntax": {
+        "version": "Cloud",
+        "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+      },
+      "sha256": "c8c999cac95baa1ebec47b22d735dd9d743184c16073e84e303c78a6a1521146",
+      "core": "2.120.81"
+    },
+    "ABAP_SYNTAX_ASSESSMENT": "Recognizable IS NULL predicate accepted locally; no SAP compiler.",
+    "SAP_MODELING_ASSESSMENT": "DDIC XML has no explicit NULL/initial flag. Adapter bypasses physical SAP activation and creates nullable SQLite INTEGER.",
+    "TEST_ORACLE_ASSESSMENT": "Injected NULL count 1 is valid locally. Replacing only NULL with zero changes count to 0. NOT NULL schema rejects original seed before ABAP executes.",
+    "ADDITIONAL_DEFECTS": "SAP column lifecycle/nullability unverified. Null predicate is not a test of ABAP initial numeric values.",
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "AUTHORITATIVE_REFERENCE": [
+      {
+        "id": "SAP_DDIC",
+        "title": "SAP NetWeaver 7.31 DDIC initial values",
+        "url": "https://help.sap.com/docs/SAP_NETWEAVER_731_BW_ABAP/ec1c9c8191b74de98feb94001a95dd76/cf21ebf0446011d189700000e8322d00.html",
+        "assessment": "Fresh or converted table columns default NOT NULL; later field addition can differ. Historical documentation is not target Cloud DDIC proof.",
+        "accessedUTC": "2026-10-19",
+        "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+        "compilerVerification": false
+      },
+      {
+        "id": "SAP_NULL",
+        "title": "SAP ABAP SQL cheat sheet",
+        "url": "https://github.com/SAP-samples/abap-cheat-sheets/blob/main/03_ABAP_SQL.md",
+        "assessment": "NULL differs from ABAP initial; outer joins can produce NULL; transfer without indicators can yield type-initial values.",
+        "accessedUTC": "2026-10-19",
+        "access": "Primary repository substantive text retrieved",
+        "compilerVerification": false
+      }
+    ],
+    "SAP_COMPILER_VERIFICATION_STATUS": "NOT_EXECUTED",
+    "RECOMMENDED_PUBLIC_WORDING": "Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION.",
+    "QUALIFICATION_STATUS": "QUALIFIED_SCOPED_INTERPRETATION_ONLY"
+  },
+  {
+    "CASE_ID": "T06_07",
+    "ORIGINAL_SOURCE_HASH": {
+      "zcl_r4_case.clas.abap": "38af4e9e50fd8e9ec8f16b90470760b337f85ad4671baa71c658e0a7560a2eec",
+      "zr4_data.tabl.xml": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+    },
+    "ORIGINAL_REQUIREMENT": {
+      "title": "Open SQL null to initial conversion",
+      "expectedStatic": "OBSERVE",
+      "defect": null,
+      "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "EXPECTED_DEFECT": null,
+    "ACTUAL_STATIC_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "CONFIGURATION_AND_LANGUAGE_VERSION": {
+      "profile": "cloud",
+      "syntax": {
+        "version": "Cloud",
+        "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+      },
+      "sha256": "c8c999cac95baa1ebec47b22d735dd9d743184c16073e84e303c78a6a1521146",
+      "core": "2.120.81"
+    },
+    "ABAP_SYNTAX_ASSESSMENT": "Recognizable SELECT SINGLE locally parsed; retained v2 adapter maps SQL NULL into type-initial integer.",
+    "SAP_MODELING_ASSESSMENT": "Same nullable SQLite seed; fresh SAP DDIC nullability is not established by missing XML flag.",
+    "TEST_ORACLE_ASSESSMENT": "Expected 0 valid for local v2 NULL conversion. Zero-row control also returns 0, so typed scalar alone cannot distinguish stored zero from SQL NULL. Original adapter failure preserved.",
+    "ADDITIONAL_DEFECTS": "Original and recovered adapter outcomes must remain distinct; no SAP indicator/NULL transfer test.",
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "AUTHORITATIVE_REFERENCE": [
+      {
+        "id": "SAP_DDIC",
+        "title": "SAP NetWeaver 7.31 DDIC initial values",
+        "url": "https://help.sap.com/docs/SAP_NETWEAVER_731_BW_ABAP/ec1c9c8191b74de98feb94001a95dd76/cf21ebf0446011d189700000e8322d00.html",
+        "assessment": "Fresh or converted table columns default NOT NULL; later field addition can differ. Historical documentation is not target Cloud DDIC proof.",
+        "accessedUTC": "2026-10-19",
+        "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+        "compilerVerification": false
+      },
+      {
+        "id": "SAP_NULL",
+        "title": "SAP ABAP SQL cheat sheet",
+        "url": "https://github.com/SAP-samples/abap-cheat-sheets/blob/main/03_ABAP_SQL.md",
+        "assessment": "NULL differs from ABAP initial; outer joins can produce NULL; transfer without indicators can yield type-initial values.",
+        "accessedUTC": "2026-10-19",
+        "access": "Primary repository substantive text retrieved",
+        "compilerVerification": false
+      }
+    ],
+    "SAP_COMPILER_VERIFICATION_STATUS": "NOT_EXECUTED",
+    "RECOMMENDED_PUBLIC_WORDING": "Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION.",
+    "QUALIFICATION_STATUS": "QUALIFIED_SCOPED_INTERPRETATION_ONLY"
+  },
+  {
+    "CASE_ID": "T06_08",
+    "ORIGINAL_SOURCE_HASH": {
+      "zcl_r4_case.clas.abap": "32f6777cc29a59e7a5c5928d3a9808fb24c0c2c97cb0ad838d2fff33478890f8",
+      "zr4_data.tabl.xml": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+    },
+    "ORIGINAL_REQUIREMENT": {
+      "title": "Open SQL null aggregate",
+      "expectedStatic": "OBSERVE",
+      "defect": null,
+      "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "EXPECTED_DEFECT": null,
+    "ACTUAL_STATIC_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 48
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "CONFIGURATION_AND_LANGUAGE_VERSION": {
+      "profile": "cloud",
+      "syntax": {
+        "version": "Cloud",
+        "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+      },
+      "sha256": "c8c999cac95baa1ebec47b22d735dd9d743184c16073e84e303c78a6a1521146",
+      "core": "2.120.81"
+    },
+    "ABAP_SYNTAX_ASSESSMENT": "Recognizable SUM aggregate; retained check_subrc finding is unrelated to NULL semantics.",
+    "SAP_MODELING_ASSESSMENT": "Same permissive SQLite table and injected NULL, without SAP physical table evidence.",
+    "TEST_ORACLE_ASSESSMENT": "SUM of 5,NULL,7,-2 is 10 locally. Replacing NULL with 0 also yields 10; this output alone does not discriminate nullability.",
+    "ADDITIONAL_DEFECTS": "No additional proven SAP defect; synthetic oracle is not SAP runtime equivalence.",
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "AUTHORITATIVE_REFERENCE": [
+      {
+        "id": "SAP_DDIC",
+        "title": "SAP NetWeaver 7.31 DDIC initial values",
+        "url": "https://help.sap.com/docs/SAP_NETWEAVER_731_BW_ABAP/ec1c9c8191b74de98feb94001a95dd76/cf21ebf0446011d189700000e8322d00.html",
+        "assessment": "Fresh or converted table columns default NOT NULL; later field addition can differ. Historical documentation is not target Cloud DDIC proof.",
+        "accessedUTC": "2026-10-19",
+        "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+        "compilerVerification": false
+      },
+      {
+        "id": "SAP_NULL",
+        "title": "SAP ABAP SQL cheat sheet",
+        "url": "https://github.com/SAP-samples/abap-cheat-sheets/blob/main/03_ABAP_SQL.md",
+        "assessment": "NULL differs from ABAP initial; outer joins can produce NULL; transfer without indicators can yield type-initial values.",
+        "accessedUTC": "2026-10-19",
+        "access": "Primary repository substantive text retrieved",
+        "compilerVerification": false
+      },
+      {
+        "id": "SAP_AGG",
+        "title": "SAP SQL aggregate functions",
+        "url": "https://help.sap.com/docs/abap-cloud/abap-keywords/sql-agg-agg-func?q=KOL1",
+        "assessment": "SUM ignores NULL. Exact target data state remains unverified.",
+        "accessedUTC": "2026-10-19",
+        "access": "Search-extracted primary documentation; SAP SPA direct body unavailable",
+        "compilerVerification": false
+      }
+    ],
+    "SAP_COMPILER_VERIFICATION_STATUS": "NOT_EXECUTED",
+    "RECOMMENDED_PUBLIC_WORDING": "Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION.",
+    "QUALIFICATION_STATUS": "QUALIFIED_SCOPED_INTERPRETATION_ONLY"
+  }
+]

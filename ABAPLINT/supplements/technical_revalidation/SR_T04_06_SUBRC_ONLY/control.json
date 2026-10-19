@@ -1,0 +1,11 @@
+{
+  "id": "SR_T04_06_SUBRC_ONLY",
+  "originCase": "T04_06",
+  "change": "Add only explicit sy-subrc handling; retain CLIENT SPECIFIED and @rv.",
+  "expected": "Isolate the original unrelated check_subrc finding. A clean result still does not adjudicate target SAP grammar.",
+  "profile": "v758",
+  "sourceHashes": {
+    "zcl_r4_case.clas.abap": "4b40a86887cf42121047060328350b33bd5f90e958bd252eec8f7ea1d132d5de",
+    "zr4_data.tabl.xml": "b44acf9be8bbccd7a13633baea12961a5e45ee589bc9197fbc955d31df3a5413"
+  }
+}

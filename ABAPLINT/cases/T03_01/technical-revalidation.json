@@ -1,0 +1,29 @@
+{
+  "CASE_ID": "T03_01",
+  "SCENARIO": "CDS over local synthetic table",
+  "SOURCE_TYPE": "CDS; DDIC_XML",
+  "TEST_CATEGORY": "Representative language pattern",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. CDS projection artifact processing only; transpilation does not establish CDS activation or executed query semantics.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zr4_view.ddls.asddls": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": null,
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+  "OFFSTACK_RESULT": {
+    "status": "PARTIAL",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T03_01/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T03_01/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_01",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "CDS projection artifact processing only; transpilation does not establish CDS activation or executed query semantics."
+}

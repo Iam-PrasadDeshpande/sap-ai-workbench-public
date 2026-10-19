@@ -1,0 +1,62 @@
+{
+  "id": "T04_06",
+  "track": "T04",
+  "title": "Explicit cross-client classic SQL",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "v758",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {},
+      "expected": 104
+    }
+  ],
+  "sapRequirement": "Explicit privileged cross-client access requires target policy and negative tests; aggregate local behavior is not a security approval.",
+  "sql": {
+    "client": true,
+    "rows": [
+      [
+        "100",
+        1,
+        5
+      ],
+      [
+        "200",
+        2,
+        99
+      ]
+    ]
+  },
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "5aa5d481b48fa3bd773cb85720e417adb986999253efb6aa381a9d08622242f4"
+    },
+    {
+      "file": "zr4_data.tabl.xml",
+      "sha256": "b44acf9be8bbccd7a13633baea12961a5e45ee589bc9197fbc955d31df3a5413"
+    }
+  ],
+  "rootCause": {
+    "classification": "EXPECTED_STATIC_RULE_FINDING",
+    "secondary": [],
+    "explanation": "No contradiction of a supported static rule contract is established by this case. Retain all policy findings and behavioral outcomes separately.",
+    "scope": "Observed exact rule policy; no SAP correctness inference."
+  },
+  "historicalStaticClassification": "PARTIAL",
+  "historicalBehaviorClassification": "LOCAL_VERIFIED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "M",
+      "capability": "Authorization",
+      "classification": "SAP_VERIFICATION_REQUIRED"
+    },
+    {
+      "id": "N",
+      "capability": "Client isolation",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

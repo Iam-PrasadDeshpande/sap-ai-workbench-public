@@ -1,0 +1,29 @@
+{
+  "CASE_ID": "T03_04",
+  "SCENARIO": "CDS missing association target",
+  "SOURCE_TYPE": "CDS; DDIC_XML",
+  "TEST_CATEGORY": "Intentional negative test",
+  "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Intentional missing CDS dependency. Processing does not establish dependency resolution or target SAP activation; no demonstrated upstream contract violation.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zr4_view.ddls.asddls": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "DEFECT",
+    "frozenDefect": "Missing association target from frozen inventory",
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+  "OFFSTACK_RESULT": {
+    "status": "UNSUPPORTED",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T03_04/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T03_04/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_04",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Intentional missing CDS dependency. Processing does not establish dependency resolution or target SAP activation; no demonstrated upstream contract violation."
+}

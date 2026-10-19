@@ -1,0 +1,290 @@
+{
+  "id": "T06_02",
+  "label": "T06_02",
+  "utc": "2026-10-19T09:25:26.498Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": -2
+      },
+      "actual": 3,
+      "completed": true,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": 2
+      },
+      "actual": -3,
+      "completed": true,
+      "expected": -3,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": 3
+      },
+      "actual": -2,
+      "completed": true,
+      "expected": -2,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": -2
+      },
+      "actual": 2,
+      "completed": true,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": 2
+      },
+      "actual": -2,
+      "completed": true,
+      "expected": -2,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": 3
+      },
+      "actual": -1,
+      "completed": true,
+      "expected": -1,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": -2
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": 2
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": 3
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": -2
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": 2
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": 3
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": -2
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": 2
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": 3
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": -2
+      },
+      "actual": -2,
+      "completed": true,
+      "expected": -2,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": 2
+      },
+      "actual": 2,
+      "completed": true,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": 3
+      },
+      "actual": 1,
+      "completed": true,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": -2
+      },
+      "actual": -3,
+      "completed": true,
+      "expected": -3,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": 2
+      },
+      "actual": 3,
+      "completed": true,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": 3
+      },
+      "actual": 2,
+      "completed": true,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": -2
+      },
+      "actual": -1073741823,
+      "completed": true,
+      "expected": -1073741823,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": 2
+      },
+      "actual": 1073741823,
+      "completed": true,
+      "expected": 1073741823,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": 3
+      },
+      "actual": 715827882,
+      "completed": true,
+      "expected": 715827882,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": -2
+      },
+      "actual": 1073741824,
+      "completed": true,
+      "expected": 1073741824,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": 2
+      },
+      "actual": -1073741824,
+      "completed": true,
+      "expected": -1073741824,
+      "pass": true
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": 3
+      },
+      "actual": -715827882,
+      "completed": true,
+      "expected": -715827882,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 27,
+  "referenceExecuted": 27,
+  "referencePassed": 27,
+  "status": "LOCAL_VERIFIED"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "T03_06",
+  "track": "T03",
+  "title": "Deliberately malformed BDEF",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "DEFECT",
+  "defect": "Deliberately malformed BDEF artifact; no valid grammar header.",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "artifactOnly": true,
+  "sourceFiles": [
+    {
+      "file": "zr4_bad.bdef.asbdef",
+      "sha256": "cf415f3709840434d55231cc956b377bac98af7938ee2113f8d70893fc242394"
+    }
+  ],
+  "rootCause": {
+    "classification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "secondary": [],
+    "explanation": "Deliberately malformed BDEF received no findings. The enabled rules did not provide a qualified BDEF grammar/semantic validator.",
+    "scope": "Pinned BDEF parsing extracts entity references; cds_parser_error covers DDLS/DDLX, not BDEF syntax."
+  },
+  "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "J",
+      "capability": "CDS",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "K",
+      "capability": "RAP behavior definitions",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "L",
+      "capability": "EML references",
+      "classification": "STATIC_BLIND_SPOT"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

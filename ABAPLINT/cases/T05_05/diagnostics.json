@@ -1,0 +1,32 @@
+{
+  "caseId": "T05_05",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "v758",
+  "configuration": "../../config/v758.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 16,
+            "character": 4
+          },
+          "end": {
+            "line": 16,
+            "character": 48
+          }
+        },
+        "code": "check_subrc",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/check_subrc/"
+        },
+        "message": "Check sy-subrc",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "f4b707be5dd6f4eed76d23b9ad26df15aba947d94ee981dcfb35945903ad7142",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

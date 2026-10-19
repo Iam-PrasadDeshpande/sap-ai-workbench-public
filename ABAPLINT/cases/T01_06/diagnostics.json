@@ -1,0 +1,32 @@
+{
+  "caseId": "T01_06",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 30
+          },
+          "end": {
+            "line": 7,
+            "character": 41
+          }
+        },
+        "code": "check_syntax",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/check_syntax/"
+        },
+        "message": "Database table or view \"zr4_missing\" not found",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "37a3d77fe19a7d32274d8951761e44456213af0982047e26ceb917ac763d2d31",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

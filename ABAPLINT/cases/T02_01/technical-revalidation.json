@@ -1,0 +1,49 @@
+{
+  "CASE_ID": "T02_01",
+  "SCENARIO": "Classic transaction in Cloud profile",
+  "SOURCE_TYPE": "ABAP",
+  "TEST_CATEGORY": "Intentional negative test",
+  "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Cloud-restricted construct tested under Cloud configuration; local rejection is not SAP activation evidence.",
+  "STATIC_RESULT": "VALIDATION_FAIL",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 4
+          },
+          "end": {
+            "line": 7,
+            "character": 28
+          }
+        },
+        "code": "parser_error",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/parser_error/"
+        },
+        "message": "Statement does not exist in the configured ABAP version(or a parser error), \"call\"",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "RESTRICTION",
+    "frozenDefect": null,
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+  "OFFSTACK_RESULT": {
+    "status": "UNSUPPORTED",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T02_01/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T02_01/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T02_01",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Cloud-restricted construct tested under Cloud configuration; local rejection is not SAP activation evidence."
+}

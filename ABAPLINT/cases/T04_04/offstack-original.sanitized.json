@@ -1,0 +1,47 @@
+{
+  "id": "T04_04",
+  "label": "T04_04",
+  "utc": "2026-10-19T09:25:08.063Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {
+        "IV": 0
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "input": {
+        "IV": 1
+      },
+      "actual": 1,
+      "completed": true,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "input": {
+        "IV": -1
+      },
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "completed": 3,
+  "referenceExecuted": 3,
+  "referencePassed": 3,
+  "status": "LOCAL_VERIFIED"
+}

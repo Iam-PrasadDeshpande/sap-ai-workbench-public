@@ -1,0 +1,38 @@
+{
+  "id": "T04_02",
+  "track": "T04",
+  "title": "Authorization result ignored",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": "Access decision must honor failed authorization result; frozen static policy check_subrc can only cover selected patterns.",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "7d1ca4b6b68fe05b842b7f602f9d89158e0c66e7af061627dd76af8e9b8e91ff"
+    }
+  ],
+  "rootCause": {
+    "classification": "UNSUPPORTED_SEMANTIC_CHECK",
+    "secondary": [],
+    "explanation": "Only the recorded parser/artifact/runtime stage was exercised; enterprise semantics remain unsupported or unverified in this configured path.",
+    "scope": "Do not promote artifact handling, style findings or failed invocation to semantic verification."
+  },
+  "historicalStaticClassification": "PARTIAL",
+  "historicalBehaviorClassification": "UNSUPPORTED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "M",
+      "capability": "Authorization",
+      "classification": "SAP_VERIFICATION_REQUIRED"
+    },
+    {
+      "id": "N",
+      "capability": "Client isolation",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

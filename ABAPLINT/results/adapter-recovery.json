@@ -1,0 +1,28 @@
+{
+  "cause": "Minimal R4 SQLite adapter passed ABAP SQL UP TO directly to SQLite. This is a harness dialect-adaptation defect, not an ABAP candidate defect, oracle error, or proven abaplint defect.",
+  "originalResult": "runtime/T06_07/result.json",
+  "repair": "Translate only a terminal UP TO integer ROWS to LIMIT integer; do not alter source, oracle, policy or other semantics.",
+  "controls": [
+    {
+      "query": "SELECT * FROM t UP TO 1 ROWS",
+      "sql": "SELECT * FROM t LIMIT 1",
+      "expectedCount": 1,
+      "actualCount": 1,
+      "pass": true
+    },
+    {
+      "query": "SELECT * FROM t WHERE value IS NULL UP TO 1 ROWS",
+      "sql": "SELECT * FROM t WHERE value IS NULL LIMIT 1",
+      "expectedCount": 1,
+      "actualCount": 1,
+      "pass": true
+    },
+    {
+      "query": "SELECT * FROM t WHERE id > 9 UP TO 1 ROWS",
+      "sql": "SELECT * FROM t WHERE id > 9 LIMIT 1",
+      "expectedCount": 0,
+      "actualCount": 0,
+      "pass": true
+    }
+  ]
+}

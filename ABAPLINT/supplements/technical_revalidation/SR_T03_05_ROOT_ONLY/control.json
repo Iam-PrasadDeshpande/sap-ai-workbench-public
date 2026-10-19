@@ -1,0 +1,12 @@
+{
+  "id": "SR_T03_05_ROOT_ONLY",
+  "originCase": "T03_05",
+  "change": "Add root to the CDS declaration only; retain original BDEF/missing implementation/authorization/key choices.",
+  "expected": "Observe whether the local gate distinguishes the root declaration. This is not a complete repaired RAP model.",
+  "profile": "cloud",
+  "sourceHashes": {
+    "zr4_view.bdef.asbdef": "9abb44e9312e1e4d1b8663d94d81cd68adbb787a98c28810107266c3405b9d3c",
+    "zr4_view.ddls.asddls": "1198411c1fda707101965f05f9d054c061c114937466d75eaf7a09cf0f4ec80f",
+    "zr4_data.tabl.xml": "aba2e9a2ee42b61e1de362231a7f1f2a28fb96401265cc433d36077b19d2ef82"
+  }
+}

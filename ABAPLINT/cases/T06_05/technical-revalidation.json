@@ -1,0 +1,54 @@
+{
+  "CASE_ID": "T06_05",
+  "SCENARIO": "Open SQL filtering and aggregation",
+  "SOURCE_TYPE": "ABAP; DDIC_XML",
+  "TEST_CATEGORY": "Simulated semantic scenario",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Custom SQLite SQL simulation with nullable seeded data; target physical DDIC nullability and SAP data state are not established.",
+  "STATIC_RESULT": "VALIDATION_FAIL",
+  "OBSERVED_DIAGNOSTICS": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 4
+          },
+          "end": {
+            "line": 7,
+            "character": 65
+          }
+        },
+        "code": "check_subrc",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/check_subrc/"
+        },
+        "message": "Check sy-subrc",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "OBSERVE",
+    "frozenDefect": null,
+    "frozenReferences": [
+      {
+        "input": {},
+        "expected": 12
+      }
+    ]
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+  "OFFSTACK_RESULT": {
+    "status": "LOCAL_VERIFIED",
+    "returned": 1,
+    "matched": 1,
+    "frozenExpected": 1,
+    "record": "cases/T06_05/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T06_05/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_05",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Custom SQLite SQL simulation with nullable seeded data; target physical DDIC nullability and SAP data state are not established."
+}

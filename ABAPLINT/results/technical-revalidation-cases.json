@@ -1,0 +1,2163 @@
+[
+  {
+    "CASE_ID": "T01_01",
+    "SCENARIO": "Available synthetic cross-class dependency",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Available synthetic local dependency; no real SAP catalog or release contract established.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [],
+      "zcl_r4_dep.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "CLEAN",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {
+            "IV": 0
+          },
+          "expected": 1
+        },
+        {
+          "input": {
+            "IV": -2
+          },
+          "expected": -1
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 2,
+      "matched": 2,
+      "frozenExpected": 2,
+      "record": "cases/T01_01/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T01_01/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_01",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Available synthetic local dependency; no real SAP catalog or release contract established."
+  },
+  {
+    "CASE_ID": "T01_02",
+    "SCENARIO": "Missing custom class",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 9
+            },
+            "end": {
+              "line": 7,
+              "character": 22
+            }
+          },
+          "code": "check_syntax",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_syntax/"
+          },
+          "message": "Class zcl_r4_absent not found",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T01_02/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T01_02/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_02",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion."
+  },
+  {
+    "CASE_ID": "T01_03",
+    "SCENARIO": "Missing external class outside error namespace",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. CL_* is outside the frozen errorNamespace. Missing external class acceptance does not demonstrate a failure of the configured namespace contract.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "CONFIGURATION_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T01_03/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T01_03/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_03",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "CL_* is outside the frozen errorNamespace. Missing external class acceptance does not demonstrate a failure of the configured namespace contract."
+  },
+  {
+    "CASE_ID": "T01_04",
+    "SCENARIO": "Missing data element",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 9
+            },
+            "end": {
+              "line": 7,
+              "character": 14
+            }
+          },
+          "code": "unknown_types",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/unknown_types/"
+          },
+          "message": "Variable \"VALUE\" contains unknown: ZR4_AMOUNT not found, lookup",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T01_04/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T01_04/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_04",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion."
+  },
+  {
+    "CASE_ID": "T01_05",
+    "SCENARIO": "Missing DDIC structure/component",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 9
+            },
+            "end": {
+              "line": 7,
+              "character": 15
+            }
+          },
+          "code": "unknown_types",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/unknown_types/"
+          },
+          "message": "Variable \"HEADER\" contains unknown: ZR4_HEADER not found, lookup",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T01_05/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T01_05/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_05",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion."
+  },
+  {
+    "CASE_ID": "T01_06",
+    "SCENARIO": "Missing transparent table",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 30
+            },
+            "end": {
+              "line": 7,
+              "character": 41
+            }
+          },
+          "code": "check_syntax",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_syntax/"
+          },
+          "message": "Database table or view \"zr4_missing\" not found",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T01_06/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T01_06/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_06",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion."
+  },
+  {
+    "CASE_ID": "T01_07",
+    "SCENARIO": "Missing interface reference",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 9
+            },
+            "end": {
+              "line": 7,
+              "character": 12
+            }
+          },
+          "code": "unknown_types",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/unknown_types/"
+          },
+          "message": "Variable \"REF\" contains unknown: REF, unable to resolve zif_r4_missing",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T01_07/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T01_07/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T01_07",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Deliberately omitted dependency. Diagnostics concern the supplied inventory; no target SAP object existence or release conclusion."
+  },
+  {
+    "CASE_ID": "T02_01",
+    "SCENARIO": "Classic transaction in Cloud profile",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Cloud-restricted construct tested under Cloud configuration; local rejection is not SAP activation evidence.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 28
+            }
+          },
+          "code": "parser_error",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/parser_error/"
+          },
+          "message": "Statement does not exist in the configured ABAP version(or a parser error), \"call\"",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "RESTRICTION",
+      "frozenDefect": null,
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T02_01/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T02_01/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T02_01",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Cloud-restricted construct tested under Cloud configuration; local rejection is not SAP activation evidence."
+  },
+  {
+    "CASE_ID": "T02_02",
+    "SCENARIO": "Same transaction in classic v758",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Classic transaction statement under the classic profile; local runtime lacks the SAP transaction environment.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T02_02/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T02_02/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T02_02",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Classic transaction statement under the classic profile; local runtime lacks the SAP transaction environment."
+  },
+  {
+    "CASE_ID": "T02_03",
+    "SCENARIO": "Modern expression under old v702",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Modern expression tested against the older v702 profile; preserve the observed version-related finding.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 21
+            }
+          },
+          "code": "parser_error",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/parser_error/"
+          },
+          "message": "Statement does not exist in the configured ABAP version(or a parser error), \"rv\"",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "RESTRICTION",
+      "frozenDefect": null,
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T02_03/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T02_03/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T02_03",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Modern expression tested against the older v702 profile; preserve the observed version-related finding."
+  },
+  {
+    "CASE_ID": "T02_04",
+    "SCENARIO": "Modern expression under v758",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Selected local expression behavior only; no SAP system execution.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "CLEAN",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 1
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T02_04/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T02_04/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T02_04",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Selected local expression behavior only; no SAP system execution."
+  },
+  {
+    "CASE_ID": "T02_05",
+    "SCENARIO": "API exists locally but release contract absent",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Two ordinary local Z classes, no component boundary or release contract supplied. Frozen expectedStatic is OBSERVE and defect is null. This is not an established unreleased-API violation.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [],
+      "zcl_r4_dep.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {
+            "IV": 4
+          },
+          "expected": 5
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T02_05/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T02_05/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T02_05",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Two ordinary local Z classes, no component boundary or release contract supplied. Frozen expectedStatic is OBSERVE and defect is null. This is not an established unreleased-API violation."
+  },
+  {
+    "CASE_ID": "T03_01",
+    "SCENARIO": "CDS over local synthetic table",
+    "SOURCE_TYPE": "CDS; DDIC_XML",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. CDS projection artifact processing only; transpilation does not establish CDS activation or executed query semantics.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zr4_view.ddls.asddls": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T03_01/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T03_01/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_01",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "CDS projection artifact processing only; transpilation does not establish CDS activation or executed query semantics."
+  },
+  {
+    "CASE_ID": "T03_02",
+    "SCENARIO": "CDS missing source",
+    "SOURCE_TYPE": "CDS",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Intentional missing CDS dependency. Processing does not establish dependency resolution or target SAP activation; no demonstrated upstream contract violation.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zr4_view.ddls.asddls": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Missing CDS source from frozen inventory",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T03_02/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T03_02/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_02",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Intentional missing CDS dependency. Processing does not establish dependency resolution or target SAP activation; no demonstrated upstream contract violation."
+  },
+  {
+    "CASE_ID": "T03_03",
+    "SCENARIO": "Malformed CDS definition",
+    "SOURCE_TYPE": "CDS",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Intentional malformed CDS negative; retain exact parser diagnostics rather than treat as a representative valid model.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zr4_view.ddls.asddls": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 0,
+              "character": 0
+            },
+            "end": {
+              "line": 0,
+              "character": 56
+            }
+          },
+          "code": "cds_parser_error",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/cds_parser_error/"
+          },
+          "message": "CDS Parser error",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Deliberately malformed CDS syntax",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T03_03/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T03_03/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_03",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Intentional malformed CDS negative; retain exact parser diagnostics rather than treat as a representative valid model."
+  },
+  {
+    "CASE_ID": "T03_04",
+    "SCENARIO": "CDS missing association target",
+    "SOURCE_TYPE": "CDS; DDIC_XML",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Intentional missing CDS dependency. Processing does not establish dependency resolution or target SAP activation; no demonstrated upstream contract violation.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zr4_view.ddls.asddls": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Missing association target from frozen inventory",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T03_04/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T03_04/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_04",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Intentional missing CDS dependency. Processing does not establish dependency resolution or target SAP activation; no demonstrated upstream contract violation."
+  },
+  {
+    "CASE_ID": "T03_05",
+    "SCENARIO": "Managed BDEF with missing implementation class",
+    "SOURCE_TYPE": "BDEF; CDS; DDIC_XML",
+    "TEST_CATEGORY": "Requires additional qualification",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Missing implementation class is not the sole issue: associated CDS lacks root. Strict managed authorization and key creation also require target modeling review. No SAP compiler execution.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zr4_view.bdef.asbdef": [],
+      "zr4_view.ddls.asddls": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Referenced managed implementation class absent from frozen inventory.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MULTIPLE_DEFECTS_IN_FIXTURE",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T03_05/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T03_05/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_05",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [
+      "SR_T03_05_ROOT_ONLY"
+    ],
+    "INTERPRETATION": "Missing implementation class is not the sole issue: associated CDS lacks root. Strict managed authorization and key creation also require target modeling review. No SAP compiler execution."
+  },
+  {
+    "CASE_ID": "T03_06",
+    "SCENARIO": "Deliberately malformed BDEF",
+    "SOURCE_TYPE": "BDEF",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Intentionally malformed BDEF accepted by the observed policy; no BDEF semantic validation contract established for the configured tool.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zr4_bad.bdef.asbdef": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Deliberately malformed BDEF artifact; no valid grammar header.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T03_06/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T03_06/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_06",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Intentionally malformed BDEF accepted by the observed policy; no BDEF semantic validation contract established for the configured tool."
+  },
+  {
+    "CASE_ID": "T03_07",
+    "SCENARIO": "EML entity read with absent behavior contract",
+    "SOURCE_TYPE": "ABAP_EML",
+    "TEST_CATEGORY": "Requires additional qualification",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Only keyword_case on Item was reported. That finding does not check the intended EML contract or establish a complete valid RAP model.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 8,
+              "character": 13
+            },
+            "end": {
+              "line": 8,
+              "character": 17
+            }
+          },
+          "code": "keyword_case",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/keyword_case/"
+          },
+          "message": "Identifiers should be lower case: \"Item\"",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "EML entity and behavior contract absent from frozen inventory.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T03_07/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T03_07/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_07",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Only keyword_case on Item was reported. That finding does not check the intended EML contract or establish a complete valid RAP model."
+  },
+  {
+    "CASE_ID": "T03_08",
+    "SCENARIO": "RAP commit without business object/save environment",
+    "SOURCE_TYPE": "ABAP_EML",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. RAP statement pattern requires a business object, save environment and SAP runtime; scalar/artifact processing is insufficient.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T03_08/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T03_08/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_08",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "RAP statement pattern requires a business object, save environment and SAP runtime; scalar/artifact processing is insufficient."
+  },
+  {
+    "CASE_ID": "T04_01",
+    "SCENARIO": "Authorization result checked",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. AUTHORITY-CHECK pattern needs SAP authorization state and kernel; local processing cannot verify role enforcement.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T04_01/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T04_01/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_01",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "AUTHORITY-CHECK pattern needs SAP authorization state and kernel; local processing cannot verify role enforcement."
+  },
+  {
+    "CASE_ID": "T04_02",
+    "SCENARIO": "Authorization result ignored",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Ignored authorization return code negative; check_subrc concerns return-code handling, not real authorization policy verification.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 59
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": "Access decision must honor failed authorization result; frozen static policy check_subrc can only cover selected patterns.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T04_02/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T04_02/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_02",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Ignored authorization return code negative; check_subrc concerns return-code handling, not real authorization policy verification."
+  },
+  {
+    "CASE_ID": "T04_03",
+    "SCENARIO": "Missing deny branch in synthetic policy",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Integer authorization-policy simulation. unused_variables on iv is unrelated to policy enforcement; preserve the frozen mismatch.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 2,
+              "character": 26
+            },
+            "end": {
+              "line": 2,
+              "character": 28
+            }
+          },
+          "code": "unused_variables",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/unused_variables/"
+          },
+          "message": "Variable \"iv\" not used",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": "Frozen synthetic policy: iv=0 must deny; iv=1 may allow. This candidate ignores its input.",
+      "frozenReferences": [
+        {
+          "input": {
+            "IV": 0
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "IV": 1
+          },
+          "expected": 1
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 2,
+      "matched": 1,
+      "frozenExpected": 2,
+      "record": "cases/T04_03/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T04_03/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_03",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Integer authorization-policy simulation. unused_variables on iv is unrelated to policy enforcement; preserve the frozen mismatch."
+  },
+  {
+    "CASE_ID": "T04_04",
+    "SCENARIO": "Explicit synthetic policy guard",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Explicit integer guard simulation; local matched output is not a SAP role or authorization test.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {
+            "IV": 0
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "IV": 1
+          },
+          "expected": 1
+        },
+        {
+          "input": {
+            "IV": -1
+          },
+          "expected": 0
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 3,
+      "matched": 3,
+      "frozenExpected": 3,
+      "record": "cases/T04_04/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T04_04/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_04",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Explicit integer guard simulation; local matched output is not a SAP role or authorization test."
+  },
+  {
+    "CASE_ID": "T04_05",
+    "SCENARIO": "Implicit client handling over local client table",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Client handling uses a custom SQLite adapter and frozen oracle; retained mismatch does not establish SAP cross-client behavior.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 48
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 5
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 1,
+      "matched": 0,
+      "frozenExpected": 1,
+      "record": "cases/T04_05/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T04_05/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_05",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Client handling uses a custom SQLite adapter and frozen oracle; retained mismatch does not establish SAP cross-client behavior."
+  },
+  {
+    "CASE_ID": "T04_06",
+    "SCENARIO": "Explicit cross-client classic SQL",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Requires additional qualification",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Classic v758 CLIENT SPECIFIED with @rv: only check_subrc observed. Exact release-specific SELECT/strict-mode legality remains unresolved. Obsolete syntax is not by itself proof this fixture fails the SAP compiler.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 65
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 104
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "UNRESOLVED_REQUIRES_SAP",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T04_06/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T04_06/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T04_06",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [
+      "SR_T04_06_SUBRC_ONLY",
+      "SR_T04_06_USING_CLIENT",
+      "SR_T04_06_NO_ESCAPE"
+    ],
+    "INTERPRETATION": "Classic v758 CLIENT SPECIFIED with @rv: only check_subrc observed. Exact release-specific SELECT/strict-mode legality remains unresolved. Obsolete syntax is not by itself proof this fixture fails the SAP compiler."
+  },
+  {
+    "CASE_ID": "T05_01",
+    "SCENARIO": "COMMIT WORK with no configured database",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. COMMIT/ROLLBACK statement with scalar return and no material DB change cannot establish SAP LUW behavior.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 1
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T05_01/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T05_01/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T05_01",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "COMMIT/ROLLBACK statement with scalar return and no material DB change cannot establish SAP LUW behavior."
+  },
+  {
+    "CASE_ID": "T05_02",
+    "SCENARIO": "ROLLBACK WORK with no configured database",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. COMMIT/ROLLBACK statement with scalar return and no material DB change cannot establish SAP LUW behavior.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 1
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "UNSUPPORTED_SEMANTIC_CHECK",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T05_02/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T05_02/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T05_02",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "COMMIT/ROLLBACK statement with scalar return and no material DB change cannot establish SAP LUW behavior."
+  },
+  {
+    "CASE_ID": "T05_03",
+    "SCENARIO": "Absent enqueue function",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Missing function module metadata. Pinned missing-function check is Cloud-specific while this case uses classic configuration; silence is not an established upstream defect.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Frozen inventory has no enqueue function/lock object; contention cannot be assessed.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T05_03/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T05_03/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T05_03",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Missing function module metadata. Pinned missing-function check is Cloud-specific while this case uses classic configuration; silence is not an established upstream defect."
+  },
+  {
+    "CASE_ID": "T05_04",
+    "SCENARIO": "Absent update function",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Missing function module metadata. Pinned missing-function check is Cloud-specific while this case uses classic configuration; silence is not an established upstream defect.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "DEFECT",
+      "frozenDefect": "Frozen inventory has no update function. SAP update-task scheduler not available.",
+      "frozenReferences": []
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "MISSING_DEPENDENCY_METADATA",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 0,
+      "record": "cases/T05_04/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T05_04/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T05_04",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Missing function module metadata. Pinned missing-function check is Cloud-specific while this case uses classic configuration; silence is not an established upstream defect."
+  },
+  {
+    "CASE_ID": "T05_05",
+    "SCENARIO": "Local SQLite transaction rollback",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. SQLite transaction adapter demonstrates selected local state transitions; it does not model SAP update tasks, LUWs or integration.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 16,
+              "character": 4
+            },
+            "end": {
+              "line": 16,
+              "character": 48
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 10
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T05_05/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T05_05/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T05_05",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "SQLite transaction adapter demonstrates selected local state transitions; it does not model SAP update tasks, LUWs or integration."
+  },
+  {
+    "CASE_ID": "T05_06",
+    "SCENARIO": "Local SQLite transaction commit",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. SQLite transaction adapter demonstrates selected local state transitions; it does not model SAP update tasks, LUWs or integration.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 16,
+              "character": 4
+            },
+            "end": {
+              "line": 16,
+              "character": 48
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 20
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T05_06/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T05_06/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T05_06",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "SQLite transaction adapter demonstrates selected local state transitions; it does not model SAP update tasks, LUWs or integration."
+  },
+  {
+    "CASE_ID": "T06_01",
+    "SCENARIO": "R3 regression: integer intermediate before truncation",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Intentional negative test",
+    "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. ABAP numeric expression is a negative against the mathematical oracle; 17 mismatches do not imply that check_syntax promises mathematical contract verification.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": "Frozen mathematical contract truncates exact rational toward zero; integer intermediate may violate it.",
+      "frozenReferences": [
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": -2
+          },
+          "expected": 3
+        },
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": 2
+          },
+          "expected": -3
+        },
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": 3
+          },
+          "expected": -2
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": -2
+          },
+          "expected": 2
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": 2
+          },
+          "expected": -2
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": 3
+          },
+          "expected": -1
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": -2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": 2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": 3
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": -2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": 2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": 3
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": -2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": 2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": 3
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": -2
+          },
+          "expected": -2
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": 2
+          },
+          "expected": 2
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": 3
+          },
+          "expected": 1
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": -2
+          },
+          "expected": -3
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": 2
+          },
+          "expected": 3
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": 3
+          },
+          "expected": 2
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": -2
+          },
+          "expected": -1073741823
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": 2
+          },
+          "expected": 1073741823
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": 3
+          },
+          "expected": 715827882
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": -2
+          },
+          "expected": 1073741824
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": 2
+          },
+          "expected": -1073741824
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": 3
+          },
+          "expected": -715827882
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+    "OFFSTACK_RESULT": {
+      "status": "PARTIAL",
+      "returned": 27,
+      "matched": 10,
+      "frozenExpected": 27,
+      "record": "cases/T06_01/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_01/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_01",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "ABAP numeric expression is a negative against the mathematical oracle; 17 mismatches do not imply that check_syntax promises mathematical contract verification."
+  },
+  {
+    "CASE_ID": "T06_02",
+    "SCENARIO": "R3 regression: decimal before division",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Selected local numeric behavior; prefer_inline findings, where present, do not establish numeric correctness or SAP equivalence.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": -2
+          },
+          "expected": 3
+        },
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": 2
+          },
+          "expected": -3
+        },
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": 3
+          },
+          "expected": -2
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": -2
+          },
+          "expected": 2
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": 2
+          },
+          "expected": -2
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": 3
+          },
+          "expected": -1
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": -2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": 2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": 3
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": -2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": 2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": 3
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": -2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": 2
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": 3
+          },
+          "expected": 0
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": -2
+          },
+          "expected": -2
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": 2
+          },
+          "expected": 2
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": 3
+          },
+          "expected": 1
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": -2
+          },
+          "expected": -3
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": 2
+          },
+          "expected": 3
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": 3
+          },
+          "expected": 2
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": -2
+          },
+          "expected": -1073741823
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": 2
+          },
+          "expected": 1073741823
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": 3
+          },
+          "expected": 715827882
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": -2
+          },
+          "expected": 1073741824
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": 2
+          },
+          "expected": -1073741824
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": 3
+          },
+          "expected": -715827882
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 27,
+      "matched": 27,
+      "frozenExpected": 27,
+      "record": "cases/T06_02/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_02/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_02",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Selected local numeric behavior; prefer_inline findings, where present, do not establish numeric correctness or SAP equivalence."
+  },
+  {
+    "CASE_ID": "T06_03",
+    "SCENARIO": "Packed decimal rounding boundary",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Selected local numeric behavior; prefer_inline findings, where present, do not establish numeric correctness or SAP equivalence.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 9
+            },
+            "end": {
+              "line": 7,
+              "character": 15
+            }
+          },
+          "code": "prefer_inline",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/prefer_inline/"
+          },
+          "message": "Prefer Inline Declarations, AMOUNT",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 124
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T06_03/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_03/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_03",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Selected local numeric behavior; prefer_inline findings, where present, do not establish numeric correctness or SAP equivalence."
+  },
+  {
+    "CASE_ID": "T06_04",
+    "SCENARIO": "Decimal cancellation beyond binary integer exactness",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Representative language pattern",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Selected local numeric behavior; prefer_inline findings, where present, do not establish numeric correctness or SAP equivalence.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 9
+            },
+            "end": {
+              "line": 7,
+              "character": 15
+            }
+          },
+          "code": "prefer_inline",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/prefer_inline/"
+          },
+          "message": "Prefer Inline Declarations, AMOUNT",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 1
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T06_04/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_04/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_04",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Selected local numeric behavior; prefer_inline findings, where present, do not establish numeric correctness or SAP equivalence."
+  },
+  {
+    "CASE_ID": "T06_05",
+    "SCENARIO": "Open SQL filtering and aggregation",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Custom SQLite SQL simulation with nullable seeded data; target physical DDIC nullability and SAP data state are not established.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 65
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 12
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T06_05/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_05/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_05",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Custom SQLite SQL simulation with nullable seeded data; target physical DDIC nullability and SAP data state are not established."
+  },
+  {
+    "CASE_ID": "T06_06",
+    "SCENARIO": "Open SQL null predicate",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 1
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T06_06/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_06/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_06",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [
+      "SR_T06_06_ZERO_ROW",
+      "SR_T06_06_NOTNULL_SCHEMA"
+    ],
+    "INTERPRETATION": "Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION."
+  },
+  {
+    "CASE_ID": "T06_07",
+    "SCENARIO": "Open SQL null to initial conversion",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION.",
+    "STATIC_RESULT": "VALIDATION_PASS",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": []
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 0
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T06_07/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_07/offstack-adapter-v2.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_07",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [
+      "SR_T06_07_ZERO_ROW"
+    ],
+    "INTERPRETATION": "Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION."
+  },
+  {
+    "CASE_ID": "T06_08",
+    "SCENARIO": "Open SQL null aggregate",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 48
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 10
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T06_08/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_08/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_08",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [
+      "SR_T06_08_ZERO_ROW"
+    ],
+    "INTERPRETATION": "Original NULL row is injected into a permissive SQLite table. Frozen DDIC XML does not prove the corresponding SAP column admits NULL. Oracle is valid for that synthetic state; promoting it to a proven SAP state would be INVALID_TEST_ASSUMPTION."
+  },
+  {
+    "CASE_ID": "T06_09",
+    "SCENARIO": "Empty SQL aggregate initial result",
+    "SOURCE_TYPE": "ABAP; DDIC_XML",
+    "TEST_CATEGORY": "Simulated semantic scenario",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Selected empty aggregate behavior in SQLite adapter; underlying synthetic NULL seed is not activated SAP DDIC evidence.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 7,
+              "character": 4
+            },
+            "end": {
+              "line": 7,
+              "character": 62
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 0
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "VALID_REPRESENTATIVE_PATTERN",
+    "OFFSTACK_RESULT": {
+      "status": "LOCAL_VERIFIED",
+      "returned": 1,
+      "matched": 1,
+      "frozenExpected": 1,
+      "record": "cases/T06_09/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_09/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_09",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Selected empty aggregate behavior in SQLite adapter; underlying synthetic NULL seed is not activated SAP DDIC evidence."
+  },
+  {
+    "CASE_ID": "T06_10",
+    "SCENARIO": "Open SQL from internal table",
+    "SOURCE_TYPE": "ABAP",
+    "TEST_CATEGORY": "Requires additional qualification",
+    "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Original invocation returned Runtime, database not initialized without a returned expectation. This configured adapter gap is not proof of universal unsupported SQL behavior.",
+    "STATIC_RESULT": "VALIDATION_FAIL",
+    "OBSERVED_DIAGNOSTICS": {
+      "zcl_r4_case.clas.abap": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 13,
+              "character": 4
+            },
+            "end": {
+              "line": 13,
+              "character": 52
+            }
+          },
+          "code": "check_subrc",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_subrc/"
+          },
+          "message": "Check sy-subrc",
+          "source": "abaplint"
+        }
+      ]
+    },
+    "EXPECTED_BEHAVIOR": {
+      "frozenStatic": "OBSERVE",
+      "frozenDefect": null,
+      "frozenReferences": [
+        {
+          "input": {},
+          "expected": 12
+        }
+      ]
+    },
+    "ROOT_CAUSE_CLASSIFICATION": "OFFSTACK_ADAPTER_LIMITATION",
+    "OFFSTACK_RESULT": {
+      "status": "UNSUPPORTED",
+      "returned": 0,
+      "matched": 0,
+      "frozenExpected": 1,
+      "record": "cases/T06_10/offstack-original.sanitized.json",
+      "selectedRecord": "cases/T06_10/offstack-original.sanitized.json"
+    },
+    "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+    "REPRODUCTION_LINK": "node harness/reproduce.cjs T06_10",
+    "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+    "INTERPRETATION": "Original invocation returned Runtime, database not initialized without a returned expectation. This configured adapter gap is not proof of universal unsupported SQL behavior."
+  }
+]

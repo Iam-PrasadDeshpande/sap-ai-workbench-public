@@ -1,0 +1,46 @@
+{
+  "id": "T03_02",
+  "track": "T03",
+  "title": "CDS missing source",
+  "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "DEFECT",
+  "defect": "Missing CDS source from frozen inventory",
+  "reference": [],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "artifactOnly": true,
+  "sourceFiles": [
+    {
+      "file": "zr4_view.ddls.asddls",
+      "sha256": "b91eee25177f12f0a3a81788c51a39af5bdd3a6b8aa0ba14308630b32865e261"
+    }
+  ],
+  "rootCause": {
+    "classification": "MISSING_DEPENDENCY",
+    "secondary": [
+      "UNSUPPORTED_SEMANTIC_CHECK"
+    ],
+    "explanation": "The CDS source is absent. cds_parser_error detects parsing, not a complete CDS dependency contract. The selected LSP emitted no source-resolution finding.",
+    "scope": "Pinned cds_parser_error.run handles DDLS/DDLX parse errors. check_syntax.run applies to ABAPObject, not a full CDS semantic verifier."
+  },
+  "historicalStaticClassification": "FALSE_NEGATIVE_OBSERVED",
+  "historicalBehaviorClassification": "PARTIAL",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "J",
+      "capability": "CDS",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "K",
+      "capability": "RAP behavior definitions",
+      "classification": "STATIC_BLIND_SPOT"
+    },
+    {
+      "id": "L",
+      "capability": "EML references",
+      "classification": "STATIC_BLIND_SPOT"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

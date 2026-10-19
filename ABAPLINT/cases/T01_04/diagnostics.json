@@ -1,0 +1,32 @@
+{
+  "caseId": "T01_04",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 9
+          },
+          "end": {
+            "line": 7,
+            "character": 14
+          }
+        },
+        "code": "unknown_types",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/unknown_types/"
+        },
+        "message": "Variable \"VALUE\" contains unknown: ZR4_AMOUNT not found, lookup",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "481d700bf03c291faeff4c24f9c93b098c5b318578f43650743a1fe2b40616ca",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

@@ -1,0 +1,689 @@
+{
+  "label": "T02_02",
+  "utc": "2026-10-19T09:24:38.901Z",
+  "ws": "<HISTORICAL_R4>/runs/T02_02",
+  "targetNames": [
+    "zcl_r4_case.clas.abap"
+  ],
+  "options": {
+    "profile": "v758"
+  },
+  "state": "VALIDATION_PASS",
+  "reason": null,
+  "checks": {
+    "policy": true,
+    "initialized": true,
+    "globDiscovered": [
+      "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_control.clas.abap",
+      "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_r4_case.clas.abap"
+    ],
+    "configLoaded": true,
+    "configurationReadHash": "5f6ee9f82b00b58b67009904e793ae6869cd4250a9f136537b9008153cfa1a28",
+    "control": true,
+    "inputIntegrity": true,
+    "completedPublications": 1
+  },
+  "files": {
+    "zcl_control.clas.abap": {
+      "hash": "374590a052698675eac5a6e5db730101e3213fe32c7f0876429bab453ce65648",
+      "diagnostics": [
+        {
+          "severity": 1,
+          "range": {
+            "start": {
+              "line": 6,
+              "character": 9
+            },
+            "end": {
+              "line": 6,
+              "character": 22
+            }
+          },
+          "code": "check_syntax",
+          "codeDescription": {
+            "href": "https://rules.abaplint.org/check_syntax/"
+          },
+          "message": "\"lv_r2_missing\" not found, findTop",
+          "source": "abaplint"
+        }
+      ],
+      "lspTranscriptStart": 29,
+      "lspTranscriptEnd": 31
+    },
+    "zcl_r4_case.clas.abap": {
+      "hash": "91d1486fb353c26708c918aa09271323e73887db8f7773e2e8255ede5097c975",
+      "diagnostics": [],
+      "lspTranscriptStart": 31,
+      "lspTranscriptEnd": 33
+    }
+  },
+  "transcript": [
+    {
+      "ms": 12,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "rootUri": "file:///<HISTORICAL_R4>/runs/T02_02",
+          "workspaceFolders": [
+            {
+              "uri": "file:///<HISTORICAL_R4>/runs/T02_02",
+              "name": "R2"
+            }
+          ],
+          "capabilities": {
+            "workspace": {
+              "workspaceFolders": true,
+              "configuration": false
+            },
+            "textDocument": {
+              "publishDiagnostics": {}
+            }
+          },
+          "initializationOptions": {
+            "provideFsProxy": true,
+            "fallbackThreshold": 2000
+          }
+        }
+      }
+    },
+    {
+      "ms": 216,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "capabilities": {
+            "textDocumentSync": 1,
+            "documentFormattingProvider": true,
+            "definitionProvider": true,
+            "codeLensProvider": {
+              "resolveProvider": false
+            },
+            "inlayHintProvider": {
+              "resolveProvider": false
+            },
+            "codeActionProvider": true,
+            "referencesProvider": true,
+            "documentHighlightProvider": true,
+            "documentSymbolProvider": true,
+            "implementationProvider": true,
+            "renameProvider": {
+              "prepareProvider": true
+            },
+            "hoverProvider": true
+          }
+        }
+      }
+    },
+    {
+      "ms": 216,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "initialized",
+        "params": {}
+      }
+    },
+    {
+      "ms": 216,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "textDocument/documentSymbol",
+        "params": {
+          "textDocument": {
+            "uri": "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_control.clas.abap"
+          }
+        }
+      }
+    },
+    {
+      "ms": 219,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 0,
+        "method": "client/registerCapability",
+        "params": {
+          "registrations": [
+            {
+              "id": "2660c052-612e-476d-b96b-75695c70c83f",
+              "method": "workspace/didChangeWorkspaceFolders",
+              "registerOptions": {}
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ms": 219,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 0,
+        "result": null
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "Workspace uri: file:///<HISTORICAL_R4>/runs/T02_02"
+        }
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "Folder overview:"
+        }
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "/<HISTORICAL_R4>/runs/T02_02 /src/**/*.*"
+        }
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "prefix: /<HISTORICAL_R4>/runs/T02_02/"
+        }
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "activeTextEditorUri: undefined"
+        }
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "scheme: file"
+        }
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "localConfigPath: undefined"
+        }
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "search: file:///<SANITIZED_WORKSPACE>"
+        }
+      }
+    },
+    {
+      "ms": 253,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "readFile",
+        "params": [
+          "file:///<SANITIZED_WORKSPACE>"
+        ]
+      }
+    },
+    {
+      "ms": 255,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": "{\n  \"global\": {\n    \"files\": \"/src/**/*.*\"\n  },\n  \"dependencies\": [],\n  \"syntax\": {\n    \"version\": \"v758\",\n    \"errorNamespace\": \"^(Z|Y|LCL_|TY_|LIF_|LTCL_)\"\n  },\n  \"rules\": {\n    \"parser_error\": true,\n    \"check_syntax\": true,\n    \"unknown_types\": true,\n    \"unused_variables\": true,\n    \"unused_types\": true,\n    \"unused_methods\": true,\n    \"unreachable_code\": true,\n    \"cds_parser_error\": true,\n    \"check_subrc\": true,\n    \"keyword_case\": {\n      \"style\": \"lower\"\n    },\n    \"line_length\": {\n      \"length\": 120\n    },\n    \"prefer_inline\": true,\n    \"empty_statement\": true,\n    \"check_abstract\": true,\n    \"superclass_final\": true,\n    \"xml_consistency\": true,\n    \"xml_bom\": true,\n    \"tabl_enhancement_category\": true,\n    \"avoid_use\": true,\n    \"prefer_insert_into_table\": true,\n    \"method_length\": true,\n    \"cyclomatic_complexity\": true\n  }\n}\n"
+      }
+    },
+    {
+      "ms": 258,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "custom abaplint configuration found"
+        }
+      }
+    },
+    {
+      "ms": 258,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "Folder overview:"
+        }
+      }
+    },
+    {
+      "ms": 258,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "/<HISTORICAL_R4>/runs/T02_02 /src/**/*.*"
+        }
+      }
+    },
+    {
+      "ms": 258,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "Call loadAndParseAll(), fallback 2000 files"
+        }
+      }
+    },
+    {
+      "ms": 258,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "glob",
+        "params": [
+          "/src/**/*.*"
+        ]
+      }
+    },
+    {
+      "ms": 258,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": [
+          "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_control.clas.abap",
+          "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_r4_case.clas.abap"
+        ]
+      }
+    },
+    {
+      "ms": 259,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "readFile",
+        "params": [
+          "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_control.clas.abap"
+        ]
+      }
+    },
+    {
+      "ms": 260,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": "class zcl_control definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\nendclass.\nclass zcl_control implementation.\n  method run.\n    rv = lv_r2_missing.\n  endmethod.\nendclass.\n"
+      }
+    },
+    {
+      "ms": 263,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "method": "readFile",
+        "params": [
+          "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_r4_case.clas.abap"
+        ]
+      }
+    },
+    {
+      "ms": 264,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "result": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    call transaction 'SE38'.\n    rv = 1.\n  endmethod.\nendclass.\n"
+      }
+    },
+    {
+      "ms": 296,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "window/logMessage",
+        "params": {
+          "type": 4,
+          "message": "loadAndParseAll() done"
+        }
+      }
+    },
+    {
+      "ms": 296,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "abaplint/status",
+        "params": {
+          "text": "Ready",
+          "tooltip": "ABAP version: v758\nabaplint: 2.120.81\nFallback threshold: 2000\nFallback activated: false\nObjects: [object Object]"
+        }
+      }
+    },
+    {
+      "ms": 296,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": [
+          {
+            "name": "zcl_control",
+            "kind": 5,
+            "range": {
+              "start": {
+                "line": 0,
+                "character": 6
+              },
+              "end": {
+                "line": 0,
+                "character": 17
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "line": 0,
+                "character": 6
+              },
+              "end": {
+                "line": 0,
+                "character": 17
+              }
+            },
+            "children": []
+          },
+          {
+            "name": "zcl_control",
+            "kind": 5,
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 6
+              },
+              "end": {
+                "line": 4,
+                "character": 17
+              }
+            },
+            "selectionRange": {
+              "start": {
+                "line": 4,
+                "character": 6
+              },
+              "end": {
+                "line": 4,
+                "character": 17
+              }
+            },
+            "children": [
+              {
+                "name": "run",
+                "kind": 6,
+                "range": {
+                  "start": {
+                    "line": 5,
+                    "character": 9
+                  },
+                  "end": {
+                    "line": 7,
+                    "character": 12
+                  }
+                },
+                "selectionRange": {
+                  "start": {
+                    "line": 5,
+                    "character": 9
+                  },
+                  "end": {
+                    "line": 5,
+                    "character": 12
+                  }
+                },
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ms": 298,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "textDocument/didOpen",
+        "params": {
+          "textDocument": {
+            "uri": "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_control.clas.abap",
+            "languageId": "abap",
+            "version": 1,
+            "text": "class zcl_control definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\nendclass.\nclass zcl_control implementation.\n  method run.\n    rv = lv_r2_missing.\n  endmethod.\nendclass.\n"
+          }
+        }
+      }
+    },
+    {
+      "ms": 534,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "textDocument/publishDiagnostics",
+        "params": {
+          "uri": "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_control.clas.abap",
+          "diagnostics": [
+            {
+              "severity": 1,
+              "range": {
+                "start": {
+                  "line": 6,
+                  "character": 9
+                },
+                "end": {
+                  "line": 6,
+                  "character": 22
+                }
+              },
+              "code": "check_syntax",
+              "codeDescription": {
+                "href": "https://rules.abaplint.org/check_syntax/"
+              },
+              "message": "\"lv_r2_missing\" not found, findTop",
+              "source": "abaplint"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ms": 535,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "textDocument/didOpen",
+        "params": {
+          "textDocument": {
+            "uri": "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_r4_case.clas.abap",
+            "languageId": "abap",
+            "version": 1,
+            "text": "class zcl_r4_case definition public final create public.\n  public section.\n    methods run returning value(rv) type i.\n\nendclass.\nclass zcl_r4_case implementation.\n  method run.\n    call transaction 'SE38'.\n    rv = 1.\n  endmethod.\nendclass.\n"
+          }
+        }
+      }
+    },
+    {
+      "ms": 759,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "textDocument/publishDiagnostics",
+        "params": {
+          "uri": "file:///<HISTORICAL_R4>/runs/T02_02/src/zcl_r4_case.clas.abap",
+          "diagnostics": []
+        }
+      }
+    },
+    {
+      "ms": 764,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "shutdown",
+        "params": null
+      }
+    },
+    {
+      "ms": 769,
+      "direction": "server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": null
+      }
+    },
+    {
+      "ms": 769,
+      "direction": "client",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "exit",
+        "params": null
+      }
+    }
+  ],
+  "stderr": "",
+  "configSha256": "5f6ee9f82b00b58b67009904e793ae6869cd4250a9f136537b9008153cfa1a28",
+  "config": {
+    "global": {
+      "files": "/src/**/*.*"
+    },
+    "dependencies": [],
+    "syntax": {
+      "version": "v758",
+      "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_|LTCL_)"
+    },
+    "rules": {
+      "parser_error": true,
+      "check_syntax": true,
+      "unknown_types": true,
+      "unused_variables": true,
+      "unused_types": true,
+      "unused_methods": true,
+      "unreachable_code": true,
+      "cds_parser_error": true,
+      "check_subrc": true,
+      "keyword_case": {
+        "style": "lower"
+      },
+      "line_length": {
+        "length": 120
+      },
+      "prefer_inline": true,
+      "empty_statement": true,
+      "check_abstract": true,
+      "superclass_final": true,
+      "xml_consistency": true,
+      "xml_bom": true,
+      "tabl_enhancement_category": true,
+      "avoid_use": true,
+      "prefer_insert_into_table": true,
+      "method_length": true,
+      "cyclomatic_complexity": true
+    }
+  },
+  "initialize": {
+    "capabilities": {
+      "textDocumentSync": 1,
+      "documentFormattingProvider": true,
+      "definitionProvider": true,
+      "codeLensProvider": {
+        "resolveProvider": false
+      },
+      "inlayHintProvider": {
+        "resolveProvider": false
+      },
+      "codeActionProvider": true,
+      "referencesProvider": true,
+      "documentHighlightProvider": true,
+      "documentSymbolProvider": true,
+      "implementationProvider": true,
+      "renameProvider": {
+        "prepareProvider": true
+      },
+      "hoverProvider": true
+    }
+  },
+  "ready": {
+    "text": "Ready",
+    "tooltip": "ABAP version: v758\nabaplint: 2.120.81\nFallback threshold: 2000\nFallback activated: false\nObjects: [object Object]"
+  },
+  "processExit": {
+    "code": null,
+    "signal": "SIGTERM"
+  },
+  "elapsedMs": 784
+}

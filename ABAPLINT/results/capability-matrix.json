@@ -1,0 +1,2545 @@
+[
+  {
+    "id": "T01_01",
+    "track": "T01",
+    "title": "Available synthetic cross-class dependency",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T01_01/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 2,
+      "referenceCompleted": 2,
+      "referenceMatched": 2,
+      "checks": [
+        {
+          "input": {
+            "IV": 0
+          },
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        },
+        {
+          "input": {
+            "IV": -2
+          },
+          "actual": -1,
+          "completed": true,
+          "expected": -1,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 2047
+  },
+  {
+    "id": "T01_02",
+    "track": "T01",
+    "title": "Missing custom class",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_syntax",
+          "message": "Class zcl_r4_absent not found"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T01_02/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: check_syntax, Class zcl_r4_absent not found, zcl_r4_case.clas.abap:8\n    at Transpiler.validate (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:158:19)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:85:14)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)\n    at Object..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "interpretation": null,
+    "originalElapsedMs": 1739
+  },
+  {
+    "id": "T01_03",
+    "track": "T01",
+    "title": "Missing external class outside error namespace",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "FALSE_NEGATIVE_OBSERVED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T01_03/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: check_syntax, Class cl_r4_absent not found, zcl_r4_case.clas.abap:8\n    at Transpiler.validate (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:158:19)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:85:14)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)\n    at Object..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "interpretation": "Strict static gate accepted a frozen known dependency/syntax or behavioral contract defect; not a claim that every such property is promised by abaplint.",
+    "originalElapsedMs": 1765
+  },
+  {
+    "id": "T01_04",
+    "track": "T01",
+    "title": "Missing data element",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "unknown_types",
+          "message": "Variable \"VALUE\" contains unknown: ZR4_AMOUNT not found, lookup"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T01_04/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: unknown_types, Variable \"VALUE\" contains unknown: ZR4_AMOUNT not found, lookup, zcl_r4_case.clas.abap:8\n    at Transpiler.validate (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:158:19)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:85:14)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)\n    at Object..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "interpretation": null,
+    "originalElapsedMs": 1806
+  },
+  {
+    "id": "T01_05",
+    "track": "T01",
+    "title": "Missing DDIC structure/component",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "unknown_types",
+          "message": "Variable \"HEADER\" contains unknown: ZR4_HEADER not found, lookup"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T01_05/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: unknown_types, Variable \"HEADER\" contains unknown: ZR4_HEADER not found, lookup, zcl_r4_case.clas.abap:8\n    at Transpiler.validate (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:158:19)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:85:14)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)\n    at Object..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "interpretation": null,
+    "originalElapsedMs": 1805
+  },
+  {
+    "id": "T01_06",
+    "track": "T01",
+    "title": "Missing transparent table",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_syntax",
+          "message": "Database table or view \"zr4_missing\" not found"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T01_06/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: check_syntax, Database table or view \"zr4_missing\" not found, zcl_r4_case.clas.abap:8\n    at Transpiler.validate (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:158:19)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:85:14)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)\n    at Object..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "interpretation": null,
+    "originalElapsedMs": 1770
+  },
+  {
+    "id": "T01_07",
+    "track": "T01",
+    "title": "Missing interface reference",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "unknown_types",
+          "message": "Variable \"REF\" contains unknown: REF, unable to resolve zif_r4_missing"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T01_07/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: unknown_types, Variable \"REF\" contains unknown: REF, unable to resolve zif_r4_missing, zcl_r4_case.clas.abap:8\n    at Transpiler.validate (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:158:19)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:85:14)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)\n    at Object..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Required object absent from frozen inventory; no real SAP dependency supplied.",
+    "interpretation": null,
+    "originalElapsedMs": 1716
+  },
+  {
+    "id": "T02_01",
+    "track": "T02",
+    "title": "Classic transaction in Cloud profile",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "parser_error",
+          "message": "Statement does not exist in the configured ABAP version(or a parser error), \"call\""
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "SMOKE_COMPLETED_NO_ORACLE",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T02_01/result.json",
+          "status": "SMOKE_COMPLETED_NO_ORACLE"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "actual": 1,
+          "completed": true,
+          "smokeOnly": true
+        }
+      ],
+      "limitation": "CALL TRANSACTION host operation returns unsupported status"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1800
+  },
+  {
+    "id": "T02_02",
+    "track": "T02",
+    "title": "Same transaction in classic v758",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "SMOKE_COMPLETED_NO_ORACLE",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T02_02/result.json",
+          "status": "SMOKE_COMPLETED_NO_ORACLE"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "actual": 1,
+          "completed": true,
+          "smokeOnly": true
+        }
+      ],
+      "limitation": "CALL TRANSACTION host operation returns unsupported status"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1838
+  },
+  {
+    "id": "T02_03",
+    "track": "T02",
+    "title": "Modern expression under old v702",
+    "profile": "v702",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "parser_error",
+          "message": "Statement does not exist in the configured ABAP version(or a parser error), \"rv\""
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "SMOKE_COMPLETED_NO_ORACLE",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T02_03/result.json",
+          "status": "SMOKE_COMPLETED_NO_ORACLE"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "actual": 1,
+          "completed": true,
+          "smokeOnly": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1800
+  },
+  {
+    "id": "T02_04",
+    "track": "T02",
+    "title": "Modern expression under v758",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T02_04/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1811
+  },
+  {
+    "id": "T02_05",
+    "track": "T02",
+    "title": "API exists locally but release contract absent",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T02_05/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {
+            "IV": 4
+          },
+          "actual": 5,
+          "completed": true,
+          "expected": 5,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Authoritative API release state and usage contract for the exact target release/language version; local presence is insufficient."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 2005
+  },
+  {
+    "id": "T03_01",
+    "track": "T03",
+    "title": "CDS over local synthetic table",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "ARTIFACT_TRANSPILED_NO_BEHAVIOR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T03_01/result.json",
+          "status": "ARTIFACT_TRANSPILED_NO_BEHAVIOR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "limitation": "Artifact handling/DDL generation only; no semantic behavior invoked."
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1739
+  },
+  {
+    "id": "T03_02",
+    "track": "T03",
+    "title": "CDS missing source",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "FALSE_NEGATIVE_OBSERVED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T03_02/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: CDS view zr4_view: unsupported database definition: source zr4_missing does not resolve to a TABL\n    at CDSDatabaseView.unsupported (node_modules\\@abaplint\\transpiler\\build\\src\\db\\cds_database_view.js:211:15)\n    at CDSDatabaseView.source (node_modules\\@abaplint\\transpiler\\build\\src\\db\\cds_database_view.js:103:25)\n    at CDSDatabaseView.build (node_modules\\@abaplint\\transpiler\\build\\src\\db\\cds_database_view.js:72:28)\n    at DatabaseSetup.buildCDSViews (node_modules\\@abaplint\\transpiler\\build\\src\\db\\index.js:78:80)\n    at DatabaseSetup.run (node_modules\\@abaplint\\transpiler\\build\\src\\db\\index.js:55:31)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:87:53)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)",
+      "limitation": "Artifact handling/DDL generation only; no semantic behavior invoked."
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Missing CDS source from frozen inventory",
+    "interpretation": "Strict static gate accepted a frozen known dependency/syntax or behavioral contract defect; not a claim that every such property is promised by abaplint.",
+    "originalElapsedMs": 1730
+  },
+  {
+    "id": "T03_03",
+    "track": "T03",
+    "title": "Malformed CDS definition",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "cds_parser_error",
+          "message": "CDS Parser error"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T03_03/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: CDS view ZR4_VIEW: unsupported database definition: could not parse CDS definition\n    at CDSDatabaseView.unsupported (node_modules\\@abaplint\\transpiler\\build\\src\\db\\cds_database_view.js:211:15)\n    at CDSDatabaseView.build (node_modules\\@abaplint\\transpiler\\build\\src\\db\\cds_database_view.js:51:25)\n    at DatabaseSetup.buildCDSViews (node_modules\\@abaplint\\transpiler\\build\\src\\db\\index.js:78:80)\n    at DatabaseSetup.run (node_modules\\@abaplint\\transpiler\\build\\src\\db\\index.js:55:31)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:87:53)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)\n    at Object..js (node:internal/modules/cjs/loader:2002:10)",
+      "limitation": "Artifact handling/DDL generation only; no semantic behavior invoked."
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Deliberately malformed CDS syntax",
+    "interpretation": null,
+    "originalElapsedMs": 1759
+  },
+  {
+    "id": "T03_04",
+    "track": "T03",
+    "title": "CDS missing association target",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "FALSE_NEGATIVE_OBSERVED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T03_04/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: CDS view zr4_view: unsupported database definition: association [ 0 .. 1 ] to ZR4_ABSENT as _Other on $projection . id = _Other . id\n    at CDSDatabaseView.unsupported (node_modules\\@abaplint\\transpiler\\build\\src\\db\\cds_database_view.js:211:15)\n    at CDSDatabaseView.keyword (node_modules\\@abaplint\\transpiler\\build\\src\\db\\cds_database_view.js:203:25)\n    at CDSDatabaseView.build (node_modules\\@abaplint\\transpiler\\build\\src\\db\\cds_database_view.js:90:22)\n    at DatabaseSetup.buildCDSViews (node_modules\\@abaplint\\transpiler\\build\\src\\db\\index.js:78:80)\n    at DatabaseSetup.run (node_modules\\@abaplint\\transpiler\\build\\src\\db\\index.js:55:31)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:87:53)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)",
+      "limitation": "Association database-view generation unsupported on this fixture"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Missing association target from frozen inventory",
+    "interpretation": "Strict static gate accepted a frozen known dependency/syntax or behavioral contract defect; not a claim that every such property is promised by abaplint.",
+    "originalElapsedMs": 1753
+  },
+  {
+    "id": "T03_05",
+    "track": "T03",
+    "title": "Managed BDEF with missing implementation class",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "FALSE_NEGATIVE_OBSERVED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "ARTIFACT_TRANSPILED_NO_BEHAVIOR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T03_05/result.json",
+          "status": "ARTIFACT_TRANSPILED_NO_BEHAVIOR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "limitation": "BDEF behavior/implementation contracts not executed"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Referenced managed implementation class absent from frozen inventory.",
+    "interpretation": "Strict static gate accepted a frozen known dependency/syntax or behavioral contract defect; not a claim that every such property is promised by abaplint.",
+    "originalElapsedMs": 2017
+  },
+  {
+    "id": "T03_06",
+    "track": "T03",
+    "title": "Deliberately malformed BDEF",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "FALSE_NEGATIVE_OBSERVED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "ARTIFACT_TRANSPILED_NO_BEHAVIOR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T03_06/result.json",
+          "status": "ARTIFACT_TRANSPILED_NO_BEHAVIOR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "limitation": "Malformed BDEF artifact accepted without semantic execution"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Deliberately malformed BDEF artifact; no valid grammar header.",
+    "interpretation": "Strict static gate accepted a frozen known dependency/syntax or behavioral contract defect; not a claim that every such property is promised by abaplint.",
+    "originalElapsedMs": 1756
+  },
+  {
+    "id": "T03_07",
+    "track": "T03",
+    "title": "EML entity read with absent behavior contract",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "keyword_case",
+          "message": "Identifiers should be lower case: \"Item\""
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "EXECUTION_ERROR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T03_07/result.json",
+          "status": "EXECUTION_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "completed": false,
+          "error": "Error: Void type: ReadEntities\n    at zcl_r4_case.clas.mjs:22:32\n    at zcl_r4_case.run (zcl_r4_case.clas.mjs:22:71)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:21:258)"
+        }
+      ],
+      "limitation": "EML execution emits Void type ReadEntities"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "EML entity and behavior contract absent from frozen inventory.",
+    "interpretation": "Keyword-case finding blocked the candidate, but did not diagnose missing EML contract.",
+    "originalElapsedMs": 1992
+  },
+  {
+    "id": "T03_08",
+    "track": "T03",
+    "title": "RAP commit without business object/save environment",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "LOCAL_TOOLCHAIN_ERROR",
+      "stages": {},
+      "attempts": [
+        {
+          "result": "runtime/T03_08/result.json",
+          "status": "LOCAL_TOOLCHAIN_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [],
+      "error": "Error: Statement CommitEntities not supported, commit entities.\n    at Traversal.traverseStatement (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1230:15)\n    at Traversal.traverse (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:167:25)\n    at Traversal.traverseProcedureLevel (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1133:38)\n    at Traversal.traverseStructure (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1193:25)\n    at Traversal.traverseStructure (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1205:38)\n    at Traversal.traverse (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:164:25)\n    at MethodTranspiler.transpile (node_modules\\@abaplint\\transpiler\\build\\src\\structures\\method.js:44:39)\n    at Traversal.traverseStructure (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:1200:40)\n    at Traversal.traverse (node_modules\\@abaplint\\transpiler\\build\\src\\traversal.js:164:25)\n    at ClassImplementationTranspiler.transpile (node_modules\\@abaplint\\transpiler\\build\\src\\structures\\class_implementation.js:45:39)",
+      "limitation": "COMMIT ENTITIES transpilation unsupported"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "RAP save sequence, validation failures, authorization and transactional consistency on target SAP."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1818
+  },
+  {
+    "id": "T04_01",
+    "track": "T04",
+    "title": "Authorization result checked",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "EXECUTION_ERROR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T04_01/result.json",
+          "status": "EXECUTION_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "completed": false,
+          "error": "Error: AuthorityCheck, kernel class missing\n    at zcl_r4_case.run (zcl_r4_case.clas.mjs:22:69)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:21:258)"
+        }
+      ],
+      "limitation": "Authorization host kernel absent"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Actual target authorization object/roles, positive and negative users; no host authorization kernel supplied."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1763
+  },
+  {
+    "id": "T04_02",
+    "track": "T04",
+    "title": "Authorization result ignored",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "EXECUTION_ERROR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T04_02/result.json",
+          "status": "EXECUTION_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "completed": false,
+          "error": "Error: AuthorityCheck, kernel class missing\n    at zcl_r4_case.run (zcl_r4_case.clas.mjs:22:69)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:21:258)"
+        }
+      ],
+      "limitation": "Authorization host kernel absent"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Access decision must honor failed authorization result; frozen static policy check_subrc can only cover selected patterns.",
+    "interpretation": null,
+    "originalElapsedMs": 1881
+  },
+  {
+    "id": "T04_03",
+    "track": "T04",
+    "title": "Missing deny branch in synthetic policy",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "unused_variables",
+          "message": "Variable \"iv\" not used"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "REFERENCE_MISMATCH",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T04_03/result.json",
+          "status": "REFERENCE_MISMATCH"
+        }
+      ],
+      "referenceExpected": 2,
+      "referenceCompleted": 2,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {
+            "IV": 0
+          },
+          "actual": 1,
+          "completed": true,
+          "expected": 0,
+          "pass": false
+        },
+        {
+          "input": {
+            "IV": 1
+          },
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Frozen synthetic policy: iv=0 must deny; iv=1 may allow. This candidate ignores its input.",
+    "interpretation": "Unused-variable diagnostic blocked the candidate, but did not diagnose the synthetic authorization-policy violation.",
+    "originalElapsedMs": 1836
+  },
+  {
+    "id": "T04_04",
+    "track": "T04",
+    "title": "Explicit synthetic policy guard",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T04_04/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 3,
+      "referenceCompleted": 3,
+      "referenceMatched": 3,
+      "checks": [
+        {
+          "input": {
+            "IV": 0
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "IV": 1
+          },
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        },
+        {
+          "input": {
+            "IV": -1
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Local iv policy is not SAP authorization; validate user/role/object mapping and all access paths on target."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1790
+  },
+  {
+    "id": "T04_05",
+    "track": "T04",
+    "title": "Implicit client handling over local client table",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "REFERENCE_MISMATCH",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T04_05/result.json",
+          "status": "REFERENCE_MISMATCH"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "actual": 104,
+          "completed": true,
+          "expected": 5,
+          "pass": false
+        }
+      ],
+      "limitation": "R4 custom adapter does not implement implicit client handling"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target client isolation, privileged cross-client paths and actual DDIC client dependency."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1823
+  },
+  {
+    "id": "T04_06",
+    "track": "T04",
+    "title": "Explicit cross-client classic SQL",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T04_06/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 104,
+          "completed": true,
+          "expected": 104,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Explicit privileged cross-client access requires target policy and negative tests; aggregate local behavior is not a security approval."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1922
+  },
+  {
+    "id": "T05_01",
+    "track": "T05",
+    "title": "COMMIT WORK with no configured database",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T05_01/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        }
+      ],
+      "limitation": "Reference checks scalar return only; no DB participant and no persistence/rollback oracle."
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "No-connection return is not persistence; verify update completion, rollback boundaries and SAP LUW."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1723
+  },
+  {
+    "id": "T05_02",
+    "track": "T05",
+    "title": "ROLLBACK WORK with no configured database",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T05_02/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        }
+      ],
+      "limitation": "Reference checks scalar return only; no DB participant and no persistence/rollback oracle."
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "No-connection return is not rollback; verify target DB state and registered update tasks."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1769
+  },
+  {
+    "id": "T05_03",
+    "track": "T05",
+    "title": "Absent enqueue function",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "FALSE_NEGATIVE_OBSERVED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "EXECUTION_ERROR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T05_03/result.json",
+          "status": "EXECUTION_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "completed": false,
+          "error": "CX_SY_DYN_CALL_ILLEGAL_FUNC not found"
+        }
+      ],
+      "limitation": "Enqueue function/lock environment absent"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Frozen inventory has no enqueue function/lock object; contention cannot be assessed.",
+    "interpretation": "Strict static gate accepted a frozen known dependency/syntax or behavioral contract defect; not a claim that every such property is promised by abaplint.",
+    "originalElapsedMs": 1935
+  },
+  {
+    "id": "T05_04",
+    "track": "T05",
+    "title": "Absent update function",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "FALSE_NEGATIVE_OBSERVED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "EXECUTION_ERROR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T05_04/result.json",
+          "status": "EXECUTION_ERROR"
+        }
+      ],
+      "referenceExpected": 0,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "completed": false,
+          "error": "CX_SY_DYN_CALL_ILLEGAL_FUNC not found"
+        }
+      ],
+      "limitation": "Update function/scheduler environment absent"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Frozen inventory has no update function. SAP update-task scheduler not available.",
+    "interpretation": "Strict static gate accepted a frozen known dependency/syntax or behavioral contract defect; not a claim that every such property is promised by abaplint.",
+    "originalElapsedMs": 1770
+  },
+  {
+    "id": "T05_05",
+    "track": "T05",
+    "title": "Local SQLite transaction rollback",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T05_05/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 10,
+          "completed": true,
+          "expected": 10,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Only SQLite transaction adapter evaluated; SAP update-task, enqueue ownership, commit ordering and save sequence remain unverified."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1978
+  },
+  {
+    "id": "T05_06",
+    "track": "T05",
+    "title": "Local SQLite transaction commit",
+    "profile": "v758",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T05_06/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 20,
+          "completed": true,
+          "expected": 20,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Only SQLite transaction adapter evaluated; SAP update-task, enqueue ownership, commit ordering and save sequence remain unverified."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1845
+  },
+  {
+    "id": "T06_01",
+    "track": "T06",
+    "title": "R3 regression: integer intermediate before truncation",
+    "profile": "cloud",
+    "provenance": "R3_ARITHMETIC_REGRESSION_PATTERN",
+    "gateA": {
+      "classification": "FALSE_NEGATIVE_OBSERVED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "PARTIAL",
+      "status": "REFERENCE_MISMATCH",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_01/result.json",
+          "status": "REFERENCE_MISMATCH"
+        }
+      ],
+      "referenceExpected": 27,
+      "referenceCompleted": 27,
+      "referenceMatched": 10,
+      "checks": [
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": -2
+          },
+          "actual": 4,
+          "completed": true,
+          "expected": 3,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": 2
+          },
+          "actual": -4,
+          "completed": true,
+          "expected": -3,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": 3
+          },
+          "actual": -2,
+          "completed": true,
+          "expected": -2,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": -2
+          },
+          "actual": 3,
+          "completed": true,
+          "expected": 2,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": 2
+          },
+          "actual": -3,
+          "completed": true,
+          "expected": -2,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": 3
+          },
+          "actual": -2,
+          "completed": true,
+          "expected": -1,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": -2
+          },
+          "actual": 1,
+          "completed": true,
+          "expected": 0,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": 2
+          },
+          "actual": -1,
+          "completed": true,
+          "expected": 0,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": 3
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": -2
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": 2
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": 3
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": -2
+          },
+          "actual": -1,
+          "completed": true,
+          "expected": 0,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": 2
+          },
+          "actual": 1,
+          "completed": true,
+          "expected": 0,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": 3
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": -2
+          },
+          "actual": -3,
+          "completed": true,
+          "expected": -2,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": 2
+          },
+          "actual": 3,
+          "completed": true,
+          "expected": 2,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": 3
+          },
+          "actual": 2,
+          "completed": true,
+          "expected": 1,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": -2
+          },
+          "actual": -4,
+          "completed": true,
+          "expected": -3,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": 2
+          },
+          "actual": 4,
+          "completed": true,
+          "expected": 3,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": 3
+          },
+          "actual": 2,
+          "completed": true,
+          "expected": 2,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": -2
+          },
+          "actual": -1073741824,
+          "completed": true,
+          "expected": -1073741823,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": 2
+          },
+          "actual": 1073741824,
+          "completed": true,
+          "expected": 1073741823,
+          "pass": false
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": 3
+          },
+          "actual": 715827882,
+          "completed": true,
+          "expected": 715827882,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": -2
+          },
+          "actual": 1073741824,
+          "completed": true,
+          "expected": 1073741824,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": 2
+          },
+          "actual": -1073741824,
+          "completed": true,
+          "expected": -1073741824,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": 3
+          },
+          "actual": -715827883,
+          "completed": true,
+          "expected": -715827882,
+          "pass": false
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": "Frozen mathematical contract truncates exact rational toward zero; integer intermediate may violate it.",
+    "interpretation": "Strict static gate accepted a frozen known dependency/syntax or behavioral contract defect; not a claim that every such property is promised by abaplint.",
+    "originalElapsedMs": 1819
+  },
+  {
+    "id": "T06_02",
+    "track": "T06",
+    "title": "R3 regression: decimal before division",
+    "profile": "cloud",
+    "provenance": "R3_ARITHMETIC_REGRESSION_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_02/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 27,
+      "referenceCompleted": 27,
+      "referenceMatched": 27,
+      "checks": [
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": -2
+          },
+          "actual": 3,
+          "completed": true,
+          "expected": 3,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": 2
+          },
+          "actual": -3,
+          "completed": true,
+          "expected": -3,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -7,
+            "DENOMINATOR": 3
+          },
+          "actual": -2,
+          "completed": true,
+          "expected": -2,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": -2
+          },
+          "actual": 2,
+          "completed": true,
+          "expected": 2,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": 2
+          },
+          "actual": -2,
+          "completed": true,
+          "expected": -2,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -5,
+            "DENOMINATOR": 3
+          },
+          "actual": -1,
+          "completed": true,
+          "expected": -1,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": -2
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": 2
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -1,
+            "DENOMINATOR": 3
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": -2
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": 2
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 0,
+            "DENOMINATOR": 3
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": -2
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": 2
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 1,
+            "DENOMINATOR": 3
+          },
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": -2
+          },
+          "actual": -2,
+          "completed": true,
+          "expected": -2,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": 2
+          },
+          "actual": 2,
+          "completed": true,
+          "expected": 2,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 5,
+            "DENOMINATOR": 3
+          },
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": -2
+          },
+          "actual": -3,
+          "completed": true,
+          "expected": -3,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": 2
+          },
+          "actual": 3,
+          "completed": true,
+          "expected": 3,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 7,
+            "DENOMINATOR": 3
+          },
+          "actual": 2,
+          "completed": true,
+          "expected": 2,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": -2
+          },
+          "actual": -1073741823,
+          "completed": true,
+          "expected": -1073741823,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": 2
+          },
+          "actual": 1073741823,
+          "completed": true,
+          "expected": 1073741823,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": 2147483647,
+            "DENOMINATOR": 3
+          },
+          "actual": 715827882,
+          "completed": true,
+          "expected": 715827882,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": -2
+          },
+          "actual": 1073741824,
+          "completed": true,
+          "expected": 1073741824,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": 2
+          },
+          "actual": -1073741824,
+          "completed": true,
+          "expected": -1073741824,
+          "pass": true
+        },
+        {
+          "input": {
+            "NUMERATOR": -2147483648,
+            "DENOMINATOR": 3
+          },
+          "actual": -715827882,
+          "completed": true,
+          "expected": -715827882,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1821
+  },
+  {
+    "id": "T06_03",
+    "track": "T06",
+    "title": "Packed decimal rounding boundary",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "prefer_inline",
+          "message": "Prefer Inline Declarations, AMOUNT"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_03/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 124,
+          "completed": true,
+          "expected": 124,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1890
+  },
+  {
+    "id": "T06_04",
+    "track": "T06",
+    "title": "Decimal cancellation beyond binary integer exactness",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "prefer_inline",
+          "message": "Prefer Inline Declarations, AMOUNT"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_04/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1805
+  },
+  {
+    "id": "T06_05",
+    "track": "T06",
+    "title": "Open SQL filtering and aggregation",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_05/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 12,
+          "completed": true,
+          "expected": 12,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1887
+  },
+  {
+    "id": "T06_06",
+    "track": "T06",
+    "title": "Open SQL null predicate",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_06/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 1,
+          "completed": true,
+          "expected": 1,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1775
+  },
+  {
+    "id": "T06_07",
+    "track": "T06",
+    "title": "Open SQL null to initial conversion",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "LOCAL_VERIFIED",
+      "state": "VALIDATION_PASS",
+      "diagnostics": [],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_07/result.json",
+          "status": "EXECUTION_ERROR"
+        },
+        {
+          "result": "runtime/T06_07_adapter_v2/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1867
+  },
+  {
+    "id": "T06_08",
+    "track": "T06",
+    "title": "Open SQL null aggregate",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_08/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 10,
+          "completed": true,
+          "expected": 10,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1847
+  },
+  {
+    "id": "T06_09",
+    "track": "T06",
+    "title": "Empty SQL aggregate initial result",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "LOCAL_VERIFIED",
+      "status": "LOCAL_VERIFIED",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_09/result.json",
+          "status": "LOCAL_VERIFIED"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 1,
+      "referenceMatched": 1,
+      "checks": [
+        {
+          "input": {},
+          "actual": 0,
+          "completed": true,
+          "expected": 0,
+          "pass": true
+        }
+      ],
+      "limitation": null
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1830
+  },
+  {
+    "id": "T06_10",
+    "track": "T06",
+    "title": "Open SQL from internal table",
+    "profile": "cloud",
+    "provenance": "SYNTHETIC_ENTERPRISE_PATTERN",
+    "gateA": {
+      "classification": "PARTIAL",
+      "state": "VALIDATION_FAIL",
+      "diagnostics": [
+        {
+          "rule": "check_subrc",
+          "message": "Check sy-subrc"
+        }
+      ],
+      "scope": "Published target class/interface/DDLS/BDEF documents; table XML loaded as dependency, not separately published"
+    },
+    "gateB": {
+      "classification": "UNSUPPORTED",
+      "status": "EXECUTION_ERROR",
+      "stages": {
+        "transpiled": true,
+        "loaded": true,
+        "invoked": true
+      },
+      "attempts": [
+        {
+          "result": "runtime/T06_10/result.json",
+          "status": "EXECUTION_ERROR"
+        }
+      ],
+      "referenceExpected": 1,
+      "referenceCompleted": 0,
+      "referenceMatched": 0,
+      "checks": [
+        {
+          "input": {},
+          "completed": false,
+          "error": "Error: Runtime, database not initialized\n    at Context.defaultDB (node_modules\\@abaplint\\runtime\\build\\src\\context.js:21:19)\n    at select (node_modules\\@abaplint\\runtime\\build\\src\\statements\\select.js:7:42)\n    at Statements.select (node_modules\\@abaplint\\runtime\\build\\src\\statements\\index.js:137:36)\n    at zcl_r4_case.run (zcl_r4_case.clas.mjs:32:27)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:21:258)"
+        }
+      ],
+      "limitation": "Internal-table SQL unavailable in configured runtime: no database/materialization supplied"
+    },
+    "gateC": {
+      "classification": "SAP_EVIDENCE_REQUIRED",
+      "requirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests."
+    },
+    "defect": null,
+    "interpretation": null,
+    "originalElapsedMs": 1844
+  }
+]

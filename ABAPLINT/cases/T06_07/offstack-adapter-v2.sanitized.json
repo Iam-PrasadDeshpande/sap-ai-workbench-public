@@ -1,0 +1,38 @@
+{
+  "id": "T06_07",
+  "label": "T06_07_adapter_v2",
+  "utc": "2026-10-19T09:26:41.481Z",
+  "stages": {
+    "transpiled": true,
+    "loaded": true,
+    "invoked": true
+  },
+  "checks": [
+    {
+      "input": {},
+      "actual": 0,
+      "completed": true,
+      "expected": 0,
+      "pass": true
+    }
+  ],
+  "sqlTrace": [
+    {
+      "operation": "select",
+      "sql": "SELECT \"amount\" from \"zr4_data\" WHERE \"id\" = 2 UP TO 1 ROWS"
+    },
+    {
+      "operation": "dialect_translation",
+      "original": "SELECT \"amount\" from \"zr4_data\" WHERE \"id\" = 2 UP TO 1 ROWS",
+      "sqlite": "SELECT \"amount\" from \"zr4_data\" WHERE \"id\" = 2 LIMIT 1"
+    }
+  ],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "execute",
+  "database": "Node built-in SQLite, in-memory, custom minimal adapter; not SAP HANA",
+  "completed": 1,
+  "referenceExecuted": 1,
+  "referencePassed": 1,
+  "status": "LOCAL_VERIFIED"
+}

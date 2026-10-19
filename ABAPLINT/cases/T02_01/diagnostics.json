@@ -1,0 +1,32 @@
+{
+  "caseId": "T02_01",
+  "state": "VALIDATION_FAIL",
+  "reason": null,
+  "profile": "cloud",
+  "configuration": "../../config/cloud.json",
+  "diagnostics": {
+    "zcl_r4_case.clas.abap": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 7,
+            "character": 4
+          },
+          "end": {
+            "line": 7,
+            "character": 28
+          }
+        },
+        "code": "parser_error",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/parser_error/"
+        },
+        "message": "Statement does not exist in the configured ABAP version(or a parser error), \"call\"",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "historicalLSPLogSha256": "ee187b9e831c093dd7256aa654add2f9fd1786cfe1bd4e491ab5eabd380b990d",
+  "sanitization": "Extracted original target diagnostic arrays; messages, rule IDs, severity and ranges retained."
+}

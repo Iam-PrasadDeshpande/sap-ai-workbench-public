@@ -1,0 +1,63 @@
+{
+  "scope": "Separate historical CDS projection supplement; not pooled with 42 cases",
+  "results": [
+    {
+      "name": "empty",
+      "actual": [],
+      "expected": [],
+      "pass": true
+    },
+    {
+      "name": "nonempty",
+      "actual": [
+        {
+          "id": 1,
+          "amount": 5
+        },
+        {
+          "id": 2,
+          "amount": 7
+        }
+      ],
+      "expected": [
+        {
+          "id": 1,
+          "amount": 5
+        },
+        {
+          "id": 2,
+          "amount": 7
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "negative-and-zero",
+      "actual": [
+        {
+          "id": 1,
+          "amount": -2
+        },
+        {
+          "id": 2,
+          "amount": 0
+        }
+      ],
+      "expected": [
+        {
+          "id": 1,
+          "amount": -2
+        },
+        {
+          "id": 2,
+          "amount": 0
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "matched": 3,
+  "total": 3,
+  "pooled": false,
+  "meaning": "Independent local replay of published supplemental plan; no SAP or RAP behavior claim."
+}

@@ -1,0 +1,229 @@
+{
+  "id": "T06_02",
+  "track": "T06",
+  "title": "R3 regression: decimal before division",
+  "provenance": "R3_ARITHMETIC_REGRESSION_PATTERN",
+  "profile": "cloud",
+  "expectedStatic": "OBSERVE",
+  "defect": null,
+  "reference": [
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": -2
+      },
+      "expected": 3
+    },
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": 2
+      },
+      "expected": -3
+    },
+    {
+      "input": {
+        "NUMERATOR": -7,
+        "DENOMINATOR": 3
+      },
+      "expected": -2
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": -2
+      },
+      "expected": 2
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": 2
+      },
+      "expected": -2
+    },
+    {
+      "input": {
+        "NUMERATOR": -5,
+        "DENOMINATOR": 3
+      },
+      "expected": -1
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": -2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": 2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": -1,
+        "DENOMINATOR": 3
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": -2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": 2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 0,
+        "DENOMINATOR": 3
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": -2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": 2
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 1,
+        "DENOMINATOR": 3
+      },
+      "expected": 0
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": -2
+      },
+      "expected": -2
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": 2
+      },
+      "expected": 2
+    },
+    {
+      "input": {
+        "NUMERATOR": 5,
+        "DENOMINATOR": 3
+      },
+      "expected": 1
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": -2
+      },
+      "expected": -3
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": 2
+      },
+      "expected": 3
+    },
+    {
+      "input": {
+        "NUMERATOR": 7,
+        "DENOMINATOR": 3
+      },
+      "expected": 2
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": -2
+      },
+      "expected": -1073741823
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": 2
+      },
+      "expected": 1073741823
+    },
+    {
+      "input": {
+        "NUMERATOR": 2147483647,
+        "DENOMINATOR": 3
+      },
+      "expected": 715827882
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": -2
+      },
+      "expected": 1073741824
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": 2
+      },
+      "expected": -1073741824
+    },
+    {
+      "input": {
+        "NUMERATOR": -2147483648,
+        "DENOMINATOR": 3
+      },
+      "expected": -715827882
+    }
+  ],
+  "sapRequirement": "Target release/compiler, real dependencies, activation and relevant SAP runtime tests.",
+  "params": "numerator type i denominator type i",
+  "sourceFiles": [
+    {
+      "file": "zcl_r4_case.clas.abap",
+      "sha256": "da1b7f2751d0df430edeb0dd111c975dd3a3fb1750e27732a7b575427f1dd7c9"
+    }
+  ],
+  "rootCause": {
+    "classification": "EXPECTED_STATIC_ACCEPTANCE",
+    "secondary": [],
+    "explanation": "No contradiction of a supported static rule contract is established by this case. Retain all policy findings and behavioral outcomes separately.",
+    "scope": "Observed exact rule policy; no SAP correctness inference."
+  },
+  "historicalStaticClassification": "LOCAL_VERIFIED",
+  "historicalBehaviorClassification": "LOCAL_VERIFIED",
+  "relatedFinalClosureCapabilities": [
+    {
+      "id": "R",
+      "capability": "Numeric semantics",
+      "classification": "LOCAL_PARTIAL"
+    },
+    {
+      "id": "S",
+      "capability": "Open SQL/database semantics",
+      "classification": "CONFIGURED_PIPELINE_LIMITATION"
+    }
+  ],
+  "note": "Track-related closure capabilities are broader than this individual case; no claim of a new case-specific closure verdict."
+}

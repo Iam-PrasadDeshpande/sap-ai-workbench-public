@@ -1,0 +1,14 @@
+{
+  "cloud": {
+    "sha256": "c8c999cac95baa1ebec47b22d735dd9d743184c16073e84e303c78a6a1521146",
+    "readyVersion": "v816"
+  },
+  "v758": {
+    "sha256": "5f6ee9f82b00b58b67009904e793ae6869cd4250a9f136537b9008153cfa1a28",
+    "readyVersion": "v758"
+  },
+  "v702": {
+    "sha256": "31f44e48eec57f1c2dced7bbdb83a48b9193c6fdd87f7fc730450f9d315aa972",
+    "readyVersion": "v702"
+  }
+}

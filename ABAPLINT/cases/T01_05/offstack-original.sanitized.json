@@ -1,0 +1,13 @@
+{
+  "id": "T01_05",
+  "label": "T01_05",
+  "utc": "2026-10-19T09:24:33.482Z",
+  "stages": {},
+  "checks": [],
+  "sqlTrace": [],
+  "sap": "SAP_EVIDENCE_REQUIRED",
+  "engine": "@abaplint/transpiler/runtime 2.14.8",
+  "phase": "transpile",
+  "status": "LOCAL_TOOLCHAIN_ERROR",
+  "error": "Error: unknown_types, Variable \"HEADER\" contains unknown: ZR4_HEADER not found, lookup, zcl_r4_case.clas.abap:8\n    at Transpiler.validate (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:158:19)\n    at Transpiler.run (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:85:14)\n    at Transpiler.runRaw (node_modules\\@abaplint\\transpiler\\build\\src\\index.js:79:21)\n    at run (<HISTORICAL_R4>\\harness\\runtime.cjs:8:57)\n    at Object.<anonymous> (<HISTORICAL_R4>\\harness\\runtime.cjs:25:26)\n    at Module._compile (node:internal/modules/cjs/loader:1871:14)\n    at Object..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+}

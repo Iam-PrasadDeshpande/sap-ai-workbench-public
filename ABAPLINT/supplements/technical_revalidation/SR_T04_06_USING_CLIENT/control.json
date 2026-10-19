@@ -1,0 +1,11 @@
+{
+  "id": "SR_T04_06_USING_CLIENT",
+  "originCase": "T04_06",
+  "change": "Start from the subrc-handled form; replace CLIENT SPECIFIED with USING CLIENT literal 100, keeping @rv.",
+  "expected": "Current-client-selection contract for synthetic rows expects 5 if implemented; record unsupported/mismatching adapter behavior without fixing it.",
+  "profile": "v758",
+  "sourceHashes": {
+    "zcl_r4_case.clas.abap": "4a7b04982bcd75c3708027e797edd8131723d340054130bd0cb5d3565bbe7198",
+    "zr4_data.tabl.xml": "b44acf9be8bbccd7a13633baea12961a5e45ee589bc9197fbc955d31df3a5413"
+  }
+}

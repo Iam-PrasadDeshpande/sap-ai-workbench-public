@@ -1,0 +1,32 @@
+{
+  "CASE_ID": "T03_05",
+  "SCENARIO": "Managed BDEF with missing implementation class",
+  "SOURCE_TYPE": "BDEF; CDS; DDIC_XML",
+  "TEST_CATEGORY": "Requires additional qualification",
+  "ABAP_GENUINENESS_ASSESSMENT": "Synthetic language/model fixture, not an extracted or SAP-activated enterprise object. Missing implementation class is not the sole issue: associated CDS lacks root. Strict managed authorization and key creation also require target modeling review. No SAP compiler execution.",
+  "STATIC_RESULT": "VALIDATION_PASS",
+  "OBSERVED_DIAGNOSTICS": {
+    "zr4_view.bdef.asbdef": [],
+    "zr4_view.ddls.asddls": []
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "DEFECT",
+    "frozenDefect": "Referenced managed implementation class absent from frozen inventory.",
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "MULTIPLE_DEFECTS_IN_FIXTURE",
+  "OFFSTACK_RESULT": {
+    "status": "UNSUPPORTED",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T03_05/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T03_05/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_05",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [
+    "SR_T03_05_ROOT_ONLY"
+  ],
+  "INTERPRETATION": "Missing implementation class is not the sole issue: associated CDS lacks root. Strict managed authorization and key creation also require target modeling review. No SAP compiler execution."
+}

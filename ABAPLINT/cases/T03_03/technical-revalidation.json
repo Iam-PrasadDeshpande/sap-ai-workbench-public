@@ -1,0 +1,49 @@
+{
+  "CASE_ID": "T03_03",
+  "SCENARIO": "Malformed CDS definition",
+  "SOURCE_TYPE": "CDS",
+  "TEST_CATEGORY": "Intentional negative test",
+  "ABAP_GENUINENESS_ASSESSMENT": "Intentional negative synthetic ABAP/CDS/BDEF input; validity is not assumed. Intentional malformed CDS negative; retain exact parser diagnostics rather than treat as a representative valid model.",
+  "STATIC_RESULT": "VALIDATION_FAIL",
+  "OBSERVED_DIAGNOSTICS": {
+    "zr4_view.ddls.asddls": [
+      {
+        "severity": 1,
+        "range": {
+          "start": {
+            "line": 0,
+            "character": 0
+          },
+          "end": {
+            "line": 0,
+            "character": 56
+          }
+        },
+        "code": "cds_parser_error",
+        "codeDescription": {
+          "href": "https://rules.abaplint.org/cds_parser_error/"
+        },
+        "message": "CDS Parser error",
+        "source": "abaplint"
+      }
+    ]
+  },
+  "EXPECTED_BEHAVIOR": {
+    "frozenStatic": "DEFECT",
+    "frozenDefect": "Deliberately malformed CDS syntax",
+    "frozenReferences": []
+  },
+  "ROOT_CAUSE_CLASSIFICATION": "VALID_NEGATIVE_TEST",
+  "OFFSTACK_RESULT": {
+    "status": "PARTIAL",
+    "returned": 0,
+    "matched": 0,
+    "frozenExpected": 0,
+    "record": "cases/T03_03/offstack-original.sanitized.json",
+    "selectedRecord": "cases/T03_03/offstack-original.sanitized.json"
+  },
+  "SAP_VALIDATION_REQUIRED": "YES: exact release, compiler/activation, dependency metadata and relevant business runtime. NOT_EXECUTED.",
+  "REPRODUCTION_LINK": "node harness/reproduce.cjs T03_03",
+  "SUPPLEMENTAL_CONTROL_IF_ANY": [],
+  "INTERPRETATION": "Intentional malformed CDS negative; retain exact parser diagnostics rather than treat as a representative valid model."
+}

@@ -1,0 +1,7 @@
+managed implementation in class zbp_r4_missing unique;
+strict ( 2 );
+define behavior for ZR4_VIEW alias Item
+persistent table zr4_data
+lock master
+authorization master ( instance )
+{ create; update; delete; field ( readonly ) id; }
