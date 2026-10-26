@@ -2,6 +2,7 @@
   "schema": "sap-public.sessions-index/1",
   "sessions": [
     "KS01",
-    "KS04"
+    "KS04",
+    "KS05"
   ]
 }
