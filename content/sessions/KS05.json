@@ -2,11 +2,11 @@
   "schema": "sap-public.session/1",
   "session_id": "KS05",
   "title": "SAP Document AI: Beyond OCR — What a Two-Invoice POC Proved",
-  "subtitle": "Structured extraction, 12 unsupported address outputs, Finance boundaries and a deferred AP integration phase",
-  "revision": "PUBLIC-CANDIDATE-R1",
+  "subtitle": "Two synthetic invoice exports, scoped field accuracy, source-support gaps and untested Finance integration",
+  "revision": "PUBLIC-CANDIDATE-R2-REVIEW-CORRECTED",
   "date": "2026-10-26",
-  "evidence_status": "Bounded synthetic invoice extraction only; SAP FI runtime not tested",
-  "lineage_note": "Derived from the private KS05 extraction and GPT publication review; the full SAP Finance phase is deferred because no authorized Finance system is available.",
+  "evidence_status": "Owner-supplied manual extraction exports reconciled offline; no independent live tenant read or Finance execution",
+  "lineage_note": "Public projection of a bounded two-invoice synthetic exercise. Source data came from owner-supplied SAP Document AI exports and PDFs; no live SAP API/catalog read was performed for this publication review. SAP Finance Phase 2 is deferred because an authorized Finance test environment was not available.",
   "views": [
     {
       "key": "overview",
@@ -40,7 +40,7 @@
       "view": "overview",
       "stage": "IDENTIFY",
       "scope": "SYNTHESIS",
-      "markdown": "SAP Document AI is primarily a **document-understanding / intelligent document processing (IDP)** service. It turns incoming unstructured document information into structured business fields. Traditional OCR usually recognizes text; modern OCR/IDP platforms may also extract structured invoice fields. **This POC did not benchmark SAP Document AI against another provider**, so no superiority claim is justified.\n\nThe architectural question is whether trustworthy extracted information can safely enter a governed SAP business process, not whether a PDF can be read."
+      "markdown": "**Research question:** What does intelligent document processing add beyond recognizing invoice text? The SAP Document AI exercise produced structured invoice header and line-item values from two supplied synthetic documents. Basic OCR concerns text recognition; using document fields in business processes requires interpretation and validation. **This exercise did not test any other OCR or IDP platform**, so it cannot establish a product advantage or a productivity benefit.\n\nThe architecture question is whether extracted values are supported by the original source and can be controlled before downstream business use."
     },
     {
       "key": "test-scope",
@@ -48,7 +48,7 @@
       "view": "evidence",
       "stage": "EVALUATE",
       "scope": "SYNTHESIS",
-      "markdown": "Two entirely synthetic supplier invoices were processed through a Document AI trial. They shared the same business invoice identity and amounts but were distinct PDF files. The assessment compared exported values with the printed invoice content.\n\n| Evidence | Scoped result |\n| --- | --- |\n| Selected expected header fields | 9 per invoice matched |\n| Selected expected line-item fields | 8 per invoice matched (two items) |\n| All selected expected fields | **34/34 matched** (17 per invoice) |\n| Unsupported supplier-address outputs | **12**, six per invoice |\n| Processing outcome | Historical troubleshooting exports recorded `DONE` for two distinct jobs |\n| Fresh catalog completeness | **Not verified** |\n| SAP Finance duplicate handling | **Not tested** |\n\nThe 34/34 result is **not** an overall accuracy rate or evidence of enterprise Accounts Payable readiness."
+      "markdown": "The owner supplied two synthetic supplier-invoice PDFs and case-labeled SAP Document AI extraction exports. The two invoices shared business identity and amounts but were different PDF files. An offline, field-by-field comparison reconciled the selected expected values to the printed source content. This was **not** a fresh authenticated tenant/API read in the publication review.\n\n| Evidence | Scoped result |\n| --- | --- |\n| Expected header fields | 9 per invoice matched |\n| Expected line-item fields | 8 per invoice matched |\n| All selected expected fields | **34/34 matched** (17 per invoice) |\n| Supplier-address outputs without source support | **12**, six per invoice |\n| Complete current tenant catalog inventory | **Not established** |\n| SAP Finance duplicate handling / posting | **Not tested** |\n\nThese results describe **two synthetic documents and only 34 selected fields**. They are not an overall extraction accuracy rate, a live processing-status claim or an enterprise Accounts Payable qualification."
     },
     {
       "key": "address-risk",
@@ -56,7 +56,7 @@
       "view": "evidence",
       "stage": "PROVE",
       "scope": "SYNTHESIS",
-      "markdown": "Both exports included six supplier-address values not supported as address information in the synthetic PDFs. For example, an invoice currency was attributed as a city and a label was attributed as a street. These 12 outputs were excluded from the selected-field match score and quarantined from downstream use.\n\nIncorrect source attribution does not establish a general model failure mechanism. Field-level review, confidence assessment, source alignment and authorization are separate controls."
+      "markdown": "The owner-supplied exports contained six address-designated values per invoice that were not supported as supplier-address facts by the source PDFs. For example, a currency token appeared in a city field. **These 12 unsupported values were identified during offline review**; the study did not demonstrate a technical control preventing their downstream transfer.\n\n**Proposed control, not an implemented outcome:** validate each extracted field against source evidence and authoritative reference data, then reject or quarantine unsupported values before any Finance integration. No downstream FI update, master-data write or quarantine mechanism was exercised."
     },
     {
       "key": "boundaries",
@@ -64,7 +64,7 @@
       "view": "architecture",
       "stage": "ALIGN WITH HANDS-ON",
       "scope": "SYNTHESIS",
-      "markdown": "1. **Extract:** recognize header and line-item business fields.\n2. **Validate:** check source support, mandatory values, arithmetic and anomalous fields.\n3. **Enrich/match:** resolve supplier/BP identities against authorized reference data where enabled.\n4. **Business controls:** invoke the relevant FI/MM invoice checks, company-code policies, PO/GR checks and duplicate verification in the actual business system.\n5. **Authorize:** apply separate governed approval before any draft creation, posting, master-data update or payment.\n\nOur POC evaluated the first two boundaries only in a limited form. It did not execute downstream SAP Finance business transactions."
+      "markdown": "**Proposed architecture for a future controlled integration (not implemented in KS05):**\n\n1. **Extract** structured header and line-item values from incoming invoices.\n2. **Validate** mandatory fields, arithmetic and support in the original document.\n3. **Resolve business identity** using authorized supplier and purchasing reference data when available.\n4. **Apply business controls** in the actual target invoice-management or Finance system.\n5. **Authorize downstream activity** separately, including drafts, postings and payments.\n\nKS05 demonstrated a bounded extraction output and offline comparison of selected fields only. It did **not** demonstrate connected supplier master data, validation enforcement, duplicate rejection or Finance transactions."
     },
     {
       "key": "ocr-compare",
@@ -72,7 +72,7 @@
       "view": "comparison",
       "stage": "COMPARE",
       "scope": "SYNTHESIS",
-      "markdown": "Basic OCR primarily recognizes text. IDP adds semantic field identification, normalization and review. SAP Document AI offers a SAP-oriented service for that function, but **structured invoice extraction is not unique to SAP**; competing services can also provide it.\n\nThe POC did not measure comparative accuracy, cost, throughput, manual correction time or real integration effort. Selection therefore remains open. For reliably structured electronic invoices, direct integration may avoid an unnecessary document-extraction step."
+      "markdown": "This was **not a comparative product evaluation**. The POC did not execute a traditional OCR engine or any competing intelligent document processing platform. It therefore does not support claims that SAP Document AI is more accurate, faster, less expensive or uniquely capable.\n\nFor a future comparative study, use the same documents and scoring contract to measure extraction errors, unsupported values, manual correction time, workflow compatibility and total cost per validated invoice. No future integration option is presented here as a proven capability of the current project."
     },
     {
       "key": "not-proved",
@@ -80,7 +80,7 @@
       "view": "conclusions",
       "stage": "PROVE",
       "scope": "SYNTHESIS",
-      "markdown": "- No current full catalog inventory or fresh job status was retrieved.\n- No SAP Finance supplier matching, company-code lookup, FI/MM duplicate enforcement, parking, posting or payment was executed.\n- No end-to-end AP productivity, straight-through processing or cost advantage was measured.\n- Two synthetic documents cannot support a population-level model accuracy claim.\n- An ABAP development trial is **not** a substitute for an S/4HANA Finance sandbox.\n\nThe proposed Finance integration Phase 2 is **deferred due to unavailable authorized SAP Finance environment**, not because SAP Document AI was shown to fail."
+      "markdown": "- **Current tenant inventory/status:** no authenticated fresh full-catalog read was available for this publication review.\n- **SAP Finance validation:** no target supplier master, company-code configuration or FI/MM runtime duplicate check was tested.\n- **Downstream controls:** no enforced source-field quarantine, draft creation, posting or payment was demonstrated.\n- **Competitive value:** no OCR/IDP comparator, representative sample, production workload or business cost benchmark was run.\n- **Evidence provenance:** owner-supplied manual exports were reviewed offline; this is not independent live SAP readback.\n\nFinance integration Phase 2 is **deferred** because an authorized SAP Finance test environment was unavailable to this evaluation. Deferral does not establish either a SAP Document AI defect or end-to-end product fitness."
     },
     {
       "key": "conclusion",
@@ -88,7 +88,7 @@
       "view": "conclusions",
       "stage": "SCOPE FOR IMPROVEMENT",
       "scope": "SYNTHESIS",
-      "markdown": "**Retain KS05 as a bounded extraction demonstration; do not claim end-to-end AP automation or competitive advantage.**\n\nA realistic adoption decision would need a representative multi-supplier invoice set, a comparison with existing OCR/IDP choices, field-source validation, exception handling, SAP integration proof and cost per *validated* invoice.\n\n**Community question:** What minimum evidence would you need before trusting extracted supplier invoice data in Finance?"
+      "markdown": "**Decision:** Retain KS05 as a bounded, synthetic document-extraction observation, not a demonstration of complete AP automation.\n\nTwo files can show how fields are represented and where unsupported data appears, but they cannot establish general accuracy, downstream business controls or comparative value. Future value qualification would require authorized source/master data, evidence-backed field validation and a separate Finance system; that work is deferred.\n\n**Community discussion:** What evidence would you require before accepting AI-extracted invoice values for use in Finance?"
     },
     {
       "key": "official",
@@ -96,65 +96,65 @@
       "view": "references",
       "stage": "IDENTIFY",
       "scope": "SAP_DOCUMENTED",
-      "markdown": "SAP describes the product, extraction workflow, catalog APIs and downstream business checks separately. SAP product editions and configured capabilities may differ. This study does not assert identical behavior across SAP Finance products or releases."
+      "markdown": "The referenced SAP documentation provides product and catalog API background only. Documentation is **not evidence that a specific live tenant operation was executed**. The supplied synthetic invoice observations and the absent Finance test are separately bounded above."
     }
   ],
   "claims": [
     {
       "claim_id": "K05-C01",
-      "claim": "Two synthetic documents matched 34 of 34 selected expected fields",
-      "evidence_class": "SAP_TRIAL_READBACK",
-      "scope": "Two invoices; 17 selected fields each",
-      "status": "SUPPORTED_BOUNDED",
-      "limitation": "Not a general accuracy benchmark"
+      "claim": "Selected expected invoice fields match across two owner-supplied synthetic extraction exports: 34 of 34",
+      "evidence_class": "SYNTHETIC_DEMONSTRATION",
+      "scope": "Offline source comparison; 17 selected fields per invoice",
+      "status": "SUPPORTED_BOUNDED_OFFLINE",
+      "limitation": "Offline review of owner-supplied synthetic PDFs and manual exports; not independent SAP tenant readback"
     },
     {
       "claim_id": "K05-C02",
-      "claim": "Twelve supplier-address fields were unsupported as address information in the source PDFs",
-      "evidence_class": "SAP_TRIAL_READBACK",
-      "scope": "Two source PDFs and exported values",
-      "status": "SUPPORTED_BOUNDED",
-      "limitation": "No conclusion about universal model behavior"
+      "claim": "Twelve address-designated outputs lacked supplier-address support in the original synthetic PDFs",
+      "evidence_class": "SYNTHETIC_DEMONSTRATION",
+      "scope": "Six unsupported source mappings per invoice; no actual quarantine enforced",
+      "status": "SUPPORTED_BOUNDED_OFFLINE",
+      "limitation": "Offline review of owner-supplied synthetic PDFs and manual exports; not independent SAP tenant readback"
     },
     {
       "claim_id": "K05-C03",
-      "claim": "Two distinct troubleshooting exports recorded historical DONE processing",
-      "evidence_class": "SAP_TRIAL_READBACK",
-      "scope": "Archived historical exports",
-      "status": "SUPPORTED_HISTORICAL",
-      "limitation": "Current live status not established"
+      "claim": "Current live SAP Document AI status and catalog completeness were verified",
+      "evidence_class": "ENTERPRISE_READBACK",
+      "scope": "Current tenant inventory and status",
+      "status": "NOT_ESTABLISHED",
+      "limitation": "No authorized fresh live inventory or job details were read; historical status withheld from public claims"
     },
     {
       "claim_id": "K05-C04",
-      "claim": "The two documents are duplicate-content candidates",
+      "claim": "The two synthetic documents share invoice business content and form a duplicate-content scenario",
       "evidence_class": "SYNTHETIC_DEMONSTRATION",
-      "scope": "Fabricated invoice identity",
-      "status": "SUPPORTED_BOUNDED",
-      "limitation": "Not proof of SAP FI duplicate prevention"
+      "scope": "Same synthetic invoice identity and amounts; two distinct PDFs",
+      "status": "SUPPORTED_BOUNDED_OFFLINE",
+      "limitation": "Not evidence of a SAP Finance duplicate-detection control or actual duplicate posting"
     },
     {
       "claim_id": "K05-C05",
-      "claim": "Complete catalog inventory was obtained",
-      "evidence_class": "SAP_TRIAL_READBACK",
+      "claim": "Complete current SAP Document AI catalog inventory was verified",
+      "evidence_class": "ENTERPRISE_READBACK",
       "scope": "Current tenant",
       "status": "NOT_ESTABLISHED",
-      "limitation": "No complete authorized catalog snapshot"
+      "limitation": "No full paginated inventory receipt was available"
     },
     {
       "claim_id": "K05-C06",
-      "claim": "SAP FI duplicate check or posting was tested",
+      "claim": "SAP Finance duplicate detection, parked invoice, or posting was executed",
       "evidence_class": "ENTERPRISE_READBACK",
       "scope": "FI/MM runtime",
       "status": "NOT_ESTABLISHED",
-      "limitation": "No S/4HANA Finance environment available"
+      "limitation": "No authorized SAP Finance application environment or runtime evidence in this evaluation"
     },
     {
       "claim_id": "K05-C07",
-      "claim": "Document AI has a demonstrated advantage over other IDP products",
+      "claim": "Document AI was demonstrated superior to other OCR/IDP alternatives",
       "evidence_class": "SYNTHETIC_DEMONSTRATION",
       "scope": "Comparative benchmarking",
       "status": "NOT_ESTABLISHED",
-      "limitation": "No comparative benchmark was executed"
+      "limitation": "No comparative OCR/IDP experiment, financial benchmark or integration proof"
     }
   ],
   "references": [
@@ -165,11 +165,7 @@
     {
       "label": "SAP Document AI - Post Catalog",
       "url": "https://help.sap.com/docs/document-ai/sap-document-ai/post-catalog"
-    },
-    {
-      "label": "S/4HANA Cloud duplicate-invoice configuration",
-      "url": "https://help.sap.com/docs/SAP_S4HANA_CLOUD/bb525a45b55f4a1c9bb32c254affeeec/c874994366d94528a23eabb26982bb0c.html?locale=en-US&state=PRODUCTION&version=2508.500"
     }
   ],
-  "content_sha256": "ed1d75da6c59125d751dfebd1c798ca345b61d06b7f3fa9f92e6c44c53c93225"
+  "content_sha256": "32904271a51fce0278467044369f04027810b72c7cc30d9d7f110e3414f9e885"
 }
