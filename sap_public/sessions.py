@@ -2,9 +2,9 @@
 
 A session is a research article derived from a reviewed master document. It is NOT a sealed-run finding and never
 enters the findings pipeline. Content lives in content/sessions/ and is shown only when the exact content digest is
-listed in the approval registry (session_approvals.py). The registry is a Python module of the signed package, so
-changing it needs a new signed release by the owner's pinned identity; whoever can edit a content file alone cannot
-approve it. An `approval` object inside a content file is informational and never authorizes display. Nothing here
+listed in the owner approval registry (session_approvals.py). The registry is covered by the public artifact's
+SHA-256 manifest under the owner-approved public-site release procedure; this is separate from private workbench D012
+signing. An `approval` object inside a content file is informational and never authorizes display. Nothing here
 executes anything, writes anything or calls the network.
 """
 from __future__ import annotations
@@ -181,7 +181,7 @@ def problems(doc) -> list[str]:
 
 
 def approved(doc: dict, registry=None) -> bool:
-    """True only when the digest of this exact content is listed for this session id in the signed registry."""
+    """True only when the exact content digest is listed for this session id in the owner approval registry."""
     reg = A.APPROVED_CONTENT_SHA256 if registry is None else registry
     sid, dg = doc.get('session_id'), digest_of(doc)
     return isinstance(sid, str) and doc.get('content_sha256') == dg and reg.get(sid) == dg

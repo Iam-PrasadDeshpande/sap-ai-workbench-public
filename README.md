@@ -35,8 +35,12 @@ repository.
 
 ## How content changes
 Content changes arrive as commits that touch `content/` only, made by the owner's local publication workflow after a
-finding has been validated and approved. Code changes arrive only as a new qualified build. This repository has no
-CI workflow.
+finding has been validated and approved. Research notes are displayed only when their exact canonical content digest
+is registered in `sap_public/session_approvals.py`. For this read-only public site, the owner-approved release
+procedure rebuilds `PUBLIC_MANIFEST.json` and runs the repository's offline qualification checks; the manifest records
+SHA-256 hashes and detects drift, but is not a cryptographic signature. This procedure does not change private
+workbench D012 signing requirements. Code changes arrive only as a new qualified build. This repository has no CI
+workflow.
 
 ## Running it
 Streamlit Community Cloud: entry point `app.py`, Python 3.12. Locally:

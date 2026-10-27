@@ -1,12 +1,13 @@
-"""Signed approval registry for public research notes.
+"""Owner approval registry for public research notes.
 
 Maps a session id to the exact content digest (SHA-256, see sessions.digest_of) the owner approved for publication.
-This module is part of the Authenticode-signed package and of the public artifact manifest, so an entry can only be
-added by the owner through a new signed release with the pinned identity. A content writer cannot approve their own
-file by editing JSON. Empty means nothing is approved: every candidate is withheld.
+This module is covered by PUBLIC_MANIFEST.json's SHA-256 file inventory. The public site's owner-approved release
+procedure uses that manifest and the exact content digest; it does not use Authenticode. This is separate from private
+workbench D012 signing requirements. A content writer cannot approve a note by editing its JSON: only a digest
+explicitly registered here is displayed. The manifest detects drift, but is not a cryptographic signature or a defense
+against an actor who can change the deployment and manifest together.
 
-Do not add an entry in a content-only change. An entry is made by the owner, after the review gates, naming the digest
-of the exact approved content.
+Entries are added only after owner approval of the exact content digest and required review/qualification gates.
 """
 APPROVED_CONTENT_SHA256: dict[str, str] = {
     # KS01 research note R7 (comprehensive eight-view research content). Owner-approved 2026-10-15 for this exact digest,
@@ -21,4 +22,6 @@ APPROVED_CONTENT_SHA256: dict[str, str] = {
     # commit; it takes effect only through an owner-approved, D012-signed and qualified release. Any change to the public
     # KS04 content changes the digest and needs a new entry.
     'KS04': 'c9cd1f31eb0da4c103d24f19cc20183ab06c762d02813282449da8072f5735e1',
+    # KS05 R3: owner-approved public POC observations; exact digest is verified in the release evidence.
+    'KS05': 'b0212b3d81a44df957bd7d86c3d4738ad6c42554a4f18122ea3faa39bdb567fc',
 }
