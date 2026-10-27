@@ -1,0 +1,62 @@
+name: KS05 R3A live rendered smoke
+on:
+  push:
+    branches:
+      - qualification/ks05-r3a-20261027
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Set up Python for read-only browser
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Validate published KS05 in rendered Streamlit application
+        shell: bash
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
+          url = "https://sap-ai-workbench-public.streamlit.app/findings"
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              page = browser.new_page(viewport={"width": 1440, "height": 1000})
+              page.set_default_timeout(30000)
+              errors=[]
+              page.on("pageerror", lambda e: errors.append(str(e)))
+              loaded=False
+              for attempt in range(3):
+                  page.goto(url, wait_until="domcontentloaded", timeout=60000)
+                  try:
+                      page.get_by_text("Hands-on Evaluations", exact=True).first.wait_for(timeout=60000)
+                      loaded=True
+                      break
+                  except PWTimeout:
+                      print(f"Attempt {attempt+1}: Streamlit did not render Hands-on Evaluations")
+              assert loaded, f"Streamlit application did not render at {url}; title={page.title()} body={page.locator('body').inner_text()[:600]}"
+              txt=page.locator("body").inner_text()
+              print("RENDERED_FINDINGS: ", txt[:1400])
+              assert "FEATURED KNOWLEDGE SESSION" in txt and "KS05" in txt, "KS05 is not the featured session"
+              assert "Explore KS05" in txt, "KS05 featured CTA missing"
+              page.get_by_role("button", name="Explore KS05").click()
+              page.get_by_text("KS05: SAP Document AI", exact=False).first.wait_for(timeout=30000)
+              txt=page.locator("body").inner_text()
+              assert "KS01" in txt and "KS04" in txt and "KS05" in txt, "Session options missing"
+              print("RENDERED_RESEARCH_NOTES: KS01 KS04 KS05 present, KS05 selected")
+              page.get_by_text("Architecture and controls", exact=True).first.click()
+              page.get_by_text("Five distinct architecture boundaries", exact=False).first.wait_for(timeout=30000)
+              assert page.locator("img").count() > 0, "No rendered architecture image found"
+              print("RENDERED_ARCHITECTURE: section and image present")
+              page.get_by_text("OCR versus Document AI", exact=True).first.click()
+              page.get_by_text("Use the tool that best supports", exact=False).first.wait_for(timeout=30000)
+              print("RENDERED_OCR_EXPLANATION: present")
+              assert not errors, f"Browser script errors: {errors}"
+              print("KS05_LIVE_RENDERED_ACCEPTANCE=PASS")
+              browser.close()
+          PY
