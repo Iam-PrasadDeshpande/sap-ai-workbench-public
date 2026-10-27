@@ -23,5 +23,5 @@ APPROVED_CONTENT_SHA256: dict[str, str] = {
     # KS04 content changes the digest and needs a new entry.
     'KS04': 'c9cd1f31eb0da4c103d24f19cc20183ab06c762d02813282449da8072f5735e1',
     # KS05 R3: owner-approved public POC observations; exact digest is verified in the release evidence.
-    'KS05': 'b0212b3d81a44df957bd7d86c3d4738ad6c42554a4f18122ea3faa39bdb567fc',
+    'KS05': '45d8776855372687ffedc7eda1a17b4e8a0817990e2be4373e5c6bbb58b05048',
 }

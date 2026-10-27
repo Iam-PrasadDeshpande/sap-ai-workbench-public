@@ -3,8 +3,8 @@
   "session_id": "KS05",
   "title": "SAP Document AI — What a Two-Invoice Evidence Handover Can Support",
   "subtitle": "Reported synthetic invoice extraction results, unreproduced field checks, and proposed Finance controls",
-  "revision": "PUBLIC-CANDIDATE-R3-EVIDENCE-BOUNDARY-CORRECTION",
-  "date": "2026-10-26",
+  "revision": "R3A-POST-PUBLICATION-UX-FAQ-ARCHITECTURE",
+  "date": "2026-10-27",
   "evidence_status": "Owner handover-reported results only; source-PDF/export field comparison not independently replayed for this publication",
   "lineage_note": "This public draft reflects a prior owner-supplied KS05 handover. Reported 34/34 field matches and 12 address-field anomalies were not re-established by an independent source-PDF-to-export replay in the R2 reviewer execution. No current SAP tenant/catalog read or Finance business-process test is established. Statements below distinguish reports from independently verified activity.",
   "views": [
@@ -40,7 +40,7 @@
       "view": "overview",
       "stage": "IDENTIFY",
       "scope": "SYNTHESIS",
-      "markdown": "**Question:** How should an SAP architecture team assess document-extraction outputs before allowing invoice data into Finance?\n\nKS05 is a **two-invoice synthetic demonstration described in an owner-provided technical handover**. The handover describes structured fields returned by SAP Document AI; this publication review did not replay the corresponding PDF-to-extraction comparison. It does not establish comparative performance, live integration, supplier validation, or automated posting.\n\n**Architectural lesson:** Field extraction is separate from proving that each value is supported by the source and is safe for downstream business use."
+      "markdown": "**Question: Why consider SAP Document AI when OCR already exists?**\n\n**Direct answer:** OCR recognizes text; SAP Document AI is designed to extract structured **business document fields** such as invoice headers and line items through supported machine-learning or template-based methods, with reviewable extraction results and documented enrichment options. These may reduce bespoke parsing effort when an existing OCR system produces only text. Document AI can itself involve OCR; the architecture question is not whether text recognition is replaced.\n\n**Do not adopt another service automatically.** If an existing OCR/IDP platform already produces accurate structured invoices, controlled exceptions and approved SAP integrations at a lower total cost, it may remain the better choice. Compare the alternatives on **field-level correctness, unsupported populated fields, human corrections, integration and operational cost per validated invoice**.\n\n**What KS05 actually provides:** two synthetic supplier invoices described by an owner handover. The reported **34/34** selected-field matches and **12** address-field concerns were **not independently rechecked against the original PDFs/exports** for this publication. No current-tenant inventory, comparator OCR benchmark, supplier/PO validation or Finance posting was verified.\n\n**Architectural lesson:** Extracting a value is not the same as proving it is supported by the document or authorized master data. Validation and approval remain separate gates."
     },
     {
       "key": "test-scope",
@@ -64,7 +64,8 @@
       "view": "architecture",
       "stage": "ALIGN WITH HANDS-ON",
       "scope": "SYNTHESIS",
-      "markdown": "**Proposed controlled processing design; none of these end-to-end controls was qualified by this exercise:**\n\n1. **Extract:** obtain structured header and line-item candidates.\n2. **Validate:** check source support, mandatory fields and arithmetic with reproducible evidence.\n3. **Resolve identity:** compare supplier and purchasing fields with authorized business records.\n4. **Apply enterprise controls:** use the actual target FI/MM or invoice-management environment for configured rules.\n5. **Authorize actions:** separate validation and business approval from any posting or payment operation.\n\nThe handover reports an extraction comparison, but the later independent review did **not** reproduce it. No current-run evidence was supplied for supplier matching, configured duplicate checking, quarantine, posting or payments."
+      "markdown": "**Proposed controlled processing design; none of these end-to-end controls was qualified by this exercise:**\n\n1. **Extract:** obtain structured header and line-item candidates.\n2. **Validate:** check source support, mandatory fields and arithmetic with reproducible evidence.\n3. **Resolve identity:** compare supplier and purchasing fields with authorized business records.\n4. **Apply enterprise controls:** use the actual target FI/MM or invoice-management environment for configured rules.\n5. **Authorize actions:** separate validation and business approval from any posting or payment operation.\n\nThe handover reports an extraction comparison, but the later independent review did **not** reproduce it. No current-run evidence was supplied for supplier matching, configured duplicate checking, quarantine, posting or payments.",
+      "diagram": true
     },
     {
       "key": "ocr-compare",
@@ -72,7 +73,7 @@
       "view": "comparison",
       "stage": "COMPARE",
       "scope": "SYNTHESIS",
-      "markdown": "KS05 **did not perform a comparative experiment** against any traditional OCR or competing intelligent document processing platform. The materials reviewed for this publication do not support relative accuracy, speed, price, implementation effort or product superiority.\n\nA future comparative study would need identical source documents, independently reproducible field truth, an agreed error scoring contract, exception-workflow measures and cost per validated invoice. No option is presented as a proven winner."
+      "markdown": "**Use the tool that best supports a controlled business outcome, not the tool with the strongest AI branding.** No comparative OCR/IDP trial was part of KS05.\n\n| Criterion | Existing OCR / IDP | SAP Document AI |\n| --- | --- | --- |\n| Recognition | OCR turns scans into text; existing IDP may also classify and extract fields | Document AI can use OCR as part of document processing |\n| Invoice field extraction | Text-only OCR needs downstream parsing; mature IDP may already produce structured data | Document AI supports extraction of structured headers and line items with supported methods |\n| Enrichment | Depends on existing products and integration | Document AI offers documented enrichment capabilities; does not prove supplier/PO business validation |\n| Exceptions / business rules | Must be designed and governed | Still requires source grounding, master data checks, duplicate handling and approval |\n| Cost / value | Reuse may avoid an extra platform | Adopt only when independently measured benefit justifies integration and service cost |\n\n**Recommended decision test:** send the same representative invoices through both options, independently score all required fields (including unsupported values), quantify reviewer corrections and exception handling, verify master-data and SAP integration requirements, and compare all-in **cost per accepted invoice**. Neither option is a proven winner here.\n\nWhere supplier invoices arrive as structured electronic messages, first determine whether OCR is required at all."
     },
     {
       "key": "not-proved",
@@ -165,7 +166,23 @@
     {
       "label": "SAP Document AI - Post Catalog",
       "url": "https://help.sap.com/docs/document-ai/sap-document-ai/post-catalog"
+    },
+    {
+      "label": "SAP Document AI — product extraction overview",
+      "url": "https://help.sap.com/docs/document-information-extraction/document-information-extraction/reserved-keywords"
+    },
+    {
+      "label": "SAP Document AI — header fields and line items",
+      "url": "https://help.sap.com/docs/document-information-extraction/document-information-extraction/document"
     }
   ],
-  "content_sha256": "b0212b3d81a44df957bd7d86c3d4738ad6c42554a4f18122ea3faa39bdb567fc"
+  "content_sha256": "45d8776855372687ffedc7eda1a17b4e8a0817990e2be4373e5c6bbb58b05048",
+  "featured": {
+    "order": -1,
+    "title": "SAP Document AI — Beyond OCR: What Did KS05 Actually Show?",
+    "description": "A two-invoice synthetic handover illustrates structured extraction and the controls still needed before Finance. Learn when Document AI may add value over existing OCR; no benchmark or posting was demonstrated.",
+    "action_label": "Explore KS05"
+  },
+  "diagram_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1100 660\">\n<rect width=\"1100\" height=\"660\" rx=\"20\" fill=\"#f8fafc\"/>\n<text x=\"550\" y=\"39\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"26\" font-weight=\"700\" fill=\"#172554\">Proposed invoice extraction and control architecture</text>\n<text x=\"550\" y=\"65\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"16\" fill=\"#475569\">Alternative extraction routes; not a measured product comparison</text>\n<rect x=\"330\" y=\"90\" width=\"440\" height=\"58\" rx=\"13\" fill=\"#e2e8f0\" stroke=\"#64748b\" stroke-width=\"2\"/>\n<text x=\"550\" y=\"124\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"22\" font-weight=\"700\" fill=\"#0f172a\">Invoice image / PDF</text>\n<path d=\"M550 148 V173 H265 V197 M550 173 H835 V197\" stroke=\"#64748b\" fill=\"none\" stroke-width=\"3\"/>\n<rect x=\"60\" y=\"197\" width=\"410\" height=\"96\" rx=\"14\" fill=\"#1e40af\"/>\n<text x=\"265\" y=\"230\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"23\" font-weight=\"700\" fill=\"#ffffff\">Existing OCR / IDP</text>\n<text x=\"265\" y=\"260\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"17\" fill=\"#dbeafe\">Recognize text / map invoice fields</text>\n<rect x=\"630\" y=\"197\" width=\"410\" height=\"96\" rx=\"14\" fill=\"#6d28d9\"/>\n<text x=\"835\" y=\"230\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"23\" font-weight=\"700\" fill=\"#ffffff\">SAP Document AI</text>\n<text x=\"835\" y=\"260\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"17\" fill=\"#ede9fe\">Header + line-item field candidates</text>\n<path d=\"M265 293 V321 H550 V340 M835 293 V321 H550\" fill=\"none\" stroke=\"#64748b\" stroke-width=\"3\"/>\n<rect x=\"210\" y=\"340\" width=\"680\" height=\"68\" rx=\"14\" fill=\"#e0f2fe\" stroke=\"#0284c7\" stroke-width=\"2\"/>\n<text x=\"550\" y=\"378\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"22\" font-weight=\"700\" fill=\"#075985\">Normalized invoice fields + source provenance</text>\n<path d=\"M550 408 V430\" fill=\"none\" stroke=\"#64748b\" stroke-width=\"3\"/>\n<rect x=\"140\" y=\"430\" width=\"820\" height=\"83\" rx=\"14\" fill=\"#fff7ed\" stroke=\"#ea580c\" stroke-width=\"2\"/>\n<text x=\"550\" y=\"461\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"23\" font-weight=\"700\" fill=\"#9a3412\">Validate source, supplier / PO, amounts and duplicates</text>\n<text x=\"550\" y=\"491\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"17\" fill=\"#9a3412\">Controls are proposed; none were qualified end to end by KS05</text>\n<path d=\"M550 513 V533 H296 V548 M550 533 H810 V548\" fill=\"none\" stroke=\"#64748b\" stroke-width=\"3\"/>\n<rect x=\"100\" y=\"548\" width=\"391\" height=\"62\" rx=\"14\" fill=\"#fef3c7\" stroke=\"#ca8a04\" stroke-width=\"2\"/>\n<text x=\"296\" y=\"587\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#78350f\">Hold / human review</text>\n<rect x=\"610\" y=\"548\" width=\"391\" height=\"62\" rx=\"14\" fill=\"#dcfce7\" stroke=\"#16a34a\" stroke-width=\"2\"/>\n<text x=\"806\" y=\"587\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"21\" font-weight=\"700\" fill=\"#166534\">Authorized SAP FI / MM</text>\n<text x=\"550\" y=\"644\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"15\" fill=\"#b45309\">KS05 scope: handover-reported Document AI extraction only. Finance integration was NOT tested.</text>\n</svg>",
+  "diagram_caption": "Proposed architecture, not a tested end-to-end integration. Existing OCR/IDP and Document AI are alternative extractors; source and enterprise controls remain separate."
 }
