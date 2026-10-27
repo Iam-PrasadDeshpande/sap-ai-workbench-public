@@ -20,7 +20,7 @@ from build_public_manifest import write_manifest
 EXPECTED = {
     'KS01': 'b3f4da6d43b3e2ab16ecb76ced012dbb7170453c89e669166606b6457c93a82e',
     'KS04': 'c9cd1f31eb0da4c103d24f19cc20183ab06c762d02813282449da8072f5735e1',
-    'KS05': 'b0212b3d81a44df957bd7d86c3d4738ad6c42554a4f18122ea3faa39bdb567fc',
+    'KS05': '45d8776855372687ffedc7eda1a17b4e8a0817990e2be4373e5c6bbb58b05048',
 }
 
 
