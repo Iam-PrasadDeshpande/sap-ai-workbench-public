@@ -1,0 +1,268 @@
+{
+  "schema": "sap-public.session/1",
+  "session_id": "KS07",
+  "title": "SAP Integration Suite Native MCP Gateway — External AI Agent to CAP OData",
+  "subtitle": "One external Claude Code agent, two SAP-native MCP integration paths, synthetic OData data and evidence-bounded controls",
+  "revision": "R1-PUBLIC-CANDIDATE-NOT-APPROVED",
+  "date": "2026-10-29",
+  "evidence_status": "Owner-supplied R15 v1.3 technical handover, 44-result evidence map and qualification receipts; not replayed independently for website publication",
+  "lineage_note": "KS07 is separate from KS04 CAP MCP development/runtime assessment. Runtime results are reported from the final handover and previously captured SAP Trial receipts. No SAP S/4HANA, ECC, RFC backend or production environment was used. Exact public content requires owner approval and the established publication gates.",
+  "views": [
+    {
+      "key": "overview",
+      "name": "Scenario and purpose"
+    },
+    {
+      "key": "architecture",
+      "name": "As-built architecture"
+    },
+    {
+      "key": "implementation",
+      "name": "Implementation steps"
+    },
+    {
+      "key": "evidence",
+      "name": "Executed tests and results"
+    },
+    {
+      "key": "security",
+      "name": "Security and policy controls"
+    },
+    {
+      "key": "limitations",
+      "name": "Open and blocked capabilities"
+    },
+    {
+      "key": "references",
+      "name": "SAP documentation and evidence"
+    }
+  ],
+  "sections": [
+    {
+      "key": "purpose",
+      "title": "Why test a standard SAP MCP Gateway?",
+      "view": "overview",
+      "stage": "IDENTIFY",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "**Experiment question:** Can one external AI agent retrieve data exposed by an SAP-hosted application through **SAP Integration Suite Native MCP Gateway**, using standard MCP discovery, authentication and tool execution, without developing a custom MCP gateway?\n\nThe application scenario had **one external agent: Claude Code CLI**. The agent called an SAP Integration Suite MCP server, which accessed an SAP BTP Cloud Foundry CAP Node.js application exposing synthetic **Students** and **Employees** data through OData V4. The OData service was created specifically for controlled tests. It was not SAP S/4HANA or SAP ECC business data.\n\nMCP Inspector and the official MCP SDK were **separate test clients** for protocol interoperability; they were not additional business agents in the original application scenario.\n\nThe technical evaluation covered the client-to-gateway-to-backend call, the security boundaries at each hop, the configured read-only tool catalog, message correlation and follow-on protocol and policy tests."
+    },
+    {
+      "key": "scope",
+      "title": "What was built and what was not",
+      "view": "overview",
+      "stage": "EVALUATE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "| Area | In the implemented Trial landscape | Boundary |\n| --- | --- | --- |\n| External agent | Claude Code CLI invoking MCP tools | One primary agent; later SDK/Inspector tests |\n| SAP standard component | Integration Suite MCP server artifact on Integration Cell | No custom gateway code |\n| Backend | CAP Node.js, OData V4 Students and Employees | Synthetic data only |\n| Source pattern 1 | HTTP endpoint with OpenAPI specification (R8) | Four GET tools |\n| Source pattern 2 | SAP-managed API artifact feeding MCP (R10) | Same backend, extra API policy hop |\n| Agent access | Developer Hub AI product and dedicated subscription | OAuth entitlement separately checked |\n| Backend access | BTP HTTP destination with OAuth2ClientCredentials | CAP XSUAA Reader identity |\n| Observability | SAP Monitor Message Processing | Analytics remains unresolved |\n\nThe PoC did not contain a live S/4HANA or ECC system, a qualified RFC source, a working external ABAP Trial communication identity, or a working remote MCP federation route. It did not qualify production performance or availability."
+    },
+    {
+      "key": "result-snapshot",
+      "title": "Results at a glance",
+      "view": "overview",
+      "stage": "PROVE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "| Test area | Recorded result | Evidence baseline |\n| --- | --- | --- |\n| Native MCP via HTTP/OpenAPI | VERIFIED_PASS: four GET tool calls matched direct CAP reads | R8 |\n| Native MCP via SAP-managed API | VERIFIED_PASS after authorization-policy correction | R9 / R10 |\n| OAuth, product entitlement, backend Reader authorization | VERIFIED_PASS for tested identities and negatives | R8 / R10 / R13 |\n| Resources and prompt rendering | VERIFIED_PASS on isolated laboratory artifact | R14 / R14.1 |\n| Quota and Surge Protection | VERIFIED_PASS on isolated laboratory artifact | R14 / R14.1 |\n| Protocol 2025-11-25 and 2026-07-28 / stateless | VERIFIED_PASS with recorded clients | R13 / R14 |\n| MCP Inspector and SDK | VERIFIED_PASS; Claude Code returned expected synthetic record | R14 |\n| Tool simplification and schema Synchronize | VERIFIED_PASS for tested configuration changes | R14 |\n| Filtered operation through managed API | VERIFIED_FAIL on tested dollar-prefixed OData option | R14 / R14.1 |\n| MCP Analytics | UNRESOLVED: no chart data, despite matching Monitor messages | R15 |\n| IP Filter | NOT_PROVEN | R14.1 |\n| Remote MCP, RFC/BAPI, ABAP Trial external data read | BLOCKED_WITH_PREREQUISITE | R13 / R14.1 |\n\nThese are **reported results from the supplied technical handover and evidence map**, not an independent replay of the private SAP tenant from this public page. A feature visible in a wizard is not treated as a runtime PASS."
+    },
+    {
+      "key": "system-topology",
+      "title": "End-to-end runtime and control-plane topology",
+      "view": "architecture",
+      "stage": "ALIGN WITH HANDS-ON",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "The diagram shows the two **implemented** routes that reached the CAP backend. The upper route is the direct HTTP/OpenAPI source. The lower route adds an SAP-managed API artifact. The Developer Hub subscription authorizes the external agent at the MCP entry point; the destination supplies a separate technical identity to CAP.\n\n**Runtime flow:** external agent → MCP Streamable HTTP / JSON-RPC → SAP Integration Suite Integration Cell → HTTP/OpenAPI or managed API source → BTP destination → authenticated CAP OData V4 GET → MCP response.\n\n**Control and evidence:** Developer Hub product/subscription and XSUAA issue and constrain credentials; SAP Monitor records completed or failed MCP/API messages. MCP Monitor correlation alone does not identify every tool name or client at INFO level.",
+      "diagram": true
+    },
+    {
+      "key": "trust-boundaries",
+      "title": "Identity and policy boundaries",
+      "view": "architecture",
+      "stage": "EVALUATE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "| Boundary | Mechanism used | Test observation |\n| --- | --- | --- |\n| External agent → MCP server | OAuth client credentials and dedicated Developer Hub agent subscription | Anonymous 401; non-entitled 403; entitled calls proceed |\n| MCP server → managed API (R10 route) | API artifact Authorization policy, including Trust Upstream MCP Authorization | R9 failed with 403 before the authorized setting change; R10 calls succeeded after |\n| Gateway → CAP backend | BTP destination OAuth2ClientCredentials and CAP XSUAA Reader | GET 200; direct anonymous 401; Reader write attempts 403 |\n| Runtime → Monitor | Integration Cell message processing / correlation ID | R10 MCP and API entries share a correlation ID |\n\nA successful MCP `initialize` does not guarantee that tools were selected or that the backend was called. The initial deployment returned an empty `tools/list` until the four GET operations were explicitly selected."
+    },
+    {
+      "key": "backend",
+      "title": "CAP OData backend and tool contract",
+      "view": "implementation",
+      "stage": "ALIGN WITH HANDS-ON",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "The CAP application exposes `EvaluationService` at `/odata/v4/evaluation`. Two seeded collections were used: `Students` (SEED-S01, SEED-S02) and `Employees` (SEED-E01, SEED-E02). The backend enforces authentication and a Reader/Writer role split through XSUAA.\n\n| Exposed MCP operation | Backend operation | Required input |\n| --- | --- | --- |\n| Students collection | GET Students | None |\n| Student by key | GET Students by ID | StudentID |\n| Employees collection | GET Employees | None |\n| Employee by key | GET Employees by ID | EmployeeID |\n\n**Important:** SAP generates the MCP tool name from its source path; the exact generated names differ between the HTTP/OpenAPI and managed-API routes. The four operations above are the business-level mapping, not a claim that an `operationId` becomes the exact exposed tool name."
+    },
+    {
+      "key": "r8-procedure",
+      "title": "R8: HTTP/OpenAPI source implementation",
+      "view": "implementation",
+      "stage": "ALIGN WITH HANDS-ON, PROVE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "**Prerequisites:** Running CAP service; XSUAA Reader client and BTP destination; SAP Integration Suite Integration Cell; GET-only OpenAPI 3.0.3 contract; Developer Hub publishing rights.\n\n**Procedure executed:**\n\n1. Deploy the CAP app and confirm authenticated OData GET and Reader write denials directly.\n2. Configure an HTTP/Internet BTP destination using OAuth2ClientCredentials and the Integration Cell inclusion label.\n3. Create an Integration Suite package and MCP server from the uploaded OpenAPI specification.\n4. Select all four GET source operations explicitly; save and deploy the MCP artifact to Integration Cell.\n5. Publish the MCP artifact as an AI product in Developer Hub, and use a dedicated agent subscription for external OAuth access.\n6. From Claude Code CLI, perform `initialize`, `tools/list` and four `tools/call` operations.\n7. Compare each MCP result with a direct authenticated CAP read; match SAP Monitor processing records.\n\n**Result:** Four GET operations executed and the returned seed records matched the direct CAP backend at field level. The original CAP Reader credential was rotated; the replacement continued to work and the former credential was rejected. The R8 evidence reports matching results before and after rotation."
+    },
+    {
+      "key": "r10-procedure",
+      "title": "R9/R10: managed API artifact source",
+      "view": "implementation",
+      "stage": "ALIGN WITH HANDS-ON, PROVE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "**Prerequisites:** Existing CAP destination and approved GET operations. An additional SAP-managed API artifact is placed between the MCP server and the backend.\n\n**Procedure executed:**\n\n1. Create and deploy the API artifact for the CAP OData read operations.\n2. Create a second MCP artifact using the API artifact as its source; explicitly select four GET tools.\n3. Publish the MCP artifact in a separate Developer Hub AI product and agent subscription.\n4. Invoke the MCP tools and compare with direct CAP results; collect paired MCP/API Monitor entries.\n\n**Initial result (R9):** MCP initialize and tool discovery succeeded, but calls were rejected at the managed API authorization boundary (403). A valid subscription token for the MCP product did not automatically confer entitlement to invoke the API artifact directly.\n\n**Correction (R10):** The API artifact Authorization policy's **Trust Upstream MCP Authorization** setting was enabled under scoped approval. The API was redeployed. Four MCP tool calls then returned backend data matching direct CAP reads. Anonymous access remained 401 and unentitled direct API requests remained 403 in the tested cases.\n\nThe additional API hop gives a separate managed API policy and monitoring boundary; this experiment did not prove added enterprise business-process coverage or production-level governance completeness."
+    },
+    {
+      "key": "protocol",
+      "title": "MCP methods and external clients",
+      "view": "evidence",
+      "stage": "PROVE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "| Test | Observed result | Scope |\n| --- | --- | --- |\n| `initialize`, `ping`, `tools/list`, `tools/call` | Successful on qualified artifacts | Integration Cell Trial |\n| `resources/list`, `resources/read` | Configured synthetic resource returned two CAP rows | Isolated R14 lab |\n| `prompts/list`, `prompts/get` | Corrected prompt template rendered with required StudentID | Isolated R14.1 lab |\n| Protocol `2025-11-25` | Negotiated; functional tool call succeeded | R13 / R14 |\n| Protocol `2026-07-28` stateless | Official SDK v2 connected, listed tools and read SEED-S01 without a session ID | R14 |\n| MCP Inspector | Discovered same four tools and read SEED-S01 | Test client |\n| Claude Code CLI | Returned expected SEED-S01 synthetic record | One external agent scenario; individual later tool event not captured |\n\nSome invalid tool arguments surfaced as MCP tool errors inside an HTTP 200 JSON-RPC result. The test methodology therefore checked `isError`, returned content and independent backend execution, not only HTTP status."
+    },
+    {
+      "key": "tests",
+      "title": "Technical evidence catalogue, not performance benchmarking",
+      "view": "evidence",
+      "stage": "PROVE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "The supplied handover contains **44 result-matrix rows** spanning mock qualification, CAP/R8, managed API/R10, ABAP feasibility, protocol tests, policy tests and the final Analytics check. The screenshot register contains authentic cockpit captures and recorded evidence gaps. The public page reports selected observations only; it does not reproduce the private archive contents or publish credentials.\n\nExamples of recorded controls:\n\n- Missing or malformed MCP bearer token returned HTTP 401.\n- Correctly authenticated but non-entitled caller: HTTP 403.\n- Unknown tool or missing required argument: MCP protocol or tool error; no backend data returned.\n- Quota after a small configured allowance: HTTP 429; calls returned 200 after rollback.\n- Surge Protection: enforced successfully on a separate lab artifact in R14.1.\n- Tool simplification: selected input/output fields were hidden, with an output field also absent from returned records.\n- Synchronize: source schema changes appeared only after explicit synchronization; a separate filtered operation then failed.\n\nThe experiment does not establish throughput, latency benchmarks, high availability, commercial entitlements or enterprise security certification."
+    },
+    {
+      "key": "issues",
+      "title": "Observed failures and corrections",
+      "view": "security",
+      "stage": "EVALUATE, PROVE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "| Experiment | Symptom | Recorded state |\n| --- | --- | --- |\n| Early CAP/R7 | OAuth accepted but MCP access 403 | Developer Hub product and subscription corrected entitlement |\n| Initial HTTP/OpenAPI deployment | `tools/list` empty | Four GET operations selected, then redeployed |\n| Managed API R9 | Internal authorization 403 | Approved Trust Upstream MCP Authorization setting allowed R10 calls |\n| Prompt template | Initial rendering and persistence failed | Corrected template rendered in R14.1; earlier cause not established |\n| Quota setup | First policy configuration did not enforce | Unconnected policy step identified; correctly wired policy returned 429 |\n| Surge first deployment | Deployment failed | Later configured test passed; first failure cause not established |\n| Managed API query option | Dollar-prefixed filter reached CAP double-encoded, producing 400 | Observed on tested API-artifact route; HTTP/OpenAPI route handled the tested options |\n| Federation | Remote-MCP destination discovery returned an empty list | Multiple labels did not change result; source/backend cause unconfirmed |\n\nNone of these findings establishes that a capability fails universally across SAP tenants, versions or backend types."
+    },
+    {
+      "key": "access",
+      "title": "Read-only operation selection and responsibility",
+      "view": "security",
+      "stage": "EVALUATE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "Four selected GET tools were exposed for the primary backend scenario. Reader permission was enforced in CAP independently of which tools appeared in MCP. There is no evidence of a production authorization model, enterprise identity propagation, or universal blocking of all write operations at every possible API layer.\n\nThe original external client used a dedicated Developer Hub subscription. Credentials were handled through local secure storage in the experiment; this publication includes **no** token, client secret, destination URL, tenant subdomain or privileged configuration file.\n\n**Roles:** external agent consumes approved tools; Integration Suite owns MCP exposure and policies; BTP destination provides backend connectivity; CAP owns the synthetic OData entities and their Reader authorization; SAP Monitor provides operational processing records."
+    },
+    {
+      "key": "analytics",
+      "title": "Analytics view versus Monitor evidence",
+      "view": "limitations",
+      "stage": "PROVE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "**Recorded R15 result: UNRESOLVED.** The MCP and API Analytics dashboards displayed zero calls and unavailable charts for the selected October 2026 time window. In the same Trial tenant, SAP Monitor contained **264 messages** in the preceding week. Four previously recorded correlation IDs resolved to completed or failed MCP/API processing entries.\n\nThe cause was **not established**. Potential explanations include Analytics ingestion or plan-specific prerequisites; none is confirmed. This is not evidence of a platform-wide Analytics defect. Tool- and agent-level attribution was not established in the INFO-level Monitor entries."
+    },
+    {
+      "key": "blocked",
+      "title": "Infrastructure-dependent capabilities",
+      "view": "limitations",
+      "stage": "PROVE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "| Capability | Recorded status | Why runtime proof was not completed |\n| --- | --- | --- |\n| Remote MCP federation | BLOCKED_WITH_PREREQUISITE | Federation destination list remained empty, including unfiltered GET; no independently hosted authorized remote server qualified |\n| RFC/BAPI | BLOCKED_WITH_PREREQUISITE | No authorized RFC backend, RFC destination or Cloud Connector in the Trial landscape |\n| BTP ABAP Trial RAP OData | BLOCKED_WITH_PREREQUISITE | Service was inventoried, but authorized external communication identity was unavailable; earlier backend attempt returned 401 |\n| IP Filter enforcement | NOT_PROVEN | No decisive controlled allow/deny source test was completed |\n| SAP S/4HANA and ECC | NOT_TESTED | No systems were available for this experiment |\n| Production suitability | NOT_QUALIFIED | No enterprise backend, audit completeness, load, HA, SLA or licensing qualification |\n\n**Evidence interpretation:** BLOCKED means the necessary conditions were unavailable. It is not equivalent to a proven product failure. The reference enterprise topology in the private handover is future context, not part of the executed Trial architecture."
+    },
+    {
+      "key": "ks04",
+      "title": "Scope relative to KS04",
+      "view": "limitations",
+      "stage": "COMPARE",
+      "scope": "OWNER_HANDOVER_REPORTED",
+      "markdown": "KS04 evaluated **SAP CAP-related MCP implementations** at development and runtime boundaries. KS07 instead evaluates **SAP Integration Suite's standard Native MCP gateway** as the access layer used by one external AI agent to read a CAP OData backend. CAP is the test system of record in KS07, not the MCP Gateway implementation itself. The two experiments should not be merged or presented as identical SAP services."
+    },
+    {
+      "key": "source",
+      "title": "Official SAP documentation and evidence status",
+      "view": "references",
+      "stage": "DISCOVER, EVALUATE",
+      "scope": "MIXED_LABELLED",
+      "markdown": "The SAP reference pages below describe product capabilities and configuration workflows. They are **not** proof of successful execution in this Trial tenant. Runtime results are derived from the owner's R8–R15 evidence receipts and technical handover. The full handover and its screenshot archives remain private and are not linked from the public website.\n\n**Evidence reading:** product documented → Trial UI visible → executed call/result → independent CAP comparison → sanitized release record. A page-level claim is labelled as observed, failed, blocked or not proven according to its underlying experiment."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "KS07-C01",
+      "claim": "One external Claude Code CLI agent accessed SAP BTP CAP synthetic OData through SAP Integration Suite Native MCP with four GET-only tools",
+      "evidence_class": "OWNER_HANDOVER_EXECUTION_RECEIPT",
+      "scope": "R8 Trial route; SDK/Inspector were additional test clients",
+      "status": "REPORTED_VERIFIED_PASS",
+      "limitation": "No S/4HANA or enterprise business data"
+    },
+    {
+      "claim_id": "KS07-C02",
+      "claim": "The HTTP/OpenAPI source completed four GET calls matching direct CAP reads",
+      "evidence_class": "OWNER_HANDOVER_EXECUTION_RECEIPT",
+      "scope": "R8 CAP synthetic data",
+      "status": "REPORTED_VERIFIED_PASS",
+      "limitation": "Synthetic records and Reader scope only"
+    },
+    {
+      "claim_id": "KS07-C03",
+      "claim": "The SAP-managed API source completed four GET calls after Trust Upstream MCP Authorization was enabled",
+      "evidence_class": "OWNER_HANDOVER_EXECUTION_RECEIPT",
+      "scope": "R9 failure then R10 corrected run",
+      "status": "REPORTED_VERIFIED_PASS",
+      "limitation": "Direct API entitlement and generic production governance not fully qualified"
+    },
+    {
+      "claim_id": "KS07-C04",
+      "claim": "Quota and Surge Protection enforced on isolated trial configurations",
+      "evidence_class": "OWNER_HANDOVER_EXECUTION_RECEIPT",
+      "scope": "R14/R14.1 laboratory artifacts",
+      "status": "REPORTED_VERIFIED_PASS",
+      "limitation": "IP Filter was not proven; no load or resilience benchmark"
+    },
+    {
+      "claim_id": "KS07-C05",
+      "claim": "Protocol 2025-11-25 and stateless 2026-07-28 calls succeeded with recorded clients",
+      "evidence_class": "OWNER_HANDOVER_EXECUTION_RECEIPT",
+      "scope": "R13/R14 official SDK and Inspector",
+      "status": "REPORTED_VERIFIED_PASS",
+      "limitation": "Does not establish every client/protocol implementation"
+    },
+    {
+      "claim_id": "KS07-C06",
+      "claim": "MCP Analytics showed no data despite 264 messages in Monitor and matched correlation entries",
+      "evidence_class": "OWNER_HANDOVER_ANALYTICS_RECEIPT",
+      "scope": "R15 read-only Trial check",
+      "status": "UNRESOLVED",
+      "limitation": "Root cause unestablished; no general product defect conclusion"
+    },
+    {
+      "claim_id": "KS07-C07",
+      "claim": "Remote MCP federation, RFC/BAPI and external ABAP Trial access could not be qualified",
+      "evidence_class": "OWNER_HANDOVER_LIMITATION",
+      "scope": "BTP Trial availability and identities",
+      "status": "BLOCKED_WITH_PREREQUISITE",
+      "limitation": "Missing remote destination, RFC backend and authorized ABAP communication identity"
+    },
+    {
+      "claim_id": "KS07-C08",
+      "claim": "Managed API forwarding of dollar-prefixed OData query options failed in a tested path",
+      "evidence_class": "OWNER_HANDOVER_FAILURE_RECEIPT",
+      "scope": "R14/R14.1 filtered call",
+      "status": "REPORTED_VERIFIED_FAIL",
+      "limitation": "Exact first encoding layer disputed in the addendum; no universal SAP defect claim"
+    }
+  ],
+  "references": [
+    {
+      "label": "SAP Help — Creating an MCP Server",
+      "url": "https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/creating-mcp-server"
+    },
+    {
+      "label": "SAP Help — MCP Server from HTTP Endpoint",
+      "url": "https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-from-http-endpoint"
+    },
+    {
+      "label": "SAP Help — MCP Server from API Artifact",
+      "url": "https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/govern-and-manage-mcp-server-created-from-api-artifact"
+    },
+    {
+      "label": "SAP Help — Model Context Protocol",
+      "url": "https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/model-context-protocol-mcp"
+    },
+    {
+      "label": "SAP Help — Analyze APIs and MCP Servers",
+      "url": "https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/analyze-apis-and-mcp-servers"
+    }
+  ],
+  "featured": {
+    "order": -2,
+    "title": "KS07 · Can an External AI Agent Read SAP APIs Through Native MCP?",
+    "description": "One Claude Code agent invoked SAP Integration Suite Native MCP against a synthetic CAP OData backend. Two source patterns worked in Trial; policy, protocol and backend limits remain evidence-scoped.",
+    "action_label": "Explore KS07"
+  },
+  "diagram_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1340 530\" role=\"img\" aria-label=\"SAP Integration Suite Native MCP experiment: external agent through HTTP or managed API to CAP synthetic OData\">\n<rect width=\"1340\" height=\"530\" rx=\"16\" fill=\"#f8fafc\"/>\n<text x=\"670\" y=\"35\" fill=\"#0f172a\" font-size=\"25\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-weight=\"700\">KS07 — Native MCP on SAP BTP Trial</text>\n<rect x=\"32\" y=\"92\" width=\"210\" height=\"100\" rx=\"10\" fill=\"#1e3a8a\"/>\n<text x=\"137\" y=\"130\" fill=\"white\" font-size=\"20\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\" font-weight=\"bold\">Claude Code</text>\n<text x=\"137\" y=\"159\" fill=\"#dbeafe\" font-size=\"15\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\">One external AI agent</text>\n<rect x=\"300\" y=\"75\" width=\"254\" height=\"145\" rx=\"11\" fill=\"#dbeafe\" stroke=\"#3b82f6\" stroke-width=\"2\"/>\n<text x=\"427\" y=\"111\" fill=\"#1e3a8a\" font-size=\"20\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\" font-weight=\"bold\">SAP Integration Suite</text>\n<text x=\"427\" y=\"142\" fill=\"#1e3a8a\" font-size=\"18\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\">Native MCP / Integration Cell</text>\n<text x=\"427\" y=\"175\" fill=\"#1e40af\" font-size=\"15\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\">OAuth + tools + policies</text>\n<path d=\"M242 143 H299\" stroke=\"#2563eb\" stroke-width=\"3\" fill=\"none\"/><path d=\"M289 136 L300 143 L289 150\" fill=\"none\" stroke=\"#2563eb\" stroke-width=\"3\"/>\n<text x=\"271\" y=\"124\" font-size=\"12\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\" fill=\"#334155\">MCP</text>\n<rect x=\"628\" y=\"61\" width=\"223\" height=\"76\" rx=\"10\" fill=\"#e0f2fe\" stroke=\"#0284c7\" stroke-width=\"2\"/>\n<text x=\"739\" y=\"90\" fill=\"#075985\" font-size=\"19\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\" font-weight=\"bold\">R8 · HTTP / OpenAPI</text>\n<text x=\"739\" y=\"115\" fill=\"#075985\" font-size=\"14\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\">4 GET tools · PASS</text>\n<rect x=\"628\" y=\"159\" width=\"223\" height=\"76\" rx=\"10\" fill=\"#ede9fe\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n<text x=\"739\" y=\"188\" fill=\"#5b21b6\" font-size=\"19\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\" font-weight=\"bold\">R10 · Managed API</text>\n<text x=\"739\" y=\"213\" fill=\"#5b21b6\" font-size=\"14\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\">4 GET tools · PASS</text>\n<path d=\"M554 128 H585 V99 H628 M585 128 V198 H628\" stroke=\"#64748b\" stroke-width=\"3\" fill=\"none\"/>\n<rect x=\"1114\" y=\"106\" width=\"193\" height=\"116\" rx=\"11\" fill=\"#dcfce7\" stroke=\"#16a34a\" stroke-width=\"2\"/>\n<text x=\"1210\" y=\"138\" fill=\"#166534\" font-size=\"20\" font-family=\"Arial,sans-serif\" font-weight=\"bold\" text-anchor=\"middle\">CAP Node.js</text>\n<text x=\"1210\" y=\"167\" fill=\"#166534\" font-size=\"16\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\">OData V4</text>\n<text x=\"1210\" y=\"192\" fill=\"#166534\" font-size=\"14\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\">Synthetic test records</text>\n<path d=\"M851 99 H885 V165 H904 M851 198 H904\" stroke=\"#64748b\" stroke-width=\"3\" fill=\"none\"/>\n<rect x=\"904\" y=\"130\" width=\"168\" height=\"100\" rx=\"10\" fill=\"#fef3c7\" stroke=\"#d97706\" stroke-width=\"2\"/>\n<text x=\"988\" y=\"163\" fill=\"#92400e\" font-size=\"17\" font-family=\"Arial,sans-serif\" font-weight=\"bold\" text-anchor=\"middle\">BTP destination</text>\n<text x=\"988\" y=\"191\" fill=\"#92400e\" font-size=\"15\" font-family=\"Arial,sans-serif\" text-anchor=\"middle\">OAuth Reader</text>\n<path d=\"M1072 179 H1114\" stroke=\"#64748b\" stroke-width=\"3\" fill=\"none\"/>\n<rect x=\"145\" y=\"311\" width=\"446\" height=\"111\" rx=\"12\" fill=\"#eef2ff\" stroke=\"#64748b\"/>\n<text x=\"368\" y=\"343\" fill=\"#1e293b\" font-size=\"19\" font-weight=\"bold\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\">Control plane</text>\n<text x=\"368\" y=\"374\" fill=\"#334155\" font-size=\"16\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\">Developer Hub product + subscription</text>\n<text x=\"368\" y=\"399\" fill=\"#334155\" font-size=\"16\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\">XSUAA Reader + BTP destination</text>\n<rect x=\"737\" y=\"311\" width=\"454\" height=\"111\" rx=\"12\" fill=\"#eff6ff\" stroke=\"#64748b\"/>\n<text x=\"964\" y=\"343\" fill=\"#1e293b\" font-size=\"19\" font-weight=\"bold\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\">Technical evidence</text>\n<text x=\"964\" y=\"374\" fill=\"#334155\" font-size=\"16\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\">MCP calls = direct CAP reads</text>\n<text x=\"964\" y=\"399\" fill=\"#334155\" font-size=\"16\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\">Monitor correlation; Analytics unresolved</text>\n<path d=\"M427 220 V270 H368 V311 M427 270 H964 V311\" stroke=\"#94a3b8\" stroke-width=\"2\" fill=\"none\" stroke-dasharray=\"6 5\"/>\n<text x=\"670\" y=\"488\" fill=\"#475569\" font-size=\"16\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\">Trial results only · no S/4HANA or ECC backend tested · no production readiness claim</text>\n</svg>",
+  "diagram_caption": "As-built KS07 Trial architecture. Two qualified MCP source routes to a synthetic CAP OData V4 backend; control plane and Monitor shown separately.",
+  "content_sha256": "d0f74814fe901790e0c0d55a92e7aacf0a8e4a43eac4273ef9de36801a752be2"
+}
