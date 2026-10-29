@@ -24,4 +24,6 @@ APPROVED_CONTENT_SHA256: dict[str, str] = {
     'KS04': 'c9cd1f31eb0da4c103d24f19cc20183ab06c762d02813282449da8072f5735e1',
     # KS05 R3: owner-approved public POC observations; exact digest is verified in the release evidence.
     'KS05': '45d8776855372687ffedc7eda1a17b4e8a0817990e2be4373e5c6bbb58b05048',
+    # KS07: add only under owner-approved exact-content publication gate.
+    'KS07': '718e6f64a45c9d49d6ed29acd72be6eb1bf79c6d77b189768378df6aef5d796e',
 }

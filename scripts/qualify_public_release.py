@@ -12,6 +12,7 @@ EXPECTED_APPROVALS = {
     'KS01': 'b3f4da6d43b3e2ab16ecb76ced012dbb7170453c89e669166606b6457c93a82e',
     'KS04': 'c9cd1f31eb0da4c103d24f19cc20183ab06c762d02813282449da8072f5735e1',
     'KS05': '45d8776855372687ffedc7eda1a17b4e8a0817990e2be4373e5c6bbb58b05048',
+    'KS07': '718e6f64a45c9d49d6ed29acd72be6eb1bf79c6d77b189768378df6aef5d796e',
 }
 
 
@@ -28,7 +29,7 @@ def qualify(root: Path, expected_commit: str) -> dict:
 
     failures = []
     if {key: APPROVED_CONTENT_SHA256.get(key) for key in EXPECTED_APPROVALS} != EXPECTED_APPROVALS:
-        failures.append('owner approval registry does not match the approved KS01/KS04/KS05 digests')
+        failures.append('owner approval registry does not match the approved KS01/KS04/KS05/KS07 digests')
 
     integrity_result = integrity.verify(root)
     if integrity_result.get('status') != 'VERIFIED':

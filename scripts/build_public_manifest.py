@@ -38,7 +38,7 @@ def build_manifest(root: Path, source_commit: str) -> dict:
 
     from sap_public import integrity, sessions
     documents = sessions.load(root / 'content' / 'sessions')
-    expected_ids = {'KS01', 'KS04', 'KS05'}
+    expected_ids = {'KS01', 'KS04', 'KS05', 'KS07'}
     if documents['withheld'] or {d.get('session_id') for d in documents['sessions']} != expected_ids:
         raise ValueError('refusing to build: all expected owner-approved sessions must validate and load')
 

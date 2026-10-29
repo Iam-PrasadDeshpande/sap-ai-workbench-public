@@ -21,14 +21,15 @@ EXPECTED = {
     'KS01': 'b3f4da6d43b3e2ab16ecb76ced012dbb7170453c89e669166606b6457c93a82e',
     'KS04': 'c9cd1f31eb0da4c103d24f19cc20183ab06c762d02813282449da8072f5735e1',
     'KS05': '45d8776855372687ffedc7eda1a17b4e8a0817990e2be4373e5c6bbb58b05048',
+    'KS07': '718e6f64a45c9d49d6ed29acd72be6eb1bf79c6d77b189768378df6aef5d796e',
 }
 
 
 class PublicReleaseTests(unittest.TestCase):
-    def test_registry_preserves_existing_approvals_and_adds_exact_ks05_digest(self):
+    def test_registry_preserves_existing_approvals_and_adds_exact_ks07_digest(self):
         self.assertEqual({key: APPROVED_CONTENT_SHA256.get(key) for key in EXPECTED}, EXPECTED)
 
-    def test_all_three_exactly_approved_sessions_load(self):
+    def test_all_four_exactly_approved_sessions_load(self):
         result = sessions.load(ROOT / 'content' / 'sessions')
         self.assertEqual(result['withheld'], [])
         self.assertEqual({doc['session_id'] for doc in result['sessions']}, set(EXPECTED))
