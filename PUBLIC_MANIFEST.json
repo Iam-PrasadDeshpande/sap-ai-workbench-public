@@ -14,10 +14,10 @@
    ".md"
   ]
  },
- "artifact_digest": "0b0be1896ce78d0cecb7ffe068d396edbfca8de14d8788551ea5e0d6a54b1d08",
+ "artifact_digest": "12739f97243fdd41f6570304a2b41d64dfaf4189524f3eb65cba57da9f442566",
  "built_by": "scripts/build_public_manifest.py",
  "content_at_build": {
-  "content_digest": "0c44ae4d23340f0addb5e7d8fa31f0273ca446bdc74341e3a6e475f3183b7365",
+  "content_digest": "e17b8c95112172e19679222eef6bd64e21ed16c68adc1bd119184a00acf050ed",
   "current_release": "releases/0001.json",
   "current_release_digest": "cf1636d67d3ed533ce6206063a93de7de9dafe0bedf06183555fd93f8b2c3c2b",
   "files": [
@@ -42,8 +42,12 @@
     "sha256": "13487b3e074b1bdccbd5d01ce5e4e3c56fa846a62b95ba18730e7eed5590d283"
    },
    {
+    "path": "content/sessions/KS07.json",
+    "sha256": "eec26ac2310a6d067dbb6ff1c2b7e849ac8940cefd4cd007a1073741ef0386f5"
+   },
+   {
     "path": "content/sessions/index.json",
-    "sha256": "66ae90ecbf34324aa24059de954961c7c58f11c77dfea7a71c1093271f8c30a0"
+    "sha256": "1ec99cc5b8755e4fc9cd00fd62eb0eb3d865445e45c72e4f29f72b037159b4b3"
    }
   ],
   "releases": 1
@@ -159,7 +163,7 @@
   },
   {
    "path": "sap_public/session_approvals.py",
-   "sha256": "dba41f7b275b65811a9899f5221d3d082f78fe22fef214d291538b446ebd8f10"
+   "sha256": "4d9507753d7d6a0f18dbfa1dad3de03800852423a39a798f92a376fafb425e60"
   },
   {
    "path": "sap_public/sessions.py",
@@ -223,14 +227,14 @@
   },
   {
    "path": "scripts/build_public_manifest.py",
-   "sha256": "268bbca25987719b9feb6a0afd71775b82e899d2b04bb1b9b891af1fca2283bf"
+   "sha256": "24b2072f8f6cc082acdac92a62e098a67145ed5956764967296f7be75a26eb50"
   },
   {
    "path": "scripts/qualify_public_release.py",
-   "sha256": "147c7691345e702eccd94f8496762f98793e2a107931e8b00bf6c3791a7e7af8"
+   "sha256": "00294824698b380fe738edc00c9c95e438a942427503c2f502b2e623a5255806"
   }
  ],
  "schema": "sap-public.artifact-manifest/1",
- "source_commit": "5e858925a485a62fca19bb3c265068765a0b14c2",
+ "source_commit": "b13f2b2a9a85231bdc49ded777da1b5923f1c31d",
  "version": "0.1.0"
 }
